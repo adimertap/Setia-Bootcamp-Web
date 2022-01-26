@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <!doctype html>
 <html lang="en">
 
@@ -19,41 +23,7 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="{{ asset('images/logo.png') }}" alt="">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Program Kelas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Flash Sale</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Portofolio</a>
-                    </li>
-                </ul>
-                <div class="d-flex">
-                    <a href="#" class="btn btn-master btn-secondary me-3">
-                        Sign In
-                    </a>
-                    <a href="#" class="btn btn-master btn-primary">
-                        Sign Up
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
+    
     <section class="banner">
         <div class="container">
             <div class="row justify-content-center">
@@ -84,11 +54,11 @@
                     </div>
                 </div>
             </div>
-            <div class="row brands">
+            {{-- <div class="row brands">
                 <div class="col-lg-12 col-12 text-center">
                     <img src="{{ asset('images/brands.png') }}" alt="">
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
 
@@ -125,7 +95,7 @@
                             Carrer Path
                         </h3>
                         <p class="support">
-                            Kami membantu Anda untuk  memilih <br>  jenjang karir yang Anda minati
+                            Kami membantu Anda untuk  memilih <br> karir yang Anda tekuni
                          
                         </p>
                     </div>
@@ -166,13 +136,13 @@
                 </div>
                 <div class="col-lg-6 col-12 text-left copywriting">
                     <p class="story">
-                        BETTER CAREER
+                        KARIR LEBIH BAIK
                     </p>
                     <h2 class="primary-header">
-                        Prepare The Journey
+                        Persiapkan Karir Anda
                     </h2>
                     <p class="support">
-                        Learn from anyone around the <br> world and get a new skills
+                        Belajar dari siapa pun dan dimana pun <br> serta dapatkan keterampilan baru
                     </p>
                     <p class="mt-5">
                         <a href="#" class="btn btn-master btn-secondary me-3">
@@ -184,13 +154,13 @@
             <div class="row item-step pb-70">
                 <div class="col-lg-6 col-12 text-left copywriting pl-150">
                     <p class="story">
-                        STUDY HARDER
+                        BELAJAR LEBIH KERAS
                     </p>
                     <h2 class="primary-header">
-                        Finish The Project
+                        Selesaikan Studi Kasus
                     </h2>
                     <p class="support">
-                        Each of you will be joining the private group and also <br> working together with team members on project
+                        Anda akan bergabung dengan grup pribadi dan juga <br> bekerja sama dengan anggota tim dalam proyek
                     </p>
                     <p class="mt-5">
                         <a href="#" class="btn btn-master btn-secondary me-3">
@@ -209,17 +179,17 @@
                 </div>
                 <div class="col-lg-6 col-12 text-left copywriting">
                     <p class="story">
-                        END GAME
+                        SELESAIKAN KELAS
                     </p>
                     <h2 class="primary-header">
-                        Big Demo Day
+                        Sertifikat & Kesempatan Bekerja
                     </h2>
                     <p class="support">
-                        Learn how to speaking in public to demonstrate your <br> final project and receive the important feedbacks
+                        Anda akan mendapatkan sertifikat kelas dan <br> kesempatan langsung diterima di perusahaan besar
                     </p>
                     <p class="mt-5">
                         <a href="#" class="btn btn-master btn-secondary me-3">
-                            Showcase
+                            Portofolio
                         </a>
                     </p>
                 </div>
@@ -232,17 +202,17 @@
             <div class="row pb-70">
                 <div class="col-lg-5 col-12 header-wrap copywriting">
                     <p class="story">
-                        GOOD INVESTMENT
+                        INVESTASI
                     </p>
                     <h2 class="primary-header text-white">
                         Start Your Journey
                     </h2>
                     <p class="support">
-                        Learn how to speaking in public to demonstrate your <br> final project and receive the important feedbacks
+                        Investasikan masa depan Anda dengan mempelajari <br> kelas yang Anda  minati tentunya dengan harga murah
                     </p>
                     <p class="mt-5">
                         <a href="#" class="btn btn-master btn-thirdty me-3">
-                            View Syllabus
+                            Lihat Program Kelas
                         </a>
                     </p>
                 </div>
@@ -251,11 +221,11 @@
                         <div class="col-lg-6 col-12">
                             <div class="table-pricing paket-gila">
                                 <p class="story text-center">
-                                    GILA BELAJAR
+                                    Mulai dari
                                 </p>
-                                <h1 class="price text-center">
-                                    $280K
-                                </h1>
+                                <h2 class="price text-center">
+                                    Rp. 150.000
+                                </h2>
                                 <div class="item-benefit-pricing mb-4">
                                     <img src="{{ asset('images/ic_check.svg') }}" alt="">
                                     <p>
@@ -320,7 +290,7 @@
                                     <div class="clear"></div>
                                 </div>
                                 <p>
-                                    <a href="#" class="btn btn-master btn-primary w-100 mt-3">
+                                    <a href="{{ route('checkout') }}" class="btn btn-master btn-primary w-100 mt-3">
                                         Take This Plan
                                     </a>
                                 </p>
@@ -366,7 +336,7 @@
                                     <div class="clear"></div>
                                 </div>
                                 <p>
-                                    <a href="#" class="btn btn-master btn-secondary w-100 mt-3">
+                                    <a href="{{ route('checkout') }}" class="btn btn-master btn-secondary w-100 mt-3">
                                         Start With This Plan
                                     </a>
                                 </p>
@@ -476,3 +446,5 @@
 </body>
 
 </html>
+
+@endsection
