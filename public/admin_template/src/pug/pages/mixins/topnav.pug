@@ -1,0 +1,155 @@
+mixin topnav(options)
+
+    nav(class=['topnav', 'navbar', 'navbar-expand', 'shadow'] class=options.topnavStyle)#sidenavAccordion
+
+        //- Navbar Brand Image or Text
+        a.navbar-brand(href='index.html')
+            | SB Admin Pro
+
+        //- Sidenav Toggle Button
+        button#sidebarToggle.btn.btn-icon.btn-transparent-dark.order-1.order-lg-0.mr-lg-2(href='#')
+            i(data-feather='menu')
+
+        //- Navbar Search
+        form.form-inline.mr-auto.d-none.d-md-block
+            .input-group.input-group-joined.input-group-solid
+                input.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search')
+                .input-group-append
+                    .input-group-text
+                        i(data-feather='search')
+
+        //- Navbar Items
+        ul.navbar-nav.align-items-center.ml-auto
+
+            //- Documentation Dropdown
+            li.nav-item.dropdown.no-caret.mr-3.d-none.d-md-inline
+                a#navbarDropdownDocs.nav-link.dropdown-toggle(href='javascript:void(0);', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                    .d-none.d-md-inline.font-weight-500
+                        | Documentation
+                    i.fas.fa-chevron-right.dropdown-arrow
+                .dropdown-menu.dropdown-menu-right.py-0.mr-sm-n15.mr-lg-0.o-hidden.animated--fade-in-up(aria-labelledby='navbarDropdownDocs')
+                    a.dropdown-item.py-3(href='https://docs.startbootstrap.com/sb-admin-pro', target='_blank')
+                        .icon-stack.bg-primary-soft.text-primary.mr-4
+                            i(data-feather='book')
+                        div
+                            .small.text-gray-500 Documentation
+                            | Usage instructions and reference
+                    .dropdown-divider.m-0
+                    a.dropdown-item.py-3(href='https://docs.startbootstrap.com/sb-admin-pro/components', target='_blank')
+                        .icon-stack.bg-primary-soft.text-primary.mr-4
+                            i(data-feather='code')
+                        div
+                            .small.text-gray-500 Components
+                            | Code snippets and reference
+                    .dropdown-divider.m-0
+                    a.dropdown-item.py-3(href='https://docs.startbootstrap.com/sb-admin-pro/changelog', target='_blank')
+                        .icon-stack.bg-primary-soft.text-primary.mr-4
+                            i(data-feather='file-text')
+                        div
+                            .small.text-gray-500 Changelog
+                            | Updates and changes
+
+            //- Search Dropdown (Visible below md breakpoint)
+            li.nav-item.dropdown.no-caret.mr-3.d-md-none
+                a#searchDropdown.btn.btn-icon.btn-transparent-dark.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                    i(data-feather='search')
+                // Dropdown - Search
+                .dropdown-menu.dropdown-menu-right.p-3.shadow.animated--fade-in-up(aria-labelledby='searchDropdown')
+                    form.form-inline.mr-auto.w-100
+                        .input-group.input-group-joined.input-group-solid
+                            input.form-control(type='text', placeholder='Search for...', aria-label='Search', aria-describedby='basic-addon2')
+                            .input-group-append
+                                .input-group-text
+                                    i(data-feather='search')
+
+            //- Alerts Dropdown
+            li.nav-item.dropdown.no-caret.mr-3.dropdown-notifications
+                a#navbarDropdownAlerts.btn.btn-icon.btn-transparent-dark.dropdown-toggle(href='javascript:void(0);', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                    i(data-feather='bell')
+                .dropdown-menu.dropdown-menu-right.border-0.shadow.animated--fade-in-up(aria-labelledby='navbarDropdownAlerts')
+                    h6.dropdown-header.dropdown-notifications-header
+                        i.mr-2(data-feather='bell')
+                        | Alerts Center
+                    //- Example Alert 1
+                    a.dropdown-item.dropdown-notifications-item(href='#!')
+                        .dropdown-notifications-item-icon.bg-warning
+                            i(data-feather='activity')
+                        .dropdown-notifications-item-content
+                            .dropdown-notifications-item-content-details
+                                | December 29, 2019
+                            .dropdown-notifications-item-content-text
+                                | This is an alert message. It's nothing serious, but it requires your attention.
+                    //- Example Alert 2
+                    a.dropdown-item.dropdown-notifications-item(href='#!')
+                        .dropdown-notifications-item-icon.bg-info
+                            i(data-feather='bar-chart')
+                        .dropdown-notifications-item-content
+                            .dropdown-notifications-item-content-details
+                                | December 22, 2019
+                            .dropdown-notifications-item-content-text
+                                | A new monthly report is ready. Click here to view!
+                    //- Example Alert 3
+                    a.dropdown-item.dropdown-notifications-item(href='#!')
+                        .dropdown-notifications-item-icon.bg-danger
+                            i.fas.fa-exclamation-triangle
+                        .dropdown-notifications-item-content
+                            .dropdown-notifications-item-content-details
+                                | December 8, 2019
+                            .dropdown-notifications-item-content-text
+                                | Critical system failure, systems shutting down.
+                    //- Example Alert 4
+                    a.dropdown-item.dropdown-notifications-item(href='#!')
+                        div.dropdown-notifications-item-icon.bg-success
+                            i(data-feather='user-plus')
+                        div.dropdown-notifications-item-content
+                            div.dropdown-notifications-item-content-details
+                                | December 2, 2019
+                            div.dropdown-notifications-item-content-text
+                                | New user request. Woody has requested access to the organization.
+                    a.dropdown-item.dropdown-notifications-footer(href='#!') View All Alerts
+
+            //- Messages Dropdown
+            li.nav-item.dropdown.no-caret.mr-3.dropdown-notifications
+                a#navbarDropdownMessages.btn.btn-icon.btn-transparent-dark.dropdown-toggle(href='javascript:void(0);', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                    i(data-feather='mail')
+                .dropdown-menu.dropdown-menu-right.border-0.shadow.animated--fade-in-up(aria-labelledby='navbarDropdownMessages')
+                    h6.dropdown-header.dropdown-notifications-header
+                        i.mr-2(data-feather='mail')
+                        | Message Center
+                    //- Example Message 1  
+                    a.dropdown-item.dropdown-notifications-item(href='#!')
+                        img.dropdown-notifications-item-img(src='https://source.unsplash.com/vTL_qy03D1I/60x60')
+                        .dropdown-notifications-item-content
+                            .dropdown-notifications-item-content-text
+                                | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            .dropdown-notifications-item-content-details
+                                | Emily Fowler · 58m
+                    //- Example Message 2
+                    a.dropdown-item.dropdown-notifications-item(href='#!')
+                        img.dropdown-notifications-item-img(src='https://source.unsplash.com/4ytMf8MgJlY/60x60')
+                        .dropdown-notifications-item-content
+                            .dropdown-notifications-item-content-text
+                                | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            .dropdown-notifications-item-content-details
+                                | Diane Chambers · 2d
+                    a.dropdown-item.dropdown-notifications-footer(href='#!') Read All Messages
+
+            //- User Dropdown
+            li.nav-item.dropdown.no-caret.mr-2.dropdown-user
+                a#navbarDropdownUserImage.btn.btn-icon.btn-transparent-dark.dropdown-toggle(href='javascript:void(0);', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                    img.img-fluid(src='https://source.unsplash.com/QAB-WJcbgJk/60x60')
+                .dropdown-menu.dropdown-menu-right.border-0.shadow.animated--fade-in-up(aria-labelledby='navbarDropdownUserImage')
+                    h6.dropdown-header.d-flex.align-items-center
+                        img.dropdown-user-img(src='https://source.unsplash.com/QAB-WJcbgJk/60x60')
+                        .dropdown-user-details
+                            .dropdown-user-details-name Valerie Luna
+                            .dropdown-user-details-email vluna@aol.com
+                    .dropdown-divider
+                    a.dropdown-item(href='#!')
+                        .dropdown-item-icon
+                            i(data-feather='settings')
+                        | Account
+                    a.dropdown-item(href='#!')
+                        .dropdown-item-icon
+                            i(data-feather='log-out')
+                        | Logout

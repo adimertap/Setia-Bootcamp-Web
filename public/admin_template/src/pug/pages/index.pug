@@ -1,0 +1,370 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Dashboard'
+
+//- Add CSS for third party plugins used on this page
+append css
+    //- Load dataTables CSS via CDN
+    link(href='https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css', rel='stylesheet', crossorigin='anonymous')
+    //- Load Date Range Picker via CDN
+    link(href='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css', rel='stylesheet', crossorigin='anonymous')
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Example dashboard overview and content summary',
+        pageIcon: 'activity',
+        breadcrumbs: false
+    })
+
+        button#reportrange.btn.btn-white.btn-sm.line-height-normal.p-3
+            i.mr-2.text-primary(data-feather='calendar')
+            span
+            i.ml-1(data-feather='chevron-down')
+
+    // Main page content
+    .container.mt-n10
+
+        .row
+            .col-xxl-4.col-xl-12.mb-4
+                .card.h-100
+                    .card-body.h-100.d-flex.flex-column.justify-content-center.py-5.py-xl-4
+                        .row.align-items-center
+                            .col-xl-8.col-xxl-12
+                                .text-center.px-4.mb-4.mb-xl-0.mb-xxl-4
+                                    h1.text-primary Welcome Back!
+                                    p.text-gray-700.mb-0 It's time to get started! View new opportunities now, or continue on your previous work.
+                            .col-xl-4.col-xxl-12.text-center
+                                img.img-fluid(src='assets/img/freepik/at-work-pana.svg', style='max-width: 26rem')
+            .col-xxl-4.col-xl-6.mb-4
+                .card.card-header-actions.h-100
+                    .card-header
+                        | Recent Activity
+                        .dropdown.no-caret
+                            button#dropdownMenuButton.btn.btn-transparent-dark.btn-icon.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                i.text-gray-500(data-feather='more-vertical')
+                            .dropdown-menu.dropdown-menu-right.animated--fade-in-up(aria-labelledby='dropdownMenuButton')
+                                h6.dropdown-header Filter Activity:
+                                a.dropdown-item(href='#!')
+                                    span.badge.badge-green-soft.text-green.my-1 Commerce
+                                a.dropdown-item(href='#!')
+                                    span.badge.badge-blue-soft.text-blue.my-1 Reporting
+                                a.dropdown-item(href='#!')
+                                    span.badge.badge-yellow-soft.text-yellow.my-1 Server
+                                a.dropdown-item(href='#!')
+                                    span.badge.badge-purple-soft.text-purple.my-1 Users
+                    .card-body
+                        .timeline.timeline-xs
+                            // Timeline Item 1
+                            .timeline-item
+                                .timeline-item-marker
+                                    .timeline-item-marker-text
+                                        | 27 min
+                                    .timeline-item-marker-indicator.bg-green
+                                .timeline-item-content
+                                    | New order placed!
+                                    a.font-weight-bold.text-dark(href='#!') Order #2912 
+                                    | has been successfully placed.
+                            // Timeline Item 2
+                            .timeline-item
+                                .timeline-item-marker
+                                    .timeline-item-marker-text
+                                        | 58 min
+                                    .timeline-item-marker-indicator.bg-blue
+                                .timeline-item-content
+                                    | Your
+                                    a.font-weight-bold.text-dark(href='#!') weekly report 
+                                    | has been generated and is ready to view.
+                            // Timeline Item 3
+                            .timeline-item
+                                .timeline-item-marker
+                                    .timeline-item-marker-text
+                                        | 2 hrs
+                                    .timeline-item-marker-indicator.bg-purple
+                                .timeline-item-content
+                                    | New user
+                                    a.font-weight-bold.text-dark(href='#!') Valerie Luna 
+                                    | has registered
+                            // Timeline Item 4
+                            .timeline-item
+                                .timeline-item-marker
+                                    .timeline-item-marker-text
+                                        | 1 day
+                                    .timeline-item-marker-indicator.bg-yellow
+                                .timeline-item-content
+                                    | Server activity monitor alert
+                            // Timeline Item 5
+                            .timeline-item
+                                .timeline-item-marker
+                                    .timeline-item-marker-text
+                                        | 1 day
+                                    .timeline-item-marker-indicator.bg-green
+                                .timeline-item-content
+                                    | New order placed!
+                                    a.font-weight-bold.text-dark(href='#!') Order #2911 
+                                    | has been successfully placed.
+                            // Timeline Item 6
+                            .timeline-item
+                                .timeline-item-marker
+                                    .timeline-item-marker-text
+                                        | 1 day
+                                    .timeline-item-marker-indicator.bg-purple
+                                .timeline-item-content
+                                    | Details for
+                                    a.font-weight-bold.text-dark(href='#!') Marketing and Planning Meeting 
+                                    | have been updated.
+                            // Timeline Item 7
+                            .timeline-item
+                                .timeline-item-marker
+                                    .timeline-item-marker-text
+                                        | 2 days
+                                    .timeline-item-marker-indicator.bg-green
+                                .timeline-item-content
+                                    | New order placed!
+                                    a.font-weight-bold.text-dark(href='#!') Order #2910 
+                                    | has been successfully placed.
+            .col-xxl-4.col-xl-6.mb-4
+                .card.card-header-actions.h-100
+                    .card-header
+                        | Progress Tracker
+                        .dropdown.no-caret
+                            button#dropdownMenuButton.btn.btn-transparent-dark.btn-icon.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                i.text-gray-500(data-feather='more-vertical')
+                            .dropdown-menu.dropdown-menu-right.animated--fade-in-up(aria-labelledby='dropdownMenuButton')
+                                a.dropdown-item(href='#!')
+                                    .dropdown-item-icon
+                                        i.text-gray-500(data-feather='list')
+                                    | Manage Tasks
+                                a.dropdown-item(href='#!')
+                                    .dropdown-item-icon
+                                        i.text-gray-500(data-feather='plus-circle')
+                                    | Add New Task
+                                a.dropdown-item(href='#!')
+                                    .dropdown-item-icon
+                                        i.text-gray-500(data-feather='minus-circle')
+                                    | Delete Tasks
+                    .card-body
+                        h4.small
+                            | Server Migration 
+                            span.float-right.font-weight-bold 20%
+                        .progress.mb-4
+                            .progress-bar.bg-danger(role='progressbar', style='width: 20%', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100')
+                        h4.small
+                            | Sales Tracking 
+                            span.float-right.font-weight-bold 40%
+                        .progress.mb-4
+                            .progress-bar.bg-warning(role='progressbar', style='width: 40%', aria-valuenow='40', aria-valuemin='0', aria-valuemax='100')
+                        h4.small
+                            | Customer Database 
+                            span.float-right.font-weight-bold 60%
+                        .progress.mb-4
+                            .progress-bar(role='progressbar', style='width: 60%', aria-valuenow='60', aria-valuemin='0', aria-valuemax='100')
+                        h4.small
+                            | Payout Details 
+                            span.float-right.font-weight-bold 80%
+                        .progress.mb-4
+                            .progress-bar.bg-info(role='progressbar', style='width: 80%', aria-valuenow='80', aria-valuemin='0', aria-valuemax='100')
+                        h4.small
+                            | Account Setup 
+                            span.float-right.font-weight-bold Complete!
+                        .progress
+                            .progress-bar.bg-success(role='progressbar', style='width: 100%', aria-valuenow='100', aria-valuemin='0', aria-valuemax='100')
+                    a.card-footer(href='#!')
+                        .d-flex.align-items-center.justify-content-between.small.text-body
+                            | Visit Task Center
+                            i(data-feather='arrow-right')
+
+        // Example Colored Cards for Dashboard Demo
+        .row
+            .col-xxl-3.col-lg-6
+                .card.bg-primary.text-white.mb-4
+                    .card-body
+                        .d-flex.justify-content-between.align-items-center
+                            .mr-3
+                                .text-white-75.small Earnings (Monthly)
+                                .text-lg.font-weight-bold $40,000
+                            i.feather-xl.text-white-50(data-feather='calendar')
+                    .card-footer.d-flex.align-items-center.justify-content-between
+                        a(href='#').small.text-white.stretched-link
+                            | View Report
+                        .small.text-white
+                            i.fas.fa-angle-right
+            .col-xxl-3.col-lg-6
+                .card.bg-warning.text-white.mb-4
+                    .card-body
+                        .d-flex.justify-content-between.align-items-center
+                            .mr-3
+                                .text-white-75.small Earnings (Annual)
+                                .text-lg.font-weight-bold $215,000
+                            i.feather-xl.text-white-50(data-feather='dollar-sign')
+                    .card-footer.d-flex.align-items-center.justify-content-between
+                        a(href='#').small.text-white.stretched-link
+                            | View Report
+                        .small.text-white
+                            i.fas.fa-angle-right
+            .col-xxl-3.col-lg-6
+                .card.bg-success.text-white.mb-4
+                    .card-body
+                        .d-flex.justify-content-between.align-items-center
+                            .mr-3
+                                .text-white-75.small Task Completion
+                                .text-lg.font-weight-bold 24
+                            i.feather-xl.text-white-50(data-feather='check-square')
+                    .card-footer.d-flex.align-items-center.justify-content-between
+                        a(href='#').small.text-white.stretched-link
+                            | View Tasks
+                        .small.text-white
+                            i.fas.fa-angle-right
+            .col-xxl-3.col-lg-6
+                .card.bg-danger.text-white.mb-4
+                    .card-body
+                        .d-flex.justify-content-between.align-items-center
+                            .mr-3
+                                .text-white-75.small Pending Requests
+                                .text-lg.font-weight-bold 17
+                            i.feather-xl.text-white-50(data-feather='message-circle')
+                    .card-footer.d-flex.align-items-center.justify-content-between
+                        a(href='#').small.text-white.stretched-link
+                            | View Requests
+                        .small.text-white
+                            i.fas.fa-angle-right
+
+        // Example Charts for Dashboard Demo
+        .row
+            .col-xl-6.mb-4
+                .card.card-header-actions.h-100
+                    .card-header
+                        | Earnings Breakdown
+                        .dropdown.no-caret
+                            button#areaChartDropdownExample.btn.btn-transparent-dark.btn-icon.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                i.text-gray-500(data-feather='more-vertical')
+                            .dropdown-menu.dropdown-menu-right.animated--fade-in-up(aria-labelledby='areaChartDropdownExample')
+                                a.dropdown-item(href='#!')
+                                    | Last 12 Months
+                                a.dropdown-item(href='#!')
+                                    | Last 30 Days
+                                a.dropdown-item(href='#!')
+                                    | Last 7 Days
+                                a.dropdown-item(href='#!')
+                                    | This Month
+                                .dropdown-divider
+                                a.dropdown-item(href='#!')
+                                    | Custom Range
+                    .card-body
+                        .chart-area
+                            canvas#myAreaChart(width='100%', height='30')
+            .col-xl-6.mb-4
+                .card.card-header-actions.h-100
+                    .card-header
+                        | Monthly Revenue
+                        .dropdown.no-caret
+                            button#areaChartDropdownExample.btn.btn-transparent-dark.btn-icon.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                i.text-gray-500(data-feather='more-vertical')
+                            .dropdown-menu.dropdown-menu-right.animated--fade-in-up(aria-labelledby='areaChartDropdownExample')
+                                a.dropdown-item(href='#!')
+                                    | Last 12 Months
+                                a.dropdown-item(href='#!')
+                                    | Last 30 Days
+                                a.dropdown-item(href='#!')
+                                    | Last 7 Days
+                                a.dropdown-item(href='#!')
+                                    | This Month
+                                .dropdown-divider
+                                a.dropdown-item(href='#!')
+                                    | Custom Range
+                    .card-body
+                        .chart-bar
+                            canvas#myBarChart(width='100%', height='30')
+
+        // Example DataTable for Dashboard Demo
+        .card.mb-4
+            .card-header
+                | Personnel Management
+            .card-body
+                include includes/datatable-example.pug
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+//- Add JS for third party plugins used on this page
+append scripts
+    //- Load Chart.js via CDN
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js', crossorigin='anonymous')
+    //- Load custom Chart.js styling and demo data
+    script(src='assets/demo/chart-area-demo.js')
+    script(src='assets/demo/chart-bar-demo.js')
+    //- Load dataTables via CDN
+    script(src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js', crossorigin='anonymous')
+    script(src='https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js', crossorigin='anonymous')
+    //- Load dataTables demo data
+    script(src='assets/demo/datatables-demo.js')
+    //- Load Moment.js and Date Range Picker via CDN
+    script(src='https://cdn.jsdelivr.net/momentjs/latest/moment.min.js', crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js', crossorigin='anonymous')
+    //- Load Date Range Picker initialization script
+    script(src='assets/demo/date-range-picker-demo.js')

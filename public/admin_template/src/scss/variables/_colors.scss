@@ -1,0 +1,111 @@
+// Override Bootstrap color system variables
+
+$red: #e81500;
+$orange: #f76400;
+$yellow: #f4a100;
+$green: #00ac69;
+$teal: #00ba94;
+$cyan: #00cfd5;
+$blue: #0061f2;
+$indigo: #5800e8;
+$purple: #6900c7;
+$pink: #e30059;
+
+// Theme variable to set base hue for the custom grayscale
+//
+// Change this to adjust the hue of the theme's grayscale
+
+$grayscale-base-hue: $blue;
+
+// Override Bootstrap grayscale with custom adaptive grayscale
+//
+// Mixes the $grayscale-base-hue variable with a desaturated grayscale to produce a grayscale with slight color saturation
+
+$white: #fff;
+$gray-100: mix(#f9f9f9, $grayscale-base-hue, 96%);
+$gray-200: mix(#ececec, $grayscale-base-hue, 96%);
+$gray-300: mix(#e2e2e2, $grayscale-base-hue, 95%);
+$gray-400: mix(#d4d4d4, $grayscale-base-hue, 93%);
+$gray-500: mix(#b4b4b4, $grayscale-base-hue, 90%);
+$gray-600: mix(#747474, $grayscale-base-hue, 90%);
+$gray-700: mix(#505050, $grayscale-base-hue, 90%);
+$gray-800: mix(#3a3a3a, $grayscale-base-hue, 87%);
+$gray-900: mix(#242424, $grayscale-base-hue, 86%);
+$black: #000;
+
+// Override Bootstrap default state colors
+
+$primary: $blue;
+$secondary: $purple;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+$dark: $gray-900;
+
+// Theme variables for soft color variations
+
+$red-soft: mix($gray-100, $red, 80%);
+$orange-soft: mix($gray-100, $orange, 80%);
+$yellow-soft: mix($gray-100, $yellow, 80%);
+$green-soft: mix($gray-100, $green, 80%);
+$teal-soft: mix($gray-100, $teal, 80%);
+$cyan-soft: mix($gray-100, $cyan, 80%);
+$blue-soft: mix($gray-100, $blue, 80%);
+$indigo-soft: mix($gray-100, $indigo, 80%);
+$purple-soft: mix($gray-100, $purple, 80%);
+$pink-soft: mix($gray-100, $pink, 80%);
+
+$primary-soft: mix($gray-100, $primary, 80%);
+$secondary-soft: mix($gray-100, $secondary, 80%);
+$success-soft: mix($gray-100, $success, 80%);
+$info-soft: mix($gray-100, $info, 80%);
+$warning-soft: mix($gray-100, $warning, 80%);
+$danger-soft: mix($gray-100, $danger, 80%);
+
+// Extend the color map to include non-contextual colors and soft variations
+
+$theme-colors: (
+    "black": $black,
+    "white": $white,
+    "red": $red,
+    "orange": $orange,
+    "yellow": $yellow,
+    "green": $green,
+    "teal": $teal,
+    "cyan": $cyan,
+    "blue": $blue,
+    "indigo": $indigo,
+    "purple": $purple,
+    "pink": $pink,
+    "red-soft": $red-soft,
+    "orange-soft": $orange-soft,
+    "yellow-soft": $yellow-soft,
+    "green-soft": $green-soft,
+    "teal-soft": $teal-soft,
+    "cyan-soft": $cyan-soft,
+    "blue-soft": $blue-soft,
+    "indigo-soft": $indigo-soft,
+    "purple-soft": $purple-soft,
+    "pink-soft": $pink-soft,
+    "primary-soft": $primary-soft,
+    "secondary-soft": $secondary-soft,
+    "success-soft": $success-soft,
+    "info-soft": $info-soft,
+    "warning-soft": $warning-soft,
+    "danger-soft": $danger-soft,
+);
+
+// Override Bootstrap yiq lightness value
+
+$yiq-contrasted-threshold: 200;
+
+// Theme brand color variables
+//
+// Used to create custom button styles for popular brands
+// You can add more brand color variables below, a good place to find official brand colors is https://brandcolors.net/
+
+$facebook: #3b5998;
+$twitter: #1da1f2;
+$github: #333333;
+$google: #ea4335;

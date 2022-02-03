@@ -1,0 +1,624 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Timeline'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'A custom component for creating timelines',
+        pageIcon: 'clock',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        .row
+            .col-lg-9
+
+                // Base timeline component
+                #timelineBasic
+                    .card.mb-4
+                        .card-header Basic Timeline
+                        .card-body
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    
+                                    .timeline
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 01/01/2020
+                                                .timeline-item-marker-indicator
+                                                    i(data-feather='check')
+                                            .timeline-item-content
+                                                | This is the content for the first timeline item.
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 02/02/2020
+                                                .timeline-item-marker-indicator
+                                                    i(data-feather='check')
+                                            .timeline-item-content
+                                                | A second timeline item comes after the first item.
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 03/03/2020
+                                                .timeline-item-marker-indicator
+                                                    i(data-feather='check')
+                                            .timeline-item-content
+                                                | The first and last items do not extend the border to the next marker.
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 04/04/2020
+                                                .timeline-item-marker-indicator
+                                                    i(data-feather='check')
+                                            .timeline-item-content
+                                                | This is the last item. The last item will not show a line after it's respective timeline marker.
+                                        
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#timelineExampleTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#timelineExampleExampleHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#timelineExampleExampleHtml', role='tab', aria-controls='timelineExampleExampleHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#timelineExampleExamplePugTab.nav-link(data-toggle='tab', href='#timelineExampleExamplePug', role='tab', aria-controls='timelineExampleExamplePug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #timelineExampleExampleHtml.tab-pane.active(role='tabpanel', aria-labelledby='timelineExampleExampleHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Fade In Animation -->
+                                                    <div class="timeline">
+                                                        <div class="timeline-item">
+                                                            <div class="timeline-item-marker">
+                                                                <div class="timeline-item-marker-text">...</div>
+                                                                <div class="timeline-item-marker-indicator"><i data-feather="check"></i></div>
+                                                            </div>
+                                                            <div class="timeline-item-content">First item</div>
+                                                        </div>
+                                                        <div class="timeline-item">
+                                                            <div class="timeline-item-marker">
+                                                                <div class="timeline-item-marker-text">...</div>
+                                                                <div class="timeline-item-marker-indicator"><i data-feather="check"></i></div>
+                                                            </div>
+                                                            <div class="timeline-item-content">Second item</div>
+                                                        </div>
+                                                        <div class="timeline-item">
+                                                            <div class="timeline-item-marker">
+                                                                <div class="timeline-item-marker-text">...</div>
+                                                                <div class="timeline-item-marker-indicator"><i data-feather="check"></i></div>
+                                                            </div>
+                                                            <div class="timeline-item-content">Third item</div>
+                                                        </div>
+                                                    </div></script>
+                                        #timelineExampleExamplePug.tab-pane(role='tabpanel', aria-labelledby='timelineExampleExamplePugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Timeline component
+                                                    .timeline
+                                                        .timeline-item
+                                                            .timeline-item-marker
+                                                                .timeline-item-marker-text
+                                                                    | ...
+                                                                .timeline-item-marker-indicator
+                                                                    i(data-feather='check')
+                                                            .timeline-item-content
+                                                                | First item
+                                                        .timeline-item
+                                                            .timeline-item-marker
+                                                                .timeline-item-marker-text
+                                                                    | ...
+                                                                .timeline-item-marker-indicator
+                                                                    i(data-feather='check')
+                                                            .timeline-item-content
+                                                                | Second item
+                                                        .timeline-item
+                                                            .timeline-item-marker
+                                                                .timeline-item-marker-text
+                                                                    | ...
+                                                                .timeline-item-marker-indicator
+                                                                    i(data-feather='check')
+                                                            .timeline-item-content
+                                                                | Third item
+                                .sbp-preview-text.
+                                    The <code>.timeline</code> component allows you to add a <code>.timeline-item</code> to display content within a sequence. The timeline also includes a marker, a field to the left of the marker for a date, and a line connecting the markers. This is a custom component designed specifically for use in the SB Admin Pro theme.
+                
+                // Small timeline component
+                #timelineSmall
+                    .card.mb-4
+                        .card-header Small Timeline Variant
+                        .card-body
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    
+                                    .timeline.timeline-sm
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 01/01/2020
+                                                .timeline-item-marker-indicator
+                                                    i(data-feather='check')
+                                            .timeline-item-content
+                                                | This is the content for the first timeline item.
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 02/02/2020
+                                                .timeline-item-marker-indicator
+                                                    i(data-feather='check')
+                                            .timeline-item-content
+                                                | A second timeline item comes after the first item.
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 03/03/2020
+                                                .timeline-item-marker-indicator
+                                                    i(data-feather='check')
+                                            .timeline-item-content
+                                                | The first and last items do not extend the border to the next marker.
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 04/04/2020
+                                                .timeline-item-marker-indicator
+                                                    i(data-feather='check')
+                                            .timeline-item-content
+                                                | This is the last item. The last item will not show a line after it's respective timeline marker.
+                                        
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#timelineSmTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#timelineSmExampleHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#timelineSmExampleHtml', role='tab', aria-controls='timelineSmExampleHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#timelineSmExamplePugTab.nav-link(data-toggle='tab', href='#timelineSmExamplePug', role='tab', aria-controls='timelineSmExamplePug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #timelineSmExampleHtml.tab-pane.active(role='tabpanel', aria-labelledby='timelineSmExampleHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Fade In Animation -->
+                                                    <div class="timeline timeline-sm">
+                                                        <div class="timeline-item">
+                                                            <div class="timeline-item-marker">
+                                                                <div class="timeline-item-marker-text">...</div>
+                                                                <div class="timeline-item-marker-indicator"><i data-feather="check"></i></div>
+                                                            </div>
+                                                            <div class="timeline-item-content">First item</div>
+                                                        </div>
+                                                        <div class="timeline-item">
+                                                            <div class="timeline-item-marker">
+                                                                <div class="timeline-item-marker-text">...</div>
+                                                                <div class="timeline-item-marker-indicator"><i data-feather="check"></i></div>
+                                                            </div>
+                                                            <div class="timeline-item-content">Second item</div>
+                                                        </div>
+                                                        <div class="timeline-item">
+                                                            <div class="timeline-item-marker">
+                                                                <div class="timeline-item-marker-text">...</div>
+                                                                <div class="timeline-item-marker-indicator"><i data-feather="check"></i></div>
+                                                            </div>
+                                                            <div class="timeline-item-content">Third item</div>
+                                                        </div>
+                                                    </div></script>
+                                        #timelineSmExamplePug.tab-pane(role='tabpanel', aria-labelledby='timelineSmExamplePugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Timeline component
+                                                    .timeline.timeline-sm
+                                                        .timeline-item
+                                                            .timeline-item-marker
+                                                                .timeline-item-marker-text
+                                                                    | ...
+                                                                .timeline-item-marker-indicator
+                                                                    i(data-feather='check')
+                                                            .timeline-item-content
+                                                                | First item
+                                                        .timeline-item
+                                                            .timeline-item-marker
+                                                                .timeline-item-marker-text
+                                                                    | ...
+                                                                .timeline-item-marker-indicator
+                                                                    i(data-feather='check')
+                                                            .timeline-item-content
+                                                                | Second item
+                                                        .timeline-item
+                                                            .timeline-item-marker
+                                                                .timeline-item-marker-text
+                                                                    | ...
+                                                                .timeline-item-marker-indicator
+                                                                    i(data-feather='check')
+                                                            .timeline-item-content
+                                                                | Third item
+                                .sbp-preview-text.
+                                    Append the <code>.timeline</code> component with the <code>.timeline-sm</code> class to use a smaller, more condensed version of the timeline. Keep in mind also that using icons is optional!
+
+                // Extra Small timeline component
+                #timelineXs
+                    .card.mb-4
+                        .card-header Extra Small Timeline Variant
+                        .card-body
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    
+                                    .timeline.timeline-xs
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 01/01/2020
+                                                .timeline-item-marker-indicator.bg-primary
+                                            .timeline-item-content
+                                                | This is the content for the first timeline item.
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 02/02/2020
+                                                .timeline-item-marker-indicator.bg-secondary
+                                            .timeline-item-content
+                                                | A second timeline item comes after the first item.
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 03/03/2020
+                                                .timeline-item-marker-indicator.bg-warning
+                                            .timeline-item-content
+                                                | The first and last items do not extend the border to the next marker.
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 04/04/2020
+                                                .timeline-item-marker-indicator.bg-danger
+                                            .timeline-item-content
+                                                | This is the last item. The last item will not show a line after it's respective timeline marker.
+                                        
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#timelineXsTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#timelineXsExampleHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#timelineXsExampleHtml', role='tab', aria-controls='timelineXsExampleHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#timelineXsExamplePugTab.nav-link(data-toggle='tab', href='#timelineXsExamplePug', role='tab', aria-controls='timelineXsExamplePug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #timelineXsExampleHtml.tab-pane.active(role='tabpanel', aria-labelledby='timelineXsExampleHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Fade In Animation -->
+                                                    <div class="timeline timeline-xs">
+                                                        <div class="timeline-item">
+                                                            <div class="timeline-item-marker">
+                                                                <div class="timeline-item-marker-text">...</div>
+                                                                <div class="timeline-item-marker-indicator"></div>
+                                                            </div>
+                                                            <div class="timeline-item-content">First item</div>
+                                                        </div>
+                                                        <div class="timeline-item">
+                                                            <div class="timeline-item-marker">
+                                                                <div class="timeline-item-marker-text">...</div>
+                                                                <div class="timeline-item-marker-indicator"></div>
+                                                            </div>
+                                                            <div class="timeline-item-content">Second item</div>
+                                                        </div>
+                                                        <div class="timeline-item">
+                                                            <div class="timeline-item-marker">
+                                                                <div class="timeline-item-marker-text">...</div>
+                                                                <div class="timeline-item-marker-indicator">/div>
+                                                            </div>
+                                                            <div class="timeline-item-content">Third item</div>
+                                                        </div>
+                                                    </div></script>
+                                        #timelineXsExamplePug.tab-pane(role='tabpanel', aria-labelledby='timelineXsExamplePugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Timeline component
+                                                    .timeline.timeline-xs
+                                                        .timeline-item
+                                                            .timeline-item-marker
+                                                                .timeline-item-marker-text
+                                                                    | ...
+                                                                .timeline-item-marker-indicator
+                                                            .timeline-item-content
+                                                                | First item
+                                                        .timeline-item
+                                                            .timeline-item-marker
+                                                                .timeline-item-marker-text
+                                                                    | ...
+                                                                .timeline-item-marker-indicator
+                                                            .timeline-item-content
+                                                                | Second item
+                                                        .timeline-item
+                                                            .timeline-item-marker
+                                                                .timeline-item-marker-text
+                                                                    | ...
+                                                                .timeline-item-marker-indicator
+                                                            .timeline-item-content
+                                                                | Third item
+                                .sbp-preview-text.
+                                    Append the <code>.timeline</code> component with the <code>.timeline-xs</code> class for an even smaller timeline component variation. At this size, we do not recommend adding content to the timeline item marker, and have not include any content within that element in the examples above. Instead, you can add context to the timeline marker by using utility classes to change the background color of each marker element.
+
+                // Styled timeline component
+                #timelineStyled
+                    .card.mb-4
+                        .card-header Styled Timeline Component Example
+                        .card-body
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    
+                                    .timeline
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 01/01/2020
+                                                .timeline-item-marker-indicator.bg-primary-soft.text-primary
+                                                    i(data-feather='flag')
+                                            .timeline-item-content.pt-0
+                                                .card.shadow-sm
+                                                    .card-body
+                                                        h5.text-primary Beginning
+                                                        | This is the content for the first timeline item. In this styled example, we're styling the timeline marker with background and typography utility classes. We've also shown that you can use the card component within the timeline item content.
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 02/02/2020
+                                                .timeline-item-marker-indicator.bg-success-soft.text-success
+                                                    i(data-feather='gift')
+                                            .timeline-item-content.pt-0
+                                                .card.shadow-sm
+                                                    .card-body
+                                                        h5.text-success Second Item
+                                                        | This is the content for the second timeline item. In this timeline example, we're also using some spacing utilities on the timeline item content to remove the padding from the top of that element.
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 03/03/2020
+                                                .timeline-item-marker-indicator.bg-secondary-soft.text-secondary
+                                                    i(data-feather='map')
+                                            .timeline-item-content.pt-0
+                                                .card.shadow-sm
+                                                    .card-body
+                                                        h5.text-secondary Third Item
+                                                        | This is the content for the third timeline item. Keep in mind this is just an example of what you can put within the timeline item content. There are many other ways you can use this timeline, and it's fully responsive too!
+                                        .timeline-item
+                                            .timeline-item-marker
+                                                .timeline-item-marker-text
+                                                    | 04/04/2020
+                                                .timeline-item-marker-indicator.bg-warning-soft.text-warning
+                                                    i(data-feather='send')
+                                            .timeline-item-content.pt-0
+                                                .card.shadow-sm
+                                                    .card-body
+                                                        h5.text-warning Last Item
+                                                        | You can use different icons in the icon markers, letters, or no icons at all if you just want a blank circle.
+                                        
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#timelineStyledExampleTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#timelineStyledExampleHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#timelineStyledExampleHtml', role='tab', aria-controls='timelineStyledExampleHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#timelineStyledExamplePugTab.nav-link(data-toggle='tab', href='#timelineStyledExamplePug', role='tab', aria-controls='timelineStyledExamplePug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #timelineStyledExampleHtml.tab-pane.active(role='tabpanel', aria-labelledby='timelineStyledExampleHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Styled timeline component example -->
+                                                    <div class="timeline">
+                                                        <div class="timeline-item">
+                                                            <div class="timeline-item-marker">
+                                                                <div class="timeline-item-marker-text">01/01/2020</div>
+                                                                <div class="timeline-item-marker-indicator bg-primary-soft text-primary"><i data-feather="flag"></i></div>
+                                                            </div>
+                                                            <div class="timeline-item-content pt-0">
+                                                                <div class="card shadow-sm">
+                                                                    <div class="card-body">
+                                                                        <h5 class="text-primary">Beginning</h5>
+                                                                        This is the content for the first timeline item. In this styled example, we're styling the timeline marker with background and typography utility classes. We've also shown that you can use the card component within the timeline item content.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="timeline-item">
+                                                            <div class="timeline-item-marker">
+                                                                <div class="timeline-item-marker-text">02/02/2020</div>
+                                                                <div class="timeline-item-marker-indicator bg-success-soft text-success"><i data-feather="gift"></i></div>
+                                                            </div>
+                                                            <div class="timeline-item-content pt-0">
+                                                                <div class="card shadow-sm">
+                                                                    <div class="card-body">
+                                                                        <h5 class="text-success">Second Item</h5>
+                                                                        This is the content for the second timeline item. In this timeline example, we're also using some spacing utilities on the timeline item content to remove the padding from the top of that element.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="timeline-item">
+                                                            <div class="timeline-item-marker">
+                                                                <div class="timeline-item-marker-text">03/03/2020</div>
+                                                                <div class="timeline-item-marker-indicator bg-secondary-soft text-secondary"><i data-feather="map"></i></div>
+                                                            </div>
+                                                            <div class="timeline-item-content pt-0">
+                                                                <div class="card shadow-sm">
+                                                                    <div class="card-body">
+                                                                        <h5 class="text-secondary">Third Item</h5>
+                                                                        This is the content for the third timeline item. Keep in mind this is just an example of what you can put within the timeline item content. There are many other ways you can use this timeline, and it's fully responsive too!
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="timeline-item">
+                                                            <div class="timeline-item-marker">
+                                                                <div class="timeline-item-marker-text">04/04/2020</div>
+                                                                <div class="timeline-item-marker-indicator bg-warning-soft text-warning"><i data-feather="send"></i></div>
+                                                            </div>
+                                                            <div class="timeline-item-content pt-0">
+                                                                <div class="card shadow-sm">
+                                                                    <div class="card-body">
+                                                                        <h5 class="text-warning">Last Item</h5>
+                                                                        You can use different icons in the icon markers, letters, or no icons at all if you just want a blank circle.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div></script>
+                                        #timelineStyledExamplePug.tab-pane(role='tabpanel', aria-labelledby='timelineStyledExamplePugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Styled timeline component example
+                                                    .timeline
+                                                        .timeline-item
+                                                            .timeline-item-marker
+                                                                .timeline-item-marker-text
+                                                                    | 01/01/2020
+                                                                .timeline-item-marker-indicator.bg-primary-soft.text-primary
+                                                                    i(data-feather='flag')
+                                                            .timeline-item-content.pt-0
+                                                                .card.shadow-sm
+                                                                    .card-body
+                                                                        h5.text-primary Beginning
+                                                                        | This is the content for the first timeline item. In this styled example, we're styling the timeline marker with background and typography utility classes. We've also shown that you can use the card component within the timeline item content.
+                                                        .timeline-item
+                                                            .timeline-item-marker
+                                                                .timeline-item-marker-text
+                                                                    | 02/02/2020
+                                                                .timeline-item-marker-indicator.bg-success-soft.text-success
+                                                                    i(data-feather='gift')
+                                                            .timeline-item-content.pt-0
+                                                                .card.shadow-sm
+                                                                    .card-body
+                                                                        h5.text-success Second Item
+                                                                        | This is the content for the second timeline item. In this timeline example, we're also using some spacing utilities on the timeline item content to remove the padding from the top of that element.
+                                                        .timeline-item
+                                                            .timeline-item-marker
+                                                                .timeline-item-marker-text
+                                                                    | 03/03/2020
+                                                                .timeline-item-marker-indicator.bg-secondary-soft.text-secondary
+                                                                    i(data-feather='map')
+                                                            .timeline-item-content.pt-0
+                                                                .card.shadow-sm
+                                                                    .card-body
+                                                                        h5.text-secondary Third Item
+                                                                        | This is the content for the third timeline item. Keep in mind this is just an example of what you can put within the timeline item content. There are many other ways you can use this timeline, and it's fully responsive too!
+                                                        .timeline-item
+                                                            .timeline-item-marker
+                                                                .timeline-item-marker-text
+                                                                    | 04/04/2020
+                                                                .timeline-item-marker-indicator.bg-warning-soft.text-warning
+                                                                    i(data-feather='send')
+                                                            .timeline-item-content.pt-0
+                                                                .card.shadow-sm
+                                                                    .card-body
+                                                                        h5.text-warning Last Item
+                                                                        | You can use different icons in the icon markers, letters, or no icons at all if you just want a blank circle.
+
+                                .sbp-preview-text.
+                                    Use built in utility classes to change the presentation of the timeline content and the styling of the timeline markers.
+
+            // Sticky Navigation
+            .col-lg-3
+                .nav-sticky
+                    .card
+                        .card-body
+                            ul.nav.flex-column#stickyNav
+                                li.nav-item
+                                    a.nav-link(href='#timelineBasic') Basic Timeline
+                                li.nav-item
+                                    a.nav-link(href='#timelineSmall') Small Timeline
+                                li.nav-item
+                                    a.nav-link(href='#timelineXs') Extra Small Timeline
+                                li.nav-item
+                                    a.nav-link(href='#timelineStyled') Styled Timeline
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+append scripts
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js', crossorigin='anonymous')

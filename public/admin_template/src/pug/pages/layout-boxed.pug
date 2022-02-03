@@ -1,0 +1,89 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Boxed Layout'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'On larger screens, this layout will keep the page content from expanding beyond a max width.',
+        pageIcon: 'layout',
+        breadcrumbs: false,
+        search: false
+    })
+
+    // Main page content
+    .container
+
+        .card.mt-n10
+            .card-header Boxed Layout Example
+            .card-body
+                | This is an example of a page with the default boxed layout. We've expanded Bootstrap by adding a new xxl breakpoint. As the screen width gets larger, the container element will set a max width to the content. The boxed layout uses the max width container element on the page header and in the main page content in this example.
+
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })

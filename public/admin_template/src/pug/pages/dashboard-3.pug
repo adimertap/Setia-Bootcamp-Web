@@ -1,0 +1,259 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Affiliate Dashboard'
+
+//- Add CSS for third party plugins used on this page
+append css
+    //- Load Date Range Picker via CDN
+    link(href='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css', rel='stylesheet', crossorigin='anonymous')
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    // Main page content
+    .container.mt-5
+
+        // Custom page header alternative example
+        .d-flex.justify-content-between.align-items-sm-center.flex-column.flex-sm-row.mb-4
+            .mr-4.mb-3.mb-sm-0
+                h1.mb-0 Dashboard
+                .small
+                    span.font-weight-500.text-primary Friday
+                    |  &middot; September 20, 2020 &middot; 12:16 PM
+            // Date range picker example button
+            button#reportrange.btn.btn-white.btn-sm.line-height-normal.p-3
+                i.mr-2.text-primary(data-feather='calendar')
+                span
+                i.ml-1(data-feather='chevron-down')
+
+        // Illustration dashboard card example
+        .card.card-waves.mb-4.mt-5
+            .card-body.p-5
+                .row.align-items-center.justify-content-between
+                    .col
+                        h2.text-primary Welcome back, your dashboard is ready!
+                        p.text-gray-700 Great job, your affiliate dashboard is ready to go! You can view sales, generate links, prepare coupons, and download affiliate reports using this dashboard.
+                        a.btn.btn-primary.btn-sm.px-3.py-2(href="#!")
+                            | Get Started
+                            i.ml-1(data-feather='arrow-right')
+                    .col.d-none.d-lg-block.mt-xxl-n4
+                        img.img-fluid.px-xl-4.mt-xxl-n5(src='assets/img/freepik/statistics-pana.svg')
+
+        .row
+
+            .col-xl-3.col-md-6.mb-4
+
+                // Dashboard info widget 1
+                .card.border-top-0.border-bottom-0.border-right-0.border-left-lg.border-primary.h-100
+                    .card-body
+                        .d-flex.align-items-center
+                            .flex-grow-1
+                                .small.font-weight-bold.text-primary.mb-1 Earnings (monthly)
+                                .h5 $4,390
+                                .text-xs.font-weight-bold.text-success.d-inline-flex.align-items-center
+                                    i.mr-1(data-feather='trending-up')
+                                    | 12%
+                            .ml-2
+                                i.fas.fa-dollar-sign.fa-2x.text-gray-200
+
+            .col-xl-3.col-md-6.mb-4
+
+                // Dashboard info widget 2
+                .card.border-top-0.border-bottom-0.border-right-0.border-left-lg.border-secondary.h-100
+                    .card-body
+                        .d-flex.align-items-center
+                            .flex-grow-1
+                                .small.font-weight-bold.text-secondary.mb-1 Average sale price
+                                .h5 $27.00
+                                .text-xs.font-weight-bold.text-danger.d-inline-flex.align-items-center
+                                    i.mr-1(data-feather='trending-down')
+                                    | 3%
+                            .ml-2
+                                i.fas.fa-tag.fa-2x.text-gray-200
+
+            .col-xl-3.col-md-6.mb-4
+
+                // Dashboard info widget 3
+                .card.border-top-0.border-bottom-0.border-right-0.border-left-lg.border-success.h-100
+                    .card-body
+                        .d-flex.align-items-center
+                            .flex-grow-1
+                                .small.font-weight-bold.text-success.mb-1 Clicks
+                                .h5 11,291
+                                .text-xs.font-weight-bold.text-success.d-inline-flex.align-items-center
+                                    i.mr-1(data-feather='trending-up')
+                                    | 12%
+                            .ml-2
+                                i.fas.fa-mouse-pointer.fa-2x.text-gray-200
+
+            .col-xl-3.col-md-6.mb-4
+
+                // Dashboard info widget 4
+                .card.border-top-0.border-bottom-0.border-right-0.border-left-lg.border-info.h-100
+                    .card-body
+                        .d-flex.align-items-center
+                            .flex-grow-1
+                                .small.font-weight-bold.text-info.mb-1 Conversion rate
+                                .h5 1.23%
+                                .text-xs.font-weight-bold.text-danger.d-inline-flex.align-items-center
+                                    i.mr-1(data-feather='trending-down')
+                                    | 1%
+                            .ml-2
+                                i.fas.fa-percentage.fa-2x.text-gray-200
+
+        .row
+
+            .col-lg-4.mb-4
+
+                // Illustration card example
+                .card.mb-4
+                    .card-body.text-center.p-5
+                        img.img-fluid.mb-5(src='assets/img/freepik/data-report-pana.svg')
+                        h4 Report generation
+                        p.mb-4 Ready to get started? Let us know now! It's time to start building that dashboard you've been waiting to create!
+                        a.btn.btn-primary.btn-sm.py-2.px-3(href='#!') Continue
+
+                // Report summary card example
+                .card.mb-4
+                    .card-header.border-bottom-0
+                        | Affiliate Reports
+                    .list-group.list-group-flush.small
+                        a(href='#!').list-group-item.list-group-item-action
+                            i.fas.fa-dollar-sign.fa-fw.text-blue.mr-2
+                            | Earnings Reports
+                        a(href='#!').list-group-item.list-group-item-action
+                            i.fas.fa-tag.fa-fw.text-purple.mr-2
+                            | Average Sale Price
+                        a(href='#!').list-group-item.list-group-item-action
+                            i.fas.fa-mouse-pointer.fa-fw.text-green.mr-2
+                            | Engagement (Clicks &amp; Impressions)
+                        a(href='#!').list-group-item.list-group-item-action
+                            i.fas.fa-percentage.fa-fw.text-yellow.mr-2
+                            | Conversion Rate
+                        a(href='#!').list-group-item.list-group-item-action
+                            i.fas.fa-chart-pie.fa-fw.text-pink.mr-2
+                            | Segments
+                    .card-footer.border-top-0
+                        a(href='#!').text-xs.d-flex.align-items-center.justify-content-between
+                            | View More Reports
+                            i.fas.fa-long-arrow-alt-right
+
+                // Progress card example
+                .card.bg-primary.border-0
+                    .card-body
+                        h5.text-white-50 Budget Overview
+                        .mb-4
+                            span.display-4.text-white $48k
+                            span.text-white-50  per year
+                        .progress.bg-white-25.rounded-pill(style='height: 0.5rem;')
+                            .progress-bar.bg-white.w-75.rounded-pill(role='progressbar', aria-valuenow='75', aria-valuemin='0', aria-valuemax='100')
+
+            .col-lg-8.mb-4
+
+                // Area chart example
+                .card.mb-4
+                    .card-header
+                        | Revenue Summary
+                    .card-body
+                        .chart-area
+                            canvas#myAreaChart(width='100%', height='30')
+                
+                .row
+
+                    .col-lg-6
+
+                        // Bar chart example
+                        .card.h-100
+                            .card-header 
+                                | Sales Reporting
+                            .card-body.d-flex.flex-column.justify-content-center
+                                .chart-bar
+                                    canvas#myBarChart(width='100%', height='30')
+                            .card-footer
+                                a(href='#!').text-xs.d-flex.align-items-center.justify-content-between
+                                    | View More Reports
+                                    i.fas.fa-long-arrow-alt-right
+
+                    .col-lg-6
+
+                        // Pie chart example
+                        .card.h-100
+                            .card-header Traffic Sources
+                            .card-body
+                                .chart-pie.mb-4
+                                    canvas#myPieChart(width='100%', height='50')
+                                .list-group.list-group-flush
+                                    .list-group-item.d-flex.align-items-center.justify-content-between.small.px-0.py-2
+                                        .mr-3
+                                            i.fas.fa-circle.fa-sm.mr-1.text-blue
+                                            | Direct
+                                        .font-weight-500.text-dark 55%
+                                    .list-group-item.d-flex.align-items-center.justify-content-between.small.px-0.py-2
+                                        .mr-3
+                                            i.fas.fa-circle.fa-sm.mr-1.text-purple
+                                            | Social
+                                        .font-weight-500.text-dark 15%
+                                    .list-group-item.d-flex.align-items-center.justify-content-between.small.px-0.py-2
+                                        .mr-3
+                                            i.fas.fa-circle.fa-sm.mr-1.text-green
+                                            | Referral
+                                        .font-weight-500.text-dark 30%
+
+append scripts
+    //- Load Chart.js via CDN
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js', crossorigin='anonymous')
+    //- Load custom Chart.js styling and demo data
+    script(src='assets/demo/chart-area-demo.js')
+    script(src='assets/demo/chart-bar-demo.js')
+    script(src='assets/demo/chart-pie-demo.js')
+    //- Load Moment.js and Date Range Picker via CDN
+    script(src='https://cdn.jsdelivr.net/momentjs/latest/moment.min.js', crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js', crossorigin='anonymous')
+    //- Load Date Range Picker initialization script
+    script(src='assets/demo/date-range-picker-demo.js')

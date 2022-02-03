@@ -1,0 +1,126 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Charts'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Interactive charts to display your data, powered by Chart.js, customized for SB Admin Pro',
+        pageIcon: 'bar-chart',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        // Area chart example
+        .card.mb-4
+            .card-header Area Chart Example
+            .card-body
+                .chart-area
+                    canvas#myAreaChart(width='100%', height='30')
+            .card-footer.small.text-muted Updated yesterday at 11:59 PM
+        .row
+            .col-lg-6
+                // Bar chart example
+                .card.mb-4
+                    .card-header Bar Chart Example
+                    .card-body
+                        .chart-bar
+                            canvas#myBarChart(width='100%', height='50')
+                    .card-footer.small.text-muted Updated yesterday at 11:59 PM
+            .col-lg-6
+                // Pie chart example
+                .card.mb-4
+                    .card-header Pie Chart Example
+                    .card-body
+                        .chart-pie
+                            canvas#myPieChart(width='100%', height='50')
+                    .card-footer.small.text-muted Updated yesterday at 11:59 PM
+
+        // Third party docs message
+        .card.card-icon.mb-4
+            .row.no-gutters
+                .col-auto.card-icon-aside.bg-primary
+                    i.text-white-50(data-feather='alert-triangle')
+                .col
+                    .card-body.py-5
+                        h5.card-title Third-Party Documentation Available
+                        p.card-text
+                            | Chart.js is a third party plugin that is used to generate the charts in this template. The charts above have been customized to fit the style of the SB Admin Pro theme. For further customization options, please visit the official Chart.js documentation.
+                        a.btn.btn-primary.btn-sm(href='https://www.chartjs.org/docs/latest/', target='_blank')
+                            i.mr-1(data-feather='external-link')
+                            | Visit Chart.js Docs
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+append scripts
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js', crossorigin='anonymous')
+    script(src='assets/demo/chart-area-demo.js')
+    script(src='assets/demo/chart-bar-demo.js')
+    script(src='assets/demo/chart-pie-demo.js')

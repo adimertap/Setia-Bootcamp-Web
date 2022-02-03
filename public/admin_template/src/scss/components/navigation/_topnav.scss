@@ -1,0 +1,52 @@
+// Base styling for the topnav
+
+.topnav {
+    padding-left: 0;
+    height: $topnav-base-height;
+    z-index: $zindex-topnav;
+    font-size: 0.9rem;
+    .navbar-brand {
+        width: $sidenav-base-width;
+        padding-left: $navbar-padding-x;
+        padding-right: $navbar-padding-x;
+        margin: 0;
+        font-size: 1rem;
+        font-weight: bold;
+        img {
+            height: 0.8rem;
+        }
+    }
+    &.navbar-dark {
+        #sidebarToggle {
+            color: $topnav-dark-toggler-color;
+        }
+        .navbar-brand {
+            color: $white;
+        }
+    }
+    &.navbar-light {
+        #sidebarToggle {
+            color: $topnav-light-toggler-color;
+        }
+        .navbar-brand {
+            color: $gray-800;
+        }
+    }
+    .dropdown {
+        position: static;
+        .dropdown-menu {
+            width: calc(100% - #{$grid-gutter-width});
+            right: $grid-gutter-width / 2;
+            left: $grid-gutter-width / 2;
+        }
+        @include media-breakpoint-up(sm) {
+            position: relative;
+            .dropdown-menu {
+                width: auto;
+                min-width: 15rem;
+                right: 0;
+                left: auto;
+            }
+        }
+    }
+}

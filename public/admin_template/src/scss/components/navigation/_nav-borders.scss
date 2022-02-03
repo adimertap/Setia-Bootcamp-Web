@@ -1,0 +1,46 @@
+.nav-borders {
+    .nav-link {
+        color: $body-color;
+        border-bottom-width: 0.125rem;
+        border-bottom-style: solid;
+        border-bottom-color: transparent;
+
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 0;
+        padding-right: 0;
+
+        margin-left: 1rem;
+        margin-right: 1rem;
+
+        &.active {
+            color: $primary;
+            border-bottom-color: $primary;
+        }
+
+        &.disabled {
+            color: $gray-400;
+        }
+    }
+    &.flex-column {
+        .nav-link {
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-right: 1rem;
+            padding-left: 1rem;
+
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            margin-right: 0;
+            margin-left: 0;
+
+            border-bottom: none;
+            border-right-width: 0.125rem;
+            border-right-style: solid;
+            border-right-color: transparent;
+            &.active {
+                border-right-color: $primary;
+            }
+        }
+    }
+}

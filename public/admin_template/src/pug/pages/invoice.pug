@@ -1,0 +1,155 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Invoice'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    // Main page content
+    .container.mt-4
+        // Invoice
+        .card.invoice
+            .card-header.p-4.p-md-5.border-bottom-0.bg-gradient-primary-to-secondary.text-white-50
+                .row.justify-content-between.align-items-center
+                    .col-12.col-lg-auto.mb-5.mb-lg-0.text-center.text-lg-left
+                        // Invoice branding
+                        img.invoice-brand-img.rounded-circle.mb-4(src='assets/img/logo-invoice.svg' alt='')
+                        .h2.text-white.mb-0 Start Bootstrap
+                        | Web Design &amp; Development
+                    .col-12.col-lg-auto.text-center.text-lg-right
+                        // Invoice details
+                        .h3.text-white Invoice
+                        | #29301
+                        br
+                        | January 1, 2020
+            .card-body.p-4.p-md-5
+                // Invoice table
+                .table-responsive
+                    table.table.table-borderless.mb-0
+                        thead.border-bottom
+                            tr.small.text-uppercase.text-muted
+                                th(scope='col') Description
+                                th.text-right(scope='col') Hours
+                                th.text-right(scope='col') Rate
+                                th.text-right(scope='col') Amount
+                        tbody
+                            // Invoice item 1
+                            tr.border-bottom
+                                td
+                                    .font-weight-bold SB Admin Pro
+                                    .small.text-muted.d-none.d-md-block A professional UI toolkit for designing admin dashboards and web applications
+                                td.text-right.font-weight-bold 12
+                                td.text-right.font-weight-bold $50.00
+                                td.text-right.font-weight-bold $600.00
+                            // Invoice item 2
+                            tr.border-bottom
+                                td
+                                    .font-weight-bold SB UI Kit Pro
+                                    .small.text-muted.d-none.d-md-block A UI toolkit for creating marketing websites and landing pages
+                                td.text-right.font-weight-bold 15
+                                td.text-right.font-weight-bold $55.00
+                                td.text-right.font-weight-bold $825.00
+                            // Invoice item 3
+                            tr.border-bottom
+                                td
+                                    .font-weight-bold Pro HTML Bundle
+                                    .small.text-muted.d-none.d-md-block A fully coded set of UI resources for creating a comprehensive web application
+                                td.text-right.font-weight-bold 4
+                                td.text-right.font-weight-bold $125.00
+                                td.text-right.font-weight-bold $500.00
+                            // Invoice subtotal
+                            tr
+                                td.text-right.pb-0(colspan='3')
+                                    .text-uppercase.small.font-weight-700.text-muted Subtotal:
+                                td.text-right.pb-0
+                                    .h5.mb-0.font-weight-700 $,1925.00
+                            // Invoice tax column
+                            tr
+                                td.text-right.pb-0(colspan='3')
+                                    .text-uppercase.small.font-weight-700.text-muted Tax (7%):
+                                td.text-right.pb-0
+                                    .h5.mb-0.font-weight-700 $134.75
+                            // Invoice total
+                            tr
+                                td.text-right.pb-0(colspan='3')
+                                    .text-uppercase.small.font-weight-700.text-muted Total Amount Due:
+                                td.text-right.pb-0
+                                    .h5.mb-0.font-weight-700.text-green $2059.75
+            .card-footer.p-4.p-lg-5.border-top-0
+                .row
+                    .col-md-6.col-lg-3.mb-4.mb-lg-0
+                        // Invoice - sent to info
+                        .small.text-muted.text-uppercase.font-weight-700.mb-2 To
+                        .h6.mb-1 Company Name
+                        .small 1234 Company Dr.
+                        .small Yorktown, MA 39201
+                    .col-md-6.col-lg-3.mb-4.mb-lg-0
+                        // Invoice - sent from info
+                        .small.text-muted.text-uppercase.font-weight-700.mb-2 From
+                        .h6.mb-0 Start Bootstrap
+                        .small 5678 Company Rd.
+                        .small Yorktown, MA 39201
+                    .col-lg-6
+                        // Invoice - additional notes
+                        .small.text-muted.text-uppercase.font-weight-700.mb-2 Note
+                        .small.mb-0 Payment is due 15 days after receipt of this invoice. Please make checks or money orders out to Company Name, and include the invoice number in the memo. We appreciate your business, and hope to be working with you again very soon!
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })

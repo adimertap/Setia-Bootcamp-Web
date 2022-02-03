@@ -1,0 +1,17 @@
+// Style overrides for the Date Range Picker plugin
+
+.daterangepicker {
+    font-family: $font-family-base !important;
+    border-radius: $border-radius !important;
+    border-color: $border-color !important;
+    .ranges li.active {
+        background-color: $primary !important;
+    }
+    td.in-range {
+        background-color: lighten($primary, 45%) !important;
+    }
+    td.active,
+    td.active:hover {
+        background-color: $primary !important;
+    }
+}

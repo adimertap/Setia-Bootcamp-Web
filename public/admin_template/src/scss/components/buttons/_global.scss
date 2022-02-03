@@ -1,0 +1,6 @@
+// Vertically centers content within buttons if content is different heights
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}

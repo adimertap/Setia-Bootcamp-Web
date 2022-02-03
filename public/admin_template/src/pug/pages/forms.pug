@@ -1,0 +1,804 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Forms'
+
+//- Add CSS for third party plugins used on this page
+append css
+    //- Load Date Range Picker via CDN
+    link(href='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css', rel='stylesheet', crossorigin='anonymous')
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Dynamic form components to give your users informative and intuitive inputs',
+        pageIcon: 'edit-3',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        .row
+            .col-lg-9
+
+                // Default Bootstrap Form Controls
+                #default
+                    .card.mb-4
+                        .card-header Default Bootstrap Form Controls
+                        .card-body
+
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    form
+                                        .form-group
+                                            label(for='exampleFormControlInput1') Email address
+                                            input#exampleFormControlInput1.form-control(type='email', placeholder='name@example.com')
+                                        .form-group
+                                            label(for='exampleFormControlSelect1') Example select
+                                            select#exampleFormControlSelect1.form-control
+                                                option 1
+                                                option 2
+                                                option 3
+                                                option 4
+                                                option 5
+                                        .form-group
+                                            label(for='exampleFormControlSelect2') Example multiple select
+                                            select#exampleFormControlSelect2.form-control(multiple='')
+                                                option 1
+                                                option 2
+                                                option 3
+                                                option 4
+                                                option 5
+                                        .form-group
+                                            label(for='exampleFormControlTextarea1') Example textarea
+                                            textarea#exampleFormControlTextarea1.form-control(rows='3')
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#formsDefaultTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#formsDefaultHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#formsDefaultHtml', role='tab', aria-controls='formsDefaultHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#formsDefaultPugTab.nav-link(data-toggle='tab', href='#formsDefaultPug', role='tab', aria-controls='formsDefaultPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #formsDefaultHtml.tab-pane.active(role='tabpanel', aria-labelledby='formsDefaultHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><form>
+                                                        <div class="form-group"><label for="exampleFormControlInput1">Email address</label><input class="form-control" id="exampleFormControlInput1" type="email" placeholder="name@example.com"></div>
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlSelect1">Example select</label><select class="form-control" id="exampleFormControlSelect1">
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                                <option>3</option>
+                                                                <option>4</option>
+                                                                <option>5</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlSelect2">Example multiple select</label><select class="form-control" id="exampleFormControlSelect2" multiple="">
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                                <option>3</option>
+                                                                <option>4</option>
+                                                                <option>5</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group"><label for="exampleFormControlTextarea1">Example textarea</label><textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea></div>
+                                                    </form></script>
+                                        #formsDefaultPug.tab-pane(role='tabpanel', aria-labelledby='formsDefaultPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    form
+                                                        .form-group
+                                                            label(for='exampleFormControlInput1') Email address
+                                                            input#exampleFormControlInput1.form-control(type='email', placeholder='name@example.com')
+                                                        .form-group
+                                                            label(for='exampleFormControlSelect1') Example select
+                                                            select#exampleFormControlSelect1.form-control
+                                                                option 1
+                                                                option 2
+                                                                option 3
+                                                                option 4
+                                                                option 5
+                                                        .form-group
+                                                            label(for='exampleFormControlSelect2') Example multiple select
+                                                            select#exampleFormControlSelect2.form-control(multiple='')
+                                                                option 1
+                                                                option 2
+                                                                option 3
+                                                                option 4
+                                                                option 5
+                                                        .form-group
+                                                            label(for='exampleFormControlTextarea1') Example textarea
+                                                            textarea#exampleFormControlTextarea1.form-control(rows='3')
+
+                                .sbp-preview-text
+                                    | The default Bootstrap form control states have been restyled to fit the SB Admin Pro theme. The style has changed, but the markup is identical.
+
+                // Solid Form Controls
+                #solid
+                    .card.mb-4
+                        .card-header Custom Solid Form Controls
+                        .card-body
+
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    form
+                                        .form-group
+                                            label(for='exampleFormControlInput1') Email address
+                                            input#exampleFormControlInput1.form-control.form-control-solid(type='email', placeholder='name@example.com')
+                                        .form-group
+                                            label(for='exampleFormControlSelect1') Example select
+                                            select#exampleFormControlSelect1.form-control.form-control-solid
+                                                option 1
+                                                option 2
+                                                option 3
+                                                option 4
+                                                option 5
+                                        .form-group
+                                            label(for='exampleFormControlSelect2') Example multiple select
+                                            select#exampleFormControlSelect2.form-control.form-control-solid(multiple='')
+                                                option 1
+                                                option 2
+                                                option 3
+                                                option 4
+                                                option 5
+                                        .form-group
+                                            label(for='exampleFormControlTextarea1') Example textarea
+                                            textarea#exampleFormControlTextarea1.form-control.form-control-solid(rows='3')
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#formsSolidTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#formsSolidHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#formsSolidHtml', role='tab', aria-controls='formsSolidHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#formsSolidPugTab.nav-link(data-toggle='tab', href='#formsSolidPug', role='tab', aria-controls='formsSolidPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #formsSolidHtml.tab-pane.active(role='tabpanel', aria-labelledby='formsSolidHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><form>
+                                                        <div class="form-group"><label for="exampleFormControlInput1">Email address</label><input class="form-control form-control-solid" id="exampleFormControlInput1" type="email" placeholder="name@example.com"></div>
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlSelect1">Example select</label><select class="form-control form-control-solid" id="exampleFormControlSelect1">
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                                <option>3</option>
+                                                                <option>4</option>
+                                                                <option>5</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlSelect2">Example multiple select</label><select class="form-control form-control-solid" id="exampleFormControlSelect2" multiple="">
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                                <option>3</option>
+                                                                <option>4</option>
+                                                                <option>5</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group"><label for="exampleFormControlTextarea1">Example textarea</label><textarea class="form-control form-control-solid" id="exampleFormControlTextarea1" rows="3"></textarea></div>
+                                                    </form></script>
+                                        #formsSolidPug.tab-pane(role='tabpanel', aria-labelledby='formsSolidPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    form
+                                                        .form-group
+                                                            label(for='exampleFormControlInput1') Email address
+                                                            input#exampleFormControlInput1.form-control.form-control-solid(type='email', placeholder='name@example.com')
+                                                        .form-group
+                                                            label(for='exampleFormControlSelect1') Example select
+                                                            select#exampleFormControlSelect1.form-control.form-control-solid
+                                                                option 1
+                                                                option 2
+                                                                option 3
+                                                                option 4
+                                                                option 5
+                                                        .form-group
+                                                            label(for='exampleFormControlSelect2') Example multiple select
+                                                            select#exampleFormControlSelect2.form-control.form-control-solid(multiple='')
+                                                                option 1
+                                                                option 2
+                                                                option 3
+                                                                option 4
+                                                                option 5
+                                                        .form-group
+                                                            label(for='exampleFormControlTextarea1') Example textarea
+                                                            textarea#exampleFormControlTextarea1.form-control.form-control-solid(rows='3')
+
+                                .sbp-preview-text.
+                                    Custom solid form controls have been developed as an alternative to the default form styling. Use them by appending the <code>.form-control-solid</code> to the normal <code>.form-control</code> class.
+
+                // Custom Checkboxes and Radio
+                #checkbox
+                    .card.mb-4
+                        .card-header Custom Checkboxes &amp; Radio
+                        .card-body
+                            h6.small.text-muted.font-weight-500 Bootstrap Custom Checkboxes:
+
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    .custom-control.custom-checkbox
+                                        input#customCheck1.custom-control-input(type='checkbox')
+                                        label.custom-control-label(for='customCheck1') Custom Checkbox 1
+                                    .custom-control.custom-checkbox
+                                        input#customCheck2.custom-control-input(type='checkbox')
+                                        label.custom-control-label(for='customCheck2') Custom Checkbox 2
+                                    .custom-control.custom-checkbox
+                                        input#customCheck3.custom-control-input(type='checkbox', disabled)
+                                        label.custom-control-label(for='customCheck3') Custom Checkbox (Disabled)
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#formsCheckboxesTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#formsCheckboxesHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#formsCheckboxesHtml', role='tab', aria-controls='formsCheckboxesHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#formsCheckboxesPugTab.nav-link(data-toggle='tab', href='#formsCheckboxesPug', role='tab', aria-controls='formsCheckboxesPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #formsCheckboxesHtml.tab-pane.active(role='tabpanel', aria-labelledby='formsCheckboxesHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="custom-control custom-checkbox">
+                                                        <input class="custom-control-input" id="customCheck1" type="checkbox">
+                                                        <label class="custom-control-label" for="customCheck1">Custom Checkbox 1</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input class="custom-control-input" id="customCheck2" type="checkbox">
+                                                        <label class="custom-control-label" for="customCheck2">Custom Checkbox 2</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input class="custom-control-input" id="customCheck3" type="checkbox" disabled="">
+                                                        <label class="custom-control-label" for="customCheck3">Custom Checkbox (Disabled)</label>
+                                                    </div></script>
+                                        #formsCheckboxesPug.tab-pane(role='tabpanel', aria-labelledby='formsCheckboxesPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .custom-control.custom-checkbox
+                                                        input#customCheck1.custom-control-input(type='checkbox')
+                                                        label.custom-control-label(for='customCheck1') Custom Checkbox 1
+                                                    .custom-control.custom-checkbox
+                                                        input#customCheck2.custom-control-input(type='checkbox')
+                                                        label.custom-control-label(for='customCheck2') Custom Checkbox 2
+                                                    .custom-control.custom-checkbox
+                                                        input#customCheck3.custom-control-input(type='checkbox', disabled)
+                                                        label.custom-control-label(for='customCheck3') Custom Checkbox (Disabled)
+                                .sbp-preview-text
+                                    | Bootstrap's custom checkbox styling has been modified for the SB Admin Pro theme.
+
+                            h6.small.text-muted.font-weight-500 Bootstrap Custom Radio:
+
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    .custom-control.custom-radio
+                                        input#customRadio1.custom-control-input(type='radio', name='customRadio')
+                                        label.custom-control-label(for='customRadio1') Toggle this custom radio
+                                    .custom-control.custom-radio
+                                        input#customRadio2.custom-control-input(type='radio', name='customRadio')
+                                        label.custom-control-label(for='customRadio2') Or toggle this other custom radio
+                                    .custom-control.custom-radio
+                                        input#customRadio3.custom-control-input(type='radio', name='customRadio', disabled)
+                                        label.custom-control-label(for='customRadio3') This radio is disabled
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#formsRadioTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#formsRadioHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#formsRadioHtml', role='tab', aria-controls='formsRadioHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#formsRadioPugTab.nav-link(data-toggle='tab', href='#formsRadioPug', role='tab', aria-controls='formsRadioPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #formsRadioHtml.tab-pane.active(role='tabpanel', aria-labelledby='formsRadioHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="custom-control custom-radio">
+                                                        <input class="custom-control-input" id="customRadio1" type="radio" name="customRadio">
+                                                        <label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio">
+                                                        <input class="custom-control-input" id="customRadio2" type="radio" name="customRadio">
+                                                        <label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio">
+                                                        <input class="custom-control-input" id="customRadio3" type="radio" name="customRadio" disabled="">
+                                                        <label class="custom-control-label" for="customRadio3">This radio is disabled</label>
+                                                    </div></script>
+                                        #formsRadioPug.tab-pane(role='tabpanel', aria-labelledby='formsRadioPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .custom-control.custom-radio
+                                                        input#customRadio1.custom-control-input(type='radio', name='customRadio')
+                                                        label.custom-control-label(for='customRadio1') Toggle this custom radio
+                                                    .custom-control.custom-radio
+                                                        input#customRadio2.custom-control-input(type='radio', name='customRadio')
+                                                        label.custom-control-label(for='customRadio2') Or toggle this other custom radio
+                                                    .custom-control.custom-radio
+                                                        input#customRadio3.custom-control-input(type='radio', name='customRadio', disabled)
+                                                        label.custom-control-label(for='customRadio3') This radio is disabled
+                                .sbp-preview-text
+                                    | Bootstrap's custom radio styling has also been modified for the SB Admin Pro theme.
+
+                // Solid Checkbox and Radio Styling
+                #checkboxSolid
+                    .card.mb-4
+                        .card-header Solid Checkboxes &amp; Radio
+                        .card-body
+                            h6.small.text-muted.font-weight-500 Custom Solid Checkboxes:
+
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    .custom-control.custom-checkbox.custom-control-solid
+                                        input#customCheckSolid1.custom-control-input(type='checkbox')
+                                        label.custom-control-label(for='customCheckSolid1') Custom Checkbox 1
+                                    .custom-control.custom-checkbox.custom-control-solid
+                                        input#customCheckSolid2.custom-control-input(type='checkbox')
+                                        label.custom-control-label(for='customCheckSolid2') Custom Checkbox 2
+                                    .custom-control.custom-checkbox.custom-control-solid
+                                        input#customCheckSolid3.custom-control-input(type='checkbox', disabled)
+                                        label.custom-control-label(for='customCheckSolid3') Custom Checkbox (Disabled)
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#formsCheckboxesSolidTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#formsCheckboxesSolidHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#formsCheckboxesSolidHtml', role='tab', aria-controls='formsCheckboxesSolidHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#formsCheckboxesSolidPugTab.nav-link(data-toggle='tab', href='#formsCheckboxesSolidPug', role='tab', aria-controls='formsCheckboxesSolidPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #formsCheckboxesSolidHtml.tab-pane.active(role='tabpanel', aria-labelledby='formsCheckboxesSolidHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="custom-control custom-checkbox custom-control-solid">
+                                                        <input class="custom-control-input" id="customCheckSolid1" type="checkbox">
+                                                        <label class="custom-control-label" for="customCheckSolid1">Custom Checkbox 1</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox custom-control-solid">
+                                                        <input class="custom-control-input" id="customCheckSolid2" type="checkbox">
+                                                        <label class="custom-control-label" for="customCheckSolid2">Custom Checkbox 2</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox custom-control-solid">
+                                                        <input class="custom-control-input" id="customCheckSolid3" type="checkbox" disabled="">
+                                                        <label class="custom-control-label" for="customCheckSolid3">Custom Checkbox (Disabled)</label>
+                                                    </div></script>
+                                        #formsCheckboxesSolidPug.tab-pane(role='tabpanel', aria-labelledby='formsCheckboxesSolidPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .custom-control.custom-checkbox.custom-control-solid
+                                                        input#customCheckSolid1.custom-control-input(type='checkbox')
+                                                        label.custom-control-label(for='customCheckSolid1') Custom Checkbox 1
+                                                    .custom-control.custom-checkbox.custom-control-solid
+                                                        input#customCheckSolid2.custom-control-input(type='checkbox')
+                                                        label.custom-control-label(for='customCheckSolid2') Custom Checkbox 2
+                                                    .custom-control.custom-checkbox.custom-control-solid
+                                                        input#customCheckSolid3.custom-control-input(type='checkbox', disabled)
+                                                        label.custom-control-label(for='customCheckSolid3') Custom Checkbox (Disabled)
+                                .sbp-preview-text.
+                                    The <code>.custom-control-solid</code> can be used with a <code>.custom-control</code> class to get a solid styling for custom checkboxes.
+
+                            h6.small.text-muted.font-weight-500 Custom Solid Radio:
+
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    .custom-control.custom-radio.custom-control-solid
+                                        input#customRadioSolid1.custom-control-input(type='radio', name='customRadioSolid')
+                                        label.custom-control-label(for='customRadioSolid1') Toggle this custom radio
+                                    .custom-control.custom-radio.custom-control-solid
+                                        input#customRadioSolid2.custom-control-input(type='radio', name='customRadioSolid')
+                                        label.custom-control-label(for='customRadioSolid2') Or toggle this other custom radio
+                                    .custom-control.custom-radio.custom-control-solid
+                                        input#customRadioSolid3.custom-control-input(type='radio', name='customRadioSolid', disabled)
+                                        label.custom-control-label(for='customRadioSolid3') This radio is disabled
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#formsRadioSolidTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#formsRadioSolidHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#formsRadioSolidHtml', role='tab', aria-controls='formsRadioSolidHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#formsRadioSolidPugTab.nav-link(data-toggle='tab', href='#formsRadioSolidPug', role='tab', aria-controls='formsRadioSolidPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #formsRadioSolidHtml.tab-pane.active(role='tabpanel', aria-labelledby='formsRadioSolidHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="custom-control custom-radio custom-control-solid">
+                                                        <input class="custom-control-input" id="customRadioSolid1" type="radio" name="customRadioSolid">
+                                                        <label class="custom-control-label" for="customRadioSolid1">Toggle this custom radio</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-solid">
+                                                        <input class="custom-control-input" id="customRadioSolid2" type="radio" name="customRadioSolid">
+                                                        <label class="custom-control-label" for="customRadioSolid2">Or toggle this other custom radio</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-solid">
+                                                        <input class="custom-control-input" id="customRadioSolid3" type="radio" name="customRadioSolid" disabled="">
+                                                        <label class="custom-control-label" for="customRadioSolid3">This radio is disabled</label>
+                                                    </div></script>
+                                        #formsRadioSolidPug.tab-pane(role='tabpanel', aria-labelledby='formsRadioSolidPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .custom-control.custom-radio.custom-control-solid
+                                                        input#customRadioSolid1.custom-control-input(type='radio', name='customRadioSolid')
+                                                        label.custom-control-label(for='customRadioSolid1') Toggle this custom radio
+                                                    .custom-control.custom-radio.custom-control-solid
+                                                        input#customRadioSolid2.custom-control-input(type='radio', name='customRadioSolid')
+                                                        label.custom-control-label(for='customRadioSolid2') Or toggle this other custom radio
+                                                    .custom-control.custom-radio.custom-control-solid
+                                                        input#customRadioSolid3.custom-control-input(type='radio', name='customRadioSolid', disabled)
+                                                        label.custom-control-label(for='customRadioSolid3') This radio is disabled
+                                .sbp-preview-text.
+                                    The <code>.custom-control-solid</code> works with custom radios as well.
+
+                // Joined Input Groups
+                #inputGroupJoined
+                    .card.mb-4
+                        .card-header Joined Input Group
+                        .card-body
+
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    
+                                    // Joined input group append example
+                                    .input-group.input-group-joined.mb-4
+                                        input.form-control(type='text', placeholder='Input group append...', aria-label='Search')
+                                        .input-group-append
+                                            span.input-group-text
+                                                i(data-feather='search')
+
+                                    // Joined input group prepend example
+                                    .input-group.input-group-joined.mb-4
+                                        .input-group-prepend
+                                            span.input-group-text
+                                                i(data-feather='search')
+                                        input.form-control(type='text', placeholder='Input group prepend...', aria-label='Search')
+
+                                    // Joined input group solid append example
+                                    .input-group.input-group-joined.input-group-solid.mb-4
+                                        input.form-control(type='text', placeholder='Input group append...', aria-label='Search')
+                                        .input-group-append
+                                            span.input-group-text
+                                                i(data-feather='search')
+
+                                    // Joined input group solid prepend example
+                                    .input-group.input-group-joined.input-group-solid
+                                        .input-group-prepend
+                                            span.input-group-text
+                                                i(data-feather='search')
+                                        input.form-control(type='text', placeholder='Input group prepend...', aria-label='Search')
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#inputGroupJoinedTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#inputGroupJoinedHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#inputGroupJoinedHtml', role='tab', aria-controls='inputGroupJoinedHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#inputGroupJoinedPugTab.nav-link(data-toggle='tab', href='#inputGroupJoinedPug', role='tab', aria-controls='inputGroupJoinedPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #inputGroupJoinedHtml.tab-pane.active(role='tabpanel', aria-labelledby='inputGroupJoinedHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Joined input group append example-->
+                                                    <div class="input-group input-group-joined">
+                                                        <input class="form-control" type="text" placeholder="Input group append..." aria-label="Search">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="search"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Joined input group prepend example-->
+                                                    <div class="input-group input-group-joined">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="search"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input class="form-control" type="text" placeholder="Input group prepend..." aria-label="Search">
+                                                    </div>
+                                                    
+                                                    <!-- Joined input group solid append example-->
+                                                    <div class="input-group input-group-joined input-group-solid">
+                                                        <input class="form-control" type="text" placeholder="Input group append..." aria-label="Search">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="search"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Joined input group solid prepend example-->
+                                                    <div class="input-group input-group-joined input-group-solid">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="search"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input class="form-control" type="text" placeholder="Input group prepend..." aria-label="Search">
+                                                    </div></script>
+                                        #inputGroupJoinedPug.tab-pane(role='tabpanel', aria-labelledby='inputGroupJoinedPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    // Joined input group append example
+                                                    .input-group.input-group-joined
+                                                        input.form-control(type='text', placeholder='Input group append...', aria-label='Search')
+                                                        .input-group-append
+                                                            span.input-group-text
+                                                                i(data-feather='search')
+
+                                                    // Joined input group prepend example
+                                                    .input-group.input-group-joined
+                                                        .input-group-prepend
+                                                            span.input-group-text
+                                                                i(data-feather='search')
+                                                        input.form-control(type='text', placeholder='Input group prepend...', aria-label='Search')
+
+                                                    // Joined input group solid append example
+                                                    .input-group.input-group-joined.mb-4.input-group-solid
+                                                        input.form-control(type='text', placeholder='Input group append...', aria-label='Search')
+                                                        .input-group-append
+                                                            span.input-group-text
+                                                                i(data-feather='search')
+
+                                                    // Joined input group solid prepend example
+                                                    .input-group.input-group-joined.input-group-solid
+                                                        .input-group-prepend
+                                                            span.input-group-text
+                                                                i(data-feather='search')
+                                                        input.form-control(type='text', placeholder='Input group prepend...', aria-label='Search')
+                                .sbp-preview-text.
+                                    The joined input group uses the <code>:focus-within</code> CSS pseudo class to join input group appends and prepends within an input group. Unlike Bootstrap's default input group behavior, these joined input group variations will focus the entire input group when the form control within is selected. This variation also removes the background and border coloring of the append and prepend elements for a smooth, and seamless input group appearance.
+
+                // Date Range Picker
+                #dateRangePicker
+                    .card.card-header-actions.mb-4
+                        .card-header
+                            | Date Range Picker
+                            span.badge.badge-warning-soft.text-warning Plugin
+                        .card-body
+
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    
+                                    // Date Range Picker Example
+                                    button#reportrange.btn.btn-light.btn-sm.line-height-normal.p-3
+                                        i.mr-2.text-primary(data-feather='calendar')
+                                        span
+                                        i.ml-1(data-feather='chevron-down')
+                                    
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#dateRangePickerTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#dateRangePickerHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#dateRangePickerHtml', role='tab', aria-controls='dateRangePickerHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#dateRangePickerPugTab.nav-link(data-toggle='tab', href='#dateRangePickerPug', role='tab', aria-controls='dateRangePickerPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                        li.nav-item
+                                            a#dateRangePickerJsTab.nav-link(data-toggle='tab', href='#dateRangePickerJs', role='tab', aria-controls='dateRangePickerJs', aria-selected='false')
+                                                i.fab.fa-js.text-yellow.mr-1
+                                                | JS
+                                    // Tab panes
+                                    .tab-content
+                                        #dateRangePickerHtml.tab-pane.active(role='tabpanel', aria-labelledby='dateRangePickerHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Date Range Picker Example-->
+                                                    <button class="btn btn-light btn-sm line-height-normal p-3" id="reportrange">
+                                                        <i class="mr-2 text-primary" data-feather="calendar"></i>
+                                                        <span></span>
+                                                        <i class="ml-1" data-feather="chevron-down"></i>
+                                                    </button></script>
+                                        #dateRangePickerPug.tab-pane(role='tabpanel', aria-labelledby='dateRangePickerPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    // Date Range Picker Example
+                                                    button#reportrange.btn.btn-light.btn-sm.line-height-normal.p-3
+                                                        i.mr-2.text-primary(data-feather='calendar')
+                                                        span
+                                                        i.ml-1(data-feather='chevron-down')
+                                        #dateRangePickerJs.tab-pane(role='tabpanel', aria-labelledby='dateRangePickerJsTab')
+                                            pre.language-js
+                                                code.
+                                                    // Date Range Picker Example
+                                                    $(function () {
+                                                        var start = moment().subtract(29, "days");
+                                                        var end = moment();
+
+                                                        function cb(start, end) {
+                                                            $("#reportrange span").html(
+                                                                start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
+                                                            );
+                                                        }
+
+                                                        $("#reportrange").daterangepicker(
+                                                            {
+                                                                startDate: start,
+                                                                endDate: end,
+                                                                ranges: {
+                                                                    Today: [moment(), moment()],
+                                                                    Yesterday: [
+                                                                        moment().subtract(1, "days"),
+                                                                        moment().subtract(1, "days"),
+                                                                    ],
+                                                                    "Last 7 Days": [moment().subtract(6, "days"), moment()],
+                                                                    "Last 30 Days": [moment().subtract(29, "days"), moment()],
+                                                                    "This Month": [
+                                                                        moment().startOf("month"),
+                                                                        moment().endOf("month"),
+                                                                    ],
+                                                                    "Last Month": [
+                                                                        moment().subtract(1, "month").startOf("month"),
+                                                                        moment().subtract(1, "month").endOf("month"),
+                                                                    ],
+                                                                },
+                                                            },
+                                                            cb
+                                                        );
+
+                                                        cb(start, end);
+                                                    });
+                                .sbp-preview-text
+                                    p.
+                                        In the example above, the empty <code>span</code> element it used to populate the content of the button element via JavaScript. This date range picker is a third party plugin with more functionality than what is shown in this example. Visit the <a href='https://www.daterangepicker.com/' target='_blank'>Date Range Picker Documentation</a> for more information on using this plugin.
+                                    .d-inline-flex.align-items-center.bg-warning-soft.text-warning.font-weight-normal.py-1.px-2.rounded
+                                        i.mr-1(data-feather='alert-circle')
+                                        | Requires JavaScript
+
+
+                // Bootstrap Docs Link
+                .card.card-icon.mb-4
+                    .row.no-gutters
+                        .col-auto.card-icon-aside.bg-secondary
+                            i.mr-1.text-white-50.fab.fa-bootstrap
+                        .col
+                            .card-body.py-5
+                                h5.card-title Bootstrap Documentation Available
+                                p.card-text
+                                    | Forms are a default component included with the Bootstrap framework. For more information on implementing, modifying, and extending the usage of forms within your project, visit the official Bootstrap forms documentation page.
+                                a.btn.btn-secondary.btn-sm(href='https://getbootstrap.com/docs/4.4/components/forms/', target='_blank')
+                                    i.mr-1(data-feather='external-link')
+                                    | Visit Bootstrap Forms Docs
+
+            // Sticky Navigation
+            .col-lg-3
+                .nav-sticky
+                    .card
+                        .card-body
+                            ul.nav.flex-column#stickyNav
+                                li.nav-item
+                                    a.nav-link(href='#default') Default Form Controls
+                                li.nav-item
+                                    a.nav-link(href='#solid') Solid Form Controls
+                                li.nav-item
+                                    a.nav-link(href='#checkbox') Default Checkboxes &amp; Radio
+                                li.nav-item
+                                    a.nav-link(href='#checkboxSolid') Solid Checkboxes &amp; Radio
+                                li.nav-item
+                                    a.nav-link(href='#inputGroupJoined')
+                                        .d-flex.align-items-center.justify-content-between
+                                            | Input Groups
+                                            span.badge.badge-primary-soft.text-primary New
+                                li.nav-item
+                                    a.nav-link(href='#dateRangePicker')
+                                        .d-flex.align-items-center.justify-content-between
+                                            | Date Range Picker
+                                            span.badge.badge-primary-soft.text-primary New
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+append scripts
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js', crossorigin='anonymous')
+    //- Load Moment.js and Date Range Picker via CDN
+    script(src='https://cdn.jsdelivr.net/momentjs/latest/moment.min.js', crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js', crossorigin='anonymous')
+    //- Load Date Range Picker initialization script
+    script(src='assets/demo/date-range-picker-demo.js')

@@ -1,0 +1,305 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Borders'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Border utilities allow you to modify the borders of your display elements',
+        pageIcon: 'maximize',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        .row
+            .col-lg-9
+
+                // Default Borders
+                #default
+                    .card.mb-4
+                        .card-header Default Bootstrap Borders
+                        .card-body
+                            h6.small.text-muted.font-weight-500 Additive:
+                            .border.border-lg.rounded.mb-4
+                                .p-4.border-bottom
+                                    .row
+                                        .col-6
+                                            .bg-light.border.p-3.mb-3 .border
+                                            .bg-light.border-top.p-3.mb-3 .border-top
+                                            .bg-light.border-right.p-3 .border-right
+                                        .col-6
+                                            .bg-light.border-bottom.p-3.mb-3 .border-bottom
+                                            .bg-light.border-left.p-3 .border-left
+                                .bg-light.p-4.small
+                                    | The above border utilities will 
+                                    em add
+                                    | 
+                                    | borders to any element.
+                            h6.small.text-muted.font-weight-500 Subtractive:
+                            .border.border-lg.rounded
+                                .p-4.border-bottom
+                                    .row
+                                        .col-6
+                                            .bg-light.border.border-0.p-3.mb-3 .border-0
+                                            .bg-light.border.border-top-0.p-3.mb-3 .border-top-0
+                                            .bg-light.border.border-right-0.p-3 .border-right-0
+                                        .col-6
+                                            .bg-light.border.border-bottom-0.p-3.mb-3 .border-bottom-0
+                                            .bg-light.border.border-left-0.p-3 .border-left-0
+                                .bg-light.p-4.small
+                                    | The above border utilities will 
+                                    em subtract
+                                    | 
+                                    | borders from any element that already has them.
+
+                // Border Colors
+                #colors
+                    .card.mb-4
+                        .card-header Border Colors
+                        .card-body
+                            h6.small.text-muted.font-weight-500 Bootstrap Default State Colors:
+                            .border.border-lg.rounded.mb-4
+                                .p-4.border-bottom
+                                    .row
+                                        .col-6
+                                            .bg-light.border.border-primary.p-3.mb-3 .border-primary
+                                            .bg-light.border.border-secondary.p-3.mb-3 .border-secondary
+                                            .bg-light.border.border-success.p-3.mb-3 .border-success
+                                            .bg-light.border.border-danger.p-3.mb-3 .border-danger
+                                            .bg-light.border.border-warning.p-3 .border-warning
+                                        .col-6
+                                            .bg-light.border.border-info.p-3.mb-3 .border-info
+                                            .bg-light.border.border-light.p-3.mb-3 .border-light
+                                            .bg-light.border.border-dark.p-3.mb-3 .border-dark
+                                            .bg-light.border.border-white.p-3 .border-white
+                                .bg-light.p-4.small
+                                    | Bootstrap's state specific border colors can be used in unison with the additive or subtractive border utilities above.
+                            h6.small.text-muted.font-weight-500 Extended Border Colors:
+                            .border.border-lg.rounded.mb-4
+                                .p-4.border-bottom
+                                    .row
+                                        .col-6
+                                            .bg-light.border.border-red.p-3.mb-3 .border-red
+                                            .bg-light.border.border-orange.p-3.mb-3 .border-orange
+                                            .bg-light.border.border-yellow.p-3.mb-3 .border-yellow
+                                            .bg-light.border.border-green.p-3.mb-3 .border-green
+                                            .bg-light.border.border-teal.p-3 .border-teal
+                                        .col-6
+                                            .bg-light.border.border-cyan.p-3.mb-3 .border-cyan
+                                            .bg-light.border.border-blue.p-3.mb-3 .border-blue
+                                            .bg-light.border.border-indigo.p-3.mb-3 .border-indigo
+                                            .bg-light.border.border-purple.p-3.mb-3 .border-purple
+                                            .bg-light.border.border-pink.p-3 .border-pink
+                                .bg-light.p-4.small
+                                    | SB Admin Pro's expanded color system allows you to use non-contextual border colors instead of state specific ones.
+
+                // Border Radius
+                #radius
+                    .card.mb-4
+                        .card-header Default Bootstrap Border Radius
+                        .card-body
+                            h6.small.text-muted.font-weight-500 Rounded Corners:
+                            .border.border-lg.rounded.mb-4
+                                .p-4.border-bottom
+                                    .row
+                                        .col-4
+                                            .bg-primary.text-white.rounded.p-3.mb-3 .rounded
+                                            .bg-primary.text-white.rounded-top.p-3 .rounded-top
+                                        .col-4
+                                            .bg-primary.text-white.rounded-right.p-3.mb-3 .rounded-right
+                                            .bg-primary.text-white.rounded-bottom.p-3 .rounded-bottom
+                                        .col-4
+                                            .bg-primary.text-white.rounded-left.p-3.mb-3 .rounded-left
+                                            .bg-primary.text-white.rounded-0.p-3 .rounded-0
+                                .bg-light.p-4.small
+                                    | The above border utilities will round the corners of your element based on which utility you specify. You can use them together as well!
+                            h6.small.text-muted.font-weight-500 Other Utilities:
+                            .border.border-lg.rounded
+                                .p-4.border-bottom
+                                    .bg-primary.text-white.rounded-circle.p-3.mr-2.d-inline-flex.align-items-center.justify-content-center(style='height: 10rem; width: 10rem;') .rounded-circle
+                                    .bg-primary.text-white.rounded-pill.p-3.mr-2.d-inline-flex.align-items-center.justify-content-center(style='height: 5rem; width: 10rem;') .rounded-pill
+                                .bg-light.p-4.small.
+                                    It is recommended that you only use the <code>.rounded-circle</code> utility on square elements and the <code>.rounded-pill</code> utility on elements with a width that is larger than it's height.
+
+                // Border Radius Size
+                #radiusSize
+                    .card.mb-4
+                        .card-header Default Bootstrap Border Radius Sizes
+                        .card-body
+                            .border.border-lg.rounded
+                                .p-4.border-bottom
+                                    .bg-primary.text-white.rounded-sm.p-3.mb-3 .rounded-sm
+                                    .bg-primary.text-white.rounded.p-3.mb-3 .rounded
+                                    .bg-primary.text-white.rounded-lg.p-3.mb-3 .rounded-lg
+                                    .bg-primary.text-white.rounded-xl.p-3 .rounded-xl
+                                .bg-light.p-4.small.
+                                    You can set the border radius sizes in by changes their respective SCSS variables in the <code>../variables/components.scss</code> file.
+
+                // Custom Border Thickness
+                #thickness
+                    .card.mb-4
+                        .card-header Custom Border Thickness
+                        .card-body
+                            .border.border-lg.rounded
+                                .p-4.border-bottom
+                                    .bg-light.border.p-3.mb-3 .border
+                                    .bg-light.border.border-lg.p-3.mb-3 .border .border-lg
+                                    .bg-light.border-top.border-lg.p-3.mb-3 .border-top .border-lg
+                                    .bg-light.border-right.border-lg.p-3.mb-3 .border-right .border-lg
+                                    .bg-light.border-bottom.border-lg.p-3.mb-3 .border-bottom .border-lg
+                                    .bg-light.border-left.border-lg.p-3 .border-left .border-lg
+                                .bg-light.p-4.small.
+                                    You can change to a thicker border radius using the <code>.border-lg</code> utility classes, which extends the default Bootstrap functionalilty.
+
+                // Combining Border Utilities
+                #usage
+                    .card.mb-4
+                        .card-header Combining Border Utilities
+                        .card-body
+                            h6.small.text-muted.font-weight-500 Basic Combinations:
+                            .border.border-lg.rounded.mb-4
+                                .p-4.border-bottom
+                                    .row
+                                        .col-6
+                                            .bg-light.border-left.border-lg.rounded.border-primary.p-3.mb-3 Combine border position, radius, color, and thickness utilities!
+                                            .bg-light.border-top.border-lg.rounded.border-warning.p-3 Combine border position, radius, color, and thickness utilities!
+                                        .col-6
+                                            .bg-light.border-right.border-lg.rounded.border-secondary.p-3.mb-3 Combine border position, radius, color, and thickness utilities!
+                                            .bg-light.border-bottom.border-lg.rounded.border-danger.p-3 Combine border position, radius, color, and thickness utilities!
+
+                                .bg-light.p-4.small
+                                    | By combining utility classes, you can avoid creating your own custom components, saving time and decresing CSS bloat throughout your project!
+
+                            h6.small.text-muted.font-weight-500 Modified Cards:
+                            .border.border-lg.rounded.mb-4
+                                .p-4.border-bottom
+                                    .row
+                                        .col-6
+                                            .card.border-left-lg.border-primary.mb-4
+                                                .card-body
+                                                    | This is a custom card with a thick, colored border.
+                                            .card.border-top-lg.border-warning.mb-4
+                                                .card-body
+                                                    | This is a custom card with a thick, colored border.
+                                        .col-6
+                                            .card.border-right-lg.border-secondary.mb-4
+                                                .card-body
+                                                    | This is a custom card with a thick, colored border.
+                                            .card.border-bottom-lg.border-danger.mb-4
+                                                .card-body
+                                                    | This is a custom card with a thick, colored border.
+
+                                .bg-light.p-4.small
+                                    | Use utility classes to modify the style of components on the fly! You don't need to use the default border utility classes if the component already has a border by default.
+
+                            h6.small.text-muted.font-weight-500 Modified Alerts:
+                            .border.border-lg.rounded
+                                .p-4.border-bottom
+                                    .alert.alert-primary.alert-icon.border-left-lg(role='alert')
+                                        button.close(type='button', data-dismiss='alert', aria-label='Close')
+                                            span(aria-hidden='true') ×
+                                        .alert-icon-aside
+                                            i.far.fa-bell
+                                        .alert-icon-content
+                                            h6.alert-heading Primary Icon Alert
+                                            | This alert has a thick left border!
+
+                                    .alert.alert-secondary.alert-icon.border-top-lg.mb-0(role='alert')
+                                        button.close(type='button', data-dismiss='alert', aria-label='Close')
+                                            span(aria-hidden='true') ×
+                                        .alert-icon-aside
+                                            i.far.fa-bell
+                                        .alert-icon-content
+                                            h6.alert-heading Secondary Icon Alert
+                                            | This alert has a thick top border!
+
+                                .bg-light.p-4.small
+                                    | Any element that already has a border defined by default doesn't need to use the Bootstrap border utilities!
+
+            // Sticky Navigation
+            .col-lg-3
+                .nav-sticky
+                    .card
+                        .card-body
+                            ul.nav.flex-column#stickyNav
+                                li.nav-item
+                                    a.nav-link(href='#default') Default
+                                li.nav-item
+                                    a.nav-link(href='#colors') Colors
+                                li.nav-item
+                                    a.nav-link(href='#radius') Radius
+                                li.nav-item
+                                    a.nav-link(href='#radiusSize') Radius Size
+                                li.nav-item
+                                    a.nav-link(href='#thickness') Thickness
+                                li.nav-item
+                                    a.nav-link(href='#usage') Usage Examples
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })

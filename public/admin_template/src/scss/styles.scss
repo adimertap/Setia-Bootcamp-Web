@@ -1,0 +1,164 @@
+// * * * * * * * * * * * * *
+// * * Import variables  * *
+// * * * * * * * * * * * * *
+
+@import './variables.scss';
+
+// * * * * * * * * * * *
+// * * Import mixins * *
+// * * * * * * * * * * *
+
+@import './mixins.scss';
+
+// * * * * * * * * * * * * *
+// * * Import Bootstrap  * *
+// * * * * * * * * * * * * *
+
+@import 'bootstrap/scss/bootstrap.scss';
+
+// * * * * * * * * * * * * * * *
+// * * Import global styling * *
+// * * * * * * * * * * * * * * *
+
+@import './global.scss';
+
+// * * * * * * * * * * * *
+// * * Import layouts  * *
+// * * * * * * * * * * * *
+
+@import './layout/authentication.scss';
+@import './layout/dashboard-default.scss';
+@import './layout/dashboard-fixed.scss';
+@import './layout/dashboard-rtl.scss';
+@import './layout/error.scss';
+
+// * * * * * * * * * * * * *
+// * * Import utilities  * *
+// * * * * * * * * * * * * *
+
+@import './utilities/animation.scss';
+@import './utilities/background.scss';
+@import './utilities/border.scss';
+@import './utilities/dropdown.scss';
+@import './utilities/general.scss';
+@import './utilities/lift.scss';
+@import './utilities/overflow.scss';
+@import './utilities/shadow.scss';
+@import './utilities/skew.scss';
+@import './utilities/text.scss';
+@import './utilities/zindex.scss';
+
+// * * * * * * * * * * * * * * * *
+// * * Import component styles * *
+// * * * * * * * * * * * * * * * *
+
+// -- Alerts
+@import './components/alerts/icon.scss';
+@import './components/alerts/solid.scss';
+
+// -- Avatars
+@import './components/avatars.scss';
+
+// -- Buttons
+@import './components/buttons/global.scss';
+@import './components/buttons/icon.scss';
+@import './components/buttons/sizing.scss';
+@import './components/buttons/social.scss';
+@import './components/buttons/transparent.scss';
+
+// -- Cards
+@import './components/cards/global.scss';
+@import './components/cards/advanced.scss';
+@import './components/cards/collapsable.scss';
+@import './components/cards/icon.scss';
+@import './components/cards/scrollable.scss';
+@import './components/cards/progress.scss';
+@import './components/cards/link.scss';
+@import './components/cards/flags.scss';
+@import './components/cards/waves.scss';
+
+// -- Page header
+@import './components/page-header/page-header.scss';
+@import './components/page-header/page-header-compact.scss';
+@import './components/page-header/page-header-dark.scss';
+@import './components/page-header/page-header-light.scss';
+
+// -- Forms
+@import './components/forms/checkboxes.scss';
+@import './components/forms/form-control.scss';
+@import './components/forms/input-group.scss';
+
+// -- Navigation
+@import './components/navigation/nav.scss';
+@import './components/navigation/nav-borders.scss';
+@import './components/navigation/navbar.scss';
+@import './components/navigation/topnav.scss';
+@import './components/navigation/nav-sticky.scss';
+@import './components/navigation/sidenav/sidenav.scss';
+@import './components/navigation/sidenav/sidenav-dark.scss';
+@import './components/navigation/sidenav/sidenav-light.scss';
+
+// -- Dropdowns
+@import './components/dropdowns/global.scss';
+@import './components/dropdowns/user.scss';
+@import './components/dropdowns/notifications.scss';
+
+// -- Footer
+@import './components/footer.scss';
+
+// -- Icons
+@import './components/icons.scss';
+
+// -- Video
+@import './components/video.scss';
+
+// -- Media
+@import './components/media.scss';
+
+// -- Accordion
+@import './components/accordion.scss';
+
+// -- Badges
+@import './components/badges.scss';
+
+// -- Pagination
+@import './components/pagination.scss';
+
+// -- List Group
+@import './components/list-group.scss';
+
+// -- Timeline
+@import './components/timeline.scss';
+
+// -- Step
+@import './components/step.scss';
+
+// * * * * * * * * * * * * * *
+// * * Import page styles  * *
+// * * * * * * * * * * * * * *
+
+@import './pages/account.scss';
+@import './pages/auth-organizations.scss';
+@import './pages/invoice.scss';
+@import './pages/pricing.scss';
+@import './pages/wizard.scss';
+
+// * * * * * * * * * * * * * * *
+// * * Import plugin styles  * *
+// * * * * * * * * * * * * * * *
+
+@import './vendor/datatables.scss';
+@import './vendor/chartjs.scss';
+@import './vendor/daterangepicker.scss';
+
+// * * * * * * * * * * * * * *
+// * * Import demo styles  * *
+// * * * * * * * * * * * * * *
+
+@import './demo/style-reference.scss';
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * Import custom styles - add your own custom styles here! * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@import './project-global.scss';

@@ -1,0 +1,206 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Knowledge Base'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    // Main page content
+    .container.mt-4
+
+        // Knowledge base home header option
+        header.card.card-waves
+            .card-body.px-5.pt-5.pb-0
+                .row.align-items-center.justify-content-between
+                    .col-lg-6
+                        h1.text-primary How can we help?
+                        p.lead.mb-4 Search our knowledge base to find answers, or contact us directly if you're having issues!
+                        .shadow.rounded
+                            .input-group.input-group-joined.input-group-joined-xl.border-0
+                                input.form-control(type='text', placeholder='Search...', aria-label='Search', autofocus)
+                                .input-group-append
+                                    span.input-group-text
+                                        i(data-feather='search')
+                    .col-lg-4
+                        img.img-fluid(src='assets/img/freepik/problem-solving-pana.svg')
+                nav.nav.nav-borders
+                    a.nav-link.active.ml-0(href='#!') Getting Started
+                    a.nav-link(href='#!') Tutorials
+                    a.nav-link(href='#!') Licensing
+                    a.nav-link(href='#!') Terms &amp; Conditions
+                    a.nav-link(href='#!') Support
+
+        h4.mb-0.mt-5 Main Categories
+        hr.mt-2.mb-4
+
+        // Knowledge base main category card 1
+        a.card.card-icon.lift.lift-sm.mb-4(href='knowledge-base-category.html')
+            .row.no-gutters
+                .col-auto.card-icon-aside.bg-primary
+                    i.text-white-50(data-feather='compass')
+                .col
+                    .card-body.py-5
+                        h5.card-title.text-primary.mb-2 Getting Started
+                        p.card-text.mb-1 Basic information about getting started including installation instructions, setup, and basic usage.
+                        .small.text-muted 5 articles in this category
+
+        // Knowledge base main category card 2
+        a.card.card-icon.lift.lift-sm.mb-4(href='knowledge-base-category.html')
+            .row.no-gutters
+                .col-auto.card-icon-aside.bg-secondary
+                    i.text-white-50(data-feather='users')
+                .col
+                    .card-body.py-5
+                        h5.card-title.text-secondary.mb-2 Account Information
+                        p.card-text.mb-1 Troubleshooting guides specific to your account including creating new accounts, modifying existing accounts, and deleting accounts.
+                        .small.text-muted 3 articles in this category
+
+        // Knowledge base main category card 3
+        a.card.card-icon.lift.lift-sm.mb-4(href='knowledge-base-category.html')
+            .row.no-gutters
+                .col-auto.card-icon-aside.bg-teal
+                    i.text-white-50(data-feather='book')
+                .col
+                    .card-body.py-5
+                        h5.card-title.text-teal.mb-2 Terms of Service
+                        p.card-text.mb-1 Our terms, licensing, and other legal documentation.
+                        .small.text-muted 7 articles in this category
+
+        h4.mb-0.mt-5 Other Topics
+        hr.mt-2.mb-4
+
+        .row
+            .col-lg-4.mb-4
+                // Knowledge base category card 1
+                a.card.lift.lift-sm.h-100(href='knowledge-base-category.html')
+                    .card-body.py-5
+                        h5.card-title.text-primary.mb-2
+                            i.mr-2(data-feather='edit-2')
+                            | Brand Guidelines
+                        p.card-text Information about what you can and can't do when using our logos and other assets
+                    .card-footer
+                        .small.text-muted 3 articles in this category
+            .col-lg-4.mb-4
+                // Knowledge base category card 2
+                a.card.lift.lift-sm.h-100(href='knowledge-base-category.html')
+                    .card-body.py-5
+                        h5.card-title.text-yellow.mb-2
+                            i.mr-2(data-feather='credit-card')
+                            | Billing Information
+                        p.card-text Troubleshoot billing issues, subscriptions, and updating payment information
+                    .card-footer
+                        .small.text-muted 2 articles in this category
+            .col-lg-4.mb-4
+                // Knowledge base category card 3
+                a.card.lift.lift-sm.h-100(href='knowledge-base-category.html')
+                    .card-body.py-5
+                        h5.card-title.text-teal.mb-2
+                            i.mr-2(data-feather='code')
+                            | API
+                        p.card-text Documentation and integration instructions for our API
+                    .card-footer
+                        .small.text-muted 15 articles in this category
+            .col-lg-4.mb-4
+                // Knowledge base category card 4
+                a.card.lift.lift-sm.h-100(href='knowledge-base-category.html')
+                    .card-body.py-5
+                        h5.card-title.text-orange.mb-2
+                            i.mr-2(data-feather='layers')
+                            | Integration
+                        p.card-text App integration policies and related content on connecting to our database
+                    .card-footer
+                        .small.text-muted 5 articles in this category
+            .col-lg-4.mb-4
+                // Knowledge base category card 5
+                a.card.lift.lift-sm.h-100(href='knowledge-base-category.html')
+                    .card-body.py-5
+                        h5.card-title.text-secondary.mb-2
+                            i.mr-2(data-feather='lock')
+                            | Privacy &amp; Content
+                        p.card-text Our privacy policy and information on how we track and utilize user data
+                    .card-footer
+                        .small.text-muted 2 articles in this category
+            .col-lg-4.mb-4
+                // Knowledge base category card 6
+                a.card.lift.lift-sm.h-100(href='knowledge-base-category.html')
+                    .card-body.py-5
+                        h5.card-title.text-red.mb-2
+                            i.mr-2(data-feather='map')
+                            | Miscellaneous
+                        p.card-text Other troubleshooting, help, and support articles related to our products and services
+                    .card-footer
+                        .small.text-muted 2 articles in this category
+
+        // Knowledge base rating
+        .text-center.mt-5
+            h4.mb-3 Was this page helpful?
+            .mb-3
+                button.btn.btn-primary.mx-2.px-3(role='button')
+                    i.mr-2(data-feather='thumbs-up')
+                    | Yes
+                button.btn.btn-primary.mx-2.px-3(role='button')
+                    i.mr-2(data-feather='thumbs-down')
+                    | No
+            .text-small.text-muted
+                em 29 people found this page helpful so far!
+
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })

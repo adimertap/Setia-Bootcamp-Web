@@ -1,0 +1,52 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/authentication.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var pageTitle = 'Create Organization'
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+    .container
+        .row.justify-content-center
+            // Create Organization
+            .col-xl-5.col-lg-6.col-md-8.col-sm-11
+                .card.mt-5
+                    .card-body.p-5.text-center
+                        .icons-org-create.align-items-center.mx-auto
+                            i.icon-users(data-feather='users')
+                            i.icon-plus.fas.fa-plus
+                        .h3.text-primary.font-weight-300.mb-0 Create an Organization
+                    hr.m-0
+                    .card-body.p-5
+                        form
+                            .form-group
+                                input.form-control.form-control-solid(type='text', placeholder='Enter new organization name', aria-label='Organization Name', aria-describedby='orgNameExample')
+                            a.btn.btn-block.btn-primary(href="multi-tenant-add-users.html") Create organization
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-dark'
+    })

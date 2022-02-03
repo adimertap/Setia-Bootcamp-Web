@@ -1,0 +1,1598 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Cards'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Extended card components for displaying content within your application',
+        pageIcon: 'layers',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        .row
+            .col-lg-9
+
+                // Basic Card
+                #basic
+                    .card.mb-4
+                        .card-header Basic Card
+                        .card-body
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content.bg-light
+                                    .card
+                                        .card-header Basic Card Example
+                                        .card-body This is an example of a basic card.
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardBasicTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardBasicHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardBasicHtml', role='tab', aria-controls='cardBasicHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardBasicPugTab.nav-link(data-toggle='tab', href='#cardBasicPug', role='tab', aria-controls='cardBasicPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardBasicHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardBasicHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="card">
+                                                        <div class="card-header">Basic Card Example</div>
+                                                        <div class="card-body">This is an example of a basic card.</div>
+                                                    </div></script>
+                                        #cardBasicPug.tab-pane(role='tabpanel', aria-labelledby='cardBasicPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .card
+                                                        .card-header Basic Card Example
+                                                        .card-body This is an example of a basic card.
+                                .sbp-preview-text
+                                    | The example above is a basic card with a card header and a card body. You can extend the card using any of the features included with Bootstrap. You can use utility classes to extend the look and feel of cards as well.
+                                    p.mb-0.
+                                        <span class="font-weight-bold">Note:</span> The card styling in SB Admin Pro looks best with a light background color due to the background color of the card header, card body, and box shadow.
+
+                // Advanced Cards
+                #advanced
+                    .card.mb-4
+                        .card-header Advanced Cards
+                        .card-body
+                            // Component Preview
+                            h6.small.text-muted.font-weight-500#advancedDropdown Card with Dropdown in Header:
+                            .sbp-preview.mb-4
+                                .sbp-preview-content.bg-light
+                                    .card.card-header-actions
+                                        .card-header
+                                            | Header Dropdown
+                                            .dropdown.no-caret
+                                                button#dropdownMenuButton.btn.btn-transparent-dark.btn-icon.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                                    i.text-primary(data-feather='more-vertical')
+                                                .dropdown-menu.dropdown-menu-right.animated--fade-in-up(aria-labelledby='dropdownMenuButton')
+                                                    a.dropdown-item(href='javascript:void(0);') Action
+                                                    a.dropdown-item(href='javascript:void(0);') Another action
+                                                    a.dropdown-item(href='javascript:void(0);') Something else here
+
+                                        .card-body
+                                            p.card-text This is an example of a custom card with a dropdown action inside of the card header. The card's overflow is set to hidden, so your card body height should exceed the height of your dropdown menu.
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardAdvancedDropdownTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardAdvancedDropdownHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardAdvancedDropdownHtml', role='tab', aria-controls='cardAdvancedDropdownHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardAdvancedDropdownPugTab.nav-link(data-toggle='tab', href='#cardAdvancedDropdownPug', role='tab', aria-controls='cardAdvancedDropdownPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardAdvancedDropdownHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardAdvancedDropdownHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="card card-header-actions">
+                                                        <div class="card-header">
+                                                            Header Dropdown
+                                                            <div class="dropdown no-caret">
+                                                                <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <i data-feather="more-vertical"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item" href="javascript:void(0);">Action</a>
+                                                                    <a class="dropdown-item" href="javascript:void(0);">Another action</a>
+                                                                    <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            ...
+                                                        </div>
+                                                    </div></script>
+                                        #cardAdvancedDropdownPug.tab-pane(role='tabpanel', aria-labelledby='cardAdvancedDropdownPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .card.card-header-actions
+                                                        .card-header
+                                                            | Header Dropdown
+                                                            .dropdown.no-caret
+                                                                button#dropdownMenuButton.btn.btn-transparent-dark.btn-icon.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                                                    i.text-primary(data-feather='more-vertical')
+                                                                .dropdown-menu.dropdown-menu-right.animated--fade-in-up(aria-labelledby='dropdownMenuButton')
+                                                                    a.dropdown-item(href='javascript:void(0);') Action
+                                                                    a.dropdown-item(href='javascript:void(0);') Another action
+                                                                    a.dropdown-item(href='javascript:void(0);') Something else here
+
+                                                        .card-body
+                                                            | ...
+                                .sbp-preview-text.
+                                    Append the <code>.card-header-actions</code> class to your <code>.card</code> when using two elements within the card header. This class will apply flex styling to the card header, allowing for even spacing between the text and another element.
+                            // Component Preview
+                            h6.small.text-muted.font-weight-500#advancedIcons Card with Icons in Header:
+                            .sbp-preview.mb-4
+                                .sbp-preview-content.bg-light
+                                    .card.card-header-actions
+                                        .card-header
+                                            | Header Icons
+                                            div
+                                                button.btn.btn-pink.btn-icon.mr-2
+                                                    i(data-feather='heart')
+                                                button.btn.btn-teal.btn-icon.mr-2
+                                                    i(data-feather='bookmark')
+                                                button.btn.btn-blue.btn-icon
+                                                    i(data-feather='share')
+
+                                        .card-body
+                                            p.card-text This is an example of a custom card with a group of icons inside of the card header.
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardAdvancedIconsTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardAdvancedIconsHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardAdvancedIconsHtml', role='tab', aria-controls='cardAdvancedIconsHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardAdvancedIconsPugTab.nav-link(data-toggle='tab', href='#cardAdvancedIconsPug', role='tab', aria-controls='cardAdvancedIconsPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardAdvancedIconsHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardAdvancedIconsHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="card card-header-actions mx-auto">
+                                                        <div class="card-header">
+                                                            Header Icons
+                                                            <div>
+                                                                <button class="btn btn-pink btn-icon mr-2">
+                                                                    <i data-feather="heart"></i>
+                                                                </button>
+                                                                <button class="btn btn-teal btn-icon mr-2">
+                                                                    <i data-feather="bookmark"></i>
+                                                                </button>
+                                                                <button class="btn btn-blue btn-icon">
+                                                                    <i data-feather="share"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            ...
+                                                        </div>
+                                                    </div></script>
+                                        #cardAdvancedIconsPug.tab-pane(role='tabpanel', aria-labelledby='cardAdvancedIconsPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .card.card-header-actions
+                                                        .card-header
+                                                            | Header Icons
+                                                            div
+                                                                button.btn.btn-pink.btn-icon.mr-2
+                                                                    i(data-feather='heart')
+                                                                button.btn.btn-teal.btn-icon.mr-2
+                                                                    i(data-feather='bookmark')
+                                                                button.btn.btn-blue.btn-icon
+                                                                    i(data-feather='share')
+
+                                                        .card-body
+                                                            ...
+                                .sbp-preview-text.
+                                    Use of Feather icons or Font Awesome icons are supported when using the above component. This CSS component also uses the <code>.card-header-actions</code> class.
+                            // Component Preview
+                            h6.small.text-muted.font-weight-500#advancedButton Card with a Button in Header:
+                            .sbp-preview.mb-4
+                                .sbp-preview-content.bg-light
+                                    .card.card-header-actions
+                                        .card-header
+                                            | Header Button
+                                            button.btn.btn-primary.btn-sm Action
+
+                                        .card-body
+                                            p.card-text This is an example of a custom card with a button inside of the card header.
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardAdvancedButtonTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardAdvancedButtonHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardAdvancedButtonHtml', role='tab', aria-controls='cardAdvancedButtonHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardAdvancedButtonPugTab.nav-link(data-toggle='tab', href='#cardAdvancedButtonPug', role='tab', aria-controls='cardAdvancedButtonPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardAdvancedButtonHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardAdvancedButtonHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="card card-header-actions">
+                                                        <div class="card-header">
+                                                            Header Button
+                                                            <button class="btn btn-primary btn-sm">Action</button>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            ...
+                                                        </div>
+                                                    </div></script>
+                                        #cardAdvancedButtonPug.tab-pane(role='tabpanel', aria-labelledby='cardAdvancedButtonPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .card.card-header-actions
+                                                        .card-header
+                                                            | Header Button
+                                                            button.btn.btn-primary.btn-sm Action
+
+                                                        .card-body
+                                                            | ...
+                                .sbp-preview-text.
+                                    The button inside of the card header in the above component example uses the <code>.btn-sm</code> styling. The <code>.btn-xs</code> styling is also supported, but larger buttons may change the internal height of the card header.
+                            // Component Preview
+                            h6.small.text-muted.font-weight-500#advancedInput Card with an Input in Header:
+                            .sbp-preview
+                                .sbp-preview-content.bg-light
+                                    .card.card-header-actions
+                                        .card-header
+                                            | Header Input
+                                            form
+                                                input.form-control(placeholder='Search')
+
+                                        .card-body
+                                            p.card-text This is an example of a custom card with a form input inside of the card header.
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardAdvancedInputTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardAdvancedInputHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardAdvancedInputHtml', role='tab', aria-controls='cardAdvancedInputHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardAdvancedInputPugTab.nav-link(data-toggle='tab', href='#cardAdvancedInputPug', role='tab', aria-controls='cardAdvancedInputPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardAdvancedInputHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardAdvancedInputHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="card card-header-actions">
+                                                        <div class="card-header">
+                                                            Header Input
+                                                            <form>
+                                                                <input class="form-control" placeholder="Search">
+                                                            </form>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            ...
+                                                        </div>
+                                                    </div></script>
+                                        #cardAdvancedInputPug.tab-pane(role='tabpanel', aria-labelledby='cardAdvancedInputPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .card.card-header-actions
+                                                        .card-header
+                                                            | Header Input
+                                                            form
+                                                                input.form-control(placeholder='Search')
+
+                                                        .card-body
+                                                            ...
+                                .sbp-preview-text.
+                                    The input header option uses a customized form input. This option also requires the <code>.card-header-actions</code> class in order to position the card header elements correctly.
+
+                .card.card-icon.mb-4
+                    .row.no-gutters
+                        .col-auto.card-icon-aside.bg-info
+                            i.text-white-50(data-feather='alert-triangle')
+                        .col
+                            .card-body.py-5
+                                h5.card-title Extending Advanced Cards
+                                p.card-text.
+                                    The <code>.card-header-actions</code> class allows you to extend the content of the hard header significantly. The above examples are just a few of many ways you can add more actionable items to your card headers.
+
+                // Collapsable Card
+                #collapsable
+                    .card.mb-4
+                        .card-header Collapsable Card
+                        .card-body
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content.bg-light
+                                    .card.card-collapsable
+                                        a.card-header(href='#collapseCardExample', data-toggle='collapse', role='button', aria-expanded='true', aria-controls='collapseCardExample')
+                                            | Collapsable Card Example
+                                            .card-collapsable-arrow
+                                                i.fas.fa-chevron-down
+                                        #collapseCardExample.collapse.show
+                                            .card-body
+                                                p.card-text
+                                                    | This is a collapsable card example using Bootstrap's built in collapse functionality with some added custom styling. 
+                                                    strong Click on the card header
+                                                    | 
+                                                    | to see the card body collapse and expand!
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardCollapsableTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardCollapsableHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardCollapsableHtml', role='tab', aria-controls='cardCollapsableHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardCollapsablePugTab.nav-link(data-toggle='tab', href='#cardCollapsablePug', role='tab', aria-controls='cardCollapsablePug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardCollapsableHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardCollapsableHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="card card-collapsable">
+                                                        <a class="card-header" href="#collapseCardExample" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">Collapsable Card Example
+                                                            <div class="card-collapsable-arrow">
+                                                                <i class="fas fa-chevron-down"></i>
+                                                            </div>
+                                                        </a>
+                                                        <div class="collapse show" id="collapseCardExample">
+                                                            <div class="card-body">
+                                                                ...
+                                                            </div>
+                                                        </div>
+                                                    </div></script>
+                                        #cardCollapsablePug.tab-pane(role='tabpanel', aria-labelledby='cardCollapsablePugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .card.card-collapsable
+                                                        a.card-header(href='#collapseCardExample', data-toggle='collapse', role='button', aria-expanded='true', aria-controls='collapseCardExample')
+                                                            | Collapsable Card Example
+                                                            .card-collapsable-arrow
+                                                                i.fas.fa-chevron-down
+                                                        #collapseCardExample.collapse.show
+                                                            .card-body
+                                                                | ...
+                                .sbp-preview-text.
+                                    The collapsable card component uses Bootstrap's built-in collapse functionality. To learn more about using collapse, visit the <a href="https://getbootstrap.com/docs/4.4/components/collapse/" target="_blank">collapse section of the Bootstrap Docs</a>.
+
+                // Card Navigation
+                #navigation
+                    .card.mb-4
+                        .card-header Navigation Cards
+                        .card-body
+                            // Component Preview
+                            h6.small.text-muted.font-weight-500#navTabs Card with Tabbed Navigation:
+                            .sbp-preview.mb-4
+                                .sbp-preview-content.bg-light
+                                    .card
+                                        .card-header
+                                            ul.nav.nav-tabs.card-header-tabs#cardTab(role='tablist')
+                                                li.nav-item
+                                                    a.nav-link.active#overview-tab(href='#overview', data-toggle='tab', role='tab', aria-controls='overview', aria-selected='true') Overview
+                                                li.nav-item
+                                                    a.nav-link#example-tab(href='#example', data-toggle='tab', role='tab', aria-controls='example', aria-selected='false') Example
+                                                li.nav-item
+                                                    a.nav-link.disabled(href='#', tabindex='-1', aria-disabled='true') Disabled
+                                        .card-body
+                                            .tab-content#cardTabContent
+                                                .tab-pane.fade.show.active#overview(role='tabpanel', aria-labelledby='overview-tab')
+                                                    h5.card-title Tabbed Navigation Card
+                                                    p.card-text
+                                                        | The tabbed navigation card allows you to use Bootstrap's built in nav component to toggle between tab panes to display content.
+                                                .tab-pane.fade#example(role='tabpanel', aria-labelledby='example-tab')
+                                                    h5.card-title Example Pane
+                                                    p.card-text
+                                                        | This is an example of another tab pane that you could use within a card with navigation in the header.
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardNavTabbedTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardNavTabbedHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardNavTabbedHtml', role='tab', aria-controls='cardNavTabbedHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardNavTabbedPugTab.nav-link(data-toggle='tab', href='#cardNavTabbedPug', role='tab', aria-controls='cardNavTabbedPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardNavTabbedHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardNavTabbedHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="card">
+                                                        <div class="card-header border-bottom">
+                                                            <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link active" id="overview-tab" href="#overview" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" id="example-tab" href="#example" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">Example</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="tab-content" id="cardTabContent">
+                                                                <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                                                                    <h5 class="card-title">Tabbed Navigation Card</h5>
+                                                                    <p class="card-text">...</p>
+                                                                </div>
+                                                                <div class="tab-pane fade" id="example" role="tabpanel" aria-labelledby="example-tab">
+                                                                    <h5 class="card-title">Example Pane</h5>
+                                                                    <p class="card-text">...</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div></script>
+                                        #cardNavTabbedPug.tab-pane(role='tabpanel', aria-labelledby='cardNavTabbedPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .card
+                                                        .card-header.border-bottom
+                                                            ul.nav.nav-tabs.card-header-tabs#cardTab(role='tablist')
+                                                                li.nav-item
+                                                                    a.nav-link.active#overview-tab(href='#overview', data-toggle='tab', role='tab', aria-controls='overview', aria-selected='true') Overview
+                                                                li.nav-item
+                                                                    a.nav-link#example-tab(href='#example', data-toggle='tab', role='tab', aria-controls='example', aria-selected='false') Example
+                                                                li.nav-item
+                                                                    a.nav-link.disabled(href='#', tabindex='-1', aria-disabled='true') Disabled
+                                                        .card-body
+                                                            .tab-content#cardTabContent
+                                                                .tab-pane.fade.show.active#overview(role='tabpanel', aria-labelledby='overview-tab')
+                                                                    h5.card-title Tabbed Navigation Card
+                                                                    p.card-text
+                                                                        | ...
+                                                                .tab-pane.fade#example(role='tabpanel', aria-labelledby='example-tab')
+                                                                    h5.card-title Example Pane
+                                                                    p.card-text
+                                                                        | ...
+                                .sbp-preview-text.
+                                    This component uses Bootstrap's tabbed navigation JavaScript behavior. For more usage information, visit the <a href="https://getbootstrap.com/docs/4.4/components/navs/#javascript-behavior" target="_blank">Navs section of the Bootstrap Docs</a>.
+                            // Component Preview
+                            h6.small.text-muted.font-weight-500#navPills Card with Pill Navigation:
+                            .sbp-preview.mb-4
+                                .sbp-preview-content.bg-light
+                                    .card
+                                        .card-header
+                                            ul.nav.nav-pills.card-header-pills#cardPill(role='tablist')
+                                                li.nav-item
+                                                    a.nav-link.active#overview-pill(href='#overviewPill', data-toggle='tab', role='tab', aria-controls='overview', aria-selected='true') Overview
+                                                li.nav-item
+                                                    a.nav-link#example-pill(href='#examplePill', data-toggle='tab', role='tab', aria-controls='example', aria-selected='false') Example
+                                                li.nav-item
+                                                    a.nav-link.disabled(href='#', tabindex='-1', aria-disabled='true') Disabled
+                                        .card-body
+                                            .tab-content#cardPillContent
+                                                .tab-pane.fade.show.active#overviewPill(role='tabpanel', aria-labelledby='overview-pill')
+                                                    h5.card-title Pill Navigation Card
+                                                    p.card-text 
+                                                        | The pill navigation card allows you to use Bootstrap's built in nav component to toggle between tab panes to display content using nav pills in the card header.
+                                                .tab-pane.fade#examplePill(role='tabpanel', aria-labelledby='example-pill')
+                                                    h5.card-title Example Pane
+                                                    p.card-text 
+                                                        | This is an example of another tab pane that you could use within a card with navigation in the header.
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardNavPillsTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardNavPillsHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardNavPillsHtml', role='tab', aria-controls='cardNavPillsHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardNavPillsPugTab.nav-link(data-toggle='tab', href='#cardNavPillsPug', role='tab', aria-controls='cardNavPillsPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardNavPillsHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardNavPillsHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="card">
+                                                        <div class="card-header">
+                                                            <ul class="nav nav-pills card-header-pills" id="cardPill" role="tablist">
+                                                                <li class="nav-item"><a class="nav-link active" id="overview-pill" href="#overviewPill" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">Overview</a></li>
+                                                                <li class="nav-item"><a class="nav-link" id="example-pill" href="#examplePill" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">Example</a></li>
+                                                                <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="tab-content" id="cardPillContent">
+                                                                <div class="tab-pane fade show active" id="overviewPill" role="tabpanel" aria-labelledby="overview-pill">
+                                                                    <h5 class="card-title">Pill Navigation Card</h5>
+                                                                    <p class="card-text">...</p>
+                                                                </div>
+                                                                <div class="tab-pane fade" id="examplePill" role="tabpanel" aria-labelledby="example-pill">
+                                                                    <h5 class="card-title">Example Pane</h5>
+                                                                    <p class="card-text">...</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div></script>
+                                        #cardNavPillsPug.tab-pane(role='tabpanel', aria-labelledby='cardNavPillsPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .card
+                                                        .card-header
+                                                            ul.nav.nav-pills.card-header-pills#cardPill(role='tablist')
+                                                                li.nav-item
+                                                                    a.nav-link.active#overview-pill(href='#overviewPill', data-toggle='tab', role='tab', aria-controls='overview', aria-selected='true') Overview
+                                                                li.nav-item
+                                                                    a.nav-link#example-pill(href='#examplePill', data-toggle='tab', role='tab', aria-controls='example', aria-selected='false') Example
+                                                                li.nav-item
+                                                                    a.nav-link.disabled(href='#', tabindex='-1', aria-disabled='true') Disabled
+                                                        .card-body
+                                                            .tab-content#cardPillContent
+                                                                .tab-pane.fade.show.active#overviewPill(role='tabpanel', aria-labelledby='overview-pill')
+                                                                    h5.card-title Pill Navigation Card
+                                                                    p.card-text 
+                                                                        | ...
+                                                                .tab-pane.fade#examplePill(role='tabpanel', aria-labelledby='example-pill')
+                                                                    h5.card-title Example Pane
+                                                                    p.card-text 
+                                                                        | ...
+                                .sbp-preview-text.
+                                    This component uses Bootstrap's tabbed navigation JavaScript behavior. For more usage information, visit the <a href="https://getbootstrap.com/docs/4.4/components/navs/#javascript-behavior" target="_blank">Navs section of the Bootstrap Docs</a>.
+                            // Component Preview
+                            h6.small.text-muted.font-weight-500#navPillsVertical Card with Vertically Stacked Pill Navigation:
+                            .sbp-preview
+                                .sbp-preview-content.bg-light
+                                    .card
+                                        .card-header Vertical Pill Navigation
+                                        .card-body
+                                            .row
+                                                .col-md-3
+                                                    ul.nav.nav-pills.flex-column#cardPillVertical(role='tablist')
+                                                        li.nav-item
+                                                            a.nav-link.active#overview-pill-vertical(href='#overviewPillVertical', data-toggle='tab', role='tab', aria-controls='overview', aria-selected='true') Overview
+                                                        li.nav-item
+                                                            a.nav-link#example-pill-vertical(href='#examplePillVertical', data-toggle='tab', role='tab', aria-controls='example', aria-selected='false') Example
+                                                        li.nav-item
+                                                            a.nav-link.disabled(href='#', tabindex='-1', aria-disabled='true') Disabled
+                                                .col-md-9
+                                                    .tab-content#cardPillContentVertical
+                                                        .tab-pane.fade.show.active#overviewPillVertical(role='tabpanel', aria-labelledby='overview-pill-vertical')
+                                                            h5.card-title Vertical Pill Navigation Card
+                                                            p.card-text
+                                                                | The tabbed navigation card allows you to use Bootstrap's built in nav component to toggle between tab panes to display content.
+                                                        .tab-pane.fade#examplePillVertical(role='tabpanel', aria-labelledby='example-pill-vertical')
+                                                            h5.card-title Example Pane
+                                                            p.card-text
+                                                                | This is an example of another tab pane that you could use within a card with navigation in the header.
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardNavPillsVertTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardNavPillsVertHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardNavPillsVertHtml', role='tab', aria-controls='cardNavPillsVertHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardNavPillsVertPugTab.nav-link(data-toggle='tab', href='#cardNavPillsVertPug', role='tab', aria-controls='cardNavPillsVertPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardNavPillsVertHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardNavPillsVertHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="card">
+                                                        <div class="card-header">Vertical Pill Navigation</div>
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <ul class="nav nav-pills flex-column" id="cardPillVertical" role="tablist">
+                                                                        <li class="nav-item"><a class="nav-link active" id="overview-pill-vertical" href="#overviewPillVertical" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">Overview</a></li>
+                                                                        <li class="nav-item"><a class="nav-link" id="example-pill-vertical" href="#examplePillVertical" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">Example</a></li>
+                                                                        <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <div class="tab-content" id="cardPillContentVertical">
+                                                                        <div class="tab-pane fade show active" id="overviewPillVertical" role="tabpanel" aria-labelledby="overview-pill-vertical">
+                                                                            <h5 class="card-title">Vertical Pill Navigation Card</h5>
+                                                                            <p class="card-text">...</p>
+                                                                        </div>
+                                                                        <div class="tab-pane fade" id="examplePillVertical" role="tabpanel" aria-labelledby="example-pill-vertical">
+                                                                            <h5 class="card-title">Example Pane</h5>
+                                                                            <p class="card-text">...</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div></script>
+                                        #cardNavPillsVertPug.tab-pane(role='tabpanel', aria-labelledby='cardNavPillsVertPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .card
+                                                        .card-header Vertical Pill Navigation
+                                                        .card-body
+                                                            .row
+                                                                .col-md-3
+                                                                    ul.nav.nav-pills.flex-column#cardPillVertical(role='tablist')
+                                                                        li.nav-item
+                                                                            a.nav-link.active#overview-pill-vertical(href='#overviewPillVertical', data-toggle='tab', role='tab', aria-controls='overview', aria-selected='true') Overview
+                                                                        li.nav-item
+                                                                            a.nav-link#example-pill-vertical(href='#examplePillVertical', data-toggle='tab', role='tab', aria-controls='example', aria-selected='false') Example
+                                                                        li.nav-item
+                                                                            a.nav-link.disabled(href='#', tabindex='-1', aria-disabled='true') Disabled
+                                                                .col-md-9
+                                                                    .tab-content#cardPillContentVertical
+                                                                        .tab-pane.fade.show.active#overviewPillVertical(role='tabpanel', aria-labelledby='overview-pill-vertical')
+                                                                            h5.card-title Vertical Pill Navigation Card
+                                                                            p.card-text
+                                                                                | ...
+                                                                        .tab-pane.fade#examplePillVertical(role='tabpanel', aria-labelledby='example-pill-vertical')
+                                                                            h5.card-title Example Pane
+                                                                            p.card-text
+                                                                                | ...
+                                .sbp-preview-text
+                                    | The vertical pills card component uses Bootstrap layout classes inside of the card body in order to acheive the vertically stacked pill navigation.
+                // Scrollable Card
+                #scrollable
+                    .card.mb-4
+                        .card-header Scrollable Card
+                        .card-body
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content.bg-light
+                                    .card.card-scrollable
+                                        .card-header Scrollable Card Example
+                                        .card-body
+                                            p.card-text
+                                                | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                            p.card-text
+                                                | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        .card-footer.small.text-muted Place cursor over card body and scroll!
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardScrollableTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardScrollableHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardScrollableHtml', role='tab', aria-controls='cardScrollableHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardScrollablePugTab.nav-link(data-toggle='tab', href='#cardScrollablePug', role='tab', aria-controls='cardScrollablePug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardScrollableHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardScrollableHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="card card-scrollable">
+                                                        <div class="card-header">Scrollable Card Example</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer small text-muted">Card Footer</div>
+                                                    </div></script>
+                                        #cardScrollablePug.tab-pane(role='tabpanel', aria-labelledby='cardScrollablePugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .card.card-scrollable
+                                                        .card-header Scrollable Card Example
+                                                        .card-body
+                                                            p.card-text
+                                                                ...
+                                                        .card-footer.small.text-muted Card Footer
+                                .sbp-preview-text.
+                                    The custom scrollable card allows you to set a maximum height to the <code>.card-body</code> element, and scroll the contents of the card body when the height is fixed. You can set the max height of the card body by changing the <code>$card-scrollable-max-height</code> SCSS variable, which is set to <code>15rem</code> by default. You can also set the max height of the card body using inline CSS, or CSS overrides for different cards.
+
+                // Image Card
+                #image
+                    .card.mb-4
+                        .card-header Image Cards
+                        .card-body
+                            // Component Preview
+                            h6.small.text-muted.font-weight-500#imageCaps Card Image Caps:
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    .row
+                                        .col-6
+                                            .card
+                                                img.card-img-top(src='https://source.unsplash.com/tz87qQK9n58/900x500', alt='...')
+                                                .card-body
+                                                    h5.card-title Card Image Cap (Top)
+                                                    p.card-text
+                                                        | This is am example of a default Bootstrap image card with an image above the card body content.
+                                        .col-6
+                                            .card
+                                                .card-body
+                                                    h5.card-title Card Image Cap (Bottom)
+                                                    p.card-text
+                                                        | This is am example of a default Bootstrap image card with an image below the card body content.
+                                                img.card-img-bottom(src='https://source.unsplash.com/9fMmgBEd2bw/900x500', alt='...')
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardImageCapsTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardImageCapsHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardImageCapsHtml', role='tab', aria-controls='cardImageCapsHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardImageCapsPugTab.nav-link(data-toggle='tab', href='#cardImageCapsPug', role='tab', aria-controls='cardImageCapsPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardImageCapsHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardImageCapsHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Card Image Cap (Top) Example -->
+                                                    <div class="card">
+                                                        <img class="card-img-top" src="path/to/image" alt="...">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Card Image Cap (Top)</h5>
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Card Image Cap (Bottom) Example -->
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Card Image Cap (Bottom)</h5>
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <img class="card-img-bottom" src="path/to/image" alt="...">
+                                                    </div></script>
+                                        #cardImageCapsPug.tab-pane(role='tabpanel', aria-labelledby='cardImageCapsPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Card Image Cap (Top) Example
+                                                    .card
+                                                        img.card-img-top(src='path/to/image', alt='...')
+                                                        .card-body
+                                                            h5.card-title Card Image Cap (Top)
+                                                            p.card-text
+                                                                | ...
+
+                                                    //- Card Image Cap (Bottom) Example
+                                                    .card
+                                                        .card-body
+                                                            h5.card-title Card Image Cap (Bottom)
+                                                            p.card-text
+                                                                | ...
+                                                        img.card-img-bottom(src='path/to/image', alt='...')
+                                .sbp-preview-text
+                                    | Card image caps are included with Bootstrap by default. When adding your image, make sure to correctly point to the path of the image being used.
+                            // Component Preview
+                            h6.small.text-muted.font-weight-500#imageOverlay Card Image Overlay:
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    .card.bg-light.text-dark
+                                        img.card-img(src='https://source.unsplash.com/wSb8d-ke5-4/900x500', alt='...')
+                                        .card-img-overlay
+                                            h5.card-title Card Image (Overlay)
+                                            p.card-text
+                                                | This card variant uses a background image as the card image with a text overlay. You can use text utility classes to style the text color.
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardImageOverlayTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardImageOverlayHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardImageOverlayHtml', role='tab', aria-controls='cardImageOverlayHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardImageOverlayPugTab.nav-link(data-toggle='tab', href='#cardImageOverlayPug', role='tab', aria-controls='cardImageOverlayPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardImageOverlayHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardImageOverlayHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Card Image Overlay Example -->
+                                                    <div class="card">
+                                                        <img class="card-img" src="path/to/image" alt="...">
+                                                        <div class="card-img-overlay">
+                                                            <h5 class="card-title">Card Image (Overlay)</h5>
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                    </div></script>
+                                        #cardImageOverlayPug.tab-pane(role='tabpanel', aria-labelledby='cardImageOverlayPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Card Image Overlay Example
+                                                    .card
+                                                        img.card-img(src='path/to/image', alt='...')
+                                                        .card-img-overlay
+                                                            h5.card-title Card Image (Overlay)
+                                                            p.card-text
+                                                                | ...
+                                .sbp-preview-text
+                                    | When using an image overlay card, you can use text utilities to style the content within the card, or custom CSS. In the above example, text color is set to dark to account for a lighter background image.        
+                            // Component Preview
+                            h6.small.text-muted.font-weight-500#imageSide Card Image Sides:
+                            .sbp-preview
+                                .sbp-preview-content
+                                    .row
+                                        .col-6
+                                            .card
+                                                .row.no-gutters
+                                                    .col-md-4
+                                                        img.img-fluid(src='https://source.unsplash.com/Il-ErBsaH4c/300x450', alt='...')
+                                                    .col-md-8
+                                                        .card-body
+                                                            h5.card-title Card Image (Left)
+                                                            p.card-text
+                                                                | Use the Bootstrap grid with utility classes to create this card variant.
+                                        .col-6
+                                            .card
+                                                .row.no-gutters
+                                                    .col-md-8
+                                                        .card-body
+                                                            h5.card-title Card Image (Right)
+                                                            p.card-text
+                                                                | Use the Bootstrap grid with utility classes to create this card variant.
+                                                    .col-md-4
+                                                        img.img-fluid(src='https://source.unsplash.com/_vWY1UKRvNk/300x450', alt='...')
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardImageSidesTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardImageSidesHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardImageSidesHtml', role='tab', aria-controls='cardImageSidesHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardImageSidesPugTab.nav-link(data-toggle='tab', href='#cardImageSidesPug', role='tab', aria-controls='cardImageSidesPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardImageSidesHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardImageSidesHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Card Image (Left) -->
+                                                    <div class="card">
+                                                        <div class="row no-gutters">
+                                                            <div class="col-md-4"><img class="img-fluid" src="path/to/image" alt="..."></div>
+                                                            <div class="col-md-8">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title">Card Image (Left)</h5>
+                                                                    <p class="card-text">...</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Card Image (Right) -->
+                                                    <div class="card">
+                                                        <div class="row no-gutters">
+                                                            <div class="col-md-8">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title">Card Image (Right)</h5>
+                                                                    <p class="card-text">...</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4"><img class="img-fluid" src="path/to/image" alt="..."></div>
+                                                        </div>
+                                                    </div></script>
+                                        #cardImageSidesPug.tab-pane(role='tabpanel', aria-labelledby='cardImageSidesPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Card Image (Left)
+                                                    .card
+                                                        .row.no-gutters
+                                                            .col-md-4
+                                                                img.img-fluid(src='path/to/image', alt='...')
+                                                            .col-md-8
+                                                                .card-body
+                                                                    h5.card-title Card Image (Left)
+                                                                    p.card-text
+                                                                        | ...
+
+                                                    //- Card Image (Right)
+                                                    .card
+                                                        .row.no-gutters
+                                                            .col-md-8
+                                                                .card-body
+                                                                    h5.card-title Card Image (Right)
+                                                                    p.card-text
+                                                                        | ...
+                                                            .col-md-4
+                                                                img.img-fluid(src='path/to/image', alt='...')
+                                .sbp-preview-text
+                                    | The Bootstrap grid is utilized to create the above card variants. The above examples show card images on either side of the card body.
+
+                // Styled Card
+                #styled
+                    .card.mb-4
+                        .card-header Styled Cards
+                        .card-body
+                            // Component Preview
+                            h6.small.text-muted.font-weight-500#styledWaves Waves:
+                            .sbp-preview
+                                .sbp-preview-content
+
+                                    .card.card-waves
+                                        .card-header Waves Styled Card
+                                        .card-body
+                                            .py-10
+                                                | This is an example of a card with the waves styling applied. Use <code>.card-waves</code> to set the background image to the waved styling. This works best with default white cards, and with cards that do not have a card footer.
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardStyledWavesTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardStyledWavesHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardStyledWavesHtml', role='tab', aria-controls='cardStyledWavesHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardStyledWavesPugTab.nav-link(data-toggle='tab', href='#cardStyledWavesPug', role='tab', aria-controls='cardStyledWavesPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardStyledWavesHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardStyledWavesHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Waves Styled Card -->
+                                                    <div class="card card-waves">
+                                                        <div class="card-header">Waves Card Example</div>
+                                                        <div class="card-body">...</div>
+                                                    </div></script>
+                                        #cardStyledWavesPug.tab-pane(role='tabpanel', aria-labelledby='cardStyledWavesPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Waves Styled Card
+                                                    .card.card-waves
+                                                        .card-header Waves Card Example
+                                                        .card-body ...
+                                .sbp-preview-text
+                                    | Styled cards are a unique feature to SB Admin Pro. Our first styled variation is our waves variation, which uses an SVG as as background image attached to the parent card component. This component is best used with cards with larger content
+
+                // Icon Card
+                #icon
+                    .card.mb-4
+                        .card-header Icon Card
+                        .card-body
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    .card.card-icon
+                                        .row.no-gutters
+                                            .col-auto.card-icon-aside.bg-primary
+                                                i.mr-1.text-white-50(data-feather='layers')
+                                            .col
+                                                .card-body.py-5
+                                                    h5.card-title Custom Icon Card
+                                                    p.card-text
+                                                        | The icon card is an extension of the Bootstrap card component that uses Bootstrap layout classes in unison with custom styling to create a new card layout that you can use to add emphasis to certain content.
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardIconTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardIconHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardIconHtml', role='tab', aria-controls='cardIconHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardIconPugTab.nav-link(data-toggle='tab', href='#cardIconPug', role='tab', aria-controls='cardIconPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardIconHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardIconHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Icon Card Example -->
+                                                    <div class="card card-icon">
+                                                        <div class="row no-gutters">
+                                                            <div class="col-auto card-icon-aside bg-primary">
+                                                                <i data-feather="layers"></i>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="card-body py-5">
+                                                                    <h5 class="card-title">Custom Icon Card</h5>
+                                                                    <p class="card-text">...</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div></script>
+                                        #cardIconPug.tab-pane(role='tabpanel', aria-labelledby='cardIconPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Icon Card Example
+                                                    .card.card-icon
+                                                        .row.no-gutters
+                                                            .col-auto.card-icon-aside.bg-primary
+                                                                i.mr-1.text-white-50(data-feather='layers')
+                                                            .col
+                                                                .card-body.py-5
+                                                                    h5.card-title Custom Icon Card
+                                                                    p.card-text
+                                                                        | ...
+                                .sbp-preview-text
+                                    | Feather Icons, Font Awesome icons, or a custom SVG can be used for the icon. Use background utility classes to set the background color of the icon aside container.
+                // Colors
+                #colors
+                    .card.mb-4
+                        .card-header Card Colors
+                        .card-body
+                            // Component Preview
+                            h6.small.text-muted.font-weight-500#colorsDefault Default Card Colors:
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    .row
+                                        .col-6
+                                            .card.bg-primary.text-white.mb-4
+                                                .card-header.text-white Primary Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+                                            .card.bg-secondary.text-white.mb-4
+                                                .card-header.text-white Secondary Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+                                            .card.bg-success.text-white.mb-4
+                                                .card-header.text-white Success Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+                                            .card.bg-danger.text-white
+                                                .card-header.text-white Danger Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+                                        .col-6
+                                            .card.bg-warning.text-white.mb-4
+                                                .card-header.text-white Warning Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+                                            .card.bg-light.mb-4
+                                                .card-header.text-dark Light Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+                                            .card.bg-dark.text-white.mb-4
+                                                .card-header.text-white Dark Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardColorsDefaultTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardColorsDefaultHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardColorsDefaultHtml', role='tab', aria-controls='cardColorsDefaultHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardColorsDefaultPugTab.nav-link(data-toggle='tab', href='#cardColorsDefaultPug', role='tab', aria-controls='cardColorsDefaultPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardColorsDefaultHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardColorsDefaultHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Primary Card -->
+                                                    <div class="card bg-primary text-white">
+                                                        <div class="card-header text-white">Primary Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div>
+
+                                                    <!-- Secondary Card -->
+                                                    <div class="card bg-secondary text-white">
+                                                        <div class="card-header text-white">Secondary Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div>
+
+                                                    <!-- Success Card -->
+                                                    <div class="card bg-success text-white">
+                                                        <div class="card-header text-white">Success Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div>
+
+                                                    <!-- Danger Card -->
+                                                    <div class="card bg-danger text-white">
+                                                        <div class="card-header text-white">Danger Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div>
+
+                                                    <!-- Warning Card -->
+                                                    <div class="card bg-warning text-white">
+                                                        <div class="card-header text-white">Warning Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div>
+
+                                                    <!-- Light Card -->
+                                                    <div class="card bg-light">
+                                                        <div class="card-header text-dark">Light Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div>
+
+                                                    <!-- Dark Card -->
+                                                    <div class="card bg-dark text-white">
+                                                        <div class="card-header text-white">Dark Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div></script>
+                                        #cardColorsDefaultPug.tab-pane(role='tabpanel', aria-labelledby='cardColorsDefaultPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Primary Card
+                                                    .card.bg-primary.text-white
+                                                        .card-header.text-white Primary Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+
+                                                    //- Secondary Card
+                                                    .card.bg-secondary.text-white
+                                                        .card-header.text-white Secondary Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+
+                                                    //- Success Card
+                                                    .card.bg-success.text-white
+                                                        .card-header.text-white Success Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+
+                                                    //- Danger Card
+                                                    .card.bg-danger.text-white
+                                                        .card-header.text-white Danger Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+
+                                                    //- Warning Card
+                                                    .card.bg-warning.text-white
+                                                        .card-header.text-white Warning Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+
+                                                    //- Light Card
+                                                    .card.bg-light
+                                                        .card-header.text-dark Light Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+
+                                                    //- Dark Card
+                                                    .card.bg-dark.text-white
+                                                        .card-header.text-white Dark Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+                                .sbp-preview-text.
+                                    The cards above use a <code>.bg-*</code> background utility class, along with a text color utility class when necessary. All of the above examples, except for the light background colored card, use the <code>.text-white</code> utility along with a background utility.
+
+                            // Component Preview
+                            h6.small.text-muted.font-weight-500#colorsExtended Extended Card Colors:
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    .row
+                                        .col-6
+                                            .card.bg-red.text-white.mb-4
+                                                .card-header.text-white Red Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+                                            .card.bg-orange.text-white.mb-4
+                                                .card-header.text-white Orange Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+                                            .card.bg-yellow.text-white.mb-4
+                                                .card-header.text-white Yellow Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+                                            .card.bg-green.text-white.mb-4
+                                                .card-header.text-white Green Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+                                            .card.bg-teal.text-white
+                                                .card-header.text-white Teal Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+                                        .col-6
+                                            .card.bg-cyan.text-white.mb-4
+                                                .card-header.text-white Cyan Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+                                            .card.bg-blue.text-white.mb-4
+                                                .card-header.text-white Blue Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+                                            .card.bg-indigo.text-white.mb-4
+                                                .card-header.text-white Indigo Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+                                            .card.bg-purple.text-white.mb-4
+                                                .card-header.text-white Purple Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+                                            .card.bg-pink.text-white
+                                                .card-header.text-white Pink Card
+                                                .card-body
+                                                    p.card-text Here is some example text within the card body.
+                                                .card-footer Card Footer
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#cardColorsExtendedTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#cardColorsExtendedHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#cardColorsExtendedHtml', role='tab', aria-controls='cardColorsExtendedHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#cardColorsExtendedPugTab.nav-link(data-toggle='tab', href='#cardColorsExtendedPug', role='tab', aria-controls='cardColorsExtendedPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #cardColorsExtendedHtml.tab-pane.active(role='tabpanel', aria-labelledby='cardColorsExtendedHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Red Card -->
+                                                    <div class="card bg-red text-white">
+                                                        <div class="card-header text-white">Red Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div>
+
+                                                    <!-- Orange Card -->
+                                                    <div class="card bg-orange text-white">
+                                                        <div class="card-header text-white">Orange Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div>
+
+                                                    <!-- Yellow Card -->
+                                                    <div class="card bg-yellow text-white">
+                                                        <div class="card-header text-white">Yellow Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div>
+
+                                                    <!-- Green Card -->
+                                                    <div class="card bg-green text-white">
+                                                        <div class="card-header text-white">Green Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div>
+
+                                                    <!-- Teal Card -->
+                                                    <div class="card bg-teal text-white">
+                                                        <div class="card-header text-white">Teal Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div>
+
+                                                    <!-- Cyan Card -->
+                                                    <div class="card bg-cyan text-white">
+                                                        <div class="card-header text-white">Cyan Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div>
+
+                                                    <!-- Blue Card -->
+                                                    <div class="card bg-blue text-white">
+                                                        <div class="card-header text-white">Blue Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div>
+
+                                                    <!-- Indigo Card -->
+                                                    <div class="card bg-indigo text-white">
+                                                        <div class="card-header text-white">Indigo Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div>
+
+                                                    <!-- Purple Card -->
+                                                    <div class="card bg-purple text-white">
+                                                        <div class="card-header text-white">Purple Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div>
+
+                                                    <!-- Pink Card -->
+                                                    <div class="card bg-pink text-white">
+                                                        <div class="card-header text-white">Pink Card</div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">...</p>
+                                                        </div>
+                                                        <div class="card-footer">Card Footer</div>
+                                                    </div></script>
+                                        #cardColorsExtendedPug.tab-pane(role='tabpanel', aria-labelledby='cardColorsExtendedPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Red Card
+                                                    .card.bg-red.text-white
+                                                        .card-header.text-white Red Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+
+                                                    //- Orange Card
+                                                    .card.bg-orange.text-white
+                                                        .card-header.text-white Orange Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+
+                                                    //- Yellow Card
+                                                    .card.bg-yellow.text-white
+                                                        .card-header.text-white Yellow Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+
+                                                    //- Green Card
+                                                    .card.bg-green.text-white
+                                                        .card-header.text-white Green Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+
+                                                    //- Teal Card
+                                                    .card.bg-teal.text-white
+                                                        .card-header.text-white Teal Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+
+                                                    //- Cyan Card
+                                                    .card.bg-cyan.text-white
+                                                        .card-header.text-white Cyan Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+
+                                                    //- Blue Card
+                                                    .card.bg-blue.text-white
+                                                        .card-header.text-white Blue Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+
+                                                    //- Indigo Card
+                                                    .card.bg-indigo.text-white
+                                                        .card-header.text-white Indigo Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+
+                                                    //- Purple Card
+                                                    .card.bg-purple.text-white
+                                                        .card-header.text-white Purple Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+
+                                                    //- Pink Card
+                                                    .card.bg-pink.text-white
+                                                        .card-header.text-white Pink Card
+                                                        .card-body
+                                                            p.card-text ...
+                                                        .card-footer Card Footer
+                                .sbp-preview-text
+                                    | You can also use the non-contextual extended color system to add color to your cards. When a card should be a certain color, and does not need to have contextual coloring or state-specific styling, use the below utilities to style your cards.
+
+                    // Bootstrap Docs Link
+                    .card.card-icon.mb-4
+                        .row.no-gutters
+                            .col-auto.card-icon-aside.bg-secondary
+                                i.mr-1.text-white-50.fab.fa-bootstrap
+                            .col
+                                .card-body.py-5
+                                    h5.card-title Bootstrap Documentation Available
+                                    p.card-text
+                                        | Cards are a default component included with the Bootstrap framework. For more information on implementing, modifying, and extending the usage of cards within your project, visit the official Bootstrap card documentation page.
+                                    a.btn.btn-secondary.btn-sm(href='https://getbootstrap.com/docs/4.4/components/card/', target='_blank')
+                                        i.mr-1(data-feather='external-link')
+                                        | Visit Bootstrap Card Docs
+
+            // Sticky Nav
+            .col-lg-3
+                .nav-sticky
+                    .card
+                        .card-body
+                            ul.nav.flex-column#stickyNav
+                                li.nav-item
+                                    a.nav-link(href='#basic') Basic
+                                li.nav-item
+                                    a.nav-link(href='#advanced') Advanced
+                                    ul.nav.flex-column.ml-3
+                                        li.nav-item
+                                            a.nav-link(href='#advancedDropdown') Header Dropdown
+                                        li.nav-item
+                                            a.nav-link(href='#advancedIcons') Header Icons
+                                        li.nav-item
+                                            a.nav-link(href='#advancedButton') Header Button
+                                        li.nav-item
+                                            a.nav-link(href='#advancedInput') Header Input
+                                li.nav-item
+                                    a.nav-link(href='#collapsable') Collapsable
+                                li.nav-item
+                                    a.nav-link(href='#navigation') Navigation
+                                    ul.nav.flex-column.ml-3
+                                        li.nav-item
+                                            a.nav-link(href='#navTabs') Tabs
+                                        li.nav-item
+                                            a.nav-link(href='#navPills') Pills
+                                        li.nav-item
+                                            a.nav-link(href='#navPillsVertical') Pills (Vertical)
+                                li.nav-item
+                                    a.nav-link(href='#scrollable') Scrollable
+                                li.nav-item
+                                    a.nav-link(href='#image') Images
+                                    ul.nav.flex-column.ml-3
+                                        li.nav-item
+                                            a.nav-link(href='#imageCaps') Caps
+                                        li.nav-item
+                                            a.nav-link(href='#imageOverlay') Overlay
+                                        li.nav-item
+                                            a.nav-link(href='#imageSide') Side
+                                li.nav-item
+                                    a.nav-link(href='#styled')
+                                        .d-flex.align-items-center.justify-content-between
+                                            | Styled
+                                            span.badge.badge-primary-soft.text-primary New
+                                    ul.nav.flex-column.ml-3
+                                        li.nav-item
+                                            a.nav-link(href='#styledWaves') Waves
+                                li.nav-item
+                                    a.nav-link(href='#icon') Icons
+                                li.nav-item
+                                    a.nav-link(href='#colors') Colors
+                                    ul.nav.flex-column.ml-3
+                                        li.nav-item
+                                            a.nav-link(href='#colorsDefault') Default
+                                        li.nav-item
+                                            a.nav-link(href='#colorsExtended') Extended
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+append scripts
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js', crossorigin='anonymous')

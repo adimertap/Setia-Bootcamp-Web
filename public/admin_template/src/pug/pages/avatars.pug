@@ -1,0 +1,265 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Avatars'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Create single and group avatars of different sizes with this custom component.',
+        pageIcon: 'users',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        .row
+            .col-lg-9
+
+                // Avatar Sizing
+                #sizing
+                    .card.mb-4
+                        .card-header Avatar Sizing
+                        .card-body
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content.d-flex.align-items-center                                
+                                    .avatar.avatar-xxl.mr-1
+                                        img.avatar-img.img-fluid(src='https://source.unsplash.com/QAB-WJcbgJk/112x112')
+                                    .avatar.avatar-xl.mr-1
+                                        img.avatar-img.img-fluid(src='https://source.unsplash.com/QAB-WJcbgJk/96x96')
+                                    .avatar.avatar-lg.mr-1
+                                        img.avatar-img.img-fluid(src='https://source.unsplash.com/QAB-WJcbgJk/80x80')
+                                    .avatar.mr-1
+                                        img.avatar-img.img-fluid(src='https://source.unsplash.com/QAB-WJcbgJk/60x60')
+                                    .avatar.avatar-sm.mr-1
+                                        img.avatar-img.img-fluid(src='https://source.unsplash.com/QAB-WJcbgJk/48x48')
+                                    .avatar.avatar-xs
+                                        img.avatar-img.img-fluid(src='https://source.unsplash.com/QAB-WJcbgJk/120x120')
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#avatarSizesTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#avatarSizesHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#avatarSizesHtml', role='tab', aria-controls='avatarSizesHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#avatarSizesPugTab.nav-link(data-toggle='tab', href='#avatarSizesPug', role='tab', aria-controls='avatarSizesPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #avatarSizesHtml.tab-pane.active(role='tabpanel', aria-labelledby='avatarSizesHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- XXL Avatar -->
+                                                    <div class="avatar avatar-xxl">
+                                                        <img class="avatar-img img-fluid" src="path/to/image">
+                                                    </div>
+
+                                                    <!-- Extra Large Avatar -->
+                                                    <div class="avatar avatar-xl">
+                                                        <img class="avatar-img img-fluid" src="path/to/image">
+                                                    </div>
+
+                                                    <!-- Large Avatar -->
+                                                    <div class="avatar avatar-lg">
+                                                        <img class="avatar-img img-fluid" src="path/to/image">
+                                                    </div>
+
+                                                    <!-- Default Avatar -->
+                                                    <div class="avatar">
+                                                        <img class="avatar-img img-fluid" src="path/to/image">
+                                                    </div>
+
+                                                    <!-- Small Avatar -->
+                                                    <div class="avatar avatar-sm">
+                                                        <img class="avatar-img img-fluid" src="path/to/image">
+                                                    </div>
+
+                                                    <!-- Extra Small Avatar -->
+                                                    <div class="avatar avatar-xs">
+                                                        <img class="avatar-img img-fluid" src="path/to/image">
+                                                    </div></script>
+                                        #avatarSizesPug.tab-pane(role='tabpanel', aria-labelledby='avatarSizesPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- XXL Avatar
+                                                    .avatar.avatar-xxl
+                                                        img.avatar-img.img-fluid(src='path/to/image')    
+
+                                                    //- Extra Large Avatar
+                                                    .avatar.avatar-xl
+                                                        img.avatar-img.img-fluid(src='path/to/image')    
+
+                                                    //- Large Avatar
+                                                    .avatar.avatar-lg
+                                                        img.avatar-img.img-fluid(src='path/to/image')    
+
+                                                    //- Default Avatar
+                                                    .avatar
+                                                        img.avatar-img.img-fluid(src='path/to/image')    
+
+                                                    //- Small Avatar
+                                                    .avatar.avatar-sm
+                                                        img.avatar-img.img-fluid(src='path/to/image')    
+
+                                                    //- Extra Small Avatar
+                                                    .avatar.avatar-xs
+                                                        img.avatar-img.img-fluid(src='path/to/image')    
+                                .sbp-preview-text.
+                                    Square images work best when using the <code>.avatar</code> component. Using an image double the resoulution of the avatar size can improve image quality on high resoulution screens.
+
+                // Avatar Status Indicators
+                #status
+                    .card.mb-4
+                        .card-header Avatar Status Inidicators
+                        .card-body
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content.d-flex.align-items-center                                
+                                    .avatar.avatar-offline.avatar-xxl.mr-1
+                                        img.avatar-img.img-fluid(src='https://source.unsplash.com/QAB-WJcbgJk/112x112')
+                                    .avatar.avatar-idle.avatar-xl.mr-1
+                                        img.avatar-img.img-fluid(src='https://source.unsplash.com/QAB-WJcbgJk/96x96')
+                                    .avatar.avatar-online.avatar-lg.mr-1
+                                        img.avatar-img.img-fluid(src='https://source.unsplash.com/QAB-WJcbgJk/80x80')
+                                    .avatar.avatar-busy.mr-1
+                                        img.avatar-img.img-fluid(src='https://source.unsplash.com/QAB-WJcbgJk/60x60')
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#avatarIndicatorsTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#avatarIndicatorsHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#avatarIndicatorsHtml', role='tab', aria-controls='avatarIndicatorsHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#avatarIndicatorsPugTab.nav-link(data-toggle='tab', href='#avatarIndicatorsPug', role='tab', aria-controls='avatarIndicatorsPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #avatarIndicatorsHtml.tab-pane.active(role='tabpanel', aria-labelledby='avatarIndicatorsHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Offline Indicator -->
+                                                    <div class="avatar avatar-offline avatar-xxl mr-1">
+                                                        <img class="avatar-img img-fluid" src="path/to/image">
+                                                    </div>
+
+                                                    <!-- Idle Indicator -->
+                                                    <div class="avatar avatar-idle avatar-xl mr-1">
+                                                        <img class="avatar-img img-fluid" src="path/to/image">
+                                                    </div>
+
+                                                    <!-- Online Indicator -->
+                                                    <div class="avatar avatar-online avatar-lg mr-1">
+                                                        <img class="avatar-img img-fluid" src="path/to/image">
+                                                    </div>
+
+                                                    <!-- Busy Indicator -->
+                                                    <div class="avatar avatar-busy mr-1">
+                                                        <img class="avatar-img img-fluid" src="path/to/image">
+                                                    </div></script>
+                                        #avatarIndicatorsPug.tab-pane(role='tabpanel', aria-labelledby='avatarIndicatorsPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Offline Indicator
+                                                    .avatar.avatar-offline.avatar-xxl
+                                                        img.avatar-img.img-fluid(src='path/to/image')
+
+                                                    //- Idle Indicator
+                                                    .avatar.avatar-idle.avatar-xl
+                                                        img.avatar-img.img-fluid(src='path/to/image')
+
+                                                    //- Online Indicator    
+                                                    .avatar.avatar-online.avatar-lg
+                                                        img.avatar-img.img-fluid(src='path/to/image')
+
+                                                    //- Busy Indicator
+                                                    .avatar.avatar-busy
+                                                        img.avatar-img.img-fluid(src='path/to/image')  
+                                .sbp-preview-text.
+                                    Use one of the four status indicator options shown above by appending the class to your <code>.avatar</code> component. The indicator is supported on all sizes of the avatar component.
+
+            // Sticky Navigation
+            .col-lg-3
+                .nav-sticky
+                    .card
+                        .card-body
+                            ul.nav.flex-column#stickyNav
+                                li.nav-item
+                                    a.nav-link(href='#sizing') Sizing
+                                li.nav-item
+                                    a.nav-link(href='#status') Status Indicators
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+append scripts
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js', crossorigin='anonymous')

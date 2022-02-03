@@ -1,0 +1,122 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Knowledge Base'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'mb-4',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'What are you looking for? Our knowledge base is here to help.',
+        pageIcon: 'life-buoy',
+        breadcrumbs: false,
+        search: true
+    })
+
+    // Main page content
+    .container
+
+        // Knowledge base article
+        .card.mb-4
+            .card-header.d-flex.align-items-center
+                a.btn.btn-transparent-dark.btn-icon(href='knowledge-base-category.html')
+                    i(data-feather='arrow-left')
+                .ml-3
+                    h2.my-3 Knowledge base article example
+            .card-body
+                p.lead Here's an example of what an article in your knowledge base will look like.
+                p.lead You can use the paragraph element along with other typography elements and text tools to create articles within your knowledge base. This is a great way to display support information to your users.
+                p.lead The knowledge base page examples are a great starting point for creating FAQ's, documentation, and more. In this section, we're using the lead paragraph class to make the text a bit larger so it's more legible since it's meant to be read in sentences.
+                p.lead.mb-5 You can also use step-by-step examples in this section:
+                h4 Step 1: Start the process
+                p.lead.mb-4 Here is some example text of a longer version of a first step. This format is great when you need to explain things more, not just using a ordered list.
+                h4 Step 2: Continue doing something
+                p.lead.mb-4 We're using built-in elements and text utilities to make this list more legible and understandable. This is a great starting point for a step by step guide within your knowledge base article.
+                h4 Step 3: Finish the process
+                p.lead.mb-5 We've used spacing utilities, text utilities, and other components within this article example. This is just an example layout of a few things you can do within an article page. Thanks for reading!
+                .alert.alert-primary.alert-icon.mb-0(role='alert')
+                    .alert-icon-aside
+                        i(data-feather='alert-triangle')
+                    .alert-icon-content
+                        h5.alert-heading Article Alert
+                        | If there is something in your article that you really want to emphasize, use the alert component, or our custom icon alert component like this one here!
+
+        // Knowledge base rating
+        .text-center.mt-5
+            h4.mb-3 Was this page helpful?
+            .mb-3
+                button.btn.btn-primary.mx-2.px-3(role='button')
+                    i.mr-2(data-feather='thumbs-up')
+                    | Yes
+                button.btn.btn-primary.mx-2.px-3(role='button')
+                    i.mr-2(data-feather='thumbs-down')
+                    | No
+            .text-small.text-muted
+                em 29 people found this page helpful so far!
+
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })

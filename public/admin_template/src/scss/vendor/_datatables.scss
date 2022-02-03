@@ -1,0 +1,101 @@
+.datatable {
+    font-size: 0.85rem;
+    @extend .table-responsive;
+    @include media-breakpoint-up(md) {
+        overflow: visible;
+    }
+
+    // Change the color of the table headings
+    table.dataTable thead,
+    table.dataTable tfoot {
+        color: $primary;
+        th {
+            font-weight: 600;
+        }
+    }
+
+    // Change the color of the table headings (dark table option)
+    table.dataTable.table-dark thead,
+    table.dataTable.table-dark tfoot {
+        color: $white;
+    }
+
+    // Action buttons within the dataTable
+    .btn-datatable {
+        height: 20px !important;
+        width: 20px !important;
+        font-size: 0.75rem;
+        border-radius: $border-radius !important;
+    }
+
+    // Overrides DataTable Sorting Icons
+
+    // First, remove the default sorting icons and define Font Awesome as the new source for icons
+    table.dataTable thead .sorting:before,
+    table.dataTable thead .sorting_asc:before,
+    table.dataTable thead .sorting_desc:before,
+    table.dataTable thead .sorting_asc_disabled:before,
+    table.dataTable thead .sorting_desc_disabled:before,
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:after {
+        display: none;
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+    }
+    // Set the icon for .sorting when a column is not sorted
+    table.dataTable thead .sorting:after {
+        content: '\f0dc';
+    }
+    // Set the icon for .sorting_asc when a column is sorted (ascending)
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_asc_disabled:after {
+        content: '\f0de';
+    }
+    // Set the icon for .sorting_desc when a column is sorted (descending)
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_desc_disabled:after {
+        content: '\f0dd';
+    }
+    // Style the SVG that is injected in place of the CSS pseudo-element via Font Awesome
+    // For more information on how this works, visit the Font Awesome Docs:
+    // https://fontawesome.com/how-to-use/on-the-web/advanced/css-pseudo-elements#with-svg-js
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+        [data-fa-pseudo-element=':after'] {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translatey(-50%);
+            color: $gray-400;
+        }
+    }
+    // Style the icons when a column is sorted to make the icon darker
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+        [data-fa-pseudo-element=':after'] {
+            color: $primary;
+        }
+    }
+    // Styling for the dark table option
+    table.dataTable.table-dark thead .sorting {
+        [data-fa-pseudo-element=':after'] {
+            color: fade-out($white, 0.75);
+        }
+    }
+    table.dataTable.table-dark thead .sorting_asc,
+    table.dataTable.table-dark thead .sorting_desc,
+    table.dataTable.table-dark thead .sorting_asc_disabled,
+    table.dataTable.table-dark thead .sorting_desc_disabled {
+        [data-fa-pseudo-element=':after'] {
+            color: fade-out($white, 0.25);
+        }
+    }
+}

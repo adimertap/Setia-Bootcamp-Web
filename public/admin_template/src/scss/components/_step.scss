@@ -1,0 +1,122 @@
+// Custom SCSS for the step component
+
+.step {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    .step-item {
+        flex: 1 1 0;
+        position: relative;
+        text-align: center;
+        &:not(:first-child)::before {
+            background-color: $body-color;
+            content: "";
+            height: $step-indicator-border-width;
+            left: -50%;
+            position: absolute;
+            top: $step-indicator-size / 2 - $step-indicator-border-width / 2;
+            width: 100%;
+            z-index: 0;
+        }
+        .step-item-link {
+            color: $body-color;
+            position: relative;
+            display: inline-block;
+            padding-top: $step-indicator-size + $step-indicator-border-width * 2;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            text-decoration: none;
+            z-index: 1;
+            &::before {
+                background-color: $body-color;
+                border: $step-indicator-border-width solid $white;
+                border-radius: 100%;
+                content: "";
+                display: block;
+                height: $step-indicator-size;
+                width: $step-indicator-size;
+                left: 50%;
+                position: absolute;
+                top: 0;
+                transform: translateX(-50%);
+                z-index: 1;
+            }
+            &.disabled {
+                pointer-events: none;
+                cursor: default;
+            }
+        }
+        &.active {
+            a::before {
+                background: $white;
+                border: $step-indicator-border-width solid $body-color;
+            }
+            ~ .step-item {
+                .step-item-link {
+                    color: $gray-300;
+                    &::before {
+                        background: $gray-300;
+                    }
+                }
+                &::before {
+                    background: $gray-300;
+                }
+            }
+        }
+    }
+}
+
+// Large sizing option for the step component
+
+.step-lg {
+    .step-item {
+        &:not(:first-child)::before {
+            height: $step-indicator-border-width-lg;
+            top: $step-indicator-size-lg / 2 - $step-indicator-border-width-lg /
+                2;
+        }
+        .step-item-link {
+            padding-top: $step-indicator-size-lg +
+                $step-indicator-border-width-lg * 2;
+            &::before {
+                border-width: $step-indicator-border-width-lg;
+                height: $step-indicator-size-lg;
+                width: $step-indicator-size-lg;
+            }
+        }
+        &.active {
+            a::before {
+                border-width: $step-indicator-border-width-lg;
+            }
+        }
+    }
+}
+
+// Set up a mixin to allow for color variants for step component
+
+@mixin step-variant($color) {
+    .step-item {
+        &:not(:first-child)::before {
+            background-color: $color;
+        }
+        .step-item-link {
+            color: $color;
+            &::before {
+                background-color: $color;
+            }
+        }
+        &.active {
+            a::before {
+                border-color: $color;
+            }
+        }
+    }
+}
+
+// Use mixin to create color variants for step component
+
+@each $color, $value in $theme-colors {
+    .step-#{$color} {
+        @include step-variant($value);
+    }
+}

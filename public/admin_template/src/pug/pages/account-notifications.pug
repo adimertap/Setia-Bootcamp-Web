@@ -1,0 +1,170 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Account Settings - Notifications'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-compact.pug
+    +header({
+        pageHeaderStyle: 'page-header-light border-bottom',
+        pageHeaderBg: 'bg-white',
+        pageHeaderSpacing: 'mb-4',
+        pageHeaderContainer: 'container-fluid',
+        pageIcon: 'user'
+    })
+
+    // Main page content
+    .container.mt-4
+        // Account page navigation
+        nav.nav.nav-borders
+            a.nav-link.ml-0(href='account-profile.html') Profile
+            a.nav-link(href='account-billing.html') Billing
+            a.nav-link(href='account-security.html') Security
+            a.nav-link.active(href='account-notifications.html') Notifications
+        hr.mt-0.mb-4
+        .row
+            .col-lg-8
+                // Email notifications preferences card
+                .card.card-header-actions.mb-4
+                    .card-header
+                        | Email Notifications
+                        .custom-control.custom-switch.mt-n2
+                            input#emailToggleSwitch.custom-control-input(type='checkbox', checked)
+                            label.custom-control-label(for='emailToggleSwitch')
+                    .card-body
+                        form
+                            // Form Group (default email)
+                            .form-group
+                                label(for='inputNotificationEmail').small.mb-1 Default notification email
+                                input#inputNotificationEmail.form-control(type='email', value='name@example.com', disabled)
+                            // Form Group (email updates checkboxes)
+                            .form-group.mb-0
+                                label.small.mb-1 Choose which types of email updates you receive
+                                .custom-control.custom-checkbox
+                                    input#checkAccountChanges.custom-control-input(type='checkbox', checked)
+                                    label.custom-control-label(for='checkAccountChanges') Changes made to your account
+                                .custom-control.custom-checkbox
+                                    input#checkAccountGroups.custom-control-input(type='checkbox', checked)
+                                    label.custom-control-label(for='checkAccountGroups') Changes are made to groups you're part of
+                                .custom-control.custom-checkbox
+                                    input#checkProductUpdates.custom-control-input(type='checkbox', checked)
+                                    label.custom-control-label(for='checkProductUpdates') Product updates for products you've purchased or starred
+                                .custom-control.custom-checkbox
+                                    input#checkProductNew.custom-control-input(type='checkbox', checked)
+                                    label.custom-control-label(for='checkProductNew') Information on new products and services
+                                .custom-control.custom-checkbox
+                                    input#checkPromotional.custom-control-input(type='checkbox')
+                                    label.custom-control-label(for='checkPromotional') Marketing and promotional offers
+                                .custom-control.custom-checkbox
+                                    input#checkSecurity.custom-control-input(type='checkbox', checked, disabled)
+                                    label.custom-control-label(for='checkSecurity') Security alerts
+                // SMS push notifications card
+                .card.card-header-actions.mb-4
+                    .card-header
+                        | Push Notifications
+                        .custom-control.custom-switch.mt-n2
+                            input#smsToggleSwitch.custom-control-input(type='checkbox', checked)
+                            label.custom-control-label(for='smsToggleSwitch')
+                    .card-body
+                        form
+                            // Form Group (default SMS number)
+                            .form-group
+                                label(for='inputNotificationSms').small.mb-1 Default SMS number
+                                input#inputNotificationSms.form-control(type='tel', value='123-456-7890', disabled)
+                            // Form Group (SMS updates checkboxes)
+                            .form-group.mb-0
+                                label.small.mb-1 Choose which types of push notifications you receive
+                                .custom-control.custom-checkbox
+                                    input#checkSmsComment.custom-control-input(type='checkbox', checked)
+                                    label.custom-control-label(for='checkSmsComment') Someone comments on your post
+                                .custom-control.custom-checkbox
+                                    input#checkSmsShare.custom-control-input(type='checkbox')
+                                    label.custom-control-label(for='checkSmsShare') Someone shares your post
+                                .custom-control.custom-checkbox
+                                    input#checkSmsFollow.custom-control-input(type='checkbox', checked)
+                                    label.custom-control-label(for='checkSmsFollow') A user follows your account
+                                .custom-control.custom-checkbox
+                                    input#checkSmsGroup.custom-control-input(type='checkbox')
+                                    label.custom-control-label(for='checkSmsGroup') New posts are made in groups you're part of
+                                .custom-control.custom-checkbox
+                                    input#checkSmsPrivateMessage.custom-control-input(type='checkbox', checked)
+                                    label.custom-control-label(for='checkSmsPrivateMessage') You receive a private message
+            .col-lg-4
+                // Notifications preferences card
+                .card
+                    .card-header Notification Preferences
+                    .card-body
+                        form
+                            // Form Group (notification preference checkboxes)
+                            .form-group
+                                .custom-control.custom-checkbox
+                                    input#checkAutoGroup.custom-control-input(type='checkbox', checked)
+                                    label.custom-control-label(for='checkAutoGroup') Automatically subscribe to group notifications
+                                .custom-control.custom-checkbox
+                                    input#checkAutoProduct.custom-control-input(type='checkbox')
+                                    label.custom-control-label(for='checkAutoProduct') Automatically subscribe to new product notifications
+                            // Submit button
+                            button.btn.btn-danger-soft.text-danger Unsubscribe from all notifications
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })

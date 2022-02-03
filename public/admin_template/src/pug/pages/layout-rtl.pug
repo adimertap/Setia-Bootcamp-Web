@@ -1,0 +1,158 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard-rtl.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Dashboard'
+
+//- Add CSS for third party plugins used on this page
+append css
+    //- Load dataTables CSS via CDN
+    link(href='https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css', rel='stylesheet', crossorigin='anonymous')
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Example dashboard overview and content summary',
+        pageIcon: 'activity',
+        breadcrumbs: false
+    })
+
+    .container.mt-n10
+
+        .row
+            .col-md-6
+                .card.mb-4
+                    .card-header Monthly Sales
+                    .card-body
+                        .chart-area
+                            canvas#myAreaChart(width='100%', height='30')
+            .col-md-6
+                .card.mb-4
+                    .card-header Revenue Breakdown
+                    .card-body
+                        .chart-bar
+                            canvas#myBarChart(width='100%', height='30')
+
+        .row
+            .col-xl-3.col-md-6
+                .card.bg-primary.text-white.mb-4
+                    .card-body
+                        | Primary Card
+                    .card-footer.d-flex.align-items-center.justify-content-between
+                        a(href='#').small.text-white.stretched-link
+                            | View Details
+                        .small.text-white
+                            i.fas.fa-angle-right
+            .col-xl-3.col-md-6
+                .card.bg-warning.text-white.mb-4
+                    .card-body
+                        | Warning Card
+                    .card-footer.d-flex.align-items-center.justify-content-between
+                        a(href='#').small.text-white.stretched-link
+                            | View Details
+                        .small.text-white
+                            i.fas.fa-angle-right
+            .col-xl-3.col-md-6
+                .card.bg-success.text-white.mb-4
+                    .card-body
+                        | Success Card
+                    .card-footer.d-flex.align-items-center.justify-content-between
+                        a(href='#').small.text-white.stretched-link
+                            | View Details
+                        .small.text-white
+                            i.fas.fa-angle-right
+            .col-xl-3.col-md-6
+                .card.bg-danger.text-white.mb-4
+                    .card-body
+                        | Danger Card
+                    .card-footer.d-flex.align-items-center.justify-content-between
+                        a(href='#').small.text-white.stretched-link
+                            | View Details
+                        .small.text-white
+                            i.fas.fa-angle-right
+
+        //- Dashboard Demo DataTable Example
+        .card.mb-4
+            .card-header
+                | DataTable Example
+            .card-body
+                include includes/datatable-example.pug
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+//- Add JS for third party plugins used on this page
+append scripts
+    //- Load Chart.js via CDN
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js', crossorigin='anonymous')
+    //- Load custom Chart.js styling and demo data
+    script(src='assets/demo/chart-area-demo.js')
+    script(src='assets/demo/chart-bar-demo.js')
+    //- Load dataTables via CDN
+    script(src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js', crossorigin='anonymous')
+    script(src='https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js', crossorigin='anonymous')
+    //- Load dataTables demo data
+    script(src='assets/demo/datatables-demo.js')

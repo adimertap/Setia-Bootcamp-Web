@@ -1,0 +1,33 @@
+.nav-fixed {
+    .topnav {
+        @extend .fixed-top;
+        z-index: $zindex-topnav;
+    }
+    #layoutSidenav {
+        #layoutSidenav_nav {
+            @extend .fixed-top;
+            width: $sidenav-base-width;
+            height: 100vh;
+            z-index: $zindex-sidenav;
+            .sidenav {
+                padding-top: $topnav-base-height;
+                .sidenav-menu {
+                    @include scrollbar-custom;
+                }
+                // Scrollbar coloring for dark sidebar color option
+                &.sidenav-dark {
+                    .sidenav-menu {
+                        &::-webkit-scrollbar-thumb {
+                            background-color: fade-out($white, 0.75);
+                            border-color: rgba(0, 0, 0, 0);
+                        }
+                    }
+                }
+            }
+        }
+        #layoutSidenav_content {
+            padding-left: $sidenav-base-width;
+            top: $topnav-base-height;
+        }
+    }
+}

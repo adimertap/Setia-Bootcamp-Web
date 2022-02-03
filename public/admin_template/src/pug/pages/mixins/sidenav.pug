@@ -1,0 +1,277 @@
+mixin sidenav(options)
+
+    nav.sidenav.shadow-right(class=options.sidenavStyle)
+            
+        .sidenav-menu
+            
+            .nav.accordion#accordionSidenav
+        
+                .sidenav-menu-heading
+                    | Core
+                    
+                a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#collapseDashboards', aria-expanded='false', aria-controls='collapseDashboards')
+                    .nav-link-icon
+                        i(data-feather='activity')
+                    | Dashboards
+                    .sidenav-collapse-arrow
+                        i.fas.fa-angle-down
+                #collapseDashboards.collapse(data-parent='#accordionSidenav')
+                    nav.sidenav-menu-nested.nav.accordion#accordionSidenavPages
+                        a.nav-link(href='index.html')
+                            | Default
+                            span.badge.badge-primary-soft.text-primary.ml-auto Updated
+                        a.nav-link(href='dashboard-2.html')
+                            | Multipurpose
+                            span.badge.badge-primary-soft.text-primary.ml-auto Updated
+                        a.nav-link(href='dashboard-3.html')
+                            | Affiliate
+                            span.badge.badge-primary-soft.text-primary.ml-auto Updated
+
+                .sidenav-menu-heading
+                    | App Views
+
+                a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#collapsePages', aria-expanded='false', aria-controls='collapsePages')
+                    .nav-link-icon
+                        i(data-feather='grid')
+                    | Pages
+                    .sidenav-collapse-arrow
+                        i.fas.fa-angle-down
+                #collapsePages.collapse(data-parent='#accordionSidenav')
+                    nav.sidenav-menu-nested.nav.accordion#accordionSidenavPagesMenu
+                        a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#pagesCollapseAccount', aria-expanded='false', aria-controls='pagesCollapseAccount')
+                            | Account
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #pagesCollapseAccount.collapse(data-parent='#accordionSidenavPagesMenu')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='account-profile.html')
+                                    | Profile
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                                a.nav-link(href='account-billing.html')
+                                    | Billing
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                                a.nav-link(href='account-security.html')
+                                    | Security
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                                a.nav-link(href='account-notifications.html')
+                                    | Notifications
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                        a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#pagesCollapseAuth', aria-expanded='false', aria-controls='pagesCollapseAuth')
+                            | Authentication
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #pagesCollapseAuth.collapse(data-parent='#accordionSidenavPagesMenu')
+                            nav.sidenav-menu-nested.nav.accordion#accordionSidenavPagesAuth
+                                a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#pagesCollapseAuthBasic', aria-expanded='false', aria-controls='pagesCollapseAuthBasic')
+                                    | Basic
+                                    .sidenav-collapse-arrow
+                                        i.fas.fa-angle-down
+                                #pagesCollapseAuthBasic.collapse(data-parent='#accordionSidenavPagesAuth')
+                                    nav.sidenav-menu-nested.nav
+                                        a.nav-link(href='auth-login-basic.html') Login
+                                        a.nav-link(href='auth-register-basic.html') Register
+                                        a.nav-link(href='auth-password-basic.html') Forgot Password
+                                a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#pagesCollapseAuthSocial', aria-expanded='false', aria-controls='pagesCollapseAuthSocial')
+                                    | Social
+                                    .sidenav-collapse-arrow
+                                        i.fas.fa-angle-down
+                                #pagesCollapseAuthSocial.collapse(data-parent='#accordionSidenavPagesAuth')
+                                    nav.sidenav-menu-nested.nav
+                                        a.nav-link(href='auth-login-social.html') Login
+                                        a.nav-link(href='auth-register-social.html') Register
+                                        a.nav-link(href='auth-password-social.html') Forgot Password
+                        a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#pagesCollapseError', aria-expanded='false', aria-controls='pagesCollapseError')
+                            | Error
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #pagesCollapseError.collapse(data-parent='#accordionSidenavPagesMenu')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='error-400.html')
+                                    | 400 Error
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                                a.nav-link(href='error-401.html')
+                                    | 401 Error
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                                a.nav-link(href='error-403.html')
+                                    | 403 Error
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                                a.nav-link(href='error-404-1.html')
+                                    | 404 Error 1
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                                a.nav-link(href='error-404-2.html')
+                                    | 404 Error 2
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                                a.nav-link(href='error-500.html')
+                                    | 500 Error
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                                a.nav-link(href='error-503.html')
+                                    | 503 Error
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                                a.nav-link(href='error-504.html')
+                                    | 504 Error
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                        a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#pagesCollapseKnowledgeBase', aria-expanded='false', aria-controls='pagesCollapseKnowledgeBase')
+                            | Knowledge Base
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #pagesCollapseKnowledgeBase.collapse(data-parent='#accordionSidenavPagesMenu')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='knowledge-base-home-1.html')
+                                    | Home 1
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                                a.nav-link(href='knowledge-base-home-2.html')
+                                    | Home 2
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                                a.nav-link(href='knowledge-base-category.html')
+                                    | Category
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                                a.nav-link(href='knowledge-base-article.html')
+                                    | Article
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                        a.nav-link(href='pricing.html')
+                            | Pricing
+                            span.badge.badge-primary-soft.text-primary.ml-auto New
+                        a.nav-link(href='invoice.html')
+                            | Invoice
+                            span.badge.badge-primary-soft.text-primary.ml-auto New
+                        
+                a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#collapseFlows', aria-expanded='false', aria-controls='collapseFlows')
+                    .nav-link-icon
+                        i(data-feather='repeat')
+                    | Flows
+                    .sidenav-collapse-arrow
+                        i.fas.fa-angle-down
+                #collapseFlows.collapse(data-parent='#accordionSidenav')
+                    nav.sidenav-menu-nested.nav
+                        a.nav-link(href='multi-tenant-select.html') Multi-Tenant Registration
+                        a.nav-link(href='wizard.html')
+                            | Wizard
+                            span.badge.badge-primary-soft.text-primary.ml-auto New
+
+                .sidenav-menu-heading
+                    | UI Toolkit
+
+                //- Layout
+                a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#collapseLayouts', aria-expanded='false', aria-controls='collapseLayouts')
+                    .nav-link-icon
+                        i(data-feather='layout')
+                    | Layout
+                    .sidenav-collapse-arrow
+                        i.fas.fa-angle-down
+                #collapseLayouts.collapse(data-parent='#accordionSidenav')
+                    nav.sidenav-menu-nested.nav.accordion#accordionSidenavLayout
+
+                        a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#collapseLayoutSidenavVariations', aria-expanded='false', aria-controls='collapseLayoutSidenavVariations')
+                            | Sidenav Variations
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #collapseLayoutSidenavVariations.collapse(data-parent='#accordionSidenavLayout')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='layout-static.html') Static Navigation
+                                a.nav-link(href='layout-dark.html') Dark Sidenav
+                                a.nav-link(href='layout-rtl.html') RTL Layout
+
+                        a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#collapseLayoutContainers', aria-expanded='false', aria-controls='collapseLayoutContainers')
+                            | Container Options
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #collapseLayoutContainers.collapse(data-parent='#accordionSidenavLayout')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='layout-boxed.html')
+                                    | Boxed Layout
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                                a.nav-link(href='layout-fluid.html')
+                                    | Fluid Layout
+                        
+                        a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#collapseLayoutsPageHeaders', aria-expanded='false', aria-controls='collapseLayoutsPageHeaders') Page Headers
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #collapseLayoutsPageHeaders.collapse(data-parent='#accordionSidenavLayout')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='header-simplified.html') Simplified
+                                a.nav-link(href='header-compact.html')
+                                    | Compact
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                                a.nav-link(href='header-overlap.html') Content Overlap
+                                a.nav-link(href='header-breadcrumbs.html') Breadcrumbs
+                                a.nav-link(href='header-light.html') Light
+
+                        a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#collapseLayoutsStarterTemplates', aria-expanded='false', aria-controls='collapseLayoutsStarterTemplates')
+                            | Starter Layouts
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #collapseLayoutsStarterTemplates.collapse(data-parent='#accordionSidenavLayout')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='starter-default.html') Default
+                                a.nav-link(href='starter-minimal.html')
+                                    | Minimal
+                                    span.badge.badge-primary-soft.text-primary.ml-auto New
+                        
+                a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#collapseComponents', aria-expanded='false', aria-controls='collapseComponents')
+                    .nav-link-icon
+                        i(data-feather='package')
+                    | Components
+                    .sidenav-collapse-arrow
+                        i.fas.fa-angle-down
+                #collapseComponents.collapse(data-parent='#accordionSidenav')
+                    nav.sidenav-menu-nested.nav
+                        a.nav-link(href='alerts.html') Alerts
+                        a.nav-link(href='avatars.html') Avatars
+                        a.nav-link(href='badges.html') Badges
+                        a.nav-link(href='buttons.html') Buttons
+                        a.nav-link(href='cards.html')
+                            | Cards
+                            span.badge.badge-primary-soft.text-primary.ml-auto Updated
+                        a.nav-link(href='dropdowns.html') Dropdowns
+                        a.nav-link(href='forms.html')
+                            | Forms
+                            span.badge.badge-primary-soft.text-primary.ml-auto Updated
+                        a.nav-link(href='modals.html') Modals
+                        a.nav-link(href='navigation.html')
+                            | Navigation
+                            span.badge.badge-primary-soft.text-primary.ml-auto Updated
+                        a.nav-link(href='progress.html') Progress
+                        a.nav-link(href='step.html')
+                            | Step
+                            span.badge.badge-primary-soft.text-primary.ml-auto New
+                        a.nav-link(href='timeline.html')
+                            | Timeline
+                            span.badge.badge-primary-soft.text-primary.ml-auto New
+                        a.nav-link(href='toasts.html') Toasts
+                        a.nav-link(href='tooltips.html') Tooltips
+                        
+                a.nav-link.collapsed(href='javascript:void(0);', data-toggle='collapse', data-target='#collapseUtilities', aria-expanded='false', aria-controls='collapseUtilities')
+                    .nav-link-icon
+                        i(data-feather='tool')
+                    | Utilities
+                    .sidenav-collapse-arrow
+                        i.fas.fa-angle-down
+                #collapseUtilities.collapse(data-parent='#accordionSidenav')
+                    nav.sidenav-menu-nested.nav
+                        a.nav-link(href='animations.html') Animations
+                        a.nav-link(href='background.html') Background
+                        a.nav-link(href='borders.html') Borders
+                        a.nav-link(href='lift.html') Lift
+                        a.nav-link(href='shadows.html') Shadows
+                        a.nav-link(href='typography.html')
+                            | Typography
+                            span.badge.badge-primary-soft.text-primary.ml-auto Updated
+                                
+                .sidenav-menu-heading
+                    | Addons
+                
+                a.nav-link(href='charts.html')
+                    .nav-link-icon
+                        i(data-feather='bar-chart')
+                    | Charts
+                    
+                a.nav-link(href='tables.html')
+                    .nav-link-icon
+                        i(data-feather='filter')
+                    | Tables
+                            
+        .sidenav-footer
+            
+            .sidenav-footer-content
+                .sidenav-footer-subtitle Logged in as:
+                .sidenav-footer-title Valerie Luna

@@ -1,0 +1,209 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Animations'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Custom animation utilities to add motion to your transitioning content',
+        pageIcon: 'film',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        .row
+            .col-lg-9
+
+                // Fade In Transition
+                #fadeIn
+                    .card.mb-4
+                        .card-header Fade In Transition
+                        .card-body
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    .dropdown
+                                        button#dropdownFadeIn.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                            | Click Me!
+                                        .dropdown-menu.animated--fade-in(aria-labelledby='dropdownFadeIn')
+                                            a.dropdown-item(href='javascript:void(0);') Action
+                                            a.dropdown-item(href='javascript:void(0);') Another action
+                                            a.dropdown-item(href='javascript:void(0);') Something else here
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#animationFadeInExampleTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#animationFadeInExampleHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#animationFadeInExampleHtml', role='tab', aria-controls='animationFadeInExampleHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#animationFadeInExamplePugTab.nav-link(data-toggle='tab', href='#animationFadeInExamplePug', role='tab', aria-controls='animationFadeInExamplePug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #animationFadeInExampleHtml.tab-pane.active(role='tabpanel', aria-labelledby='animationFadeInExampleHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Fade In Animation -->
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-primary dropdown-toggle" id="dropdownFadeIn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Click Me!</button>
+                                                        <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownFadeIn">
+                                                            <a class="dropdown-item" href="javascript:void(0);">Action</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);">Another action</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+                                                        </div>
+                                                    </div></script>
+                                        #animationFadeInExamplePug.tab-pane(role='tabpanel', aria-labelledby='animationFadeInExamplePugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Fade In Animation
+                                                    .dropdown
+                                                        button#dropdownFadeIn.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                                            | Click Me!
+                                                        .dropdown-menu.animated--fade-in(aria-labelledby='dropdownFadeIn')
+                                                            a.dropdown-item(href='javascript:void(0);') Action
+                                                            a.dropdown-item(href='javascript:void(0);') Another action
+                                                            a.dropdown-item(href='javascript:void(0);') Something else here
+                                .sbp-preview-text.
+                                    The fade in utility can be used by adding <code>.animated--fade-in</code> to an element. In the above example, it is being used along with a Bootstrap dropdown menu.
+
+                // Fade In Up Transition
+                #fadeInUp
+                    .card.mb-4
+                        .card-header Fade In Up Transition
+                        .card-body
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    .dropdown
+                                        button#dropdownFadeIn.btn.btn-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                            | Click Me!
+                                        .dropdown-menu.animated--fade-in-up(aria-labelledby='dropdownFadeIn')
+                                            a.dropdown-item(href='javascript:void(0);') Action
+                                            a.dropdown-item(href='javascript:void(0);') Another action
+                                            a.dropdown-item(href='javascript:void(0);') Something else here
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#animationFadeInUpExampleTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#animationFadeInUpExampleHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#animationFadeInUpExampleHtml', role='tab', aria-controls='animationFadeInUpExampleHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#animationFadeInUpExamplePugTab.nav-link(data-toggle='tab', href='#animationFadeInUpExamplePug', role='tab', aria-controls='animationFadeInUpExamplePug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #animationFadeInUpExampleHtml.tab-pane.active(role='tabpanel', aria-labelledby='animationFadeInUpExampleHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Fade In Up Animation -->
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary dropdown-toggle" id="dropdownFadeIn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Click Me!</button>
+                                                        <div class="dropdown-menu animated--fade-in-up" aria-labelledby="dropdownFadeIn">
+                                                            <a class="dropdown-item" href="javascript:void(0);">Action</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);">Another action</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+                                                        </div>
+                                                    </div></script>
+                                        #animationFadeInUpExamplePug.tab-pane(role='tabpanel', aria-labelledby='animationFadeInUpExamplePugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Fade In Up Animation
+                                                    .dropdown
+                                                        button#dropdownFadeIn.btn.btn-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                                            | Click Me!
+                                                        .dropdown-menu.animated--fade-in-up(aria-labelledby='dropdownFadeIn')
+                                                            a.dropdown-item(href='javascript:void(0);') Action
+                                                            a.dropdown-item(href='javascript:void(0);') Another action
+                                                            a.dropdown-item(href='javascript:void(0);') Something else here
+                                .sbp-preview-text.
+                                    The fade in up utility can be used by adding <code>.animated--fade-in-up</code> to an element. In the above example, it is being used along with a Bootstrap dropdown menu.
+
+            // Sticky Navigation
+            .col-lg-3
+                .nav-sticky
+                    .card
+                        .card-body
+                            ul.nav.flex-column#stickyNav
+                                li.nav-item
+                                    a.nav-link(href='#fadeIn') Fade In
+                                li.nav-item
+                                    a.nav-link(href='#fadeInUp') Fade In Up
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+append scripts
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js', crossorigin='anonymous')

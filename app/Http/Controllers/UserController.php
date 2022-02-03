@@ -31,6 +31,7 @@ class UserController extends Controller
             'email' => $callback->getEmail(),
             'avatar' => $callback->getAvatar(),
             'email_verified_at' => date('Y-m-d H:i:s', time()),
+            'role' => 'User'
         ];
 
         // return $data;

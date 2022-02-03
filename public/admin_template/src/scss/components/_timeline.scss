@@ -1,0 +1,138 @@
+// Styling for the custom timeline component
+
+.timeline {
+    .timeline-item {
+        display: flex;
+        align-items: flex-start;
+        .timeline-item-marker {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            .timeline-item-marker-text {
+                font-size: $font-size-sm;
+                width: 6rem;
+                color: $gray-500;
+                text-align: center;
+                margin-bottom: 0.5rem;
+                // Truncate the text if over the defined width
+                display: block;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            .timeline-item-marker-indicator {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                height: $timeline-marker-size;
+                width: $timeline-marker-size;
+                background-color: $gray-100;
+                border-radius: 100%;
+            }
+        }
+        .timeline-item-content {
+            padding-top: 0;
+            padding-bottom: 2rem;
+            padding-left: 1rem;
+            width: 100%;
+        }
+        &:last-child {
+            .timeline-item-content {
+                padding-bottom: 0 !important;
+            }
+        }
+    }
+}
+
+// Responsive behavior for the timeline component
+
+@include media-breakpoint-up(sm) {
+    .timeline {
+        .timeline-item {
+            .timeline-item-marker {
+                flex-direction: row;
+                transform: translateX(
+                    ($timeline-marker-size / 2) + ($border-width-lg / 2)
+                );
+                margin-bottom: 0;
+                .timeline-item-marker-text {
+                    margin-right: 0.5rem;
+                    margin-bottom: 0;
+                }
+            }
+            .timeline-item-content {
+                padding-top: $timeline-marker-size / 4;
+                padding-bottom: 3rem;
+                padding-left: 3rem;
+                border-left: solid $border-width-lg $gray-100;
+            }
+            &:last-child {
+                .timeline-item-content {
+                    border-left-color: transparent;
+                }
+            }
+        }
+    }
+}
+
+// Timeline small variant
+
+.timeline.timeline-sm {
+    .timeline-item {
+        .timeline-item-marker {
+            transform: translateX(
+                ($timeline-sm-marker-size / 2) + ($border-width-lg / 2)
+            );
+            .timeline-item-marker-text {
+                width: 3rem;
+                font-size: $btn-font-size-xs;
+            }
+            .timeline-item-marker-indicator {
+                height: $timeline-sm-marker-size;
+                width: $timeline-sm-marker-size;
+                font-size: $font-size-sm;
+                .feather {
+                    height: 0.75rem;
+                    width: 0.75rem;
+                }
+            }
+        }
+        .timeline-item-content {
+            font-size: $font-size-sm;
+            padding-top: 0.15rem;
+            padding-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+    }
+}
+
+// Timeline extra small variant
+
+.timeline.timeline-xs {
+    .timeline-item {
+        .timeline-item-marker {
+            transform: translateX(
+                ($timeline-xs-marker-size / 2) + ($border-width-lg / 2)
+            );
+            .timeline-item-marker-text {
+                width: 3rem;
+                font-size: $btn-font-size-xs;
+            }
+            .timeline-item-marker-indicator {
+                height: $timeline-xs-marker-size;
+                width: $timeline-xs-marker-size;
+                font-size: $font-size-sm;
+                border: 0.125rem solid $white;
+                margin-top: -0.125rem;
+            }
+        }
+        .timeline-item-content {
+            font-size: $font-size-sm;
+            padding-top: 0;
+            padding-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+    }
+}

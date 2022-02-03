@@ -1,0 +1,14 @@
+.footer {
+    height: $footer-base-height;
+    display: flex;
+    align-items: center;
+    a {
+        @extend .text-reset;
+    }
+    &.footer-dark {
+        color: fade-out($white, 0.4);
+    }
+    &.footer-light {
+        color: $gray-500;
+    }
+}

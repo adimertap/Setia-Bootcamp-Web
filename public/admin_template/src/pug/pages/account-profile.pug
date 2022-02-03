@@ -1,0 +1,158 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Account Settings - Profile'
+
+//- Add CSS for third party plugins used on this page
+append css
+    //- Load Date Range Picker via CDN
+    link(href='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css', rel='stylesheet', crossorigin='anonymous')
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-compact.pug
+    +header({
+        pageHeaderStyle: 'page-header-light border-bottom',
+        pageHeaderBg: 'bg-white',
+        pageHeaderSpacing: 'mb-4',
+        pageHeaderContainer: 'container-fluid',
+        pageIcon: 'user'
+    })
+
+    // Main page content
+    .container.mt-4
+        // Account page navigation
+        nav.nav.nav-borders
+            a.nav-link.active.ml-0(href='account-profile.html') Profile
+            a.nav-link(href='account-billing.html') Billing
+            a.nav-link(href='account-security.html') Security
+            a.nav-link(href='account-notifications.html') Notifications
+        hr.mt-0.mb-4
+        .row
+            .col-xl-4
+                // Profile picture card
+                .card
+                    .card-header Profile Picture
+                    .card-body.text-center
+                        // Profile picture image
+                        img.img-account-profile.rounded-circle.mb-2(src='https://source.unsplash.com/QAB-WJcbgJk/300x300', alt='')
+                        // Profile picture help block
+                        .small.font-italic.text-muted.mb-4 JPG or PNG no larger than 5 MB
+                        // Profile picture upload button
+                        button.btn.btn-primary(type='button') Upload new image
+            .col-xl-8
+                // Account details card
+                .card.mb-4
+                    .card-header Account Details
+                    .card-body
+                        form
+                            // Form Group (username)
+                            .form-group
+                                label.small.mb-1(for='inputUsername') Username (how your name will appear to other users on the site)
+                                input#inputUsername.form-control(type='text', placeholder='Enter your username', value='username')
+                            // Form Row
+                            .form-row
+                                // Form Group (first name)
+                                .form-group.col-md-6
+                                    label.small.mb-1(for='inputFirstName') First name
+                                    input#inputFirstName.form-control(type='text', placeholder='Enter your first name', value='Valerie')
+                                // Form Group (last name)
+                                .form-group.col-md-6
+                                    label.small.mb-1(for='inputLastName') Last name
+                                    input#inputLastName.form-control(type='text', placeholder='Enter your last name', value='Luna')
+                            // Form Row        
+                            .form-row
+                                // Form Group (organization name)
+                                .form-group.col-md-6
+                                    label.small.mb-1(for='inputOrgName') Organization name
+                                    input#inputOrgName.form-control(type='text', placeholder='Enter your organization name', value='Start Bootstrap')
+                                // Form Group (location)
+                                .form-group.col-md-6
+                                    label.small.mb-1(for='inputLocation') Location
+                                    input#inputLocation.form-control(type='text', placeholder='Enter your location', value='San Francisco, CA')
+                            // Form Group (email address)
+                            .form-group
+                                label.small.mb-1(for='inputEmailAddress') Email address
+                                input#inputEmailAddress.form-control(type='email', placeholder='Enter your email address', value='name@example.com')
+                            // Form Row
+                            .form-row
+                                // Form Group (phone number)
+                                .form-group.col-md-6
+                                    label.small.mb-1(for='inputPhone') Phone number
+                                    input#inputPhone.form-control(type='tel', placeholder='Enter your phone number', value='555-123-4567')
+                                // Form Group (birthday)
+                                .form-group.col-md-6
+                                    label.small.mb-1(for='inputBirthday') Birthday
+                                    input#inputBirthday.form-control(type='text', name='birthday', placeholder='Enter your birthday', value='06/10/1988')
+                            // Save changes button
+                            button.btn.btn-primary(type='button') Save changes
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+//- Add JS for third party plugins used on this page
+append scripts
+    //- Load Moment.js and Date Range Picker via CDN
+    script(src='https://cdn.jsdelivr.net/momentjs/latest/moment.min.js', crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js', crossorigin='anonymous')
+    //- Load Date Range Picker initialization script
+    script(src='assets/demo/date-range-picker-demo-single.js')

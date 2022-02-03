@@ -1,0 +1,142 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Knowledge Base'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'mb-4',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'What are you looking for? Our knowledge base is here to help.',
+        pageIcon: 'life-buoy',
+        breadcrumbs: false,
+        search: true
+    })
+
+    // Main page content
+    .container
+
+        // Knowledge base category
+        h2.mb-0.mt-5 Category Name
+        hr.mt-2.mb-4
+
+        // Knowledge base item
+        a.card.card-icon.lift.lift-sm.mb-4(href='knowledge-base-article.html')
+            .card-body
+                .d-flex.align-items-center.justify-content-between
+                    .h5.card-title.mb-0 How to update your billing information
+                    i.flex-shrink-0.ml-4(data-feather='chevron-right')
+
+        // Knowledge base item
+        a.card.card-icon.lift.lift-sm.mb-4(href='knowledge-base-article.html')
+            .card-body
+                .d-flex.align-items-center.justify-content-between
+                    .h5.card-title.mb-0 Integrating with the API
+                    i.flex-shrink-0.ml-4(data-feather='chevron-right')
+
+        // Knowledge base item
+        a.card.card-icon.lift.lift-sm.mb-4(href='knowledge-base-article.html')
+            .card-body
+                .d-flex.align-items-center.justify-content-between
+                    .h5.card-title.mb-0 Setting up new accounts within our platform
+                    i.flex-shrink-0.ml-4(data-feather='chevron-right')
+
+        // Knowledge base item
+        a.card.card-icon.lift.lift-sm.mb-4(href='knowledge-base-article.html')
+            .card-body
+                .d-flex.align-items-center.justify-content-between
+                    .h5.card-title.mb-0 Accessing and editing order details
+                    i.flex-shrink-0.ml-4(data-feather='chevron-right')
+
+        // Knowledge base item
+        a.card.card-icon.lift.lift-sm.mb-4(href='knowledge-base-article.html')
+            .card-body
+                .d-flex.align-items-center.justify-content-between
+                    .h5.card-title.mb-0 Installation instructions for Windows 10 users
+                    i.flex-shrink-0.ml-4(data-feather='chevron-right')
+
+        // Knowledge base item
+        a.card.card-icon.lift.lift-sm.mb-4(href='knowledge-base-article.html')
+            .card-body
+                .d-flex.align-items-center.justify-content-between
+                    .h5.card-title.mb-0 Installation instructions for Mac OSX users
+                    i.flex-shrink-0.ml-4(data-feather='chevron-right')
+        
+        // knowledge base rating
+        .text-center.mt-5
+            h4.mb-3 Was this page helpful?
+            .mb-3
+                button.btn.btn-primary.mx-2.px-3(role='button')
+                    i.mr-2(data-feather='thumbs-up')
+                    | Yes
+                button.btn.btn-primary.mx-2.px-3(role='button')
+                    i.mr-2(data-feather='thumbs-down')
+                    | No
+            .text-small.text-muted
+                em 29 people found this page helpful so far!
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })

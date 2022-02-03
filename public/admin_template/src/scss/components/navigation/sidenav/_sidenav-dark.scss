@@ -1,0 +1,36 @@
+// Dark theme for sidenav
+// Append .sidenav-dark to .sidenav to use
+
+.sidenav-dark {
+    background-color: $sidenav-dark-bg;
+    color: $sidenav-dark-color;
+    .sidenav-menu {
+        .sidenav-menu-heading {
+            color: $sidenav-dark-heading-color;
+        }
+        .nav-link {
+            color: $sidenav-dark-link-color;
+            .nav-link-icon {
+                color: $sidenav-dark-icon-color;
+            }
+            .sidenav-collapse-arrow {
+                color: $sidenav-dark-icon-color;
+            }
+            &:hover {
+                color: $sidenav-dark-link-active-color;
+            }
+            &.active {
+                color: $sidenav-dark-link-active-color;
+                .nav-link-icon {
+                    color: $sidenav-dark-link-active-color;
+                }
+            }
+        }
+    }
+    .sidenav-menu-nested {
+        border-left-color: fade-out($white, 0.85);
+    }
+    .sidenav-footer {
+        background-color: $sidenav-dark-footer-bg;
+    }
+}

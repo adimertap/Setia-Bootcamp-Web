@@ -1,0 +1,142 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Shadows'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Shadow utilities add depth and elevation to your content',
+        pageIcon: 'sunset',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        .row
+            .col-lg-9
+
+                // Default Shadows
+                #default
+                    .card.mb-4
+                        .card-header Default Bootstrap Shadows
+                        .card-body
+                            .border.border-lg.rounded
+                                .p-4.border-bottom
+                                    .bg-light.p-3.shadow-none.mb-4
+                                        | .shadow-none
+                                    .bg-white.p-3.shadow-sm.mb-4
+                                        | .shadow.sm
+                                    .bg-white.p-3.shadow.mb-4
+                                        | .shadow
+                                    .bg-white.p-3.shadow-lg
+                                        | .shadow-lg
+                                .bg-light.p-4.small.
+                                    The SCSS variables that define the intensity of the box shadow can be modified by overriding the values set in the <code>../variables/_components.scss</code> file.
+                // Extended Shadows
+                #extended
+                    .card.mb-4
+                        .card-header Extended Shadow Utilities
+                        .card-body
+                            h6.small.text-muted.font-weight-500 Left Shadows:
+                            .border.border-lg.rounded.mb-4
+                                .p-4.border-bottom
+                                    .d-flex.flex-row
+                                        .bg-white.p-3.shadow-left-sm.m-4
+                                            | .shadow-left-sm
+                                        .bg-white.p-3.shadow-left.m-4
+                                            | .shadow-left
+                                        .bg-white.p-3.shadow-left-lg.m-4
+                                            | .shadow-left-lg
+                                .bg-light.p-4.small.
+                                    The <code>.shadow-left</code> utility has small and large variants.
+                            h6.small.text-muted.font-weight-500 Right Shadows:
+                            .border.border-lg.rounded
+                                .p-4.border-bottom
+                                    .d-flex.flex-row
+                                        .bg-white.p-3.shadow-right-sm.m-4
+                                            | .shadow-right-sm
+                                        .bg-white.p-3.shadow-right.m-4
+                                            | .shadow-right
+                                        .bg-white.p-3.shadow-right-lg.m-4
+                                            | .shadow-right-lg
+                                .bg-light.p-4.small.
+                                    The <code>.shadow-right</code> utility has small and large variants. The <code>$box-shadow-right</code> variable is used on the SB Admin Pro side navigation.
+
+            // Sticky Navigation
+            .col-lg-3
+                .nav-sticky
+                    .card
+                        .card-body
+                            ul.nav.flex-column#stickyNav
+                                li.nav-item
+                                    a.nav-link(href='#default') Default
+                                li.nav-item
+                                    a.nav-link(href='#extended') Extended
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })

@@ -1,0 +1,680 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Modals'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Dialog boxes to display lightbox, notifications, or other custom content',
+        pageIcon: 'external-link',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        .row
+            .col-lg-9
+
+                // Default Bootstrap Modal
+                #default
+                    .card.mb-4
+                        .card-header Default Bootstrap Modal
+                        .card-body
+                            h6.small.text-muted.font-weight-500 Modal Default:
+                            // Component Preview
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    // Button trigger modal
+                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModal')
+                                        | Launch Demo Modal
+                                    // Modal
+                                    #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+                                        .modal-dialog(role='document')
+                                            .modal-content
+                                                .modal-header
+                                                    h5#exampleModalLabel.modal-title Default Bootstrap Modal
+                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                        span(aria-hidden='true') ×
+                                                .modal-body
+                                                    | This modal window is included with the Bootstrap framework. The styling has been changed for the SB Admin Pro theme.
+                                                .modal-footer
+                                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                                                    button.btn.btn-primary(type='button') Save changes
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#modalDefaultTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#modalDefaultHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#modalDefaultHtml', role='tab', aria-controls='modalDefaultHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#modalDefaultPugTab.nav-link(data-toggle='tab', href='#modalDefaultPug', role='tab', aria-controls='modalDefaultPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #modalDefaultHtml.tab-pane.active(role='tabpanel', aria-labelledby='modalDefaultHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Button trigger modal -->
+                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal">Launch Demo Modal</button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Default Bootstrap Modal</h5>
+                                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                                </div>
+                                                                <div class="modal-body">...</div>
+                                                                <div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save changes</button></div>
+                                                            </div>
+                                                        </div>
+                                                    </div></script>
+                                        #modalDefaultPug.tab-pane(role='tabpanel', aria-labelledby='modalDefaultPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Button trigger modal
+                                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModal')
+                                                        | Launch Demo Modal
+                                                    //- Modal
+                                                    #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+                                                        .modal-dialog(role='document')
+                                                            .modal-content
+                                                                .modal-header
+                                                                    h5#exampleModalLabel.modal-title Default Bootstrap Modal
+                                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                                        span(aria-hidden='true') ×
+                                                                .modal-body
+                                                                    | ...
+                                                                .modal-footer
+                                                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                                                                    button.btn.btn-primary(type='button') Save changes
+                                .sbp-preview-text
+                                    | The default Bootstrap modal has been restyled for the SB Admin Pro theme.
+
+                            h6.small.text-muted.font-weight-500 Static Backdrop:
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    // Button trigger modal
+                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#staticBackdrop')
+                                        | Launch Static Backdrop Modal
+                                    // Modal
+                                    #staticBackdrop.modal.fade(data-backdrop='static', tabindex='-1', role='dialog', aria-labelledby='staticBackdropLabel', aria-hidden='true')
+                                        .modal-dialog(role='document')
+                                            .modal-content
+                                                .modal-header
+                                                    h5#staticBackdropLabel.modal-title Static Backdrop Modal
+                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                        span(aria-hidden='true') ×
+                                                .modal-body.
+                                                    When using the <code>data-backdrop='static'</code> attribute with a modal window, the user cannot dismiss the modal by clicking outside of the modal pane.
+                                                .modal-footer
+                                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                                                    button.btn.btn-primary(type='button') Understood
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#modalDefaultStaticTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#modalDefaultStaticHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#modalDefaultStaticHtml', role='tab', aria-controls='modalDefaultStaticHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#modalDefaultStaticPugTab.nav-link(data-toggle='tab', href='#modalDefaultStaticPug', role='tab', aria-controls='modalDefaultStaticPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #modalDefaultStaticHtml.tab-pane.active(role='tabpanel', aria-labelledby='modalDefaultStaticHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Button trigger modal -->
+                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#staticBackdrop">Launch Static Backdrop Modal</button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="staticBackdropLabel">Static Backdrop Modal</h5>
+                                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                                </div>
+                                                                <div class="modal-body">...</div>
+                                                                <div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Understood</button></div>
+                                                            </div>
+                                                        </div>
+                                                    </div></script>
+                                        #modalDefaultStaticPug.tab-pane(role='tabpanel', aria-labelledby='modalDefaultStaticPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Button trigger modal
+                                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#staticBackdrop')
+                                                        | Launch Static Backdrop Modal
+                                                    //- Modal
+                                                    #staticBackdrop.modal.fade(data-backdrop='static', tabindex='-1', role='dialog', aria-labelledby='staticBackdropLabel', aria-hidden='true')
+                                                        .modal-dialog(role='document')
+                                                            .modal-content
+                                                                .modal-header
+                                                                    h5#staticBackdropLabel.modal-title Static Backdrop Modal
+                                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                                        span(aria-hidden='true') ×
+                                                                .modal-body
+                                                                    | ...
+                                                                .modal-footer
+                                                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                                                                    button.btn.btn-primary(type='button') Understood
+                                .sbp-preview-text
+                                    | The static backdrop modal option cannot be dismissed by clicking outside of the modal pane. Instead, the user must dismiss the modal by using the close button within the modal pane.
+
+                // Scrollable Bootstrap Modal
+                #scrollable
+                    .card.mb-4
+                        .card-header Scrollable Bootstrap Modals
+                        .card-body
+                            h6.small.text-muted.font-weight-500 Page Scrolling Long Modal:
+                            // Component Preview
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    // Button trigger modal
+                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalLong')
+                                        | Launch Scrollable Modal
+                                    // Modal
+                                    #exampleModalLong.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLongTitle', aria-hidden='true')
+                                        .modal-dialog(role='document')
+                                            .modal-content
+                                                .modal-header
+                                                    h5#exampleModalLongTitle.modal-title Long Modal with Page Scrolling
+                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                        span(aria-hidden='true') ×
+                                                .modal-body
+                                                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                    p.mb-0 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                .modal-footer
+                                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                                                    button.btn.btn-primary(type='button') Save changes
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#modalScrollingTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#modalScrollingHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#modalScrollingHtml', role='tab', aria-controls='modalScrollingHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#modalScrollingPugTab.nav-link(data-toggle='tab', href='#modalScrollingPug', role='tab', aria-controls='modalScrollingPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #modalScrollingHtml.tab-pane.active(role='tabpanel', aria-labelledby='modalScrollingHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Button trigger modal -->
+                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModalLong">Launch Scrollable Modal</button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLongTitle">Long Modal with Page Scrolling</h5>
+                                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    ...
+                                                                </div>
+                                                                <div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save changes</button></div>
+                                                            </div>
+                                                        </div>
+                                                    </div></script>
+                                        #modalScrollingPug.tab-pane(role='tabpanel', aria-labelledby='modalScrollingPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Button trigger modal
+                                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalLong')
+                                                        | Launch Scrollable Modal
+                                                    //- Modal
+                                                    #exampleModalLong.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLongTitle', aria-hidden='true')
+                                                        .modal-dialog(role='document')
+                                                            .modal-content
+                                                                .modal-header
+                                                                    h5#exampleModalLongTitle.modal-title Long Modal with Page Scrolling
+                                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                                        span(aria-hidden='true') ×
+                                                                .modal-body
+                                                                    | ...
+                                                                .modal-footer
+                                                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                                                                    button.btn.btn-primary(type='button') Save changes
+                                .sbp-preview-text
+                                    | By default, the content within a modal will scroll independently of the page if the content is too long. If you don't want the page to scroll, use the next option.
+
+                            h6.small.text-muted.font-weight-500 Modal Dialog Scrolling Long Modal:
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    // Button trigger modal
+                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalScrollable')
+                                        | Launch Scrollable Modal
+                                    // Modal
+                                    #exampleModalScrollable.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalScrollableTitle', aria-hidden='true')
+                                        .modal-dialog.modal-dialog-scrollable(role='document')
+                                            .modal-content
+                                                .modal-header
+                                                    h5#exampleModalScrollableTitle.modal-title Modal title
+                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                        span(aria-hidden='true') ×
+                                                .modal-body
+                                                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                    p.mb-0 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                .modal-footer
+                                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                                                    button.btn.btn-primary(type='button') Save changes
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#modalScrollingDialogTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#modalScrollingDialogHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#modalScrollingDialogHtml', role='tab', aria-controls='modalScrollingDialogHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#modalScrollingDialogPugTab.nav-link(data-toggle='tab', href='#modalScrollingDialogPug', role='tab', aria-controls='modalScrollingDialogPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #modalScrollingDialogHtml.tab-pane.active(role='tabpanel', aria-labelledby='modalScrollingDialogHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Button modal trigger -->
+                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModalScrollable">Launch Scrollable Modal</button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+                                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    ...
+                                                                </div>
+                                                                <div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save changes</button></div>
+                                                            </div>
+                                                        </div>
+                                                    </div></script>
+                                        #modalScrollingDialogPug.tab-pane(role='tabpanel', aria-labelledby='modalScrollingDialogPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Button trigger modal
+                                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalScrollable')
+                                                        | Launch Scrollable Modal
+                                                    //- Modal
+                                                    #exampleModalScrollable.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalScrollableTitle', aria-hidden='true')
+                                                        .modal-dialog.modal-dialog-scrollable(role='document')
+                                                            .modal-content
+                                                                .modal-header
+                                                                    h5#exampleModalScrollableTitle.modal-title Modal title
+                                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                                        span(aria-hidden='true') ×
+                                                                .modal-body
+                                                                    | ...
+                                                                .modal-footer
+                                                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                                                                    button.btn.btn-primary(type='button') Save changes
+                                .sbp-preview-text.
+                                    Add <code>.modal-dialog-scrollable</code> to the <code>.modal-dialog</code> to make longer modal content scroll within the modal body if the contents is longer than the viewport height.
+
+                // Vertically Centered Bootstrap Modal
+                #centered
+                    .card.mb-4
+                        .card-header Vertically Centered Bootstrap Modal
+                        .card-body
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    // Button trigger modal
+                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalCenter')
+                                        | Launch Vertically Centered Modal
+                                    // Modal
+                                    #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+                                        .modal-dialog.modal-dialog-centered(role='document')
+                                            .modal-content
+                                                .modal-header
+                                                    h5#exampleModalCenterTitle.modal-title Vertically Centered Modal
+                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                        span(aria-hidden='true') ×
+                                                .modal-body
+                                                    | The vertically centered modal centers the modal dialog in the center of the page.
+                                                .modal-footer
+                                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                                                    button.btn.btn-primary(type='button') Save changes
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#modalCenteredTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#modalCenteredHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#modalCenteredHtml', role='tab', aria-controls='modalCenteredHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#modalCenteredPugTab.nav-link(data-toggle='tab', href='#modalCenteredPug', role='tab', aria-controls='modalCenteredPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #modalCenteredHtml.tab-pane.active(role='tabpanel', aria-labelledby='modalCenteredHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Button trigger modal -->
+                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModalCenter">Launch Vertically Centered Modal</button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Vertically Centered Modal</h5>
+                                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                                </div>
+                                                                <div class="modal-body">...</div>
+                                                                <div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save changes</button></div>
+                                                            </div>
+                                                        </div>
+                                                    </div></script>
+                                        #modalCenteredPug.tab-pane(role='tabpanel', aria-labelledby='modalCenteredPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Button trigger modal
+                                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalCenter')
+                                                        | Launch Vertically Centered Modal
+                                                    //- Modal
+                                                    #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+                                                        .modal-dialog.modal-dialog-centered(role='document')
+                                                            .modal-content
+                                                                .modal-header
+                                                                    h5#exampleModalCenterTitle.modal-title Vertically Centered Modal
+                                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                                        span(aria-hidden='true') ×
+                                                                .modal-body
+                                                                    | ...
+                                                                .modal-footer
+                                                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                                                                    button.btn.btn-primary(type='button') Save changes
+                                .sbp-preview-text.
+                                    Add <code>.modal-dialog-centered</code> to the <code>.modal-dialog</code> to vertically center the modal dilog when the modal window appears.
+
+                // Modal Sizing
+                #sizing
+                    .card.mb-4
+                        .card-header Modal Sizing
+                        .card-body
+
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    // Extra large modal
+                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalXl') Extra Large
+                                    .modal.fade#exampleModalXl(tabindex='-1', role='dialog', aria-labelledby='myExtraLargeModalLabel', aria-hidden='true')
+                                        .modal-dialog.modal-xl(role='document')
+                                            .modal-content
+                                                .modal-header
+                                                    h5.modal-title Extra Large Modal
+                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                        span(aria-hidden='true') ×
+                                                .modal-body
+                                                    p This is an example of an extra large modal!
+                                                .modal-footer
+                                                    button.btn.btn-primary(type='button', data-dismiss='modal') Close
+                                    // Large modal
+                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalLg') Large
+                                    .modal.fade#exampleModalLg(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
+                                        .modal-dialog.modal-lg(role='document')
+                                            .modal-content
+                                                .modal-header
+                                                    h5.modal-title Large Modal
+                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                        span(aria-hidden='true') ×
+                                                .modal-body
+                                                    p This is an example of a large modal.
+                                                .modal-footer
+                                                    button.btn.btn-primary(type='button', data-dismiss='modal') Close
+                                    // Small modal
+                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalSm') Small
+                                    .modal.fade#exampleModalSm(tabindex='-1', role='dialog', aria-labelledby='mySmallModalLabel', aria-hidden='true')
+                                        .modal-dialog.modal-sm(role='document')
+                                            .modal-content
+                                                .modal-header
+                                                    h5.modal-title Small Modal
+                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                        span(aria-hidden='true') ×
+                                                .modal-body
+                                                    p This is an example of a small modal.
+                                                .modal-footer
+                                                    button.btn.btn-primary(type='button', data-dismiss='modal') Close
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#modalSizingTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#modalSizingHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#modalSizingHtml', role='tab', aria-controls='modalSizingHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#modalSizingPugTab.nav-link(data-toggle='tab', href='#modalSizingPug', role='tab', aria-controls='modalSizingPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #modalSizingHtml.tab-pane.active(role='tabpanel', aria-labelledby='modalSizingHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Extra large modal -->
+                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModalXl">Extra Large</button>
+                                                    <div class="modal fade" id="exampleModalXl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" style="display: none;" aria-hidden="true">
+                                                        <div class="modal-dialog modal-xl" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Extra Large Modal</h5>
+                                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>This is an example of an extra large modal!</p>
+                                                                </div>
+                                                                <div class="modal-footer"><button class="btn btn-primary" type="button" data-dismiss="modal">Close</button></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Large modal -->
+                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModalLg">Large</button>
+                                                    <div class="modal fade" id="exampleModalLg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Large Modal</h5>
+                                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>This is an example of a large modal.</p>
+                                                                </div>
+                                                                <div class="modal-footer"><button class="btn btn-primary" type="button" data-dismiss="modal">Close</button></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Small modal -->
+                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModalSm">Small</button>
+                                                    <div class="modal fade" id="exampleModalSm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-sm" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Small Modal</h5>
+                                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>This is an example of a small modal.</p>
+                                                                </div>
+                                                                <div class="modal-footer"><button class="btn btn-primary" type="button" data-dismiss="modal">Close</button></div>
+                                                            </div>
+                                                        </div>
+                                                    </div></script>
+                                        #modalSizingPug.tab-pane(role='tabpanel', aria-labelledby='modalSizingPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Extra large modal
+                                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalXl') Extra Large
+                                                    .modal.fade#exampleModalXl(tabindex='-1', role='dialog', aria-labelledby='myExtraLargeModalLabel', aria-hidden='true')
+                                                        .modal-dialog.modal-xl(role='document')
+                                                            .modal-content
+                                                                .modal-header
+                                                                    h5.modal-title Extra Large Modal
+                                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                                        span(aria-hidden='true') ×
+                                                                .modal-body
+                                                                    p This is an example of an extra large modal!
+                                                                .modal-footer
+                                                                    button.btn.btn-primary(type='button', data-dismiss='modal') Close
+                                                    //- Large modal
+                                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalLg') Large
+                                                    .modal.fade#exampleModalLg(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
+                                                        .modal-dialog.modal-lg(role='document')
+                                                            .modal-content
+                                                                .modal-header
+                                                                    h5.modal-title Large Modal
+                                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                                        span(aria-hidden='true') ×
+                                                                .modal-body
+                                                                    p This is an example of a large modal.
+                                                                .modal-footer
+                                                                    button.btn.btn-primary(type='button', data-dismiss='modal') Close
+                                                    //- Small modal
+                                                    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalSm') Small
+                                                    .modal.fade#exampleModalSm(tabindex='-1', role='dialog', aria-labelledby='mySmallModalLabel', aria-hidden='true')
+                                                        .modal-dialog.modal-sm(role='document')
+                                                            .modal-content
+                                                                .modal-header
+                                                                    h5.modal-title Small Modal
+                                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                                        span(aria-hidden='true') ×
+                                                                .modal-body
+                                                                    p This is an example of a small modal.
+                                                                .modal-footer
+                                                                    button.btn.btn-primary(type='button', data-dismiss='modal') Close
+                                .sbp-preview-text.
+                                    Add <code>.modal-xl</code>, <code>.modal-lg</code>, or <code>.modal-sm</code> to the <code>.modal-dialog</code> to adjust the sizing of your Bootstrap modals.
+
+                // Bootstrap Docs Link
+                .card.card-icon.mb-4
+                    .row.no-gutters
+                        .col-auto.card-icon-aside.bg-secondary
+                            i.mr-1.text-white-50.fab.fa-bootstrap
+                        .col
+                            .card-body.py-5
+                                h5.card-title Bootstrap Documentation Available
+                                p.card-text
+                                    | Modals are a default component included with the Bootstrap framework. For more information on implementing, modifying, and extending the usage of modals within your project, visit the official Bootstrap modal documentation page.
+                                a.btn.btn-secondary.btn-sm(href='https://getbootstrap.com/docs/4.4/components/modal/', target='_blank')
+                                    i.mr-1(data-feather='external-link')
+                                    | Visit Bootstrap Modal Docs
+
+            // Sticky Navigation
+            .col-lg-3
+                .nav-sticky
+                    .card
+                        .card-body
+                            ul.nav.flex-column#stickyNav
+                                li.nav-item
+                                    a.nav-link(href='#default') Default
+                                li.nav-item
+                                    a.nav-link(href='#scrollable') Scrollable
+                                li.nav-item
+                                    a.nav-link(href='#centered') Vertically Centered
+                                li.nav-item
+                                    a.nav-link(href='#sizing') Sizing
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+append scripts
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js', crossorigin='anonymous')

@@ -1,0 +1,259 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Wizard'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Wizard examples for step-by-step form submission content to use as part of an application',
+        pageIcon: 'arrow-right-circle',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        // Wizard card example with navigation
+        .card
+            .card-header.border-bottom
+                // Wizard navigation
+                .nav.nav-pills.nav-justified.flex-column.flex-xl-row.nav-wizard#cardTab(role='tablist')
+                    // Wizard navigation item 1
+                    a.nav-item.nav-link.active#wizard1-tab(href='#wizard1', data-toggle='tab', role='tab', aria-controls='wizard1', aria-selected='true')
+                        .wizard-step-icon
+                            | 1
+                        .wizard-step-text
+                            .wizard-step-text-name Account Setup
+                            .wizard-step-text-details Basic details and information
+                    // Wizard navigation item 2
+                    a.nav-item.nav-link#wizard2-tab(href='#wizard2', data-toggle='tab', role='tab', aria-controls='wizard2', aria-selected='true')
+                        .wizard-step-icon
+                            | 2
+                        .wizard-step-text
+                            .wizard-step-text-name Billing Details
+                            .wizard-step-text-details Credit card information
+                    // Wizard navigation item 3
+                    a.nav-item.nav-link#wizard3-tab(href='#wizard3', data-toggle='tab', role='tab', aria-controls='wizard3', aria-selected='true')
+                        .wizard-step-icon
+                            | 3
+                        .wizard-step-text
+                            .wizard-step-text-name Preferences
+                            .wizard-step-text-details Notification and account options
+                    // Wizard navigation item 4
+                    a.nav-item.nav-link#wizard4-tab(href='#wizard4', data-toggle='tab', role='tab', aria-controls='wizard4', aria-selected='true')
+                        .wizard-step-icon
+                            | 4
+                        .wizard-step-text
+                            .wizard-step-text-name Review &amp; Submit
+                            .wizard-step-text-details Review and submit changes
+            .card-body
+                .tab-content#cardTabContent
+                    // Wizard tab pane item 1
+                    .tab-pane.py-5.py-xl-10.fade.show.active#wizard1(role='tabpanel', aria-labelledby='wizard1-tab')
+                        .row.justify-content-center
+                            .col-xxl-6.col-xl-8
+                                h3.text-primary Step 1
+                                h5.card-title Enter your account information
+                                form
+                                    .form-group
+                                        label.small.mb-1(for='inputUsername') Username (how your name will appear to other users on the site)
+                                        input#inputUsername.form-control(type='text', placeholder='Enter your username', value='username')
+                                    .form-row
+                                        .form-group.col-md-6
+                                            label.small.mb-1(for='inputFirstName') First name
+                                            input#inputFirstName.form-control(type='text', placeholder='Enter your first name', value='Valerie')
+                                        .form-group.col-md-6
+                                            label.small.mb-1(for='inputLastName') Last name
+                                            input#inputLastName.form-control(type='text', placeholder='Enter your last name', value='Luna')
+                                    .form-row
+                                        .form-group.col-md-6
+                                            label.small.mb-1(for='inputOrgName') Organization name
+                                            input#inputOrgName.form-control(type='text', placeholder='Enter your organization name', value='Start Bootstrap')
+                                        .form-group.col-md-6
+                                            label.small.mb-1(for='inputLocation') Location
+                                            input#inputLocation.form-control(type='text', placeholder='Enter your location', value='San Francisco, CA')
+                                    .form-group
+                                        label.small.mb-1(for='inputEmailAddress') Email address
+                                        input#inputEmailAddress.form-control(type='email', placeholder='Enter your email address', value='name@example.com')
+                                    .form-row
+                                        .form-group.col-md-6.mb-md-0
+                                            label.small.mb-1(for='inputPhone') Phone number
+                                            input#inputPhone.form-control(type='tel', placeholder='Enter your phone number', value='555-123-4567')
+                                        .form-group.col-md-6.mb-0
+                                            label.small.mb-1(for='inputBirthday') Birthday
+                                            input#inputBirthday.form-control(type='text', name='birthday', placeholder='Enter your birthday', value='06/10/1988')
+                                    hr.my-4
+                                    .d-flex.justify-content-between
+                                        button.btn.btn-light.disabled(type='button', disabled) Previous
+                                        button.btn.btn-primary(type='button') Next
+                    // Wizard tab pane item 2
+                    .tab-pane.py-5.py-xl-10.fade#wizard2(role='tabpanel', aria-labelledby='wizard2-tab')
+                        .row.justify-content-center
+                            .col-xxl-6.col-xl-8
+                                h3.text-primary Step 2
+                                h5.card-title Enter your billing details
+                                form
+                                    .form-row
+                                        .form-group.col-md-6
+                                            label.small.mb-1(for='inputBillingName') Name on card
+                                            input#inputBillingName.form-control(type='text', placeholder='Enter the name as it appears on your card', value='Valerie Luna')
+                                        .form-group.col-md-6
+                                            label.small.mb-1(for='inputBillingCCNumber') Card number
+                                            input#inputBillingCCNumber.form-control(type='text', placeholder='Enter your credit card number', value='4444 3333 2222 1111')
+                                    .form-row
+                                        .form-group.col-md-4.mb-4.mb-md-0
+                                            label.small.mb-1(for='inputOrgName') Card expiry month
+                                            input#inputOrgName.form-control(type='text', placeholder='Enter expiry month', value='06')
+                                        .form-group.col-md-4.mb-4.mb-md-0
+                                            label.small.mb-1(for='inputLocation') Card expiry year
+                                            input#inputLocation.form-control(type='text', placeholder='Enter expiry year', value='2024')
+                                        .form-group.col-md-4.mb-0
+                                            label.small.mb-1(for='inputLocation') CVV Number
+                                            input#inputLocation.form-control(type='password', placeholder='Enter CVV number', value='111')
+                                    hr.my-4
+                                    .d-flex.justify-content-between
+                                        button.btn.btn-light(type='button') Previous
+                                        button.btn.btn-primary(type='button') Next
+                    // Wizard tab pane item 3
+                    .tab-pane.py-5.py-xl-10.fade#wizard3(role='tabpanel', aria-labelledby='wizard3-tab')
+                        .row.justify-content-center
+                            .col-xxl-6.col-xl-8
+                                h3.text-primary Step 3
+                                h5.card-title Choose when you want to receive email notifications
+                                form
+                                    .custom-control.custom-checkbox
+                                        input#checkAccountChanges.custom-control-input(type='checkbox', checked)
+                                        label.custom-control-label(for='checkAccountChanges') Changes made to your account
+                                    .custom-control.custom-checkbox
+                                        input#checkAccountGroups.custom-control-input(type='checkbox', checked)
+                                        label.custom-control-label(for='checkAccountGroups') Changes are made to groups you're part of
+                                    .custom-control.custom-checkbox
+                                        input#checkProductUpdates.custom-control-input(type='checkbox', checked)
+                                        label.custom-control-label(for='checkProductUpdates') Product updates for products you've purchased or starred
+                                    .custom-control.custom-checkbox
+                                        input#checkProductNew.custom-control-input(type='checkbox', checked)
+                                        label.custom-control-label(for='checkProductNew') Information on new products and services
+                                    .custom-control.custom-checkbox
+                                        input#checkPromotional.custom-control-input(type='checkbox')
+                                        label.custom-control-label(for='checkPromotional') Marketing and promotional offers
+                                    .custom-control.custom-checkbox
+                                        input#checkSecurity.custom-control-input(type='checkbox', checked, disabled)
+                                        label.custom-control-label(for='checkSecurity') Security alerts
+                                    hr.my-4
+                                    .d-flex.justify-content-between
+                                        button.btn.btn-light(type='button') Previous
+                                        button.btn.btn-primary(type='button') Next
+                    // Wizard tab pane item 4
+                    .tab-pane.py-5.py-xl-10.fade#wizard4(role='tabpanel', aria-labelledby='wizard4-tab')
+                        .row.justify-content-center
+                            .col-xxl-6.col-xl-8
+                                h3.text-primary Step 4
+                                h5.card-title Review the following information and submit
+                                .row.small.text-muted
+                                    .col-sm-3.text-truncate
+                                        em Username:
+                                    .col username
+                                .row.small.text-muted
+                                    .col-sm-3.text-truncate
+                                        em Name:
+                                    .col Valerie Luna
+                                .row.small.text-muted
+                                    .col-sm-3.text-truncate
+                                        em Organization Name:
+                                    .col Start Bootstrap
+                                .row.small.text-muted
+                                    .col-sm-3.text-truncate
+                                        em Location:
+                                    .col San Francisco, CA
+                                .row.small.text-muted
+                                    .col-sm-3.text-truncate
+                                        em Email Address:
+                                    .col name@example.com
+                                .row.small.text-muted
+                                    .col-sm-3.text-truncate
+                                        em Phone Number:
+                                    .col 555-123-4567
+                                .row.small.text-muted
+                                    .col-sm-3.text-truncate
+                                        em Birthday:
+                                    .col 06/10/1988
+                                .row.small.text-muted
+                                    .col-sm-3.text-truncate
+                                        em Credit Card Number:
+                                    .col **** **** **** 1111
+                                .row.small.text-muted
+                                    .col-sm-3.text-truncate
+                                        em Credit Card Expiration:
+                                    .col 06/2024
+
+                                hr.my-4
+                                .d-flex.justify-content-between
+                                    button.btn.btn-light(type='button') Previous
+                                    button.btn.btn-primary(type='button') Submit
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })

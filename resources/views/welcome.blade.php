@@ -49,11 +49,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row brands">
-                <div class="col-lg-12 col-12 text-center">
-                    <img src="{{asset('images/brands.png')}}" alt="">
-                </div>
-            </div>
+          
         </div>
     </section>
 
@@ -424,7 +420,7 @@
                     <div class="row copyright">
                         <div class="col-lg-12 col-12">
                             <p>
-                                All Rights Reserved. Copyright Laracamp BWA Indonesia.
+                                All Rights Reserved. Copyright PT Setia Mandiri Perkasa.
                             </p>
                         </div>
                     </div>

@@ -1,0 +1,35 @@
+@mixin scrollbar-custom {
+    overflow-y: hidden;
+    &::-webkit-scrollbar {
+        width: 0.75rem;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10rem;
+        border-width: 0.2rem;
+        border-style: solid;
+        background-clip: padding-box;
+        background-color: fade-out($gray-900, 0.8);
+        border-color: transparent;
+    }
+    &::-webkit-scrollbar-button {
+        width: 0;
+        height: 0;
+        display: none;
+    }
+    &::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    // Show scrollbar overlay only on hover when on non-touch devices
+    @media (pointer: fine) and (hover: hover) {
+        &:hover {
+            overflow-y: overlay;
+        }
+    }
+    // Always allow overflow-y when on touch devices
+    @media (pointer: coarse) and (hover: none) {
+        overflow-y: overlay;
+    }
+}

@@ -1,0 +1,24 @@
+mixin header(options)
+
+    header.page-header.page-header-compact(class=options.pageHeaderStyle + ' ' + options.pageHeaderBg + ' ' + options.pageHeaderSpacing)
+
+        div(class=options.pageHeaderContainer)
+
+            .page-header-content
+
+                .row.align-items-center.justify-content-between.pt-3
+
+                    .col-auto.mb-3
+
+                        h1.page-header-title
+
+                            if options.pageIcon
+                                .page-header-icon
+                                    i(data-feather=options.pageIcon)
+                            else
+                            | #{pageTitle}
+
+                    if block
+                        .col-12.col-xl-auto.mb-3
+                            block
+                    else

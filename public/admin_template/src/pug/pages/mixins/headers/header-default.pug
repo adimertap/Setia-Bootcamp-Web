@@ -1,0 +1,49 @@
+mixin header(options)
+
+    header.page-header(class=options.pageHeaderStyle + ' ' + options.pageHeaderBg + ' ' + options.pageHeaderSpacing)
+
+        div(class=options.pageHeaderContainer)
+
+            .page-header-content.pt-4
+
+                .row.align-items-center.justify-content-between
+
+                    .col-auto.mt-4
+
+                        h1.page-header-title
+
+                            if options.pageIcon
+                                .page-header-icon
+                                    i(data-feather=options.pageIcon)
+                            else
+                            | #{pageTitle}
+
+                        if options.pageSubtitle
+                            .page-header-subtitle
+                                | #{options.pageSubtitle}
+                        else
+
+                    if block
+                        .col-12.col-xl-auto.mt-4
+                            block
+                    else
+
+                if options.breadcrumbs
+
+                    ol.breadcrumb.mb-0.mt-4
+                        li.breadcrumb-item
+                            a(href='index.html') Dashboard
+                        li.breadcrumb-item.active #{pageTitle}
+
+                else
+
+                if options.search
+
+                    .page-header-search.mt-4
+                        .input-group.input-group-joined
+                            input.form-control(type='text', placeholder='Search...', aria-label='Search', autofocus)
+                            .input-group-append
+                                span.input-group-text
+                                    i(data-feather='search')
+
+                else

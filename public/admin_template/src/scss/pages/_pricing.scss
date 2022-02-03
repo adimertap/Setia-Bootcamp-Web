@@ -1,0 +1,26 @@
+.pricing-detailed {
+    .pricing-detailed-behind {
+        @include media-breakpoint-up(lg) {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+}
+
+.pricing-columns {
+    .pricing-columns-price {
+        font-size: 2rem;
+        color: $gray-900;
+        span {
+            font-weight: normal;
+            font-size: 1rem;
+            color: $body-color;
+        }
+    }
+    .list-group-flush {
+        .list-group-item {
+            display: flex;
+            align-items: center;
+        }
+    }
+}

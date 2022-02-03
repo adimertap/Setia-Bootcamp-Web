@@ -1,0 +1,301 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Pricing'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'mb-5',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Example pricing layouts to use within your project',
+        pageIcon: 'package',
+        breadcrumbs: false,
+        search: false
+    })
+
+    // Main page content
+    .container
+
+        .text-center.mb-5
+            .display-4.text-primary.mb-2 Pricing built for your business.
+            .display-4 No surprises, no hassle.
+
+        // Detailed pricing example
+        .pricing-detailed
+            .row.align-items-center.no-gutters
+                // Detailed pricing column 1
+                .col-lg-6.z-1.mb-4.mb-lg-0
+                    .card.text-center.border-0
+                        .card-header.bg-transparent.justify-content-center.py-4
+                            h5.text-primary.mb-0 Standard
+                        .card-body.p-5
+                            p.lead One easy to understand pricing plan for all of our users! Get complete access to all of our features.
+                            .mb-5
+                                .display-3.text-dark
+                                    | $9
+                                | per month
+                            ul.list-unstyled
+                                li.d-flex.align-items-center.justify-content-center.mb-3
+                                    i.text-primary.mr-2(data-feather='check-circle')
+                                    | Unlimited access to all of our products
+                                li.d-flex.align-items-center.justify-content-center.mb-3
+                                    i.text-primary.mr-2(data-feather='check-circle')
+                                    | No setup fees or any hidden fees
+                                li.d-flex.align-items-center.justify-content-center
+                                    i.text-primary.mr-2(data-feather='check-circle')
+                                    | Dedicated customer support
+                        a.card-footer.d-flex.align-items-center.justify-content-center(href='#!')
+                            | Start now
+                            i.ml-2(data-feather='arrow-right')
+                // Detailed pricing column 2
+                .col-lg-6
+                    .card.bg-dark.text-center.pricing-detailed-behind
+                        .card-header.justify-content-center.py-4
+                            h5.mb-0.text-white Custom
+                        .card-body.text-white-50.p-5
+                            | Need something more? We offer customized, enterprise level plans for specific implementations. Contact our sales team to learn more about custom licensing!
+                        a.card-footer.bg-gray-800.text-white.d-flex.align-items-center.justify-content-center(href='#!')
+                            | Contact sales
+                            i.ml-2(data-feather='arrow-right')
+
+    hr.my-10
+
+    .container
+
+        .text-center.mb-5
+            .display-4.text-primary.mb-2 Choose a pricing plan
+            .display-4 Pick what's right for you
+
+        // Pricing columns example
+        .pricing-columns
+            .row.justify-content-center
+                // Pricing column 1
+                .col-xl-4.col-lg-6.mb-4.mb-xl-0
+                    .card.h-100
+                        .card-header.bg-transparent
+                            span.badge.badge-primary-soft.text-primary.badge-pill.py-2.px-3.mb-2 Individual
+                            .pricing-columns-price
+                                | $9
+                                span /month
+                        .card-body.p-0
+                            ul.list-group.list-group-flush
+                                li.list-group-item
+                                    i.text-primary.mr-2(data-feather='check-circle')
+                                    | 1 user account
+                                li.list-group-item
+                                    i.text-primary.mr-2(data-feather='check-circle')
+                                    | Remove ads
+                                li.list-group-item 
+                                    i.text-primary.mr-2(data-feather='check-circle')
+                                    | Premium assets
+                                li.list-group-item 
+                                    i.text-primary.mr-2(data-feather='check-circle')
+                                    | Saved projects
+                        a.card-footer.d-flex.align-items-center.justify-content-between.text-decoration-none.bg-primary-soft(href='#!')
+                            | Get started!
+                            i(data-feather='arrow-right')
+                // Pricing column 2
+                .col-xl-4.col-lg-6.mb-4.mb-xl-0
+                    .card.h-100
+                        .card-header.bg-transparent
+                            span.badge.badge-secondary-soft.text-secondary.badge-pill.py-2.px-3.mb-2 Team
+                            .pricing-columns-price
+                                | $39
+                                span /month
+                        .card-body.p-0
+                            ul.list-group.list-group-flush
+                                li.list-group-item
+                                    i.text-secondary.mr-2(data-feather='check-circle')
+                                    | Up to 5 user accounts
+                                li.list-group-item
+                                    i.text-secondary.mr-2(data-feather='check-circle')
+                                    | Remove ads
+                                li.list-group-item 
+                                    i.text-secondary.mr-2(data-feather='check-circle')
+                                    | Premium assets
+                                li.list-group-item 
+                                    i.text-secondary.mr-2(data-feather='check-circle')
+                                    | Saved projects
+                                li.list-group-item 
+                                    i.text-secondary.mr-2(data-feather='check-circle')
+                                    | Team collaboration tools
+                        a.card-footer.d-flex.align-items-center.justify-content-between.text-secondary.bg-secondary-soft.text-decoration-none(href='#!')
+                            | Get started!
+                            i(data-feather='arrow-right')
+                // Pricing column 3
+                .col-xl-4.col-lg-6
+                    .pricing-table
+                        .card.h-100
+                            .card-header.bg-transparent
+                                span.badge.badge-success-soft.text-success.badge-pill.py-2.px-3.mb-2 Organization
+                                .pricing-columns-price
+                                    | $249
+                                    span /month
+                            .card-body.p-0
+                                ul.list-group.list-group-flush
+                                    li.list-group-item
+                                        i.text-success.mr-2(data-feather='check-circle')
+                                        | Up to 50 user accounts
+                                    li.list-group-item
+                                        i.text-success.mr-2(data-feather='check-circle')
+                                        | Remove ads
+                                    li.list-group-item 
+                                        i.text-success.mr-2(data-feather='check-circle')
+                                        | Premium assets
+                                    li.list-group-item 
+                                        i.text-success.mr-2(data-feather='check-circle')
+                                        | Saved projects
+                                    li.list-group-item 
+                                        i.text-success.mr-2(data-feather='check-circle')
+                                        | Team collaboration tools
+                                    li.list-group-item 
+                                        i.text-success.mr-2(data-feather='check-circle')
+                                        | Create teams &amp; groups
+                                    li.list-group-item 
+                                        i.text-success.mr-2(data-feather='check-circle')
+                                        | Priority customer support
+                            a.card-footer.d-flex.align-items-center.justify-content-between.text-success.bg-success-soft.text-decoration-none(href='#!')
+                                | Get started!
+                                i(data-feather='arrow-right')
+
+    hr.my-10
+
+    .container
+
+        .text-center.mb-5
+            .display-4.text-primary.mb-2 Compare our pricing plans
+            .display-4 Pick what's right for you
+
+        // Pricing table example
+        .card.mb-5
+            .card-body.p-0
+                .table-responsive
+                    table.table.mb-0
+                        thead
+                            tr.bg-dark.text-white
+                                th.py-4(scope='col')
+                                th.py-4(scope='col') Individual
+                                th.py-4(scope='col') Team
+                                th.py-4(scope='col') Organization
+                        tbody
+                            tr
+                                th(scope='row') Price per month
+                                td $9
+                                td $39
+                                td $249
+                            tr.bg-gray-100
+                                th(scope='row') User accounts
+                                td 1
+                                td Up to 5
+                                td Up to 50
+                            tr
+                                th(scope='row') Ad free
+                                td
+                                    i.fas.fa-check.text-green
+                                td
+                                    i.fas.fa-check.text-green
+                                td
+                                    i.fas.fa-check.text-green
+                            tr.bg-gray-100
+                                th(scope='row') Premium assets
+                                td
+                                    i.fas.fa-check.text-green
+                                td
+                                    i.fas.fa-check.text-green
+                                td
+                                    i.fas.fa-check.text-green
+                            tr
+                                th(scope='row') Saved projects
+                                td
+                                    i.fas.fa-check.text-green
+                                td
+                                    i.fas.fa-check.text-green
+                                td
+                                    i.fas.fa-check.text-green
+                            tr.bg-gray-100
+                                th(scope='row') Team collaboration tools
+                                td
+                                    i.fas.fa-times.text-red
+                                td
+                                    i.fas.fa-check.text-green
+                                td
+                                    i.fas.fa-check.text-green
+                            tr
+                                th(scope='row') Create teams &amp; groups
+                                td
+                                    i.fas.fa-times.text-red
+                                td
+                                    i.fas.fa-times.text-red
+                                td
+                                    i.fas.fa-check.text-green
+                            tr.bg-gray-100
+                                th(scope='row') Customer support
+                                td Email only
+                                td Email &amp; phone
+                                td Dedicated account manager
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })

@@ -1,0 +1,62 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/authentication.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var pageTitle = 'Join Organization'
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+    .container
+        .row.justify-content-center
+            // Join Organization
+            .col-xl-5.col-lg-6.col-md-8.col-sm-11
+                .card.border-0.shadow-lg.mt-5
+                    .card-body.p-5.text-center
+                        .icons-org-join.align-items-center.mx-auto
+                            i.icon-user(data-feather='user')
+                            i.icon-arrow.fas.fa-long-arrow-alt-right
+                            i.icon-users(data-feather='users')
+                        .h3.text-secondary.font-weight-300.mb-0 Join an Organization
+                    hr.m-0
+                    .card-body.p-5
+                        form
+                            h5.font-weight-500.mb-3 Have an access code?
+                            .form-group
+                                input.form-control.form-control-solid(type='text', placeholder='Enter access code', aria-label='Access Code', aria-describedby='accessCodeExample')
+                            a.btn.btn-block.btn-secondary(href="auth-login-social.html") Join
+                    .org-or-divider
+                        .org-or or
+                    .card-body.p-5
+                        form
+                            h5.font-weight-500.mb-3 Request access
+                            .form-group
+                                input.form-control.form-control-solid(type='text', placeholder='Existing organization name', aria-label='Access Code', aria-describedby='accessCodeExample')
+                            a.btn.btn-block.btn-secondary(href="auth-login-social.html") Request Access
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-dark'
+    })

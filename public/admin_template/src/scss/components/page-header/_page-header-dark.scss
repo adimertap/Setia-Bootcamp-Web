@@ -1,0 +1,33 @@
+// Contextual styling for a page header with a dark background
+.page-header.page-header-dark {
+    color: fade-out($white, 0.5);
+    .page-header-title {
+        color: $white;
+        .page-header-icon {
+            color: fade-out($white, 0.5);
+        }
+    }
+    .page-header-subtitle {
+        color: fade-out($white, 0.5);
+    }
+    .breadcrumb {
+        background-color: fade-out($black, 0.85);
+        box-shadow: $box-shadow;
+        .breadcrumb-item,
+        .breadcrumb-item + .breadcrumb-item::before {
+            color: fade-out($white, 0.65);
+        }
+        .breadcrumb-item a {
+            color: fade-out($white, 0.4);
+        }
+    }
+    // Input focus color for page header search options
+    .page-header-search {
+        .input-group-joined {
+            &:focus-within {
+                box-shadow: 0 0 0 $input-btn-focus-width fade-out($white, 0.5);
+                border-color: transparent;
+            }
+        }
+    }
+}

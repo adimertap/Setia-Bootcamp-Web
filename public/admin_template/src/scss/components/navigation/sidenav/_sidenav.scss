@@ -1,0 +1,80 @@
+// Base styling for the sidenav
+
+.sidenav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-wrap: nowrap;
+    font-size: 0.9rem;
+    .sidenav-menu {
+        flex-grow: 1;
+        .nav {
+            flex-direction: column;
+            flex-wrap: nowrap;
+            .sidenav-menu-heading {
+                padding: 1.75rem 1rem 0.75rem;
+                font-size: 0.7rem;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+            .nav-link {
+                display: flex;
+                align-items: center;
+                line-height: normal;
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+                position: relative;
+                .nav-link-icon {
+                    font-size: 0.9rem;
+                    padding-right: 0.5rem;
+                    display: inline-flex;
+                    .feather {
+                        width: 1rem;
+                        height: 1rem;
+                    }
+                }
+                &.active {
+                    font-weight: 600;
+                    .nav-icon {
+                        color: $primary;
+                    }
+                }
+                .sidenav-collapse-arrow {
+                    display: inline-block;
+                    margin-left: auto;
+                    transition: transform 0.15s ease;
+                }
+                &.collapsed {
+                    .sidenav-collapse-arrow {
+                        transform: rotate(-90deg);
+                    }
+                }
+            }
+            .sidenav-menu-nested {
+                flex-direction: column;
+                margin-left: 2rem - $sidenav-nested-border-offest;
+                border-left-style: solid;
+                border-left-width: thin;
+                padding-left: $sidenav-nested-border-offest;
+            }
+        }
+    }
+    .sidenav-footer {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;;
+        height: $footer-base-height;
+        .sidenav-footer-content {
+            font-size: 0.9rem;
+            .sidenav-footer-subtitle {
+                font-size: 0.75rem;
+            }
+            .sidenav-footer-title {
+                font-weight: 500;
+            }
+        }
+    }
+}

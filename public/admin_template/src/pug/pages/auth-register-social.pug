@@ -1,0 +1,100 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/authentication.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var pageTitle = 'Register'
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+    .container
+        .row.justify-content-center
+            .col-xl-8.col-lg-9
+                // Social registration form
+                .card.my-5
+                    .card-body.p-5.text-center
+                        .h3.font-weight-light.mb-3 Create an Account
+                        .small.text-muted.mb-2 Sign in using...
+                        // Social registration links
+                        a.btn.btn-icon.btn-facebook.mx-1(href='#!')
+                            i.fab.fa-facebook-f.fa-fw.fa-sm
+                        a.btn.btn-icon.btn-github.mx-1(href='#!')
+                            i.fab.fa-github.fa-fw.fa-sm
+                        a.btn.btn-icon.btn-google.mx-1(href='#!')
+                            i.fab.fa-google.fa-fw.fa-sm
+                        a.btn.btn-icon.btn-twitter.mx-1(href='#!')
+                            i.fab.fa-twitter.fa-fw.fa-sm
+                    hr.my-0
+                    .card-body.p-5
+                        .text-center.small.text-muted.mb-4 ...or enter your information below.
+                        // Login form
+                        form
+                            // Form Row
+                            .form-row
+                                .col-md-6
+                                    // Form Group (first name)
+                                    .form-group
+                                        label.text-gray-600.small(for='firstNameExample') First name
+                                        input.form-control.form-control-solid.py-4(type='text', placeholder='', aria-label='First Name', aria-describedby='firstNameExample')
+                                .col-md-6
+                                    // Form Group (last name)
+                                    .form-group
+                                        label.text-gray-600.small(for='lastNameExample') Last name
+                                        input.form-control.form-control-solid.py-4(type='text', placeholder='', aria-label='Last Name', aria-describedby='lastNameExample')
+                            // Form Group (email address)
+                            .form-group
+                                label.text-gray-600.small(for='emailExample') Email address
+                                input.form-control.form-control-solid.py-4(type='text', placeholder='', aria-label='Email Address', aria-describedby='emailExample')
+                            // Form Row
+                            .form-row
+                                .col-md-6
+                                    // Form Group (choose password)
+                                    .form-group
+                                        label.text-gray-600.small(for='passwordExample') Password
+                                        input.form-control.form-control-solid.py-4(type='password', placeholder='', aria-label='Password', aria-describedby='passwordExample')
+                                .col-md-6
+                                    // Form Group (confirm password)
+                                    .form-group
+                                        label.text-gray-600.small(for='confirmPasswordExample') Confirm Password
+                                        input.form-control.form-control-solid.py-4(type='password', placeholder='', aria-label='Confirm Password', aria-describedby='confirmPasswordExample')
+                            // Form Group (form submission)
+                            .form-group.d-flex.align-items-center.justify-content-between
+                                .custom-control.custom-control-solid.custom-checkbox
+                                    input#customCheck1.custom-control-input.small(type='checkbox')
+                                    label.custom-control-label.mr-3(for='customCheck1')
+                                        | I accept the 
+                                        a(href='#!') terms &amp; conditions
+                                        | .
+                                a.btn.btn-primary(href='auth-login-social.html') Create Account
+                    hr.my-0
+                    .card-body.px-5.py-4
+                        .small.text-center
+                            | Have an account? 
+                            a(href="auth-login-social.html") Sign in!
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-dark'
+    })

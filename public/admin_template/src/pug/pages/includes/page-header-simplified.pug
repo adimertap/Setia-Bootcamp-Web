@@ -1,0 +1,17 @@
+.page-header(class=pageHeaderStyle, class=pageHeaderBackground)
+    .container-fluid
+        .page-header-content.py-5
+            h1.page-header-title
+                .page-header-icon
+                    i(data-feather=pageIcon)
+                span #{pageTitle}
+            .page-header-subtitle
+                | #{pageSummary}
+            if breadcrumbs
+
+                ol.breadcrumb.mt-4.mb-0
+                    li.breadcrumb-item
+                        a(href='index.html') Dashboard
+                    li.breadcrumb-item.active #{pageTitle}
+
+            else

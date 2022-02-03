@@ -1,0 +1,550 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Alerts'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Alert components to add special emphasis to select content',
+        pageIcon: 'alert-triangle',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        .row
+            // Style Reference
+            .col-lg-9
+
+                // Default Bootstrap Alerts
+                #default
+                    .card.mb-4
+                        .card-header Default Bootstrap Alerts
+                        .card-body
+
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    .alert.alert-primary(role='alert')
+                                        | A primary alert—check it out!
+                                    .alert.alert-secondary(role='alert')
+                                        | A secondary alert—check it out!
+                                    .alert.alert-success(role='alert')
+                                        | A success alert—check it out!
+                                    .alert.alert-danger(role='alert')
+                                        | A danger alert—check it out!
+                                    .alert.alert-warning(role='alert')
+                                        | A warning alert—check it out!
+                                    .alert.alert-info(role='alert')
+                                        | A info alert—check it out!
+                                    .alert.alert-light(role='alert')
+                                        | A light alert—check it out!
+                                    .alert.alert-dark.mb-0(role='alert')
+                                        | A dark alert—check it out!
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#alertsDefaultTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#alertsDefaultHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#alertsDefaultHtml', role='tab', aria-controls='alertsDefaultHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#alertsDefaultPugTab.nav-link(data-toggle='tab', href='#alertsDefaultPug', role='tab', aria-controls='alertsDefaultPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #alertsDefaultHtml.tab-pane.active(role='tabpanel', aria-labelledby='alertsDefaultHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="alert alert-primary" role="alert">
+                                                        A primary alert—check it out!
+                                                    </div>
+                                                    <div class="alert alert-secondary" role="alert">
+                                                        A secondary alert—check it out!
+                                                    </div>
+                                                    <div class="alert alert-success" role="alert">
+                                                        A success alert—check it out!
+                                                    </div>
+                                                    <div class="alert alert-danger" role="alert">
+                                                        A danger alert—check it out!
+                                                    </div>
+                                                    <div class="alert alert-warning" role="alert">
+                                                        A warning alert—check it out!
+                                                    </div>
+                                                    <div class="alert alert-info" role="alert">
+                                                        A info alert—check it out!
+                                                    </div>
+                                                    <div class="alert alert-light" role="alert">
+                                                        A light alert—check it out!
+                                                    </div>
+                                                    <div class="alert alert-dark" role="alert">
+                                                        A dark alert—check it out!
+                                                    </div></script>
+                                        #alertsDefaultPug.tab-pane(role='tabpanel', aria-labelledby='alertsDefaultPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .alert.alert-primary(role='alert')
+                                                        | A primary alert—check it out!
+                                                    .alert.alert-secondary(role='alert')
+                                                        | A secondary alert—check it out!
+                                                    .alert.alert-success(role='alert')
+                                                        | A success alert—check it out!
+                                                    .alert.alert-danger(role='alert')
+                                                        | A danger alert—check it out!
+                                                    .alert.alert-warning(role='alert')
+                                                        | A warning alert—check it out!
+                                                    .alert.alert-info(role='alert')
+                                                        | A info alert—check it out!
+                                                    .alert.alert-light(role='alert')
+                                                        | A light alert—check it out!
+                                                    .alert.alert-dark(role='alert')
+                                                        | A dark alert—check it out!
+                                .sbp-preview-text
+                                    | Bootstrap's default state-specific alert styles have been styled to fit the SB Admin Pro theme.
+
+                // Bootstrap Alerts Content
+                #content
+                    .card.mb-4
+                        .card-header Alert Content Styling
+                        .card-body
+
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    .alert.alert-primary.alert-dismissible.fade.show.mb-0(role='alert')
+                                        h5.alert-heading Alert Heading
+                                        | This alert example has an alert heading, an alert link, and is dismissible! 
+                                        a.alert-link(href='javascript:void(0);') Example alert link!
+                                        button.close(type='button', data-dismiss='alert', aria-label='Close')
+                                            span(aria-hidden='true') ×
+
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#alertsContentTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#alertsContentHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#alertsContentHtml', role='tab', aria-controls='alertsContentHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#alertsContentPugTab.nav-link(data-toggle='tab', href='#alertsContentPug', role='tab', aria-controls='alertsContentPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #alertsContentHtml.tab-pane.active(role='tabpanel', aria-labelledby='alertsContentHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                        <h5 class="alert-heading">Alert Heading</h5>
+                                                        This alert example has an alert heading, an alert link, and is dismissible! <a class="alert-link" href="javascript:void(0);">Example alert link!</a>
+                                                        <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div></script>
+                                        #alertsContentPug.tab-pane(role='tabpanel', aria-labelledby='alertsContentPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .alert.alert-primary.alert-dismissible.fade.show(role='alert')
+                                                        h5.alert-heading Alert Heading
+                                                        | This alert example has an alert heading, an alert link, and is dismissible! 
+                                                        a.alert-link(href='javascript:void(0);') Example alert link!
+                                                        button.close(type='button', data-dismiss='alert', aria-label='Close')
+                                                            span(aria-hidden='true') ×
+                                .sbp-preview-text
+                                    p.
+                                        By default, Bootstrap styles the content within alerts. Use <code>.alert-heading</code> to style a heading within an alert, <code>.alert-link</code> to style a link within an alert, or you can use the dismissible option by using the <code>data-dismiss='alert'</code> data attribute.
+                                    p.mb-0.
+                                        Learn more about dismissing Bootstrap alerts in the <a target='_blank' href='https://getbootstrap.com/docs/4.4/components/alerts/#dismissing'>Bootstrap alerts component documentation</a>.
+
+                // Custom Icon Alerts
+                #icons
+                    .card.mb-4
+                        .card-header Custom Icon Alerts
+                        .card-body
+
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    .alert.alert-primary.alert-icon(role='alert')
+                                        button.close(type='button', data-dismiss='alert', aria-label='Close')
+                                            span(aria-hidden='true') ×
+                                        .alert-icon-aside
+                                            i.far.fa-flag
+                                        .alert-icon-content
+                                            h6.alert-heading Primary Icon Alert
+                                            | This alert uses an icon from Font Awesome!
+                                    .alert.alert-secondary.alert-icon.mb-0(role='alert')
+                                        button.close(type='button', data-dismiss='alert', aria-label='Close')
+                                            span(aria-hidden='true') ×
+                                        .alert-icon-aside
+                                            i(data-feather='feather')
+                                        .alert-icon-content
+                                            h6.alert-heading Danger Icon Alert
+                                            | This alert uses an icon from Feather Icons!
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#alertsIconsTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#alertsIconsHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#alertsIconsHtml', role='tab', aria-controls='alertsIconsHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#alertsIconsPugTab.nav-link(data-toggle='tab', href='#alertsIconsPug', role='tab', aria-controls='alertsIconsPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #alertsIconsHtml.tab-pane.active(role='tabpanel', aria-labelledby='alertsIconsHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="alert alert-primary alert-icon" role="alert">
+                                                        <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                        <div class="alert-icon-aside">
+                                                            <i class="far fa-flag"></i>
+                                                        </div>
+                                                        <div class="alert-icon-content">
+                                                            <h6 class="alert-heading">Primary Icon Alert</h6>
+                                                            This alert uses an icon from Font Awesome!
+                                                        </div>
+                                                    </div>
+                                                    <div class="alert alert-secondary alert-icon" role="alert">
+                                                        <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                        <div class="alert-icon-aside">
+                                                            <i data-feather="feather"></i>
+                                                        </div>
+                                                        <div class="alert-icon-content">
+                                                            <h6 class="alert-heading">Danger Icon Alert</h6>
+                                                            This alert uses an icon from Feather Icons!
+                                                        </div>
+                                                    </div></script>
+                                        #alertsIconsPug.tab-pane(role='tabpanel', aria-labelledby='alertsIconsPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .alert.alert-primary.alert-icon(role='alert')
+                                                        button.close(type='button', data-dismiss='alert', aria-label='Close')
+                                                            span(aria-hidden='true') ×
+                                                        .alert-icon-aside
+                                                            i.far.fa-flag
+                                                        .alert-icon-content
+                                                            h6.alert-heading Primary Icon Alert
+                                                            | This alert uses an icon from Font Awesome!
+                                                    .alert.alert-secondary.alert-icon(role='alert')
+                                                        button.close(type='button', data-dismiss='alert', aria-label='Close')
+                                                            span(aria-hidden='true') ×
+                                                        .alert-icon-aside
+                                                            i(data-feather='feather')
+                                                        .alert-icon-content
+                                                            h6.alert-heading Danger Icon Alert
+                                                            | This alert uses an icon from Feather Icons!
+                                .sbp-preview-text
+                                    | The custom icon alert option allows you to use icons within alerts for additional context. Use icons from either Font Awesome or Feather Icons!
+
+                // Custom Solid Alerts
+                #solid
+                    .card.mb-4
+                        .card-header Custom Solid Alerts
+                        .card-body
+
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    .alert.alert-primary.alert-solid(role='alert')
+                                        | This is a solid, primary alert!
+                                    .alert.alert-secondary.alert-solid(role='alert')
+                                        | This is a solid, secondary alert!
+                                    .alert.alert-success.alert-solid(role='alert')
+                                        | This is a solid, success alert!
+                                    .alert.alert-danger.alert-solid(role='alert')
+                                        | This is a solid, danger alert!
+                                    .alert.alert-warning.alert-solid(role='alert')
+                                        | This is a solid, warning alert!
+                                    .alert.alert-info.alert-solid(role='alert')
+                                        | This is a solid, info alert!
+                                    .alert.alert-light.alert-solid(role='alert')
+                                        | This is a solid, light alert!
+                                    .alert.alert-dark.alert-solid.mb-0(role='alert')
+                                        | This is a solid, dark alert!
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#alertsSolidTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#alertsSolidHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#alertsSolidHtml', role='tab', aria-controls='alertsSolidHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#alertsSolidPugTab.nav-link(data-toggle='tab', href='#alertsSolidPug', role='tab', aria-controls='alertsSolidPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #alertsSolidHtml.tab-pane.active(role='tabpanel', aria-labelledby='alertsSolidHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="alert alert-primary alert-solid" role="alert">This is a solid, primary alert!</div>
+                                                    <div class="alert alert-secondary alert-solid" role="alert">This is a solid, secondary alert!</div>
+                                                    <div class="alert alert-success alert-solid" role="alert">This is a solid, success alert!</div>
+                                                    <div class="alert alert-danger alert-solid" role="alert">This is a solid, danger alert!</div>
+                                                    <div class="alert alert-warning alert-solid" role="alert">This is a solid, warning alert!</div>
+                                                    <div class="alert alert-info alert-solid" role="alert">This is a solid, info alert!</div>
+                                                    <div class="alert alert-light alert-solid" role="alert">This is a solid, light alert!</div>
+                                                    <div class="alert alert-dark alert-solid" role="alert">This is a solid, dark alert!</div></script>
+                                        #alertsSolidPug.tab-pane(role='tabpanel', aria-labelledby='alertsSolidPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .alert.alert-primary.alert-solid(role='alert')
+                                                        | This is a solid, primary alert!
+                                                    .alert.alert-secondary.alert-solid(role='alert')
+                                                        | This is a solid, secondary alert!
+                                                    .alert.alert-success.alert-solid(role='alert')
+                                                        | This is a solid, success alert!
+                                                    .alert.alert-danger.alert-solid(role='alert')
+                                                        | This is a solid, danger alert!
+                                                    .alert.alert-warning.alert-solid(role='alert')
+                                                        | This is a solid, warning alert!
+                                                    .alert.alert-info.alert-solid(role='alert')
+                                                        | This is a solid, info alert!
+                                                    .alert.alert-light.alert-solid(role='alert')
+                                                        | This is a solid, light alert!
+                                                    .alert.alert-dark.alert-solid(role='alert')
+                                                        | This is a solid, dark alert!
+                                .sbp-preview-text.
+                                    Append the <code>.alert-solid</code> class to any alert to get a custom solid state color instead of the default low contrast color. Any of the other alert content options, including custom icon alerts, are supported with the solid alert styles.
+
+                // Extended Alert Colors
+                .card.mb-4#colors
+                    .card-header Extended Alert Colors
+                    .card-body
+
+                        // Custom Alert Colors with Default Alert Styling
+                        h6.small.text-muted.font-weight-500 Custom Colors with Default Alerts:
+                        .sbp-preview.mb-4
+                            .sbp-preview-content
+                                .row
+                                    .col-6
+                                        .alert.alert-red(role='alert') This is a red alert.
+                                        .alert.alert-orange(role='alert') This is a orange alert.
+                                        .alert.alert-yellow(role='alert') This is a yellow alert.
+                                        .alert.alert-green(role='alert') This is a green alert.
+                                        .alert.alert-teal.mb-0(role='alert') This is a teal alert.
+                                    .col-6
+                                        .alert.alert-cyan(role='alert') This is a cyan alert.
+                                        .alert.alert-blue(role='alert') This is a blue alert.
+                                        .alert.alert-indigo(role='alert') This is a indigo alert.
+                                        .alert.alert-purple(role='alert') This is a purple alert.
+                                        .alert.alert-pink.mb-0(role='alert') This is a pink alert.
+
+                            .sbp-preview-code
+                                // Code sample
+                                ul#alertsExtendedTabs.nav.nav-tabs(role='tablist')
+                                    li.nav-item
+                                        a#alertsExtendedHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#alertsExtendedHtml', role='tab', aria-controls='alertsExtendedHtml', aria-selected='true')
+                                            i.fab.fa-html5.text-orange.mr-1
+                                            | HTML
+                                    li.nav-item
+                                        a#alertsExtendedPugTab.nav-link(data-toggle='tab', href='#alertsExtendedPug', role='tab', aria-controls='alertsExtendedPug', aria-selected='false')
+                                            img.img-pug.mr-1(src='assets/img/pug.svg')
+                                            | PUG
+                                // Tab panes
+                                .tab-content
+                                    #alertsExtendedHtml.tab-pane.active(role='tabpanel', aria-labelledby='alertsExtendedHtmlTab')
+                                        pre.language-markup
+                                            code.
+                                                <script type="text/plain"><div class="alert alert-red" role="alert">This is a red alert.</div>
+                                                <div class="alert alert-orange" role="alert">This is a orange alert.</div>
+                                                <div class="alert alert-yellow" role="alert">This is a yellow alert.</div>
+                                                <div class="alert alert-green" role="alert">This is a green alert.</div>
+                                                <div class="alert alert-teal" role="alert">This is a teal alert.</div>
+                                                <div class="alert alert-cyan" role="alert">This is a cyan alert.</div>
+                                                <div class="alert alert-blue" role="alert">This is a blue alert.</div>
+                                                <div class="alert alert-indigo" role="alert">This is a indigo alert.</div>
+                                                <div class="alert alert-purple" role="alert">This is a purple alert.</div>
+                                                <div class="alert alert-pink" role="alert">This is a pink alert.</div></script>
+                                    #alertsExtendedPug.tab-pane(role='tabpanel', aria-labelledby='alertsExtendedPugTab')
+                                        pre.language-pug
+                                            code.
+                                                .alert.alert-red(role='alert') This is a red alert.
+                                                .alert.alert-orange(role='alert') This is a orange alert.
+                                                .alert.alert-yellow(role='alert') This is a yellow alert.
+                                                .alert.alert-green(role='alert') This is a green alert.
+                                                .alert.alert-teal(role='alert') This is a teal alert.
+                                                .alert.alert-cyan(role='alert') This is a cyan alert.
+                                                .alert.alert-blue(role='alert') This is a blue alert.
+                                                .alert.alert-indigo(role='alert') This is a indigo alert.
+                                                .alert.alert-purple(role='alert') This is a purple alert.
+                                                .alert.alert-pink(role='alert') This is a pink alert.
+
+                            .sbp-preview-text
+                                | SB Admin Pro's expanded color system allows you to use the non-contextual colors in the same way as Bootstrap's colors.
+
+                        // Custom Alert Colors with Solid Alert Styling
+                        h6.small.text-muted.font-weight-500 Custom Colors with Solid Alerts:
+                        .sbp-preview
+                            .sbp-preview-content
+                                .row
+                                    .col-6
+                                        .alert.alert-red.alert-solid(role='alert') This is a red alert.
+                                        .alert.alert-orange.alert-solid(role='alert') This is a orange alert.
+                                        .alert.alert-yellow.alert-solid(role='alert') This is a yellow alert.
+                                        .alert.alert-green.alert-solid(role='alert') This is a green alert.
+                                        .alert.alert-teal.alert-solid.mb-0(role='alert') This is a teal alert.
+                                    .col-6
+                                        .alert.alert-cyan.alert-solid(role='alert') This is a cyan alert.
+                                        .alert.alert-blue.alert-solid(role='alert') This is a blue alert.
+                                        .alert.alert-indigo.alert-solid(role='alert') This is a indigo alert.
+                                        .alert.alert-purple.alert-solid(role='alert') This is a purple alert.
+                                        .alert.alert-pink.alert-solid.mb-0(role='alert') This is a pink alert.
+
+                            .sbp-preview-code
+                                // Code sample
+                                ul#alertsExtendedSolidTabs.nav.nav-tabs(role='tablist')
+                                    li.nav-item
+                                        a#alertsExtendedSolidHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#alertsExtendedSolidHtml', role='tab', aria-controls='alertsExtendedSolidHtml', aria-selected='true')
+                                            i.fab.fa-html5.text-orange.mr-1
+                                            | HTML
+                                    li.nav-item
+                                        a#alertsExtendedSolidPugTab.nav-link(data-toggle='tab', href='#alertsExtendedSolidPug', role='tab', aria-controls='alertsExtendedSolidPug', aria-selected='false')
+                                            img.img-pug.mr-1(src='assets/img/pug.svg')
+                                            | PUG
+                                // Tab panes
+                                .tab-content
+                                    #alertsExtendedSolidHtml.tab-pane.active(role='tabpanel', aria-labelledby='alertsExtendedSolidHtmlTab')
+                                        pre.language-markup
+                                            code.
+                                                <script type="text/plain"><div class="alert alert-red alert-solid" role="alert">This is a red alert.</div>
+                                                <div class="alert alert-orange alert-solid" role="alert">This is a orange alert.</div>
+                                                <div class="alert alert-yellow alert-solid" role="alert">This is a yellow alert.</div>
+                                                <div class="alert alert-green alert-solid" role="alert">This is a green alert.</div>
+                                                <div class="alert alert-teal alert-solid" role="alert">This is a teal alert.</div>
+                                                <div class="alert alert-cyan alert-solid" role="alert">This is a cyan alert.</div>
+                                                <div class="alert alert-blue alert-solid" role="alert">This is a blue alert.</div>
+                                                <div class="alert alert-indigo alert-solid" role="alert">This is a indigo alert.</div>
+                                                <div class="alert alert-purple alert-solid" role="alert">This is a purple alert.</div>
+                                                <div class="alert alert-pink alert-solid" role="alert">This is a pink alert.</div></script>
+                                    #alertsExtendedSolidPug.tab-pane(role='tabpanel', aria-labelledby='alertsExtendedSolidPugTab')
+                                        pre.language-pug
+                                            code.
+                                                .alert.alert-red.alert-solid(role='alert') This is a red alert.
+                                                .alert.alert-orange.alert-solid(role='alert') This is a orange alert.
+                                                .alert.alert-yellow.alert-solid(role='alert') This is a yellow alert.
+                                                .alert.alert-green.alert-solid(role='alert') This is a green alert.
+                                                .alert.alert-teal.alert-solid(role='alert') This is a teal alert.
+                                                .alert.alert-cyan.alert-solid(role='alert') This is a cyan alert.
+                                                .alert.alert-blue.alert-solid(role='alert') This is a blue alert.
+                                                .alert.alert-indigo.alert-solid(role='alert') This is a indigo alert.
+                                                .alert.alert-purple.alert-solid(role='alert') This is a purple alert.
+                                                .alert.alert-pink.alert-solid(role='alert') This is a pink alert.
+
+                            .sbp-preview-text.
+                                Use the <code>.alert-solid</code> class to utilize custom solid alert colors with the expanded color system.
+
+                // Bootstrap Docs Link
+                .card.card-icon.mb-4
+                    .row.no-gutters
+                        .col-auto.card-icon-aside.bg-secondary
+                            i.mr-1.text-white-50.fab.fa-bootstrap
+                        .col
+                            .card-body.py-5
+                                h5.card-title Bootstrap Documentation Available
+                                p.card-text
+                                    | Alerts are a default component included with the Bootstrap framework. For more information on implementing, modifying, and extending the usage of alerts within your project, visit the official Bootstrap modal documentation page.
+                                a.btn.btn-secondary.btn-sm(href='https://getbootstrap.com/docs/4.4/components/alerts/', target='_blank')
+                                    i.mr-1(data-feather='external-link')
+                                    | Visit Bootstrap Alerts Docs
+
+            // Sticky Nav
+            .col-lg-3
+                .nav-sticky
+                    .card
+                        .card-body
+                            ul.nav.flex-column#stickyNav
+                                li.nav-item
+                                    a.nav-link(href='#default') Default
+                                li.nav-item
+                                    a.nav-link(href='#content') Content
+                                li.nav-item
+                                    a.nav-link(href='#icons') Icon
+                                li.nav-item
+                                    a.nav-link(href='#solid') Solid
+                                li.nav-item
+                                    a.nav-link(href='#colors') Extended
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+append scripts
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js', crossorigin='anonymous')

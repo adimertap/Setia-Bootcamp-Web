@@ -1,0 +1,206 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Lift'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'A utility to give a slight lift effect on hovering over an element',
+        pageIcon: 'chevrons-up',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        .row
+            .col-lg-9
+
+                // Lift Utility
+                #lift
+                    .card.mb-4
+                        .card-header Lift Base Behavior
+                        .card-body
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    h6.small.text-muted.font-weight-500 Card Link Lift Example:
+                                    a(href='#!').card.lift
+                                        .card-body
+                                            | Card with the lift utility applied. Hover over me, and then click on me!
+
+                                    h6.small.text-muted.font-weight-500.mt-4 Button Lift Example:
+                                    a(href='#!').btn.btn-primary.lift
+                                        | Hover me!
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#animationFadeInExampleTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#animationFadeInExampleHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#animationFadeInExampleHtml', role='tab', aria-controls='animationFadeInExampleHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#animationFadeInExamplePugTab.nav-link(data-toggle='tab', href='#animationFadeInExamplePug', role='tab', aria-controls='animationFadeInExamplePug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #animationFadeInExampleHtml.tab-pane.active(role='tabpanel', aria-labelledby='animationFadeInExampleHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Card with lift -->
+                                                    <a class="card lift" href="#!">
+                                                        <div class="card-body">Card with the lift utility applied. Hover over me, and then click on me!</div>
+                                                    </a>
+
+                                                    <!-- Button with lift -->
+                                                    <a class="btn btn-primary lift" href="#!">Button</a></script>
+                                        #animationFadeInExamplePug.tab-pane(role='tabpanel', aria-labelledby='animationFadeInExamplePugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Card with lift
+                                                    a(href='#!').card.lift
+                                                        .card-body
+                                                            | ...
+
+                                                    //- Button with lift
+                                                    a(href='#!').btn.btn-primary.lift
+                                                        | Button
+                                .sbp-preview-text.
+                                    The lift utility can be used by adding the <code>.lift</code> class to any element. In the above example, it is being used along with a Bootstrap card and a Bootstrap button. Since the lift utility is a hover effect, it should mostly be used with links! When a lifted item is clicked, an active styling will be applied bringing the element back to its base position.
+
+                // Lift Sizing
+                #liftSizing
+                    .card.mb-4
+                        .card-header Lift Sizing
+                        .card-body
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    h6.small.text-muted.font-weight-500 Card Link Lift Example (Small):
+                                    a(href='#!').card.lift.lift-sm
+                                        .card-body
+                                            | Card with the lift utility applied. Hover over me, and then click on me!
+
+                                    h6.small.text-muted.font-weight-500.mt-4 Button Lift Example (Small):
+                                    a(href='#!').btn.btn-primary.lift.lift-sm
+                                        | Hover me!
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#animationFadeInUpExampleTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#animationFadeInUpExampleHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#animationFadeInUpExampleHtml', role='tab', aria-controls='animationFadeInUpExampleHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#animationFadeInUpExamplePugTab.nav-link(data-toggle='tab', href='#animationFadeInUpExamplePug', role='tab', aria-controls='animationFadeInUpExamplePug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #animationFadeInUpExampleHtml.tab-pane.active(role='tabpanel', aria-labelledby='animationFadeInUpExampleHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Card with lift small -->
+                                                    <a class="card lift lift-sm" href="#!">
+                                                        <div class="card-body">Card with the lift utility applied. Hover over me, and then click on me!</div>
+                                                    </a>
+
+                                                    <!-- Button with lift small -->
+                                                    <a class="btn btn-primary lift lift-sm" href="#!">Button</a></script>
+                                        #animationFadeInUpExamplePug.tab-pane(role='tabpanel', aria-labelledby='animationFadeInUpExamplePugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Card with lift small
+                                                    a(href='#!').card.lift.lift-sm
+                                                        .card-body
+                                                            | ...
+
+                                                    //- Button with lift small
+                                                    a(href='#!').btn.btn-primary.lift.lift-sm
+                                                        | Button
+                                .sbp-preview-text.
+                                    Use <code>.lift-sm</code> along with the <code>.lift</code> utility to have a less significant lift effect applied to an element.
+
+            // Sticky Navigation
+            .col-lg-3
+                .nav-sticky
+                    .card
+                        .card-body
+                            ul.nav.flex-column#stickyNav
+                                li.nav-item
+                                    a.nav-link(href='#lift') Lift Base
+                                li.nav-item
+                                    a.nav-link(href='#liftSizing') Lift Sizing
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+append scripts
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js', crossorigin='anonymous')

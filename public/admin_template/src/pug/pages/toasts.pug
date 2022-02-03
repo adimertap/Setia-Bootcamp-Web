@@ -1,0 +1,721 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Toasts'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Subtle push notifications to help deliver alerts to your users',
+        pageIcon: 'bell',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        .row
+            .col-lg-9
+
+                // Default Bootstrap Toasts
+                #demo
+                    .card.mb-4
+                        .card-header Bootstrap Toasts Demo
+                        .card-body
+                            h6.small.text-muted.font-weight-500 Basic Toast with Auto Hide:
+                            // Component Preview
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    div(style='height: 200px;')
+                                        // Toast button trigger
+                                        button.btn.btn-primary.mb-3#toastBasicTrigger Toast Demo
+
+                                        p.small.mb-0 The toast alert will appear in the bottom right of this element when the above button is clicked.
+
+                                        // Toast container
+                                        div(style='position: absolute; bottom: 1rem; right: 1rem;')
+                                            //- Toast
+                                            .toast#toastBasic(role='alert', aria-live='assertive', aria-atomic='true', data-delay='5000')
+                                                .toast-header
+                                                    i(data-feather='bell').mr-2
+                                                    strong.mr-auto Toast with Autohide
+                                                    small.text-muted.ml-2 just now
+                                                    button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                        span(aria-hidden='true') ×
+                                                .toast-body
+                                                    | This is an example toast alert, it will dismiss automatically, or you can dismiss it manually.
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#toastAutoHideTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#toastAutoHideHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#toastAutoHideHtml', role='tab', aria-controls='toastAutoHideHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#toastAutoHidePugTab.nav-link(data-toggle='tab', href='#toastAutoHidePug', role='tab', aria-controls='toastAutoHidePug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                        li.nav-item
+                                            a#toastAutoHideJsTab.nav-link(data-toggle='tab', href='#toastAutoHideJs', role='tab', aria-controls='toastAutoHideJs', aria-selected='false')
+                                                i.fab.fa-js-square.text-yellow.mr-1
+                                                | JS
+                                    // Tab panes
+                                    .tab-content
+                                        #toastAutoHideHtml.tab-pane.active(role='tabpanel', aria-labelledby='toastAutoHideHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Toast button trigger -->
+                                                    <button class="btn btn-primary mb-3" id="toastBasicTrigger">Toast Demo</button>
+
+                                                    <!-- Toast container -->
+                                                    <div style="position: absolute; bottom: 1rem; right: 1rem;">
+                                                        <!-- Toast -->
+                                                        <div class="toast" id="toastBasic" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+                                                            <div class="toast-header">
+                                                                <i data-feather="bell"></i>
+                                                                <strong class="mr-auto">Toast with Autohide</strong>
+                                                                <small class="text-muted ml-2">just now</small>
+                                                                <button class="ml-2 mb-1 close" type="button" data-dismiss="toast" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="toast-body">This is an example toast alert, it will dismiss automatically, or you can dismiss it manually.</div>
+                                                        </div>
+                                                    </div></script>
+                                        #toastAutoHidePug.tab-pane(role='tabpanel', aria-labelledby='toastAutoHidePugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Toast button trigger
+                                                    button.btn.btn-primary.mb-3#toastBasicTrigger Toast Demo
+
+                                                    //- Toast container
+                                                    div(style='position: absolute; bottom: 1rem; right: 1rem;')
+                                                        //- Toast
+                                                        .toast#toastBasic(role='alert', aria-live='assertive', aria-atomic='true', data-delay='5000')
+                                                            .toast-header
+                                                                i(data-feather='bell').mr-2
+                                                                strong.mr-auto Toast with Autohide
+                                                                small.text-muted.ml-2 just now
+                                                                button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                                    span(aria-hidden='true') ×
+                                                            .toast-body
+                                                                | This is an example toast alert, it will dismiss automatically, or you can dismiss it manually.
+                                        #toastAutoHideJs.tab-pane(role='tabpanel', aria-labelledby='toastAutoHideJsTab')
+                                            pre.language-js
+                                                code.
+                                                    $("#toastBasicTrigger").on("click", function(e) {
+                                                        e.preventDefault();
+                                                        $("#toastBasic").toast("show");
+                                                    });
+                                .sbp-preview-text
+                                    p.
+                                        Toasts are positioned using <code>position: absolute</code>, meaning they will position themselves relative to their nearest parent element using <code>position: relative</code>.
+                                    p
+                                        | The absolute positioned container element (rather than using absolute position on the toast itself) is used so the toasts will automatically stack if multiple toasts are used. For more information on how to use and position toasts, visit the offical Bootstrap docs.
+                                    p.mb-0.font-weight-bold
+                                        | Note: Toasts require JavaScript for initialization!
+
+                            h6.small.text-muted.font-weight-500 Basic Toast with Manual Dismissal:
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    div(style="height: 200px;")
+                                        // Toast button trigger
+                                        button.btn.btn-primary.mb-3#toastNoAutohideTrigger Toast Demo
+                                        p.small The toast alert will appear in the bottom right of this element when the above button is clicked.
+
+                                        // Toast container
+                                        div(style='position: absolute; bottom: 1rem; right: 1rem;')
+                                            // Toast
+                                            .toast#toastNoAutohide(role='alert', aria-live='assertive', aria-atomic='true', data-autohide='false')
+                                                .toast-header
+                                                    i(data-feather='bell').mr-2
+                                                    strong.mr-auto Toast without Autohide
+                                                    small.text-muted.ml-2 just now
+                                                    button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                        span(aria-hidden='true') ×
+                                                .toast-body
+                                                    | This is an example toast alert, you must close this toast alert manually.
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#toastsManualDismissTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#toastsManualDismissHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#toastsManualDismissHtml', role='tab', aria-controls='toastsManualDismissHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#toastsManualDismissPugTab.nav-link(data-toggle='tab', href='#toastsManualDismissPug', role='tab', aria-controls='toastsManualDismissPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                        li.nav-item
+                                            a#toastsManualDismissJsTab.nav-link(data-toggle='tab', href='#toastsManualDismissJs', role='tab', aria-controls='toastsManualDismissJs', aria-selected='false')
+                                                i.fab.fa-js-square.text-yellow.mr-1
+                                                | JS
+                                    // Tab panes
+                                    .tab-content
+                                        #toastsManualDismissHtml.tab-pane.active(role='tabpanel', aria-labelledby='toastsManualDismissHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Toast button trigger -->
+                                                    <button class="btn btn-primary mb-3" id="toastNoAutohideTrigger">Toast Demo</button>
+
+                                                    <!-- Toast container -->
+                                                    <div style="position: absolute; bottom: 1rem; right: 1rem;">
+                                                        <!-- Toast -->
+                                                        <div class="toast" id="toastNoAutohide" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+                                                            <div class="toast-header">
+                                                                <i data-feather="bell"></i>
+                                                                <strong class="mr-auto">Toast without Autohide</strong>
+                                                                <small class="text-muted ml-2">just now</small>
+                                                                <button class="ml-2 mb-1 close" type="button" data-dismiss="toast" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="toast-body">This is an example toast alert, you must close this toast alert manually.</div>
+                                                        </div>
+                                                    </div></script>
+                                        #toastsManualDismissPug.tab-pane(role='tabpanel', aria-labelledby='toastsManualDismissPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    //- Toast button trigger
+                                                    button.btn.btn-primary.mb-3#toastNoAutohideTrigger Toast Demo
+
+                                                    //- Toast container
+                                                    div(style='position: absolute; bottom: 1rem; right: 1rem;')
+                                                        //- Toast
+                                                        .toast#toastNoAutohide(role='alert', aria-live='assertive', aria-atomic='true', data-autohide='false')
+                                                            .toast-header
+                                                                i(data-feather='bell').mr-2
+                                                                strong.mr-auto Toast without Autohide
+                                                                small.text-muted.ml-2 just now
+                                                                button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                                    span(aria-hidden='true') ×
+                                                            .toast-body
+                                                                | This is an example toast alert, you must close this toast alert manually.
+                                        #toastsManualDismissJs.tab-pane(role='tabpanel', aria-labelledby='toastsManualDismissJs')
+                                            pre.language-js
+                                                code.
+                                                    $("#toastNoAutohideTrigger").on("click", function(e) {
+                                                        e.preventDefault();
+                                                        $("#toastNoAutohide").toast("show");
+                                                    });
+                                .sbp-preview-text
+                                    p.
+                                        The above example uses the <code>data-autohide='false'</code> data attribute, which disables the auto hiding feature. You must manually dismiss this demo toast by clicking the x button on the toast.
+                                    p.mb-0.font-weight-bold
+                                        | Note: Toasts require JavaScript for initialization!
+
+                // Toast Colors
+                #colors
+                    .card.mb-4
+                        .card-header Toast Colors
+                        .card-body
+                            h6.small.text-muted.font-weight-500 Text Color Modification:
+                            // Component Preview
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                        .toast-header.text-primary
+                                            i(data-feather='alert-circle').mr-2
+                                            strong.mr-auto Primary Text Toast
+                                            small.text-muted.ml-2 just now
+                                            button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                span(aria-hidden='true') ×
+                                        .toast-body
+                                            | This toast uses the primary text utility on the toast header.
+                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                        .toast-header.text-secondary
+                                            i(data-feather='alert-circle').mr-2
+                                            strong.mr-auto Secondary Text Toast
+                                            small.text-muted.ml-2 just now
+                                            button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                span(aria-hidden='true') ×
+                                        .toast-body
+                                            | This toast uses the secondary text utility on the toast header.
+                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                        .toast-header.text-success
+                                            i(data-feather='check-circle').mr-2
+                                            strong.mr-auto Success Text Toast
+                                            small.text-muted.ml-2 just now
+                                            button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                span(aria-hidden='true') ×
+                                        .toast-body
+                                            | This toast uses the success text utility on the toast header.
+                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                        .toast-header.text-info
+                                            i(data-feather='info').mr-2
+                                            strong.mr-auto Info Text Toast
+                                            small.text-muted.ml-2 just now
+                                            button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                span(aria-hidden='true') ×
+                                        .toast-body
+                                            | This toast uses the info text utility on the toast header.
+                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                        .toast-header.text-warning
+                                            i(data-feather='alert-triangle').mr-2
+                                            strong.mr-auto Warning Text Toast
+                                            small.text-muted.ml-2 just now
+                                            button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                span(aria-hidden='true') ×
+                                        .toast-body
+                                            | This toast uses the warning text utility on the toast header.
+                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                        .toast-header.text-danger
+                                            i(data-feather='alert-octagon').mr-2
+                                            strong.mr-auto Danger Text Toast
+                                            small.text-muted.ml-2 just now
+                                            button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                span(aria-hidden='true') ×
+                                        .toast-body
+                                            | This toast uses the danger text utility on the toast header.
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#toastsColorsTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#toastsColorsHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#toastsColorsHtml', role='tab', aria-controls='toastsColorsHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#toastsColorsPugTab.nav-link(data-toggle='tab', href='#toastsColorsPug', role='tab', aria-controls='toastsColorsPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #toastsColorsHtml.tab-pane.active(role='tabpanel', aria-labelledby='toastsColorsHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="opacity: 1;">
+                                                        <div class="toast-header text-primary">
+                                                            <i data-feather="bell"></i>
+                                                            <strong class="mr-auto">Primary Text Toast</strong>
+                                                            <small class="text-muted ml-2">just now</small>
+                                                            <button class="ml-2 mb-1 close" type="button" data-dismiss="toast" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="toast-body">This toast uses the primary text utility on the toast header.</div>
+                                                    </div>
+                                                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="opacity: 1;">
+                                                        <div class="toast-header text-secondary">
+                                                            <i data-feather="bell"></i>
+                                                            <strong class="mr-auto">Secondary Text Toast</strong>
+                                                            <small class="text-muted ml-2">just now</small>
+                                                            <button class="ml-2 mb-1 close" type="button" data-dismiss="toast" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="toast-body">This toast uses the secondary text utility on the toast header.</div>
+                                                    </div>
+                                                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="opacity: 1;">
+                                                        <div class="toast-header text-success">
+                                                            <i data-feather="bell"></i>
+                                                            <strong class="mr-auto">Success Text Toast</strong>
+                                                            <small class="text-muted ml-2">just now</small>
+                                                            <button class="ml-2 mb-1 close" type="button" data-dismiss="toast" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="toast-body">This toast uses the success text utility on the toast header.</div>
+                                                    </div>
+                                                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="opacity: 1;">
+                                                        <div class="toast-header text-info">
+                                                            <i data-feather="bell"></i>
+                                                            <strong class="mr-auto">Info Text Toast</strong>
+                                                            <small class="text-muted ml-2">just now</small>
+                                                            <button class="ml-2 mb-1 close" type="button" data-dismiss="toast" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="toast-body">This toast uses the info text utility on the toast header.</div>
+                                                    </div>
+                                                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="opacity: 1;">
+                                                        <div class="toast-header text-warning">
+                                                            <i data-feather="bell"></i>
+                                                            <strong class="mr-auto">Warning Text Toast</strong>
+                                                            <small class="text-muted ml-2">just now</small>
+                                                            <button class="ml-2 mb-1 close" type="button" data-dismiss="toast" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="toast-body">This toast uses the warning text utility on the toast header.</div>
+                                                    </div>
+                                                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="opacity: 1;">
+                                                        <div class="toast-header text-danger">
+                                                            <i data-feather="bell"></i>
+                                                            <strong class="mr-auto">Danger Text Toast</strong>
+                                                            <small class="text-muted ml-2">just now</small>
+                                                            <button class="ml-2 mb-1 close" type="button" data-dismiss="toast" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="toast-body">This toast uses the danger text utility on the toast header.</div>
+                                                    </div></script>
+                                        #toastsColorsPug.tab-pane(role='tabpanel', aria-labelledby='toastsColorsPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                                        .toast-header.text-primary
+                                                            i(data-feather='alert-circle').mr-2
+                                                            strong.mr-auto Primary Text Toast
+                                                            small.text-muted.ml-2 just now
+                                                            button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                                span(aria-hidden='true') ×
+                                                        .toast-body
+                                                            | This toast uses the primary text utility on the toast header.
+                                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                                        .toast-header.text-secondary
+                                                            i(data-feather='alert-circle').mr-2
+                                                            strong.mr-auto Secondary Text Toast
+                                                            small.text-muted.ml-2 just now
+                                                            button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                                span(aria-hidden='true') ×
+                                                        .toast-body
+                                                            | This toast uses the secondary text utility on the toast header.
+                                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                                        .toast-header.text-success
+                                                            i(data-feather='check-circle').mr-2
+                                                            strong.mr-auto Success Text Toast
+                                                            small.text-muted.ml-2 just now
+                                                            button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                                span(aria-hidden='true') ×
+                                                        .toast-body
+                                                            | This toast uses the success text utility on the toast header.
+                                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                                        .toast-header.text-info
+                                                            i(data-feather='info').mr-2
+                                                            strong.mr-auto Info Text Toast
+                                                            small.text-muted.ml-2 just now
+                                                            button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                                span(aria-hidden='true') ×
+                                                        .toast-body
+                                                            | This toast uses the info text utility on the toast header.
+                                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                                        .toast-header.text-warning
+                                                            i(data-feather='alert-triangle').mr-2
+                                                            strong.mr-auto Warning Text Toast
+                                                            small.text-muted.ml-2 just now
+                                                            button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                                span(aria-hidden='true') ×
+                                                        .toast-body
+                                                            | This toast uses the warning text utility on the toast header.
+                                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                                        .toast-header.text-danger
+                                                            i(data-feather='alert-octagon').mr-2
+                                                            strong.mr-auto Danger Text Toast
+                                                            small.text-muted.ml-2 just now
+                                                            button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                                                                span(aria-hidden='true') ×
+                                                        .toast-body
+                                                            | This toast uses the danger text utility on the toast header.
+                                .sbp-preview-text
+                                    | The above examples use a different text color utility class on the toast header to add another level of context and emphasis to toast notifications. You can use any of the text color utilities available with Bootstrap or with the SB Admin Pro theme!
+
+                            h6.small.text-muted.font-weight-500 Background Color Modification:
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                        .toast-header.bg-primary.text-white
+                                            i(data-feather='alert-circle').mr-2.text-white-50
+                                            strong.mr-auto Primary Text Toast
+                                            small.text-white-50.ml-2 just now
+                                            button.ml-2.mb-1.close.text-white(type='button', data-dismiss='toast', aria-label='Close')
+                                                span(aria-hidden='true') ×
+                                        .toast-body
+                                            | This toast uses the primary background color utility on the toast header.
+                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                        .toast-header.bg-secondary.text-white
+                                            i(data-feather='alert-circle').mr-2.text-white-50
+                                            strong.mr-auto Secondary Text Toast
+                                            small.text-white-50.ml-2 just now
+                                            button.ml-2.mb-1.close.text-white(type='button', data-dismiss='toast', aria-label='Close')
+                                                span(aria-hidden='true') ×
+                                        .toast-body
+                                            | This toast uses the secondary background color utility on the toast header.
+                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                        .toast-header.bg-success.text-white
+                                            i(data-feather='check-circle').mr-2.text-white-50
+                                            strong.mr-auto Success Text Toast
+                                            small.text-white-50.ml-2 just now
+                                            button.ml-2.mb-1.close.text-white(type='button', data-dismiss='toast', aria-label='Close')
+                                                span(aria-hidden='true') ×
+                                        .toast-body
+                                            | This toast uses the success background color utility on the toast header.
+                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                        .toast-header.bg-info.text-white
+                                            i(data-feather='info').mr-2.text-white-50
+                                            strong.mr-auto Info Text Toast
+                                            small.text-white-50.ml-2 just now
+                                            button.ml-2.mb-1.close.text-white(type='button', data-dismiss='toast', aria-label='Close')
+                                                span(aria-hidden='true') ×
+                                        .toast-body
+                                            | This toast uses the info background color utility on the toast header.
+                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                        .toast-header.bg-warning.text-white
+                                            i(data-feather='alert-triangle').mr-2.text-white-50
+                                            strong.mr-auto Warning Text Toast
+                                            small.text-white-50.ml-2 just now
+                                            button.ml-2.mb-1.close.text-white(type='button', data-dismiss='toast', aria-label='Close')
+                                                span(aria-hidden='true') ×
+                                        .toast-body
+                                            | This toast uses the warning background color utility on the toast header.
+                                    .toast(role='alert', aria-live='assertive', aria-atomic='true', style='opacity: 1;')
+                                        .toast-header.bg-danger.text-white
+                                            i(data-feather='alert-octagon').mr-2.text-white-50
+                                            strong.mr-auto Danger Text Toast
+                                            small.text-white-50.ml-2 just now
+                                            button.ml-2.mb-1.close.text-white(type='button', data-dismiss='toast', aria-label='Close')
+                                                span(aria-hidden='true') ×
+                                        .toast-body
+                                            | This toast uses the danger background color utility on the toast header.
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#toastsColorsBackgroundTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#toastsColorsBackgroundHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#toastsColorsBackgroundHtml', role='tab', aria-controls='toastsColorsBackgroundHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#toastsColorsBackgroundPugTab.nav-link(data-toggle='tab', href='#toastsColorsBackgroundPug', role='tab', aria-controls='toastsColorsBackgroundPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #toastsColorsBackgroundHtml.tab-pane.active(role='tabpanel', aria-labelledby='toastsColorsBackgroundHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                                        <div class="toast-header bg-primary text-white">
+                                                            <i data-feather="alert-circle"></i>
+                                                            <strong class="mr-auto">Primary Text Toast</strong>
+                                                            <small class="text-white-50 ml-2">just now</small>
+                                                            <button class="ml-2 mb-1 close text-white" type="button" data-dismiss="toast" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="toast-body">This toast uses the primary background color utility on the toast header.</div>
+                                                    </div>
+                                                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                                        <div class="toast-header bg-secondary text-white">
+                                                            <i data-feather="alert-circle"></i>
+                                                            <strong class="mr-auto">Secondary Text Toast</strong>
+                                                            <small class="text-white-50 ml-2">just now</small>
+                                                            <button class="ml-2 mb-1 close text-white" type="button" data-dismiss="toast" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="toast-body">This toast uses the secondary background color utility on the toast header.</div>
+                                                    </div>
+                                                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                                        <div class="toast-header bg-success text-white">
+                                                            <i data-feather="alert-circle"></i>
+                                                            <strong class="mr-auto">Success Text Toast</strong>
+                                                            <small class="text-white-50 ml-2">just now</small>
+                                                            <button class="ml-2 mb-1 close text-white" type="button" data-dismiss="toast" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="toast-body">This toast uses the success background color utility on the toast header.</div>
+                                                    </div>
+                                                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                                        <div class="toast-header bg-info text-white">
+                                                            <i data-feather="alert-circle"></i>
+                                                            <strong class="mr-auto">Info Text Toast</strong>
+                                                            <small class="text-white-50 ml-2">just now</small>
+                                                            <button class="ml-2 mb-1 close text-white" type="button" data-dismiss="toast" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="toast-body">This toast uses the info background color utility on the toast header.</div>
+                                                    </div>
+                                                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                                        <div class="toast-header bg-warning text-white">
+                                                            <i data-feather="alert-circle"></i>
+                                                            <strong class="mr-auto">Warning Text Toast</strong>
+                                                            <small class="text-white-50 ml-2">just now</small>
+                                                            <button class="ml-2 mb-1 close text-white" type="button" data-dismiss="toast" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="toast-body">This toast uses the warning background color utility on the toast header.</div>
+                                                    </div>
+                                                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                                        <div class="toast-header bg-danger text-white">
+                                                            <i data-feather="alert-circle"></i>
+                                                            <strong class="mr-auto">Danger Text Toast</strong>
+                                                            <small class="text-white-50 ml-2">just now</small>
+                                                            <button class="ml-2 mb-1 close text-white" type="button" data-dismiss="toast" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="toast-body">This toast uses the danger background color utility on the toast header.</div>
+                                                    </div></script>
+                                        #toastsColorsBackgroundPug.tab-pane(role='tabpanel', aria-labelledby='toastsColorsBackgroundPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    .toast(role='alert', aria-live='assertive', aria-atomic='true')
+                                                        .toast-header.bg-primary.text-white
+                                                            i(data-feather='alert-circle').mr-2.text-white-50
+                                                            strong.mr-auto Primary Text Toast
+                                                            small.text-white-50.ml-2 just now
+                                                            button.ml-2.mb-1.close.text-white(type='button', data-dismiss='toast', aria-label='Close')
+                                                                span(aria-hidden='true') ×
+                                                        .toast-body
+                                                            | This toast uses the primary background color utility on the toast header.
+                                                    .toast(role='alert', aria-live='assertive', aria-atomic='true')
+                                                        .toast-header.bg-secondary.text-white
+                                                            i(data-feather='alert-circle').mr-2.text-white-50
+                                                            strong.mr-auto Secondary Text Toast
+                                                            small.text-white-50.ml-2 just now
+                                                            button.ml-2.mb-1.close.text-white(type='button', data-dismiss='toast', aria-label='Close')
+                                                                span(aria-hidden='true') ×
+                                                        .toast-body
+                                                            | This toast uses the secondary background color utility on the toast header.
+                                                    .toast(role='alert', aria-live='assertive', aria-atomic='true')
+                                                        .toast-header.bg-success.text-white
+                                                            i(data-feather='check-circle').mr-2.text-white-50
+                                                            strong.mr-auto Success Text Toast
+                                                            small.text-white-50.ml-2 just now
+                                                            button.ml-2.mb-1.close.text-white(type='button', data-dismiss='toast', aria-label='Close')
+                                                                span(aria-hidden='true') ×
+                                                        .toast-body
+                                                            | This toast uses the success background color utility on the toast header.
+                                                    .toast(role='alert', aria-live='assertive', aria-atomic='true')
+                                                        .toast-header.bg-info.text-white
+                                                            i(data-feather='info').mr-2.text-white-50
+                                                            strong.mr-auto Info Text Toast
+                                                            small.text-white-50.ml-2 just now
+                                                            button.ml-2.mb-1.close.text-white(type='button', data-dismiss='toast', aria-label='Close')
+                                                                span(aria-hidden='true') ×
+                                                        .toast-body
+                                                            | This toast uses the info background color utility on the toast header.
+                                                    .toast(role='alert', aria-live='assertive', aria-atomic='true')
+                                                        .toast-header.bg-warning.text-white
+                                                            i(data-feather='alert-triangle').mr-2.text-white-50
+                                                            strong.mr-auto Warning Text Toast
+                                                            small.text-white-50.ml-2 just now
+                                                            button.ml-2.mb-1.close.text-white(type='button', data-dismiss='toast', aria-label='Close')
+                                                                span(aria-hidden='true') ×
+                                                        .toast-body
+                                                            | This toast uses the warning background color utility on the toast header.
+                                                    .toast(role='alert', aria-live='assertive', aria-atomic='true')
+                                                        .toast-header.bg-danger.text-white
+                                                            i(data-feather='alert-octagon').mr-2.text-white-50
+                                                            strong.mr-auto Danger Text Toast
+                                                            small.text-white-50.ml-2 just now
+                                                            button.ml-2.mb-1.close.text-white(type='button', data-dismiss='toast', aria-label='Close')
+                                                                span(aria-hidden='true') ×
+                                                        .toast-body
+                                                            | This toast uses the danger background color utility on the toast header.
+                                .sbp-preview-text
+                                    | The above examples use a combination of background color utilities and text color utilities on the toast header to add another level of context and emphasis to toast notifications. You can use any combination of the background color or text color utilities available with Bootstrap or with the SB Admin Pro theme!
+
+                // Bootstrap Docs Link
+                .card.card-icon.mb-4
+                    .row.no-gutters
+                        .col-auto.card-icon-aside.bg-secondary
+                            i.mr-1.text-white-50.fab.fa-bootstrap
+                        .col
+                            .card-body.py-5
+                                h5.card-title Bootstrap Documentation Available
+                                p.card-text
+                                    | Toasts are a default component included with the Bootstrap framework. For more information on implementing, modifying, and extending the usage of toasts within your project, visit the official Bootstrap toasts documentation page.
+                                a.btn.btn-secondary.btn-sm(href='https://getbootstrap.com/docs/4.4/components/toasts/', target='_blank')
+                                    i.mr-1(data-feather='external-link')
+                                    | Visit Bootstrap Toasts Docs
+
+            // Sticky Navigation
+            .col-lg-3
+                .nav-sticky
+                    .card
+                        .card-body
+                            ul.nav.flex-column#stickyNav
+                                li.nav-item
+                                    a.nav-link(href='#demo') Demo
+                                li.nav-item
+                                    a.nav-link(href='#colors') Colors
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+append scripts
+    //- Activate Two Basic Bootstrap Toast Demos
+    script.
+        $("#toastBasicTrigger").on("click", function(e) {
+            e.preventDefault();
+            $("#toastBasic").toast("show");
+        });
+        $("#toastNoAutohideTrigger").on("click", function(e) {
+            e.preventDefault();
+            $("#toastNoAutohide").toast("show");
+        });
+
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js', crossorigin='anonymous')

@@ -1,0 +1,155 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Account Settings - Security'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-compact.pug
+    +header({
+        pageHeaderStyle: 'page-header-light border-bottom',
+        pageHeaderBg: 'bg-white',
+        pageHeaderSpacing: 'mb-4',
+        pageHeaderContainer: 'container-fluid',
+        pageIcon: 'user'
+    })
+
+    // Main page content
+    .container.mt-4
+        // Account page navigation
+        nav.nav.nav-borders
+            a.nav-link.ml-0(href='account-profile.html') Profile
+            a.nav-link(href='account-billing.html') Billing
+            a.nav-link.active(href='account-security.html') Security
+            a.nav-link(href='account-notifications.html') Notifications
+        hr.mt-0.mb-4
+        .row
+            .col-lg-8
+                // Ganti Password card
+                .card.mb-4
+                    .card-header Ganti Password
+                    .card-body
+                        form
+                            // Form Group (current password)
+                            .form-group
+                                label(for='currentPassword').small.mb-1 Current Password
+                                input.form-control#currentPassword(type='password', placeholder='Enter current password')
+                            // Form Group (new password)
+                            .form-group
+                                label(for='newPassword').small.mb-1 New Password
+                                input.form-control#newPassword(type='password', placeholder='Enter new password')
+                            // Form Group (confirm password)
+                            .form-group
+                                label(for='confirmPassword').small.mb-1 Confirm Password
+                                input.form-control#confirmPassword(type='password', placeholder='Confirm new password')
+                            button.btn.btn-primary(type='button') Save
+                // Security preferences card
+                .card.mb-4
+                    .card-header Security Preferences
+                    .card-body
+                        // Account privacy optinos
+                        h5.mb-1 Account Privacy
+                        p.small.text-muted By setting your account to private, your profile information and posts will not be visible to users outside of your user groups.
+                        form
+                            .custom-control.custom-radio
+                                input#radioPublic.custom-control-input(type='radio', name='radioPrivacy', checked)
+                                label.custom-control-label(for='radioPublic') Public (posts are available to all users)
+                            .custom-control.custom-radio
+                                input#radioPrivate.custom-control-input(type='radio', name='radioPrivacy')
+                                label.custom-control-label(for='radioPrivate') Private (posts are available to only users in your groups)
+                        hr.my-4
+                        // Data sharing options
+                        h5.mb-1 Data Sharing
+                        p.small.text-muted Sharing usage data can help us to improve our products and better serve our users as they navigation through our application. When you agree to share usage data with us, crash reports and usage analytics will be automatically sent to our development team for investigation.
+                        form
+                            .custom-control.custom-radio
+                                input#radioUsageYes.custom-control-input(type='radio', name='radioUsage', checked)
+                                label.custom-control-label(for='radioUsageYes') Yes, share data and crash reports with app developers
+                            .custom-control.custom-radio
+                                input#radioUsageNo.custom-control-input(type='radio', name='radioUsage')
+                                label.custom-control-label(for='radioUsageNo') No, limit my data sharing with app developers
+            .col-lg-4
+                // Two factor authentication card
+                .card.mb-4
+                    .card-header Two-Factor Authentication
+                    .card-body
+                        p Add another level of security to your account by enabling two-factor authentication. We will send you a text message to verify your login attempts on unrecognized devices and browsers.
+                        form
+                            .form-group
+                                .custom-control.custom-radio
+                                    input#twoFactorOn.custom-control-input(type='radio', name='radioUsage', checked)
+                                    label.custom-control-label(for='twoFactorOn') On
+                                .custom-control.custom-radio
+                                    input#twoFactorOff.custom-control-input(type='radio', name='radioUsage')
+                                    label.custom-control-label(for='twoFactorOff') Off
+                            .form-group.mb-0
+                                label(for='twoFactorSMS').small.mb-1 SMS Number
+                                input.form-control#twoFactorSMS(type='tel', placeholder='Enter a phone number', value='555-123-4567')
+                // Delete account card
+                .card.mb-4
+                    .card-header Delete Account
+                    .card-body
+                        p Deleting your account is a permanent action and cannot be undone. If you are sure you want to delete your account, select the button below.
+                        button.btn.btn-danger-soft.text-danger(type='button') I understand, delete my account
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })

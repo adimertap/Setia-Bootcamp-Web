@@ -1,0 +1,14 @@
+.page-header-compact {
+    .page-header-content {
+        padding: 0;
+        .page-header-title {
+            font-size: 1rem;
+            .page-header-icon {
+                .feather {
+                    height: 1rem;
+                    width: 1rem;
+                }
+            }
+        }
+    }
+}

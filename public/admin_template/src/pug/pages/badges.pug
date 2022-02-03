@@ -1,0 +1,305 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Badges'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Add contextual labels to text within your project',
+        pageIcon: 'award',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        .row
+            .col-lg-9
+
+                // Default Bootstrap Badges
+                #default
+                    .card.mb-4
+                        .card-header Default Bootstrap Badges
+                        .card-body
+
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    span.badge.badge-primary.mr-2 Primary
+                                    span.badge.badge-secondary.mr-2 Secondary
+                                    span.badge.badge-success.mr-2 Success
+                                    span.badge.badge-danger.mr-2 Danger
+                                    span.badge.badge-warning.mr-2 Warning
+                                    span.badge.badge-info.mr-2 Info
+                                    span.badge.badge-light.mr-2 Light
+                                    span.badge.badge-dark.mr-2 Dark
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#badgeDefaultTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#badgeDefaultHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#badgeDefaultHtml', role='tab', aria-controls='badgeDefaultHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#badgeDefaultPugTab.nav-link(data-toggle='tab', href='#badgeDefaultPug', role='tab', aria-controls='badgeDefaultPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #badgeDefaultHtml.tab-pane.active(role='tabpanel', aria-labelledby='badgeDefaultHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><span class="badge badge-primary">Primary</span>
+                                                    <span class="badge badge-secondary">Secondary</span>
+                                                    <span class="badge badge-success">Success</span>
+                                                    <span class="badge badge-danger">Danger</span>
+                                                    <span class="badge badge-warning">Warning</span>
+                                                    <span class="badge badge-info">Info</span>
+                                                    <span class="badge badge-light">Light</span>
+                                                    <span class="badge badge-dark">Dark</span></script>
+                                        #badgeDefaultPug.tab-pane(role='tabpanel', aria-labelledby='badgeDefaultPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    span.badge.badge-primary.mr-2 Primary
+                                                    span.badge.badge-secondary.mr-2 Secondary
+                                                    span.badge.badge-success.mr-2 Success
+                                                    span.badge.badge-danger.mr-2 Danger
+                                                    span.badge.badge-warning.mr-2 Warning
+                                                    span.badge.badge-info.mr-2 Info
+                                                    span.badge.badge-light.mr-2 Light
+                                                    span.badge.badge-dark.mr-2 Dark
+                                .sbp-preview-text
+                                    | By default, Bootstrap includes the above badges. The styling for these default badges has been modified to fit the SB Admin Pro theme.
+
+                // Extended Badges
+                #extended
+                    .card.mb-4
+                        .card-header Extended Badges
+                        .card-body
+
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    span.badge.badge-red.mr-2 Red
+                                    span.badge.badge-orange.mr-2 Orange
+                                    span.badge.badge-yellow.mr-2 Yellow
+                                    span.badge.badge-green.mr-2 Green
+                                    span.badge.badge-teal.mr-2 Teal
+                                    span.badge.badge-cyan.mr-2 Cyan
+                                    span.badge.badge-blue.mr-2 Blue
+                                    span.badge.badge-indigo.mr-2 Indigo
+                                    span.badge.badge-purple.mr-2 Purple
+                                    span.badge.badge-pink.mr-2 Pink
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#badgeExtendedTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#badgeExtendedHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#badgeExtendedHtml', role='tab', aria-controls='badgeExtendedHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#badgeExtendedPugTab.nav-link(data-toggle='tab', href='#badgeExtendedPug', role='tab', aria-controls='badgeExtendedPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #badgeExtendedHtml.tab-pane.active(role='tabpanel', aria-labelledby='badgeExtendedHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><span class="badge badge-red">Red</span>
+                                                    <span class="badge badge-orange">Orange</span>
+                                                    <span class="badge badge-yellow">Yellow</span>
+                                                    <span class="badge badge-green">Green</span>
+                                                    <span class="badge badge-teal">Teal</span>
+                                                    <span class="badge badge-cyan">Cyan</span>
+                                                    <span class="badge badge-blue">Blue</span>
+                                                    <span class="badge badge-indigo">Indigo</span>
+                                                    <span class="badge badge-purple">Purple</span>
+                                                    <span class="badge badge-pink">Pink</span></script>
+                                        #badgeExtendedPug.tab-pane(role='tabpanel', aria-labelledby='badgeExtendedPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    span.badge.badge-red Red
+                                                    span.badge.badge-orange Orange
+                                                    span.badge.badge-yellow Yellow
+                                                    span.badge.badge-green Green
+                                                    span.badge.badge-teal Teal
+                                                    span.badge.badge-cyan Cyan
+                                                    span.badge.badge-blue Blue
+                                                    span.badge.badge-indigo Indigo
+                                                    span.badge.badge-purple Purple
+                                                    span.badge.badge-pink Pink
+                                .sbp-preview-text
+                                    | The above non-contextual badge styles are custom made for the SB Admin Pro theme!
+
+                // Badge Sizing
+                #sizing
+                    .card.mb-4
+                        .card-header Badge Sizing
+                        .card-body
+
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    h1 Example Heading
+                                        span.badge.badge-primary.ml-2 New
+                                    h2 Example Heading
+                                        span.badge.badge-primary.ml-2 New
+                                    h3 Example Heading
+                                        span.badge.badge-primary.ml-2 New
+                                    h4 Example Heading
+                                        span.badge.badge-primary.ml-2 New
+                                    h5 Example Heading
+                                        span.badge.badge-primary.ml-2 New
+                                    h6 Example Heading
+                                        span.badge.badge-primary.ml-2 New
+                                    p This is an example paragraph with a badge at the end!
+                                        span.badge.badge-primary.ml-2 New
+                                    button.btn.btn-primary.mr-2 Messages
+                                        span.badge.badge-white.ml-2 5
+                                    button.btn.btn-secondary.mr-2 Notifications
+                                        span.badge.badge-white.ml-2 3
+                                    button.btn.btn-warning Alerts
+                                        span.badge.badge-white.ml-2 7
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#badgeSizingTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#badgeSizingHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#badgeSizingHtml', role='tab', aria-controls='badgeSizingHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#badgeSizingPugTab.nav-link(data-toggle='tab', href='#badgeSizingPug', role='tab', aria-controls='badgeSizingPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #badgeSizingHtml.tab-pane.active(role='tabpanel', aria-labelledby='badgeSizingHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><h1>Example Heading <span class="badge badge-primary">New</span></h1>
+                                                    <h2>Example Heading <span class="badge badge-primary">New</span></h2>
+                                                    <h3>Example Heading <span class="badge badge-primary">New</span></h3>
+                                                    <h4>Example Heading <span class="badge badge-primary">New</span></h4>
+                                                    <h5>Example Heading <span class="badge badge-primary">New</span></h5>
+                                                    <h6>Example Heading <span class="badge badge-primary">New</span></h6>
+
+                                                    <p>This is an example paragraph with a badge at the end! <span class="badge badge-primary">New</span></p>
+
+                                                    <button class="btn btn-primary">Messages <span class="badge badge-white">5</span></button>
+
+                                                    <button class="btn btn-secondary">Notifications <span class="badge badge-white">3</span></button>
+
+                                                    <button class="btn btn-warning">Alerts <span class="badge badge-white">7</span></button></script>
+                                        #badgeSizingPug.tab-pane(role='tabpanel', aria-labelledby='badgeSizingPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    h1 Example Heading
+                                                        span.badge.badge-primary.ml-2 New
+                                                    h2 Example Heading
+                                                        span.badge.badge-primary.ml-2 New
+                                                    h3 Example Heading
+                                                        span.badge.badge-primary.ml-2 New
+                                                    h4 Example Heading
+                                                        span.badge.badge-primary.ml-2 New
+                                                    h5 Example Heading
+                                                        span.badge.badge-primary.ml-2 New
+                                                    h6 Example Heading
+                                                        span.badge.badge-primary.ml-2 New
+                                                    p This is an example paragraph with a badge at the end!
+                                                        span.badge.badge-primary.ml-2 New
+                                                    button.btn.btn-primary.mr-2 Messages
+                                                        span.badge.badge-white.ml-2 5
+                                                    button.btn.btn-secondary.mr-2 Notifications
+                                                        span.badge.badge-white.ml-2 3
+                                                    button.btn.btn-warning Alerts
+                                                        span.badge.badge-white.ml-2 7
+                                .sbp-preview-text.
+                                    Badge sizing is set using <code>em</code> units, which means they will adapt to the font size of their immediate parent. The above examples show the badge size adapting to the parent, including the badge used within the button element.
+
+            // Sticky Navigation
+            .col-lg-3
+                .nav-sticky
+                    .card
+                        .card-body
+                            ul.nav.flex-column#stickyNav
+                                li.nav-item
+                                    a.nav-link(href='#default') Default
+                                li.nav-item
+                                    a.nav-link(href='#extended') Extended
+                                li.nav-item
+                                    a.nav-link(href='#sizing') Sizing
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+append scripts
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js', crossorigin='anonymous')

@@ -1,0 +1,45 @@
+.input-group-joined {
+    border-color: $input-border-color;
+    border-width: $input-border-width;
+    border-style: solid;
+    border-radius: $border-radius;
+    transition: $input-transition;
+    &:focus-within {
+        box-shadow: $input-btn-focus-box-shadow;
+        // border-color: $input-focus-border-color;
+    }
+    .form-control {
+        border: none;
+        &:focus {
+            box-shadow: none;
+            outline: none;
+        }
+    }
+    .input-group-append .input-group-text,
+    .input-group-prepend .input-group-text {
+        border: none;
+        background-color: $input-bg;
+    }
+    .input-group-append .input-group-text {
+        padding-left: 0;
+    }
+    .input-group-prepend .input-group-text {
+        padding-right: 0;
+    }
+}
+
+.input-group-joined-xl {
+    .form-control {
+        height: 4rem;
+        font-size: 1.25rem;
+    }
+}
+
+.input-group-joined.input-group-solid {
+    border: 0;
+    background-color: $input-solid-bg;
+    .form-control,
+    .input-group-text {
+        background-color: transparent;
+    }
+}

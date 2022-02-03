@@ -1,0 +1,32 @@
+// Restate and add to the Bootstrap default spacing variables
+//
+// The spacer is restated in order to add new entries to the $spacers map
+// The 10 and n1 through n10 spacers are newly added allowing for larger
+// spacing options and negative padding and margin utilities
+
+$spacer: 1rem;
+$spacers: ();
+$spacers: map-merge(
+  (
+    10: ($spacer * 6),
+    15: ($spacer * 9)
+  ),
+  $spacers
+);
+
+// Sidebar expanded width variable
+//
+// The base default width of the sidebar - you can adjust this value
+// in order to increase or decrease the width of the sidebar component
+
+$sidenav-base-width: 15rem;
+
+// Topnav fixed height variable
+//
+// The fixed height of the topnav
+
+$topnav-base-height: 3.625rem;
+
+// Footer base height
+
+$footer-base-height: 5rem;

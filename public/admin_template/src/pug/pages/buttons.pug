@@ -1,0 +1,1057 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Buttons'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Restyled Bootstrap default buttons and custom developed button components',
+        pageIcon: 'mouse-pointer',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        .row
+            // Style Reference
+            .col-lg-9
+
+                // Default Bootstrap Buttons
+                #default
+                    .card.mb-4
+                        .card-header
+                            | Default Bootstrap Buttons
+                        .card-body
+
+                            // Default Bootstrap Buttons Component Preview
+                            h6.small.text-muted.font-weight-500#defaultSolid Bootstrap Buttons:
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    button.btn.btn-primary.mr-2.my-1(type='button') Primary
+                                    button.btn.btn-secondary.mr-2.my-1(type='button') Secondary
+                                    button.btn.btn-success.mr-2.my-1(type='button') Success
+                                    button.btn.btn-danger.mr-2.my-1(type='button') Danger
+                                    button.btn.btn-warning.mr-2.my-1(type='button') Warning
+                                    button.btn.btn-info.mr-2.my-1(type='button') Info
+                                    button.btn.btn-light.mr-2.my-1(type='button') Light
+                                    button.btn.btn-dark.mr-2.my-1(type='button') Dark
+                                    button.btn.btn-link.my-1(type='button') Link
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#buttonsDefaultTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#buttonsDefaultHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#buttonsDefaultHtml', role='tab', aria-controls='buttonsDefaultHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#buttonsDefaultPugTab.nav-link(data-toggle='tab', href='#buttonsDefaultPug', role='tab', aria-controls='buttonsDefaultPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #buttonsDefaultHtml.tab-pane.active(role='tabpanel', aria-labelledby='buttonsDefaultHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><button class="btn btn-primary" type="button">Primary</button>
+                                                    <button class="btn btn-secondary" type="button">Secondary</button>
+                                                    <button class="btn btn-success" type="button">Success</button>
+                                                    <button class="btn btn-danger" type="button">Danger</button>
+                                                    <button class="btn btn-warning" type="button">Warning</button>
+                                                    <button class="btn btn-info" type="button">Info</button>
+                                                    <button class="btn btn-light" type="button">Light</button>
+                                                    <button class="btn btn-dark" type="button">Dark</button>
+                                                    <button class="btn btn-link" type="button">Link</button></script>
+                                        #buttonsDefaultPug.tab-pane(role='tabpanel', aria-labelledby='buttonsDefaultPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    button.btn.btn-primary(type='button') Primary
+                                                    button.btn.btn-secondary(type='button') Secondary
+                                                    button.btn.btn-success(type='button') Success
+                                                    button.btn.btn-danger(type='button') Danger
+                                                    button.btn.btn-warning(type='button') Warning
+                                                    button.btn.btn-info(type='button') Info
+                                                    button.btn.btn-light(type='button') Light
+                                                    button.btn.btn-dark(type='button') Dark
+                                                    button.btn.btn-link(type='button') Link
+                                .sbp-preview-text
+                                    | Bootstrap's default state-specific button styles have been styled to fit the SB Admin Pro theme.
+
+                            // Default Bootstrap Outline Buttons Component Preview
+                            h6.small.text-muted.font-weight-500#defaultOutline Bootstrap Outline Buttons:
+                            .sbp-preview
+                                .sbp-preview-content
+                                    button.btn.btn-outline-primary.mr-2.my-1(type='button') Primary
+                                    button.btn.btn-outline-secondary.mr-2.my-1(type='button') Secondary
+                                    button.btn.btn-outline-success.mr-2.my-1(type='button') Success
+                                    button.btn.btn-outline-danger.mr-2.my-1(type='button') Danger
+                                    button.btn.btn-outline-warning.mr-2.my-1(type='button') Warning
+                                    button.btn.btn-outline-info.mr-2.my-1(type='button') Info
+                                    button.btn.btn-outline-light.mr-2.my-1(type='button') Light
+                                    button.btn.btn-outline-dark.my-1(type='button') Dark
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#buttonsDefaultOutlineTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#buttonsDefaultOutlineHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#buttonsDefaultOutlineHtml', role='tab', aria-controls='buttonsDefaultOutlineHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#buttonsDefaultOutlinePugTab.nav-link(data-toggle='tab', href='#buttonsDefaultOutlinePug', role='tab', aria-controls='buttonsDefaultOutlinePug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #buttonsDefaultOutlineHtml.tab-pane.active(role='tabpanel', aria-labelledby='buttonsDefaultOutlineHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><button class="btn btn-outline-primary" type="button">Primary</button>
+                                                    <button class="btn btn-outline-secondary" type="button">Secondary</button>
+                                                    <button class="btn btn-outline-success" type="button">Success</button>
+                                                    <button class="btn btn-outline-danger" type="button">Danger</button>
+                                                    <button class="btn btn-outline-warning" type="button">Warning</button>
+                                                    <button class="btn btn-outline-info" type="button">Info</button>
+                                                    <button class="btn btn-outline-light" type="button">Light</button>
+                                                    <button class="btn btn-outline-dark" type="button">Dark</button>
+                                                    <button class="btn btn-outline-link" type="button">Link</button></script>
+                                        #buttonsDefaultOutlinePug.tab-pane(role='tabpanel', aria-labelledby='buttonsDefaultOutlinePugTab')
+                                            pre.language-pug
+                                                code.
+                                                    button.btn.btn-outline-primary(type='button') Primary
+                                                    button.btn.btn-outline-secondary(type='button') Secondary
+                                                    button.btn.btn-outline-success(type='button') Success
+                                                    button.btn.btn-outline-danger(type='button') Danger
+                                                    button.btn.btn-outline-warning(type='button') Warning
+                                                    button.btn.btn-outline-info(type='button') Info
+                                                    button.btn.btn-outline-light(type='button') Light
+                                                    button.btn.btn-outline-dark(type='button') Dark
+                                                    button.btn.btn-outline-link(type='button') Link
+                                .sbp-preview-text
+                                    | Outline button styles are also available by default from Bootstrap.
+
+                // Custom Button Colors
+                #customColors
+                    .card.mb-4
+                        .card-header
+                            | Custom Button Colors
+                        .card-body
+
+                            // Custom Button Colors Component Preview
+                            h6.small.text-muted.font-weight-500#customColorsSolid Non-Contextual Button Colors:
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    button.btn.btn-red.mr-2.my-1(type='button') Red
+                                    button.btn.btn-orange.mr-2.my-1(type='button') Orange
+                                    button.btn.btn-yellow.mr-2.my-1(type='button') Yellow
+                                    button.btn.btn-green.mr-2.my-1(type='button') Green
+                                    button.btn.btn-teal.mr-2.my-1(type='button') Teal
+                                    button.btn.btn-cyan.mr-2.my-1(type='button') Cyan
+                                    button.btn.btn-blue.mr-2.my-1(type='button') Blue
+                                    button.btn.btn-indigo.mr-2.my-1(type='button') Indigo
+                                    button.btn.btn-purple.mr-2.my-1(type='button') Purple
+                                    button.btn.btn-pink.my-1(type='button') Pink
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#buttonsCustomTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#buttonsCustomHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#buttonsCustomHtml', role='tab', aria-controls='buttonsCustomHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#buttonsCustomPugTab.nav-link(data-toggle='tab', href='#buttonsCustomPug', role='tab', aria-controls='buttonsCustomPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #buttonsCustomHtml.tab-pane.active(role='tabpanel', aria-labelledby='buttonsCustomHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><button class="btn btn-red" type="button">Red</button>
+                                                    <button class="btn btn-orange" type="button">Orange</button>
+                                                    <button class="btn btn-yellow" type="button">Yellow</button>
+                                                    <button class="btn btn-green" type="button">Green</button>
+                                                    <button class="btn btn-teal" type="button">Teal</button>
+                                                    <button class="btn btn-cyan" type="button">Cyan</button>
+                                                    <button class="btn btn-blue" type="button">Blue</button>
+                                                    <button class="btn btn-indigo" type="button">Indigo</button>
+                                                    <button class="btn btn-purple" type="button">Purple</button>
+                                                    <button class="btn btn-pink" type="button">Pink</button></script>
+                                        #buttonsCustomPug.tab-pane(role='tabpanel', aria-labelledby='buttonsCustomPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    button.btn.btn-red(type='button') Red
+                                                    button.btn.btn-orange(type='button') Orange
+                                                    button.btn.btn-yellow(type='button') Yellow
+                                                    button.btn.btn-green(type='button') Green
+                                                    button.btn.btn-teal(type='button') Teal
+                                                    button.btn.btn-cyan(type='button') Cyan
+                                                    button.btn.btn-blue(type='button') Blue
+                                                    button.btn.btn-indigo(type='button') Indigo
+                                                    button.btn.btn-purple(type='button') Purple
+                                                    button.btn.btn-pink(type='button') Pink
+                                .sbp-preview-text
+                                    | By default, Bootstrap's buttons are semantically named. We've extended the Bootstrap framework to include non-contextual colors.
+
+                            // Custom Button Outline Colors Component Preview
+                            h6.small.text-muted.font-weight-500#customColorsOutline Non-Contextual Outline Button Colors:
+                            .sbp-preview
+                                .sbp-preview-content
+                                    button.btn.btn-outline-red.mr-2.my-1(type='button') Red
+                                    button.btn.btn-outline-orange.mr-2.my-1(type='button') Orange
+                                    button.btn.btn-outline-yellow.mr-2.my-1(type='button') Yellow
+                                    button.btn.btn-outline-green.mr-2.my-1(type='button') Green
+                                    button.btn.btn-outline-teal.mr-2.my-1(type='button') Teal
+                                    button.btn.btn-outline-cyan.mr-2.my-1(type='button') Cyan
+                                    button.btn.btn-outline-blue.mr-2.my-1(type='button') Blue
+                                    button.btn.btn-outline-indigo.mr-2.my-1(type='button') Indigo
+                                    button.btn.btn-outline-purple.mr-2.my-1(type='button') Purple
+                                    button.btn.btn-outline-pink.my-1(type='button') Pink
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#buttonsCustomOutlineTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#buttonsCustomOutlineHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#buttonsCustomOutlineHtml', role='tab', aria-controls='buttonsCustomOutlineHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#buttonsCustomOutlinePugTab.nav-link(data-toggle='tab', href='#buttonsCustomOutlinePug', role='tab', aria-controls='buttonsCustomOutlinePug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #buttonsCustomOutlineHtml.tab-pane.active(role='tabpanel', aria-labelledby='buttonsCustomOutlineHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><button class="btn btn-outline-red" type="button">Red</button>
+                                                    <button class="btn btn-outline-orange" type="button">Orange</button>
+                                                    <button class="btn btn-outline-yellow" type="button">Yellow</button>
+                                                    <button class="btn btn-outline-green" type="button">Green</button>
+                                                    <button class="btn btn-outline-teal" type="button">Teal</button>
+                                                    <button class="btn btn-outline-cyan" type="button">Cyan</button>
+                                                    <button class="btn btn-outline-blue" type="button">Blue</button>
+                                                    <button class="btn btn-outline-indigo" type="button">Indigo</button>
+                                                    <button class="btn btn-outline-purple" type="button">Purple</button>
+                                                    <button class="btn btn-outline-pink" type="button">Pink</button></script>
+                                        #buttonsCustomOutlinePug.tab-pane(role='tabpanel', aria-labelledby='buttonsCustomOutlinePugTab')
+                                            pre.language-pug
+                                                code.
+                                                    button.btn.btn-outline-red(type='button') Red
+                                                    button.btn.btn-outline-orange(type='button') Orange
+                                                    button.btn.btn-outline-yellow(type='button') Yellow
+                                                    button.btn.btn-outline-green(type='button') Green
+                                                    button.btn.btn-outline-teal(type='button') Teal
+                                                    button.btn.btn-outline-cyan(type='button') Cyan
+                                                    button.btn.btn-outline-blue(type='button') Blue
+                                                    button.btn.btn-outline-indigo(type='button') Indigo
+                                                    button.btn.btn-outline-purple(type='button') Purple
+                                                    button.btn.btn-outline-pink(type='button') Pink
+                                .sbp-preview-text
+                                    | SB Admin Pro's non-contextual color classes work with outline buttons as well!
+
+                // Custom Icon Buttons
+                #icon
+                    .card.mb-4
+                        .card-header
+                            | Custom Icon Buttons
+                        .card-body
+
+                            // Icon Buttons (Feather Icons) Component Preview
+                            h6.small.text-muted.font-weight-500#iconFeather Icon Buttons (Feather Icons):
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    button.btn.btn-red.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-orange.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-yellow.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-green.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-teal.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-cyan.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-blue.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-indigo.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-purple.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-pink.btn-icon.my-1(type='button')
+                                        i(data-feather='feather')
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#buttonsIconFeatherTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#buttonsIconFeatherHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#buttonsIconFeatherHtml', role='tab', aria-controls='buttonsIconFeatherHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#buttonsIconFeatherPugTab.nav-link(data-toggle='tab', href='#buttonsIconFeatherPug', role='tab', aria-controls='buttonsIconFeatherPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #buttonsIconFeatherHtml.tab-pane.active(role='tabpanel', aria-labelledby='buttonsIconFeatherHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><button class="btn btn-red btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-orange btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-yellow btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-green btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-teal btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-cyan btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-blue btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-indigo btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-purple btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-pink btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button></script>
+                                        #buttonsIconFeatherPug.tab-pane(role='tabpanel', aria-labelledby='buttonsIconFeatherPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    button.btn.btn-red.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-orange.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-yellow.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-green.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-teal.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-cyan.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-blue.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-indigo.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-purple.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-pink.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                .sbp-preview-text
+                                    | Our custom icon button component is circular by default, and looks great when used with Feather Icons, which are included with this theme.
+
+                            // Icon Buttons (Font Awesome Icons) Component Preview
+                            h6.small.text-muted.font-weight-500#iconFontAwesome Icon Buttons (Font Awesome Icons):
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    button.btn.btn-red.btn-icon.mr-2.my-1(type='button')
+                                        i.fas.fa-flag
+                                    button.btn.btn-orange.btn-icon.mr-2.my-1(type='button')
+                                        i.fas.fa-flag
+                                    button.btn.btn-yellow.btn-icon.mr-2.my-1(type='button')
+                                        i.fas.fa-flag
+                                    button.btn.btn-green.btn-icon.mr-2.my-1(type='button')
+                                        i.fas.fa-flag
+                                    button.btn.btn-teal.btn-icon.mr-2.my-1(type='button')
+                                        i.fas.fa-flag
+                                    button.btn.btn-cyan.btn-icon.mr-2.my-1(type='button')
+                                        i.fas.fa-flag
+                                    button.btn.btn-blue.btn-icon.mr-2.my-1(type='button')
+                                        i.fas.fa-flag
+                                    button.btn.btn-indigo.btn-icon.mr-2.my-1(type='button')
+                                        i.fas.fa-flag
+                                    button.btn.btn-purple.btn-icon.mr-2.my-1(type='button')
+                                        i.fas.fa-flag
+                                    button.btn.btn-pink.btn-icon.my-1(type='button')
+                                        i.fas.fa-flag
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#buttonsIconFontAwesomeTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#buttonsIconFontAwesomeHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#buttonsIconFontAwesomeHtml', role='tab', aria-controls='buttonsIconFontAwesomeHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#buttonsIconFontAwesomePugTab.nav-link(data-toggle='tab', href='#buttonsIconFontAwesomePug', role='tab', aria-controls='buttonsIconFontAwesomePug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #buttonsIconFontAwesomeHtml.tab-pane.active(role='tabpanel', aria-labelledby='buttonsIconFontAwesomeHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><button class="btn btn-red btn-icon" type="button">
+                                                        <i class="fas fa-flag"></i>
+                                                    </button>
+                                                    <button class="btn btn-orange btn-icon" type="button">
+                                                        <i class="fas fa-flag"></i>
+                                                    </button>
+                                                    <button class="btn btn-yellow btn-icon" type="button">
+                                                        <i class="fas fa-flag"></i>
+                                                    </button>
+                                                    <button class="btn btn-green btn-icon" type="button">
+                                                        <i class="fas fa-flag"></i>
+                                                    </button>
+                                                    <button class="btn btn-teal btn-icon" type="button">
+                                                        <i class="fas fa-flag"></i>
+                                                    </button>
+                                                    <button class="btn btn-cyan btn-icon" type="button">
+                                                        <i class="fas fa-flag"></i>
+                                                    </button>
+                                                    <button class="btn btn-blue btn-icon" type="button">
+                                                        <i class="fas fa-flag"></i>
+                                                    </button>
+                                                    <button class="btn btn-indigo btn-icon" type="button">
+                                                        <i class="fas fa-flag"></i>
+                                                    </button>
+                                                    <button class="btn btn-purple btn-icon" type="button">
+                                                        <i class="fas fa-flag"></i>
+                                                    </button>
+                                                    <button class="btn btn-pink btn-icon" type="button">
+                                                        <i class="fas fa-flag"></i>
+                                                    </button></script>
+                                        #buttonsIconFontAwesomePug.tab-pane(role='tabpanel', aria-labelledby='buttonsIconFontAwesomePugTab')
+                                            pre.language-pug
+                                                code.
+                                                    button.btn.btn-red.btn-icon(type='button')
+                                                        i.fas.fa-flag
+                                                    button.btn.btn-orange.btn-icon(type='button')
+                                                        i.fas.fa-flag
+                                                    button.btn.btn-yellow.btn-icon(type='button')
+                                                        i.fas.fa-flag
+                                                    button.btn.btn-green.btn-icon(type='button')
+                                                        i.fas.fa-flag
+                                                    button.btn.btn-teal.btn-icon(type='button')
+                                                        i.fas.fa-flag
+                                                    button.btn.btn-cyan.btn-icon(type='button')
+                                                        i.fas.fa-flag
+                                                    button.btn.btn-blue.btn-icon(type='button')
+                                                        i.fas.fa-flag
+                                                    button.btn.btn-indigo.btn-icon(type='button')
+                                                        i.fas.fa-flag
+                                                    button.btn.btn-purple.btn-icon(type='button')
+                                                        i.fas.fa-flag
+                                                    button.btn.btn-pink.btn-icon(type='button')
+                                                        i.fas.fa-flag
+                                .sbp-preview-text
+                                    | Use our icon buttons with Font Awesome as well!
+
+                            // Icon Buttons (Text) Component Preview
+                            h6.small.text-muted.font-weight-500#iconText Icon Buttons (Text):
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    button.btn.btn-red.btn-icon.mr-2.my-1(type='button') S
+                                    button.btn.btn-orange.btn-icon.mr-2.my-1(type='button') B
+                                    button.btn.btn-yellow.btn-icon.mr-2.my-1(type='button') A
+                                    button.btn.btn-green.btn-icon.mr-2.my-1(type='button') D
+                                    button.btn.btn-teal.btn-icon.mr-2.my-1(type='button') M
+                                    button.btn.btn-cyan.btn-icon.mr-2.my-1(type='button') I
+                                    button.btn.btn-blue.btn-icon.mr-2.my-1(type='button') N
+                                    button.btn.btn-indigo.btn-icon.mr-2.my-1(type='button') P
+                                    button.btn.btn-purple.btn-icon.mr-2.my-1(type='button') R
+                                    button.btn.btn-pink.btn-icon.my-1(type='button') O
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#buttonsIconTextTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#buttonsIconTextHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#buttonsIconTextHtml', role='tab', aria-controls='buttonsIconTextHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#buttonsIconTextPugTab.nav-link(data-toggle='tab', href='#buttonsIconTextPug', role='tab', aria-controls='buttonsIconTextPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #buttonsIconTextHtml.tab-pane.active(role='tabpanel', aria-labelledby='buttonsIconTextHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><button class="btn btn-red btn-icon" type="button">S </button>
+                                                    <button class="btn btn-orange btn-icon" type="button">B</button>
+                                                    <button class="btn btn-yellow btn-icon" type="button">A</button>
+                                                    <button class="btn btn-green btn-icon" type="button">D</button>
+                                                    <button class="btn btn-teal btn-icon" type="button">M</button>
+                                                    <button class="btn btn-cyan btn-icon" type="button">I</button>
+                                                    <button class="btn btn-blue btn-icon" type="button">N</button>
+                                                    <button class="btn btn-indigo btn-icon" type="button">P</button>
+                                                    <button class="btn btn-purple btn-icon" type="button">R</button>
+                                                    <button class="btn btn-pink btn-icon" type="button">O</button></script>
+                                        #buttonsIconTextPug.tab-pane(role='tabpanel', aria-labelledby='buttonsIconTextPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    button.btn.btn-red.btn-icon(type='button') S
+                                                    button.btn.btn-orange.btn-icon(type='button') B
+                                                    button.btn.btn-yellow.btn-icon(type='button') A
+                                                    button.btn.btn-green.btn-icon(type='button') D
+                                                    button.btn.btn-teal.btn-icon(type='button') M
+                                                    button.btn.btn-cyan.btn-icon(type='button') I
+                                                    button.btn.btn-blue.btn-icon(type='button') N
+                                                    button.btn.btn-indigo.btn-icon(type='button') P
+                                                    button.btn.btn-purple.btn-icon(type='button') R
+                                                    button.btn.btn-pink.btn-icon(type='button') O
+                                .sbp-preview-text
+                                    | Icon buttons use a fixed height and width, so you can use them with short strings of text, one or two characters long.
+
+                            // Icon Buttons (Outline) Component Preview
+                            h6.small.text-muted.font-weight-500#iconOutline Icon Buttons (Outline):
+                            .sbp-preview
+                                .sbp-preview-content
+                                    button.btn.btn-outline-red.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-outline-orange.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-outline-yellow.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-outline-green.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-outline-teal.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-outline-cyan.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-outline-blue.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-outline-indigo.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-outline-purple.btn-icon.mr-2.my-1(type='button')
+                                        i(data-feather='feather')
+                                    button.btn.btn-outline-pink.btn-icon.my-1(type='button')
+                                        i(data-feather='feather')
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#buttonsIconOutlineTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#buttonsIconOutlineHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#buttonsIconOutlineHtml', role='tab', aria-controls='buttonsIconOutlineHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#buttonsIconOutlinePugTab.nav-link(data-toggle='tab', href='#buttonsIconOutlinePug', role='tab', aria-controls='buttonsIconOutlinePug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #buttonsIconOutlineHtml.tab-pane.active(role='tabpanel', aria-labelledby='buttonsIconOutlineHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><button class="btn btn-outline-red btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-orange btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-yellow btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-green btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-teal btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-cyan btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-blue btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-indigo btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-purple btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-pink btn-icon" type="button">
+                                                        <i data-feather="feather"></i>
+                                                    </button></script>
+                                        #buttonsIconOutlinePug.tab-pane(role='tabpanel', aria-labelledby='buttonsIconOutlinePugTab')
+                                            pre.language-pug
+                                                code.
+                                                    button.btn.btn-outline-red.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-outline-orange.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-outline-yellow.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-outline-green.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-outline-teal.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-outline-cyan.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-outline-blue.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-outline-indigo.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-outline-purple.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                                    button.btn.btn-outline-pink.btn-icon(type='button')
+                                                        i(data-feather='feather')
+                                .sbp-preview-text
+                                    | Our custom icon button component is circular by default, and looks great when used with Feather Icons, which are included with this theme.
+
+                // Custom Transparent Buttons
+                #transparent
+                    .card.mb-4
+                        .card-header
+                            | Custom Transparent Buttons
+                        .card-body
+
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content.p-0
+                                    .bg-dark.p-4.border-bottom
+                                        button.btn.btn-transparent-light.mr-2(type='button') Hover Me!
+                                        button.btn.btn-transparent-light.btn-icon(type='button')
+                                            i(data-feather='feather')
+                                    .p-4.border-bottom
+                                        button.btn.btn-transparent-dark.mr-2(type='button') Hover Me!
+                                        button.btn.btn-transparent-dark.btn-icon(type='button')
+                                            i(data-feather='feather')
+                                    .bg-dark.p-4.border-bottom
+                                        button.btn.btn-white-10.mr-2(type='button') Hover Me!
+                                        button.btn.btn-white-10.btn-icon(type='button')
+                                            i(data-feather='feather')
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#buttonsTransparentTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#buttonsTransparentHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#buttonsTransparentHtml', role='tab', aria-controls='buttonsTransparentHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#buttonsTransparentPugTab.nav-link(data-toggle='tab', href='#buttonsTransparentPug', role='tab', aria-controls='buttonsTransparentPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #buttonsTransparentHtml.tab-pane.active(role='tabpanel', aria-labelledby='buttonsTransparentHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><!-- Button Transparent (Light) -->
+                                                    <button class="btn btn-transparent-light" type="button">...</button>
+
+                                                    <!-- Button Transparent (Dark) -->
+                                                    <button class="btn btn-transparent-dark" type="button">...</button>
+
+                                                    <!-- Button Transparent (10% White Opacity) -->
+                                                    <button class="btn btn-white-10" type="button">...</button></script>
+                                        #buttonsTransparentPug.tab-pane(role='tabpanel', aria-labelledby='buttonsTransparentPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    // Button Transparent (Light)
+                                                    button.btn.btn-transparent-light(type='button') ...
+
+                                                    // Button Transparent (Dark)
+                                                    button.btn.btn-transparent-dark(type='button') ...
+
+                                                    // Button Transparent (10% White Opacity)
+                                                    button.btn.btn-white-10(type='button') ...
+                                .sbp-preview-text
+                                    | Our transparent button component is available to use in place of a button color. This color styling works with all of the other customization options available, including icon buttons.
+
+                // Button Sizing
+                #sizing
+                    .card.mb-4
+                        .card-header
+                            | Button Sizing
+                        .card-body
+
+                            // Component Preview
+                            h6.small.text-muted.font-weight-500 Sizing Options:
+                            .sbp-preview.mb-4
+                                .sbp-preview-content
+                                    button.btn.btn-primary.btn-xs.mr-2.my-1 Extra Small
+                                    button.btn.btn-primary.btn-sm.mr-2.my-1 Small
+                                    button.btn.btn-primary.mr-2.my-1 Default
+                                    button.btn.btn-primary.btn-lg.mr-2.my-1 Large
+                                    button.btn.btn-primary.btn-xl.my-1 Extra Large
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#buttonSizingTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#buttonSizingHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#buttonSizingHtml', role='tab', aria-controls='buttonSizingHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#buttonSizingPugTab.nav-link(data-toggle='tab', href='#buttonSizingPug', role='tab', aria-controls='buttonSizingPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #buttonSizingHtml.tab-pane.active(role='tabpanel', aria-labelledby='buttonSizingHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><button class="btn btn-primary btn-xs">Extra Small</button>
+                                                    <button class="btn btn-primary btn-sm">Small</button>
+                                                    <button class="btn btn-primary">Default</button>
+                                                    <button class="btn btn-primary btn-lg">Large</button>
+                                                    <button class="btn btn-primary btn-xl">Extra Large</button></script>
+                                        #buttonSizingPug.tab-pane(role='tabpanel', aria-labelledby='buttonSizingPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    button.btn.btn-primary.btn-xs Extra Small
+                                                    button.btn.btn-primary.btn-sm Small
+                                                    button.btn.btn-primary Default
+                                                    button.btn.btn-primary.btn-lg Large
+                                                    button.btn.btn-primary.btn-xl Extra Large
+                                .sbp-preview-text
+                                    | Button sizes have been extended from Bootstrap defaults to include extra small and extra large buttons.
+
+                            // Component Preview
+                            h6.small.text-muted.font-weight-500 Sizing Options (Icon Buttons):
+                            .sbp-preview
+                                .sbp-preview-content
+                                    button.btn.btn-primary.btn-xs.btn-icon.mr-2.my-1
+                                        i.fas.fa-flag
+                                    button.btn.btn-primary.btn-sm.btn-icon.mr-2.my-1
+                                        i.fas.fa-flag
+                                    button.btn.btn-primary.btn-icon.mr-2.my-1
+                                        i.fas.fa-flag
+                                    button.btn.btn-primary.btn-lg.btn-icon.mr-2.my-1
+                                        i.fas.fa-flag
+                                    button.btn.btn-primary.btn-xl.btn-icon.my-1
+                                        i.fas.fa-flag
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#buttonSizingIconsTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#buttonSizingIconsHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#buttonSizingIconsHtml', role='tab', aria-controls='buttonSizingIconsHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#buttonSizingIconsPugTab.nav-link(data-toggle='tab', href='#buttonSizingIconsPug', role='tab', aria-controls='buttonSizingIconsPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #buttonSizingIconsHtml.tab-pane.active(role='tabpanel', aria-labelledby='buttonSizingIconsHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><button class="btn btn-primary btn-xs btn-icon">
+                                                        <i class="fas fa-flag"></i>
+                                                    </button>
+                                                    <button class="btn btn-primary btn-sm btn-icon">
+                                                        <i class="fas fa-flag"></i>
+                                                    </button>
+                                                    <button class="btn btn-primary btn-icon">
+                                                        <i class="fas fa-flag"></i>
+                                                    </button>
+                                                    <button class="btn btn-primary btn-lg btn-icon">
+                                                        <i class="fas fa-flag"></i>
+                                                    </button>
+                                                    <button class="btn btn-primary btn-xl btn-icon">
+                                                        <i class="fas fa-flag"></i>
+                                                    </button></script>
+                                        #buttonSizingIconsPug.tab-pane(role='tabpanel', aria-labelledby='buttonSizingIconsPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    button.btn.btn-primary.btn-xs.btn-icon
+                                                        i.fas.fa-flag
+                                                    button.btn.btn-primary.btn-sm.btn-icon
+                                                        i.fas.fa-flag
+                                                    button.btn.btn-primary.btn-icon
+                                                        i.fas.fa-flag
+                                                    button.btn.btn-primary.btn-lg.btn-icon
+                                                        i.fas.fa-flag
+                                                    button.btn.btn-primary.btn-xl.btn-icon
+                                                        i.fas.fa-flag
+                                .sbp-preview-text
+                                    | The custom icon button component is compatible with all of the button sizing options available.
+
+                // Social Buttons
+                #social
+                    .card.mb-4
+                        .card-header
+                            | Social Buttons
+                        .card-body
+
+                            // Component Preview
+                            .sbp-preview
+                                .sbp-preview-content
+                                    button.btn.btn-facebook.mr-2.my-1
+                                        i.fab.fa-facebook-f.mr-2
+                                        | Facebook
+                                    button.btn.btn-github.mr-2.my-1
+                                        i.fab.fa-github.mr-2
+                                        | GitHub
+                                    button.btn.btn-google.mr-2.my-1
+                                        i.fab.fa-google.mr-2
+                                        | Google
+                                    button.btn.btn-twitter.my-1
+                                        i.fab.fa-twitter.mr-2
+                                        | Twitter
+
+                                .sbp-preview-code
+                                    // Code sample
+                                    ul#buttonsSocialTabs.nav.nav-tabs(role='tablist')
+                                        li.nav-item
+                                            a#buttonsSocialHtmlTab.nav-link.active.mr-1(data-toggle='tab', href='#buttonsSocialHtml', role='tab', aria-controls='buttonsSocialHtml', aria-selected='true')
+                                                i.fab.fa-html5.text-orange.mr-1
+                                                | HTML
+                                        li.nav-item
+                                            a#buttonsSocialPugTab.nav-link(data-toggle='tab', href='#buttonsSocialPug', role='tab', aria-controls='buttonsSocialPug', aria-selected='false')
+                                                img.img-pug.mr-1(src='assets/img/pug.svg')
+                                                | PUG
+                                    // Tab panes
+                                    .tab-content
+                                        #buttonsSocialHtml.tab-pane.active(role='tabpanel', aria-labelledby='buttonsSocialHtmlTab')
+                                            pre.language-markup
+                                                code.
+                                                    <script type="text/plain"><button class="btn btn-facebook">
+                                                        <i class="fab fa-facebook-f"></i> Facebook
+                                                    </button>
+                                                    <button class="btn btn-github">
+                                                        <i class="fab fa-github"></i> GitHub
+                                                    </button>
+                                                    <button class="btn btn-google">
+                                                        <i class="fab fa-google"></i> Google
+                                                    </button>
+                                                    <button class="btn btn-twitter">
+                                                        <i class="fab fa-twitter"></i> Twitter
+                                                    </button></script>
+                                        #buttonsSocialPug.tab-pane(role='tabpanel', aria-labelledby='buttonsSocialPugTab')
+                                            pre.language-pug
+                                                code.
+                                                    button.btn.btn-facebook
+                                                        i.fab.fa-facebook-f.mr-2
+                                                        | Facebook
+                                                    button.btn.btn-github
+                                                        i.fab.fa-github.mr-2
+                                                        | GitHub
+                                                    button.btn.btn-google
+                                                        i.fab.fa-google.mr-2
+                                                        | Google
+                                                    button.btn.btn-twitter
+                                                        i.fab.fa-twitter.mr-2
+                                                        | Twitter
+                                .sbp-preview-text
+                                    | A select group of popular brands have had custom buttons styles added. The example above uses the Font Awesome brand icons in unison with the custom brand button styling.
+
+                // Extending Buttons
+                #extending
+                    .card.mb-4
+                        .card-header
+                            | Extending Buttons
+                        .card-body
+                            .card.card-icon.mb-4
+                                .row.no-gutters
+                                    .col-auto.card-icon-aside.bg-primary
+                                        i.mr-1.text-white-50(data-feather='alert-triangle')
+                                    .col
+                                        .card-body.py-5
+                                            h6.card-title Using Utility Classes vs. Overriding SCSS Variables
+                                            p.card-text.small
+                                                | Utility classes are a quick and powerful way to extend the styling the button component. Specifically, border, shadow, text, and spacing utilities work well to customize a button.
+                                            p.card-text.small
+                                                | Use utility classes to transform the style of a single button, or a small group of buttons. The best way to globally restyle the button component is by overriding button specific SCSS variables.
+                            .sbp-btn-example.mb-4
+                                h6.small.text-muted.font-weight-500 Square Buttons:
+                                .border.border-lg.rounded
+                                    .p-4.border-bottom
+                                        button.btn.btn-primary.rounded-0.mr-2.my-1 Primary
+                                        button.btn.btn-secondary.rounded-0.mr-2.my-1 Secondary
+                                        button.btn.btn-outline-primary.rounded-0.mr-2.my-1 Primary
+                                        button.btn.btn-outline-secondary.rounded-0.mr-2.my-1 Secondary
+                                        button.btn.btn-primary.btn-icon.rounded-0.mr-2.my-1
+                                            i(data-feather='feather')
+                                        button.btn.btn-secondary.btn-icon.rounded-0.mr-2.my-1
+                                            i(data-feather='feather')
+                                        button.btn.btn-outline-primary.btn-icon.rounded-0.mr-2.my-1
+                                            i(data-feather='feather')
+                                        button.btn.btn-outline-secondary.btn-icon.rounded-0.my-1
+                                            i(data-feather='feather')
+                                    .bg-light.p-4.small.
+                                        Append the <code>.rounded-0</code> helper utility class onto any button and it will square the edges, resulting in a squared button.
+                            .sbp-btn-example.mb-4
+                                h6.small.text-muted.font-weight-500 Shadowed Buttons:
+                                .border.border-lg.rounded
+                                    .p-4.border-bottom
+                                        button.btn.btn-primary.shadow-sm.mr-2.my-1 Primary
+                                        button.btn.btn-secondary.shadow-sm.mr-2.my-1 Secondary
+                                        button.btn.btn-outline-primary.shadow-sm.mr-2.my-1 Primary
+                                        button.btn.btn-outline-secondary.shadow-sm.mr-2.my-1 Secondary
+                                        button.btn.btn-primary.btn-icon.shadow-sm.mr-2.my-1
+                                            i(data-feather='feather')
+                                        button.btn.btn-secondary.btn-icon.shadow-sm.mr-2.my-1
+                                            i(data-feather='feather')
+                                        button.btn.btn-outline-primary.btn-icon.shadow-sm.mr-2.my-1
+                                            i(data-feather='feather')
+                                        button.btn.btn-outline-secondary.btn-icon.shadow-sm.my-1
+                                            i(data-feather='feather')
+                                    .bg-light.p-4.small.
+                                        Append the <code>.shadow-sm</code> helper utility class onto any button and it will give the button a subtle shadow effect. You can use the <code>.shadow</code> and <code>.shadow-lg</code> utilities to add more shadow depth.
+                            .sbp-btn-example.mb-4
+                                h6.small.text-muted.font-weight-500 Pill Buttons:
+                                .border.border-lg.rounded
+                                    .p-4.border-bottom
+                                        button.btn.btn-primary.rounded-pill.mr-2.my-1 Primary
+                                        button.btn.btn-secondary.rounded-pill.mr-2.my-1 Secondary
+                                        button.btn.btn-outline-primary.rounded-pill.mr-2.my-1 Primary
+                                        button.btn.btn-outline-secondary.rounded-pill.my-1 Secondary
+                                    .bg-light.p-4.small.
+                                        Append the <code>.rounded-pill</code> helper utility class onto any button and it will give the button a pill effect. Note, this will have no effect on icon buttons which are already circular.
+                            .sbp-btn-example
+                                h6.small.text-muted.font-weight-500 Deeper Customization:
+                                .border.border-lg.rounded
+                                    .p-4.border-bottom
+                                        button.btn.btn-primary.rounded-pill.px-4.mr-2.my-1 Primary
+                                        button.btn.btn-secondary.rounded-pill.px-4.mr-2.my-1 Secondary
+                                        button.btn.btn-outline-primary.rounded-pill.px-4.mr-2.my-1 Primary
+                                        button.btn.btn-outline-secondary.rounded-pill.px-4.mr-2.my-1 Secondary
+                                        button.btn.btn-sm.btn-primary.p-3.line-height-normal.mr-2.my-1 Primary
+                                        button.btn.btn-sm.btn-secondary.p-3.line-height-normal.my-1 Secondary
+                                    .bg-light.p-4.small.
+                                        Spacing utilities are especially useful when trying to achieve a certain look and feel for a specific button. In the above example, the <code>.px-4</code> helper utility was added to the button component in order to create more negative space to the left and right sides of the button.
+                                    .p-4.border-bottom
+                                        button.btn.btn-primary.btn-sm.rounded-0.shadow-sm.px-4.py-3.text-uppercase.font-weight-800.mr-2.my-1 Primary
+                                        button.btn.btn-secondary.btn-sm.rounded-0.shadow-sm.px-4.py-3.text-uppercase.font-weight-800.mr-2.my-1 Secondary
+                                        button.btn.btn-outline-primary.btn-sm.rounded-0.shadow-sm.px-4.py-3.text-uppercase.font-weight-800.mr-2.my-1 Primary
+                                        button.btn.btn-outline-secondary.btn-sm.rounded-0.shadow-sm.px-4.py-3.text-uppercase.font-weight-800.my-1 Secondary
+                                    .bg-light.p-4.small.
+                                        Multiple utility classes used together can drastically change the styling of a button. This should only be done in cases where only a single button, or a small group of buttons need to have a specific style. To modify buttons globally, it is best to override button SCSS variables.
+
+                // Bootstrap Docs Link
+                .card.card-icon.mb-4
+                    .row.no-gutters
+                        .col-auto.card-icon-aside.bg-secondary
+                            i.mr-1.text-white-50.fab.fa-bootstrap
+                        .col
+                            .card-body.py-5
+                                h5.card-title Bootstrap Documentation Available
+                                p.card-text
+                                    | Buttons are a default component included with the Bootstrap framework. For more information on implementing, modifying, and extending the usage of buttons within your project, visit the official Bootstrap buttons documentation page.
+                                a.btn.btn-secondary.btn-sm(href='https://getbootstrap.com/docs/4.4/components/buttons/', target='_blank')
+                                    i.mr-1(data-feather='external-link')
+                                    | Visit Bootstrap Buttons Docs
+
+            // Sticky Nav
+            .col-lg-3
+                .nav-sticky
+                    .card
+                        .card-body
+                            ul.nav.flex-column#stickyNav
+                                li.nav-item
+                                    a.nav-link(href='#default') Default Colors
+                                    ul.nav.flex-column.ml-3
+                                        li.nav-item
+                                            a.nav-link(href='#defaultSolid') Solid
+                                        li.nav-item
+                                            a.nav-link(href='#defaultOutline') Outline
+                                li.nav-item
+                                    a.nav-link(href='#customColors') Custom Colors
+                                    ul.nav.flex-column.ml-3
+                                        li.nav-item
+                                            a.nav-link(href='#customColorsSolid') Solid
+                                        li.nav-item
+                                            a.nav-link(href='#customColorsOutline') Outline
+                                li.nav-item
+                                    a.nav-link(href='#icon') Icon
+                                    ul.nav.flex-column.ml-3
+                                        li.nav-item
+                                            a.nav-link(href='#iconFeather') Feather Icons
+                                        li.nav-item
+                                            a.nav-link(href='#iconFontAwesome') Font Awesome Icons
+                                        li.nav-item
+                                            a.nav-link(href='#iconText') Text
+                                        li.nav-item
+                                            a.nav-link(href='#iconOutline') Outline
+                                li.nav-item
+                                    a.nav-link(href='#transparent') Transparent
+                                li.nav-item
+                                    a.nav-link(href='#sizing') Sizing
+                                li.nav-item
+                                    a.nav-link(href='#social') Social
+                                li.nav-item
+                                    a.nav-link(href='#extending') Extending
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+append scripts
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js', crossorigin='anonymous')

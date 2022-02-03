@@ -1,0 +1,254 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Typography'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-default.pug
+    +header({
+        pageHeaderStyle: 'page-header-dark',
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderSpacing: 'pb-10',
+        pageHeaderContainer: 'container',
+        pageSubtitle: 'Text utilities to help you add meaning and emphasis to your content',
+        pageIcon: 'type',
+        breadcrumbs: false
+    })
+
+    // Main page content
+    .container.mt-n10
+        .row
+            .col-lg-9
+
+                // Text Color Utilities
+                #color
+                    .card.mb-4
+                        .card-header Text Color Utilities
+                        .card-body
+                            h6.small.text-muted.font-weight-500 Bootstrap Defaults:
+                            .border.border-lg.rounded.mb-4
+                                .p-4.border-bottom
+                                    .row
+                                        .col-6
+                                            .p-3.border.mb-3.text-primary .text-primary
+                                            .p-3.border.mb-3.text-secondary .text-secondary
+                                            .p-3.border.mb-3.text-success .text-success
+                                            .p-3.border.mb-3.text-danger .text-danger
+                                            .p-3.border.mb-3.text-warning .text-warning
+                                            .p-3.border.text-info .text-info
+                                        .col-6
+                                            .p-3.border.mb-3.text-light.bg-dark .text-light
+                                            .p-3.border.mb-3.text-dark .text-dark
+                                            .p-3.border.mb-3.text-body .text-body
+                                            .p-3.border.mb-3.text-muted .text-muted
+                                            .p-3.border.mb-3.text-black .text-black
+                                            .p-3.border.text-white.bg-dark .text-white
+                                .bg-light.p-4.small
+                                    | By default, Bootstrap has a number of text utilities that you can use to change the text color. The default utilities are semantic by nature.
+
+                            h6.small.text-muted.font-weight-500 Extended Utilities:
+                            .border.border-lg.rounded
+                                .p-4.border-bottom
+                                    .row
+                                        .col-6
+                                            .p-3.border.mb-3.text-red .text-red
+                                            .p-3.border.mb-3.text-orange .text-orange
+                                            .p-3.border.mb-3.text-yellow .text-yellow
+                                            .p-3.border.mb-3.text-green .text-green
+                                            .p-3.border.text-teal .text-teal
+                                        .col-6
+                                            .p-3.border.mb-3.text-cyan .text-cyan
+                                            .p-3.border.mb-3.text-blue .text-blue
+                                            .p-3.border.mb-3.text-indigo .text-indigo
+                                            .p-3.border.mb-3.text-purple .text-purple
+                                            .p-3.border.text-pink .text-pink
+                                .bg-light.p-4.small
+                                    | SB Admin Pro's non-contextual true colors that have been added to the color map are also available as text utilities.
+
+                // Opacity Text Utilities
+                #opacity
+                    .card.mb-4
+                        .card-header Opacity Text Utilities
+                        .card-body
+                            .border.border-lg.rounded
+                                .p-4.border-bottom
+                                    .row
+                                        .col-6
+                                            .p-3.border.mb-3.text-black-25 .text-black-25
+                                            .p-3.border.mb-3.text-black-50 .text-black-50
+                                            .p-3.border.text-black-75 .text-black-75
+                                        .col-6
+                                            .p-3.border.mb-3.text-white-25.bg-dark .text-white-25
+                                            .p-3.border.mb-3.text-white-50.bg-dark .text-white-50
+                                            .p-3.border.text-white-75.bg-dark .text-white-75
+                                .bg-light.p-4.small.
+                                    Black and white opaque text utilities are available as part of this theme. The <code>.text-black-50</code> and <code>.text-white-50</code> utilities are part of Bootstrap, and the 25% and 75% opacity utilities have been added to expand this feature.
+
+                // Grayscale Color Utilities
+                #grayscale
+                    .card.mb-4
+                        .card-header Grayscale Text Utilities
+                        .card-body
+                            .border.border-lg.rounded
+                                .p-4.border-bottom
+                                    .row
+                                        .col-6
+                                            .p-3.border.mb-3.text-gray-100.bg-dark .text-gray-100
+                                            .p-3.border.mb-3.text-gray-200.bg-dark .text-gray-200
+                                            .p-3.border.mb-3.text-gray-300.bg-dark .text-gray-300
+                                            .p-3.border.mb-3.text-gray-400 .text-gray-400
+                                            .p-3.border.text-gray-500 .text-gray-500
+                                        .col-6
+                                            .p-3.border.mb-3.text-gray-600 .text-gray-600
+                                            .p-3.border.mb-3.text-gray-700 .text-gray-700
+                                            .p-3.border.mb-3.text-gray-800 .text-gray-800
+                                            .p-3.border.text-gray-900 .text-gray-900
+                                .bg-light.p-4.small
+                                    | SB Admin Pro's adaptive grayscale has been applied to text utilities.
+
+                // Font Weight Utilities
+                #weight
+                    .card.mb-4
+                        .card-header Font Weight Utilities
+                        .card-body
+                            h6.small.text-muted.font-weight-500 Bootstrap Defaults:
+                            .border.border-lg.rounded.mb-4
+                                .p-4.border-bottom
+                                    .p-3.border.mb-3.font-weight-bold Bold text.
+                                    .p-3.border.mb-3.font-weight-bolder Bolder weight text (relative to the parent element).
+                                    .p-3.border.mb-3.font-weight-normal Normal weight text.
+                                    .p-3.border.mb-3.font-weight-light Light weight text.
+                                    .p-3.border.font-weight-lighter Lighter weight text (relative to the parent element).
+
+                                .bg-light.p-4.small
+                                    | By default, Bootstrap has a number of text utilities that you can use to change the font weight.
+
+                            h6.small.text-muted.font-weight-500 Extended Utilities:
+                            .border.border-lg.rounded
+                                .p-4.border-bottom
+                                    .row
+                                        .col-6
+                                            h6.p-3.border.mb-3.font-weight-100 .font-weight-100
+                                            h6.p-3.border.mb-3.font-weight-200 .font-weight-200
+                                            h6.p-3.border.mb-3.font-weight-300 .font-weight-300
+                                            h6.p-3.border.mb-3.font-weight-400 .font-weight-400
+                                            h6.p-3.border.mb-0.font-weight-500 .font-weight-500
+                                        .col-6
+                                            h6.p-3.border.mb-3.font-weight-600 .font-weight-600
+                                            h6.p-3.border.mb-3.font-weight-700 .font-weight-700
+                                            h6.p-3.border.mb-3.font-weight-800 .font-weight-800
+                                            h6.p-3.border.mb-0.font-weight-900 .font-weight-900
+                                .bg-light.p-4.small
+                                    | SB Admin Pro has extended font weight utilities to include specific font weights, for use wherever you want to show a specialized font weight. Note that the font weights are only supported if the font that you are using supports the specified font weight.
+
+                // Text Transform Utilities
+                #transform
+                    .card.mb-4
+                        .card-header Text Transform &amp; Styling Utilities
+                        .card-body
+                            .border.border-lg.rounded
+                                .p-4.border-bottom
+                                    .p-3.border.mb-3.font-italic .font-italic
+                                    .p-3.border.mb-3.text-uppercase .text-uppercase
+                                    .p-3.border.mb-3.text-monospace .text-monospace
+                                    .p-3.border.mb-3.text-xs .text-xs
+                                    .p-3.border.mb-3.text-sm .small (or .text-sm)
+                                    .p-3.border.mb-3.text-lg .text-lg
+                                    .p-3.border.mb-3.text-xl .text-xl
+                                    .p-3.border.text-uppercase-expanded .text-uppercase-expanded
+                                .bg-light.p-4.small.
+                                    These are some commonly used text style and transform utilities available as part of Bootstrap, with the <code>.text-uppercase-expanded</code> utility being added for extra emphasis in certain scenarios.
+
+                // Bootstrap Docs Link
+                .card.card-icon.mb-4
+                    .row.no-gutters
+                        .col-auto.card-icon-aside.bg-secondary
+                            i.mr-1.text-white-50.fab.fa-bootstrap
+                        .col
+                            .card-body.py-5
+                                h5.card-title Bootstrap Documentation Available
+                                p.card-text
+                                    | There are a number of text utilities not referenced above that are included with the Bootstrap framework. For more information on using these Bootstrap utilities within your project, visit the official Bootstrap documentation.
+                                a.btn.btn-secondary.btn-sm(href='https://getbootstrap.com/docs/4.5/utilities/text/', target='_blank')
+                                    i.mr-1(data-feather='external-link')
+                                    | Visit Bootstrap Docs
+
+            // Sticky Navigation
+            .col-lg-3
+                .nav-sticky
+                    .card
+                        .card-body
+                            ul.nav.flex-column#stickyNav
+                                li.nav-item
+                                    a.nav-link(href='#color') Text Color
+                                li.nav-item
+                                    a.nav-link(href='#opacity') Text Opacity
+                                li.nav-item
+                                    a.nav-link(href='#grayscale') Grayscale Colors
+                                li.nav-item
+                                    a.nav-link(href='#weight') Font Weight
+                                li.nav-item
+                                    a.nav-link(href='#transform') Text Transform &amp; Styling
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })

@@ -1,0 +1,73 @@
+.icons-org-create {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    .icon-users {
+        height: 4rem;
+        width: 4rem;
+        circle,
+        path:first-of-type {
+            color: $primary;
+        }
+        path {
+            color: fade-out($primary, 0.65);
+        }
+    }
+    .icon-plus {
+        color: $primary;
+        position: absolute;
+        font-size: 1.5rem;
+        top: -0.5rem;
+        right: -0.75rem;
+    }
+}
+
+.icons-org-join {
+    display: inline-flex;
+    position: relative;
+    .icon-user {
+        height: 4rem;
+        width: 4rem;
+        color: $secondary;
+    }
+    .icon-arrow {
+        font-size: 2rem;
+        margin: 1rem 0.5rem 1rem 0;
+        color: $secondary;
+    }
+    .icon-users {
+        margin: 0.5rem 0;
+        height: 3rem;
+        width: 3rem;
+        circle,
+        path:first-of-type {
+            color: fade-out($secondary, 0.5);
+        }
+        path {
+            color: fade-out($secondary, 0.75);
+        }
+    }
+}
+
+.org-or-divider {
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: center;
+    border-bottom: 1px solid $gray-200;
+    .org-or {
+        height: 2rem;
+        width: 2rem;
+        position: absolute;
+        top: -1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        background-color: $white;
+        border-radius: 100%;
+        border: 1px solid $gray-200;
+        font-size: 80%;
+        color: $secondary;
+    }
+}

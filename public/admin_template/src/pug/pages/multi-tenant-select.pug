@@ -1,0 +1,65 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/authentication.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var pageTitle = 'Create or Join Organization'
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+    .container
+        .row.justify-content-center
+            // Create Organization
+            .col-xl-5.col-lg-6.col-md-8.col-sm-11.mt-4
+                .card.text-center.h-100
+                    .card-body.px-5.pt-5.d-flex.flex-column
+                        div
+                            .h3.text-primary.font-weight-300 Create
+                            p.text-muted.mb-4 Create an organization and invite new members
+                        .icons-org-create.align-items-center.mx-auto.mt-auto
+                            i.icon-users(data-feather='users')
+                            i.icon-plus.fas.fa-plus
+                    .card-footer.bg-transparent.px-5.py-4
+                        .small.text-center
+                            a.btn.btn-block.btn-primary(href="multi-tenant-create.html") Create new organization
+            // Join Organization
+            .col-xl-5.col-lg-6.col-md-8.col-sm-11.mt-4
+                .card.text-center.h-100
+                    .card-body.px-5.pt-5.d-flex.flex-column.align-items-between
+                        div
+                            .h3.text-secondary.font-weight-300 Join
+                            p.text-muted.mb-4 Enter an access code or request access to an existing organization
+                        .icons-org-join.align-items-center.mx-auto
+                            i.icon-user(data-feather='user')
+                            i.icon-arrow.fas.fa-long-arrow-alt-right
+                            i.icon-users(data-feather='users')
+                    .card-footer.bg-transparent.px-5.py-4
+                        .small.text-center
+                            a.btn.btn-block.btn-secondary(href="multi-tenant-join.html") Join an organization
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-dark'
+    })
