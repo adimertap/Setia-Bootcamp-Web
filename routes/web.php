@@ -98,19 +98,19 @@ Route::middleware(['auth'])->group(function(){
     });
 
     Route::prefix('admin/masterdata')
-    ->namespace('Admin')
-    ->middleware(['Admin_Role','verified'])
-    ->group(function () {
-            Route::resource('diskon', '\App\Http\Controllers\Admin\MasterDiskonController');
-    });
+        ->namespace('Admin')
+        ->middleware(['Admin_Role','verified'])
+        ->group(function () {
+                Route::resource('diskon', '\App\Http\Controllers\Admin\MasterDiskonController');
+        });
 
     Route::prefix('admin/masterdata')
-    ->namespace('Admin')
-    ->middleware(['Admin_Role','verified'])
-    ->group(function () {
-            Route::resource('kelas', '\App\Http\Controllers\Admin\MasterKelasController');
-            Route::post('kelas/{id_kelas}/set-status', '\App\Http\Controllers\Admin\MasterKelasController@launch')
-                ->name('launch-kelas');
+        ->namespace('Admin')
+        ->middleware(['Admin_Role','verified'])
+        ->group(function () {
+                Route::resource('kelas', '\App\Http\Controllers\Admin\MasterKelasController');
+                Route::post('kelas/{id_kelas}/set-status', '\App\Http\Controllers\Admin\MasterKelasController@launch')
+                    ->name('launch-kelas');
     });
     
     // ADMIN MENU MENTOR
@@ -121,6 +121,15 @@ Route::middleware(['auth'])->group(function(){
             Route::resource('list-mentor', '\App\Http\Controllers\Admin\ListMentorController');
             Route::delete('list/{id_kelas}', '\App\Http\Controllers\Admin\ListMentorController@kelasdestroy')
                 ->name('list-mentor-destroy-kelas');
+    });
+
+    Route::prefix('admin')
+    ->namespace('Admin')
+    ->middleware(['Admin_Role','verified'])
+    ->group(function () {
+            Route::resource('approval-video', '\App\Http\Controllers\Admin\ApprovalVideoController');
+            Route::post('Video/{id_kelas}/set-status', '\App\Http\Controllers\Admin\ApprovalVideoController@setStatus')
+                    ->name('video-status');
     });
 
     

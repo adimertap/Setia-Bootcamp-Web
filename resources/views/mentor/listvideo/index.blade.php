@@ -3,7 +3,7 @@
 @section('content')
 
 <main>
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
         <!-- Custom page header alternative example-->
         <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
             <div class="mr-4 mb-3 mb-sm-0">
@@ -72,9 +72,9 @@
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 50px;">Jenis Kelas</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            {{-- <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 20px;">Jumlah Video</th>
+                                                style="width: 20px;">Jumlah Video</th> --}}
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 20px;">Status Keypoint</th>
@@ -93,20 +93,20 @@
                                         @if ($class == '')
                                             
                                         @else
-                                            @forelse ($class->Kelas as $item)
+                                            @forelse ($class as $item)
                                             <tr role="row" class="odd">
                                                 <th scope="row" class="small" class="sorting_1">{{ $loop->iteration}}.</th>
-                                                <td>{{ $item->nama_kelas }}</td>
-                                                <td>{{ $item->Jeniskelas->jenis_kelas }}</td>
-                                                <td>
-                                                    @if ($item->status_video == 'Belum Dibuat')
+                                                <td>{{ $item->Kelas[0]->nama_kelas }}</td>
+                                                <td>{{ $item->Kelas[0]->Jeniskelas->jenis_kelas }}</td>
+                                                {{-- <td>
+                                                    @if ($item->Kelas[0]->status_video == 'Belum Dibuat')
                                                         <span class="small"> 0 </span>
                                                     @else
                                                         <span class="small"> {{ $jumlah_video }} </span>
                                                     @endif
-                                                </td>
+                                                </td> --}}
                                                 <td class="text-center">
-                                                    @if ($item->status_keypoint == 'Telah Dibuat')
+                                                    @if ($item->Kelas[0]->status_keypoint == 'Telah Dibuat')
                                                         <span class="badge badge-success ">Telah Dibuat</span>
                                                     @else
                                                         <span class="badge badge-danger">Belum Dibuat</span>
@@ -114,14 +114,14 @@
                                                 </td>
                                                 
                                                 <td class="text-center">
-                                                    @if ($item->status_video == 'Telah Dibuat')
+                                                    @if ($item->Kelas[0]->status_video == 'Telah Dibuat')
                                                         <span class="badge badge-success ">Telah Dibuat</span>
                                                     @else
                                                         <span class="badge badge-danger">Belum Dibuat</span>
                                                     @endif
                                                 </td>
                                             <td class="text-center">
-                                                @if ($item->status_approval_video == 'Pending')
+                                                @if ($item->Kelas[0]->status_approval_video == 'Pending')
                                                     <span class="badge badge-secondary">Pending</span>
                                                 @elseif ($item->status_approval_video == 'Ditolak')
                                                     <span class="badge badge-danger">Ditolak</span>
@@ -130,10 +130,10 @@
                                                 @endif
                                             </td>
                                                 <td class="text-center">
-                                                    @if ($item->status_keypoint == 'Belum Dibuat')
+                                                    @if ($item->Kelas[0]->status_keypoint == 'Belum Dibuat')
                                                         <span class="badge badge-warning">Atur Keypoint Terlebih Dahulu</span>
                                                     @else
-                                                        <a href="{{ route('mentor-video.edit', $item->id_kelas) }}"
+                                                        <a href="{{ route('mentor-video.edit', $item->Kelas[0]->id_kelas) }}"
                                                             class="btn-xs btn-secondary" data-toggle="tooltip"
                                                             data-placement="top" title="" data-original-title="Video Pembelajaran">
                                                             <i class="fab fa-youtube"></i> Buat Video

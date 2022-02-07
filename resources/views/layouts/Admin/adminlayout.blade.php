@@ -200,7 +200,7 @@
                                 @endif
                                
                                 @if (Auth::user()->role == 'Admin')
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="{{ route('approval-video.index') }}">
                                         Approval Video Mentor
                                     </a>
                                 @endif

@@ -20,12 +20,11 @@ class MentorVideoController extends Controller
      */
     public function index()
     {
-        $class = DetailMentor::with('Kelas')->where('id', Auth::user()->id)->first();
-        $jumlah_video = DetailVideo::where('id_kelas', $class->id_kelas)->count();
+        $class = DetailMentor::with('Kelas')->where('id', Auth::user()->id)->get();
         $today = Carbon::now()->isoFormat('dddd');
         $tanggal = Carbon::now()->format('j F Y');
 
-        return view('mentor.listvideo.index', compact('class','today','tanggal','jumlah_video')); 
+        return view('mentor.listvideo.index', compact('class','today','tanggal')); 
     }
 
     /**

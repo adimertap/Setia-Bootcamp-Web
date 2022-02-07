@@ -4,7 +4,7 @@
 {{-- HEADER --}}
 <main>
     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
-        <div class="container">
+        <div class="container-fluid">
             <div class="page-header-content pt-4">
                 <div class="row align-items-center justify-content-between">
                     <div class="col-auto mt-4">
@@ -34,7 +34,7 @@
         </div>
     </header>
 
-    <div class="container mt-n10">
+    <div class="container-fluid mt-n10">
         <div class="row">
             <div class="col-lg-4">
                 <div class="card mb-4">
@@ -171,7 +171,7 @@
                         Keypoint Merupakan Modul Pembelajaran Suatu Kelas
                     </div>
                     <div class="form-group">
-                        <label class="small mb-1" for="number">Nomor Keypoint</label>
+                        <label class="small mb-1" for="number">Urutan Keypoint</label>
                         <div class="input-group input-group-joined">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -179,11 +179,11 @@
                                 </span>
                             </div>
                             <input class="form-control" id="number" type="number" min="1" max="99" name="number"
-                                placeholder="Input Nomor Keypoint">
+                                placeholder="Urutan Modul">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="small mb-1" for="nama_keypoint">Nomor Keypoint</label>
+                        <label class="small mb-1" for="nama_keypoint">Nama Keypoint/Modul</label>
                         <div class="input-group input-group-joined">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -351,6 +351,7 @@
             ]).draw();
 
             $('#closetambahpajak').click()
+            $("#form2")[0].reset();
 
             const Toast = Swal.mixin({
                 toast: true,

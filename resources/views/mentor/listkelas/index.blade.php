@@ -3,7 +3,7 @@
 @section('content')
 
 <main>
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
         <!-- Custom page header alternative example-->
         <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
             <div class="mr-4 mb-3 mb-sm-0">
@@ -59,28 +59,28 @@
                                         @if ($class == '')
                                             
                                         @else
-                                        @forelse ($class->Kelas as $item)
+                                        @forelse ($class as $item)
                                         <tr role="row" class="odd">
                                             <th scope="row" class="small" class="sorting_1">{{ $loop->iteration}}.</th>
-                                            <td>{{ $item->nama_kelas }}</td>
-                                            <td>{{ $item->Jeniskelas->jenis_kelas }}</td>
-                                            <td>{{ $item->level->nama_level }}</td>
+                                            <td>{{ $item->Kelas[0]->nama_kelas }}</td>
+                                            <td>{{ $item->Kelas[0]->Jeniskelas->jenis_kelas }}</td>
+                                            <td>{{ $item->Kelas[0]->level->nama_level }}</td>
                                             <td class="text-center">
-                                                @if ($item->status_video == 'Telah Dibuat')
+                                                @if ($item->Kelas[0]->status_video == 'Telah Dibuat')
                                                     <span class="badge badge-success ">Telah Dibuat</span>
                                                 @else
                                                     <span class="badge badge-danger">Belum Dibuat</span>
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                @if ($item->status_keypoint == 'Telah Dibuat')
+                                                @if ($item->Kelas[0]->status_keypoint == 'Telah Dibuat')
                                                     <span class="badge badge-success ">Telah Dibuat</span>
                                                 @else
                                                     <span class="badge badge-danger">Belum Dibuat</span>
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('mentor-kelas.edit', $item->id_kelas) }}" class="btn btn-xs btn-primary" type="button"> <i class="fas fa-rocket mr-1"></i>Atur Keypoint</a>
+                                                <a href="{{ route('mentor-kelas.edit', $item->Kelas[0]->id_kelas) }}" class="btn btn-xs btn-primary" type="button"> <i class="fas fa-rocket mr-1"></i>Atur Keypoint</a>
                                             </td>
                                         </tr>
                                         @empty

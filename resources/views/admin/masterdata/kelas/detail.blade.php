@@ -3,7 +3,7 @@
 @section('content')
 {{-- HEADER --}}
 <main>
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
         <!-- Custom page header alternative example-->
         <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
             <div class="mr-4 mb-3 mb-sm-0">
@@ -123,8 +123,8 @@
                             </div>
                           
                             <div class="form-group">
-                            <textarea class="form-control" name="tentang_kelas" id="tentang_kelas" cols="10"
-                                rows="10" readonly>{{ $kelas->tentang_kelas }}</textarea>
+                            <textarea class="form-control" name="tentang_kelas" id="tentang_kelas" cols="20"
+                                rows="20" readonly>{{ $kelas->tentang_kelas }}</textarea>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="example" role="tabpanel" aria-labelledby="example-tab">

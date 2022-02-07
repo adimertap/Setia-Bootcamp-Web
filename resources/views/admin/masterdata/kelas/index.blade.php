@@ -3,7 +3,7 @@
 @section('content')
 
 <main>
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
         <!-- Custom page header alternative example-->
         <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
             <div class="mr-4 mb-3 mb-sm-0">
@@ -113,9 +113,11 @@
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                @if ($item->status_video == 'Belum Dibuat')
+                                                @if ($item->status_video == 'Belum Dibuat' && $item->status_approval_video == 'Pending')
                                                     <span class="badge badge-warning ">Segera Selesaikan Video!</span>
-                                                @else
+                                                @elseif ($item->status_video == 'Telah Dibuat' && $item->status_approval_video == 'Pending')
+                                                    <span class="badge badge-warning ">Cek Menu Approval untuk Approve Video</span>
+                                                @elseif ($item->status_video == 'Telah Dibuat' && $item->status_approval_video == 'Disetujui')
                                                 <a href="" class="btn-xs btn-primary" type="button"
                                                     data-toggle="modal"
                                                     data-target="#Modallaunching-{{ $item->id_kelas }}">
@@ -126,6 +128,8 @@
                                                     data-target="#Modaldiskon-{{ $item->id_kelas }}">
                                                     Atur Diskon
                                                 </a>
+                                                @elseif ($item->status_video == 'Telah Dibuat' && $item->status_approval_video == 'Ditolak')
+                                                    <span class="badge badge-danger ">Menunggu Pembenaran Video!</span>
                                                 @endif
                                                
                                             </td>

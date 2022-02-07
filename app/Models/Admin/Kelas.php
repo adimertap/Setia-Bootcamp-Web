@@ -27,7 +27,8 @@ class Kelas extends Model
         'status',
         'status_video',
         'status_approval_video',
-        'status_keypoint'
+        'status_keypoint',
+        'keterangan_approval'
     ];
 
     protected $hidden =[ 

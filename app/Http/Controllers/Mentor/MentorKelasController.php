@@ -18,7 +18,7 @@ class MentorKelasController extends Controller
      */
     public function index()
     {
-        $class = DetailMentor::with('Kelas')->where('id', Auth::user()->id)->first();
+        $class = DetailMentor::with('Kelas')->where('id', Auth::user()->id)->get();
       
         $today = Carbon::now()->isoFormat('dddd');
         $tanggal = Carbon::now()->format('j F Y');
