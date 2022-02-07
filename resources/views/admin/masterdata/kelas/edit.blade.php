@@ -10,7 +10,7 @@
                     <div class="col-auto mb-3">
                         <h1 class="page-header-title">
                             <div class="page-header-icon"><i class="far fa-clipboard"></i></div>
-                            Tambah Data Kelas
+                            Edit Data Kelas {{ $kelas->nama_kelas }}
                         </h1>
                     </div>
                     <div class="col-12 col-xl-auto mb-3">
@@ -32,8 +32,8 @@
                         aria-controls="wizard1" aria-selected="true">
                         <div class="wizard-step-icon"><i class="fas fa-plus"></i></div>
                         <div class="wizard-step-text">
-                            <div class="wizard-step-text-name">Form Tambah Kelas</div>
-                            <div class="wizard-step-text-details">Lengkapi formulir penambahan kelas</div>
+                            <div class="wizard-step-text-name">Form Edit Kelas</div>
+                            <div class="wizard-step-text-details">Lengkapi formulir edit kelas</div>
                         </div>
                     </a>
 
@@ -50,19 +50,20 @@
                             <div class="col-xxl-10 col-xl-10">
                                 <h3 class="text-primary">Kelas Bootcamp</h3>
                                 <h5 class="card-title">Input Formulir Kelas</h5>
-                                <form action="{{ route('kelas.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('kelas.update', $kelas->id_kelas) }}" method="POST" enctype="multipart/form-data">
+                                    @method('PUT')
                                     @csrf
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label class="small mb-1" for="kode_kelas">Kode Kelas</label>
                                             <input class="form-control" id="kode_kelas" type="text" name="kode_kelas"
-                                                placeholder="Input Kode Kelas" value="{{ $kode_kelas }}" readonly />
+                                                placeholder="Input Kode Kelas" value="{{ $kelas->kode_kelas }}" readonly />
                                         </div>
                                         <div class="form-group col-md-8">
                                             <label class="small mb-1 mr-1" for="nama_kelas">Nama Kelas</label><span
                                                 class="mr-4 mb-3" style="color: red">*</span>
                                             <input class="form-control" id="nama_kelas" type="text" name="nama_kelas"
-                                                placeholder="Input Nama Kelas" value="{{ old('nama_kelas') }}"
+                                                placeholder="Input Nama Kelas" value="{{ $kelas->nama_kelas }}"
                                                 class="form-control @error('nama_kelas') is-invalid @enderror" />
                                             @error('nama_kelas')<div class="text-danger small mb-1">{{ $message }}
                                             </div> @enderror
@@ -74,7 +75,7 @@
                                                 Kelas</label><span class="mr-4 mb-3" style="color: red">*</span>
                                             <select class="form-control" name="id_jenis_kelas" id="id_jenis_kelas"
                                                 class="form-control @error('id_jenis_kelas') is-invalid @enderror">
-                                                <option value="" holder>Pilih Jenis</option>
+                                                <option value="{{ $kelas->Jeniskelas->id_jenis_kelas }}" holder>{{ $kelas->Jeniskelas->jenis_kelas }}</option>
                                                 @foreach ($jenis_kelas as $jenis)
                                                 <option value="{{ $jenis->id_jenis_kelas }}">
                                                     {{ $jenis->jenis_kelas }}
@@ -90,7 +91,7 @@
                                                 class="mr-4 mb-3" style="color: red">*</span>
                                             <select class="form-control" name="id_level" id="id_level"
                                                 class="form-control @error('id_level') is-invalid @enderror">
-                                                <option value="" holder>Pilih Level</option>
+                                                <option value="{{ $kelas->level->id_level }}" holder>{{ $kelas->level->nama_level }}</option>
                                                 @foreach ($level as $levels)
                                                 <option value="{{ $levels->id_level }}">
                                                     {{ $levels->nama_level }}
@@ -113,7 +114,7 @@
                                             </div>
                                             <input class="form-control" name="harga_kelas" type="number"
                                                 id="harga_kelas" placeholder="Input Harga Kelas"
-                                                value="{{ old('harga_kelas') }}"
+                                                value="{{ $kelas->harga_kelas }}"
                                                 class="form-control @error('harga_kelas') is-invalid @enderror" />
                                             @error('harga_kelas')<div class="text-danger small mb-1">{{ $message }}
                                             </div> @enderror
@@ -123,16 +124,24 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label class="small mb-1 mr-1" for="status_kelas">Status Kelas</label>
-                                            <input class="form-control" name="status_kelas" type="text"
-                                                id="status_kelas" value="Aktif" readonly />
+                                            <label class="small mb-1 mr-1" for="status">Status</label><span class="mr-4 mb-3" style="color: red">*</span>
+                                            <select name="status" id="status" class="form-control"
+                                                class="form-control @error('status') is-invalid @enderror">
+                                                <option value="{{ $kelas->status }}">{{ $kelas->status }}</option>
+                                                <option value="Aktif">Aktif</option>
+                                                <option value="Tidak Aktif">Tidak Aktif</option>
+                                            </select>
+                                            @error('status')<div class="text-danger small mb-1">{{ $message }}
+                                            </div> @enderror
                                         </div>
+
                                         <div class="form-group col-md-4">
                                             <label class="small mb-1" for="cover_kelas">Gambar Cover Kelas</label><span
                                                 class="mr-4 mb-3" style="color: red">*</span>
                                             <input class="form-control" id="cover_kelas" type="file" name="cover_kelas"
-                                                value="{{ old('cover_kelas') }}" accept="image/*" multiple="multiple"
+                                                value="{{ $kelas->cover_kelas }}" accept="image/*" multiple="multiple"
                                                 class="form-control @error('cover_kelas') is-invalid @enderror">
+                                            {{-- <img class="mt-2" src="/image/{{ $kelas->cover_kelas }}" width="300px"> --}}
                                             @error('cover_kelas')<div class="text-danger small mb-1">{{ $message }}
                                             </div> @enderror
                                             <div class="small">
@@ -144,15 +153,15 @@
                                         <label class="small mb-1" for="tentang_kelas">Tentang Kelas</label>
                                         <textarea class="form-control" name="tentang_kelas" id="tentang_kelas" cols="10"
                                             rows="5" placeholder="Input Deskripsi Mengenai Kelas"
-                                            value="{{ old('tentang_kelas') }}"
-                                            class="form-control @error('tentang_kelas') is-invalid @enderror"></textarea>
+                                            value="{{ $kelas->tentang_kelas }}"
+                                            class="form-control @error('tentang_kelas') is-invalid @enderror">{{ $kelas->tentang_kelas }}</textarea>
                                         @error('tentang_kelas')<div class="text-danger small mb-1">{{ $message }}
                                         </div> @enderror
                                     </div>
                                     <hr class="my-4" />
                                     <div class="d-flex justify-content-between">
                                         <a href="{{ route('kelas.index') }}" class="btn btn-light">Kembali</a>
-                                        <button class="btn btn-primary" type="Submit">Tambah!</button>
+                                        <button class="btn btn-primary" type="Submit">Edit!</button>
                                     </div>
                                 </form>
                             </div>

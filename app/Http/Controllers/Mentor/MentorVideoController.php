@@ -1,39 +1,31 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Mentor;
 
+use App\Http\Controllers\Controller;
+use App\Models\Admin\DetailKeypoint;
+use App\Models\Admin\DetailMentor;
+use App\Models\Admin\DetailVideo;
+use App\Models\Admin\Kelas;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Auth;
+use Carbon\Carbon;
 
-class HomeController extends Controller
+class MentorVideoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function dashboard()
+    public function index()
     {
+        $class = DetailMentor::with('Kelas')->where('id', Auth::user()->id)->first();
+        $jumlah_video = DetailVideo::where('id_kelas', $class->id_kelas)->count();
+        $today = Carbon::now()->isoFormat('dddd');
+        $tanggal = Carbon::now()->format('j F Y');
 
-        if(Auth::user()->role == 'User'){
-            return redirect(route('user.dashboard'));
-        }else if(Auth::user()->role == 'Admin'){
-            return redirect(route('admin.dashboard'));
-        }else if(Auth::user()->role == 'Mentor'){
-            return redirect(route('mentor.dashboard'));
-        }else if(Auth::user()->role == 'Perusahaan'){
-            'ROLE PERUSAHAAN';
-        }
-
-        // switch(Auth::user()->role == 'User'){
-        //     case true:
-        //         return redirect(route('admin.dashboard'));
-        //         break;
-            
-        //     default:
-        //     return redirect(route('user.dashboard'));
-        //         break;
-        // }
+        return view('mentor.listvideo.index', compact('class','today','tanggal','jumlah_video')); 
     }
 
     /**
@@ -76,7 +68,10 @@ class HomeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kelas = Kelas::with('Jeniskelas','Level')->find($id);
+        $keypoint = DetailKeypoint::where('id_kelas', $id)->get();
+
+        return view('mentor.listvideo.edit', compact('kelas','keypoint'));
     }
 
     /**
@@ -88,7 +83,13 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $video = Kelas::find($id);
+        $video->status_video = 'Telah Dibuat';
+        $video->update();
+        
+        $video->detailvideo()->delete();
+        $video->detailvideo()->insert($request->video);
+        return $request;
     }
 
     /**

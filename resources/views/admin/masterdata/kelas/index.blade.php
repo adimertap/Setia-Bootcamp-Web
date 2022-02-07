@@ -32,6 +32,14 @@
             </div>
             <div class="card-body">
                 <div class="datatable">
+                    @if(session('messagelaunch'))
+                    <div class="alert alert-primary" role="alert"> <i class="fas fa-check"></i>
+                        {{ session('messagelaunch') }}
+                        <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    @endif
                     @if(session('messageberhasil'))
                     <div class="alert alert-success" role="alert"> <i class="fas fa-check"></i>
                         {{ session('messageberhasil') }}
@@ -62,7 +70,7 @@
                                                 style="width: 20px;">No</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 90px;">Nama Kelas</th>
+                                                style="width: 150px;">Nama Kelas</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 50px;">Jenis Kelas</th>
@@ -71,32 +79,63 @@
                                                 style="width: 50px;">Harga Kelas</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 50px;">Status</th>
+                                                style="width: 20px;">Status</th>
+                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Position: activate to sort column ascending"
+                                                style="width: 20px;">Status Video</th>
+                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Position: activate to sort column ascending"
+                                                style="width: 80px;">Launching dan Diskon</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 50px;">Action</th>
+                                                style="width: 80px;">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse ($kelas as $item)
                                         <tr role="row" class="odd">
                                             <th scope="row" class="small" class="sorting_1">{{ $loop->iteration}}.</th>
-                                            <td>{{ $item->nama_level }}</td>
+                                            <td>{{ $item->nama_kelas }}</td>
                                             <td>{{ $item->Jeniskelas->jenis_kelas }}</td>
-                                            <td>{{ number_format($item->harga_kelas) }}</td>
-                                            <td>
+                                            <td>Rp. {{ number_format($item->harga_kelas) }}</td>
+                                            <td class="text-center">
                                                 @if ($item->status == 'Aktif')
-                                                <span class="badge badge-success">Aktif</span>
+                                                    <span class="badge badge-success ">Aktif</span>
                                                 @else
-                                                <span class="badge badge-danger">Tidak Aktif</span>
+                                                    <span class="badge badge-danger">Tidak Aktif</span>
                                                 @endif
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($item->status_video == 'Telah Dibuat')
+                                                    <span class="badge badge-success ">Telah Dibuat</span>
+                                                @else
+                                                    <span class="badge badge-danger">Belum Dibuat</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($item->status_video == 'Belum Dibuat')
+                                                    <span class="badge badge-warning ">Segera Selesaikan Video!</span>
+                                                @else
+                                                <a href="" class="btn-xs btn-primary" type="button"
+                                                    data-toggle="modal"
+                                                    data-target="#Modallaunching-{{ $item->id_kelas }}">
+                                                    <i class="fas fa-rocket mr-1"></i>Launch
+                                                </a>
+                                                <a href="" class="btn-xs btn-secondary" type="button"
+                                                    data-toggle="modal"
+                                                    data-target="#Modaldiskon-{{ $item->id_kelas }}">
+                                                    Atur Diskon
+                                                </a>
+                                                @endif
+                                               
+                                            </td>
                                             <td class="text-center">
                                                 <a href="{{ route('kelas.show', $item->id_kelas) }}"
                                                     class="btn btn-secondary btn-datatable" data-toggle="tooltip"
                                                     data-placement="top" title="" data-original-title="Detail">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
-                                                <a href="{{ route('level.edit', $item->id_kelas) }}" class="btn btn-primary btn-datatable" type="button">
+                                                <a href="{{ route('kelas.edit', $item->id_kelas) }}" class="btn btn-primary btn-datatable" type="button">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <a href="" class="btn btn-danger btn-datatable" type="button"
@@ -119,6 +158,34 @@
         </div>
     </div>
 </main>
+
+@forelse ($kelas as $item)
+<div class="modal fade" id="Modallaunching-{{ $item->id_kelas }}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary-soft">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Konfirmasi Launching Kelas</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+            </div>
+            <form action="{{ route('launch-kelas', $item->id_kelas) }}" method="POST" class="d-inline">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">Apakah Anda Yakin Posting dan Launching Kelas <b>{{ $item->nama_kelas }}</b>  dengan harga <b> {{ number_format($item->harga_kelas) }}</b>?</div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                    <button class="btn btn-success" type="submit">Ya! Launch</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@empty
+@endforelse
+
 
 @forelse ($kelas as $item)
 <div class="modal fade" id="Modalhapus-{{ $item->id_kelas }}" tabindex="-1" role="dialog"

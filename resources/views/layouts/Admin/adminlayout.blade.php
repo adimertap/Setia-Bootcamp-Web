@@ -22,6 +22,8 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ url('/node_modules/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -37,12 +39,11 @@
         <ul class="navbar-nav align-items-center ml-auto">
             <li class="nav-item dropdown no-caret mr-2 dropdown-user">
                 @if (Auth::user()->avatar)
-                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage"
+                <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage"
                     href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false"><img class="img-fluid"
-                        src="{{Auth::user()->avatar}}" />
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
+                    aria-expanded="false"><img class="img-fluid" src="{{Auth::user()->avatar}}" />
+                </a>
+                <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
                     aria-labelledby="navbarDropdownUserImage">
                     <h6 class="dropdown-header d-flex align-items-center">
                         <img class="dropdown-user-img" src="{{Auth::user()->avatar}}" />
@@ -51,39 +52,38 @@
                             <div class="dropdown-user-details-email">{{ Auth::user()->email }}</div>
                         </div>
                     </h6>
-                @else
+                    @else
                     <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage"
-                    href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false"><img class="img-fluid"
-                        src="https://ui-avatars.com/api/?name=Admin" />
+                        href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"><img class="img-fluid" src="https://ui-avatars.com/api/?name=Admin" />
                     </a>
                     <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
-                    aria-labelledby="navbarDropdownUserImage">
-                    <h6 class="dropdown-header d-flex align-items-center">
-                        <img class="dropdown-user-img" src="https://ui-avatars.com/api/?name=Admin" />
-                        <div class="dropdown-user-details">
-                            <div class="dropdown-user-details-name">{{ Auth::user()->name }}</div>
-                            <div class="dropdown-user-details-email">{{ Auth::user()->email }}</div>
-                        </div>
-                    </h6>
-                @endif
-               
-                
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route('welcome') }}">
-                        <div class="dropdown-item-icon"><i data-feather="columns"></i></div>
-                        Welcome Page
-                    </a>
-                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                        <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
-                        Logout
-                    </a>
+                        aria-labelledby="navbarDropdownUserImage">
+                        <h6 class="dropdown-header d-flex align-items-center">
+                            <img class="dropdown-user-img" src="https://ui-avatars.com/api/?name=Admin" />
+                            <div class="dropdown-user-details">
+                                <div class="dropdown-user-details-name">{{ Auth::user()->name }}</div>
+                                <div class="dropdown-user-details-email">{{ Auth::user()->email }}</div>
+                            </div>
+                        </h6>
+                        @endif
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </div>
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('welcome') }}">
+                            <div class="dropdown-item-icon"><i data-feather="columns"></i></div>
+                            Welcome Page
+                        </a>
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                            <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
+                            Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout-admin') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
             </li>
         </ul>
     </nav>
@@ -99,7 +99,8 @@
                             <div class="nav-link-icon"><i class="fas fa-warehouse"></i></div>
                             Dashboard
                         </a>
-                      
+
+                        @if (Auth::user()->role == 'Admin')
                         <div class="sidenav-menu-heading">Master Data</div>
                         <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
                             data-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
@@ -123,21 +124,16 @@
                                 <a class="nav-link" href="{{ route('diskon.index') }}">
                                     Diskon
                                 </a>
-                                <a class="nav-link" href="#">
-                                    FAQ
-                                </a>
                             </nav>
                         </div>
-                    
 
-                      
                         <div class="sidenav-menu-heading">Detail Kelas</div>
                         <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
                             data-target="#collapseUtilities" aria-expanded="false" aria-controls="collapseUtilities">
                             <div class="nav-link-icon">
                                 <i class="fas fa-cubes"></i>
                             </div>
-                            User Kelas
+                            User dan Pembayaran
                             <div class="sidenav-collapse-arrow">
                                 <i class="fas fa-angle-down"></i>
                             </div>
@@ -152,75 +148,62 @@
                                 </a>
                             </nav>
                         </div>
-                       
 
-                     
-                        <div class="sidenav-menu-heading">Capaian User</div>
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
-                                data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
-                                Capaian
-                                <div class="sidenav-collapse-arrow">
-                                    <i class="fas fa-angle-down"></i>
-                                </div>
-                            </a>
-                            <div class="collapse" id="collapsePages" data-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
-                                    <a class="nav-link " href="#">
-                                       Sertifikat
-                                    </a>
-                                    <a class="nav-link " href="#">
-                                        Review Kelas
-                                     </a>
-                                     <a class="nav-link " href="#">
-                                        Portofolio
-                                     </a>
-                                </nav>
-                            </div>
-{{--                      
 
-                        @if (Auth::user()->hasRole('Aplikasi Gudang') || Auth::user()->role == 'owner')
                         <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
-                            data-target="#collapseComponents" aria-expanded="false" aria-controls="collapseComponents">
-                            <div class="nav-link-icon"><i class="fas fa-box-open"></i></div>
-                            Receiving
+                            data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+                            Capaian User
                             <div class="sidenav-collapse-arrow">
                                 <i class="fas fa-angle-down"></i>
                             </div>
                         </a>
-                        <div class="collapse" id="collapseComponents" data-parent="#accordionSidenav">
-                            <nav class="sidenav-menu-nested nav">
-                                <a class="nav-link " href="{{ route('Rcv.index') }}">
-                                    Receiving
+                        <div class="collapse" id="collapsePages" data-parent="#accordionSidenav">
+                            <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
+                                <a class="nav-link " href="#">
+                                    Sertifikat
                                 </a>
-                                <a class="nav-link" href="{{ route('retur.index') }}">
-                                    Retur
+                                <a class="nav-link " href="#">
+                                    Review Kelas
+                                </a>
+                                <a class="nav-link " href="#">
+                                    Portofolio
                                 </a>
                             </nav>
                         </div>
-                        @endif --}}
+                        @endif
 
-                     
                         <div class="sidenav-menu-heading">Mentor</div>
                         <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
                             data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="nav-link-icon"><i data-feather="check-square"></i></div>
+                            <div class="nav-link-icon"><i class="fas fa-address-card"></i></div>
                             Mentor Menu
                             <div class="sidenav-collapse-arrow">
                                 <i class="fas fa-angle-down">
                                 </i></div>
                         </a>
-                   
+
                         <div class="collapse" id="collapseLayouts" data-parent="#accordionSidenav">
                             <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
-                            
-                                <a class="nav-link" href="#">
-                                    List Mentor
-                                </a>
-                                <a class="nav-link" href="#">
-                                    Approval Video Mentor
-                                </a>
+                                @if (Auth::user()->role == 'Admin')
+                                    <a class="nav-link" href="{{ route('list-mentor.index') }}">
+                                        List Mentor
+                                    </a>
+                                @endif
+                                @if (Auth::user()->role == 'Mentor')
+                                    <a class="nav-link" href="{{ route('mentor-kelas.index') }}">
+                                        Modul Kelas
+                                    </a>
+                                    <a class="nav-link" href="{{ route('mentor-video.index') }}">
+                                        Video Mentor
+                                    </a>
+                                @endif
                                
+                                @if (Auth::user()->role == 'Admin')
+                                    <a class="nav-link" href="#">
+                                        Approval Video Mentor
+                                    </a>
+                                @endif
                             </nav>
                         </div>
                     </div>
@@ -238,11 +221,13 @@
 
 
         <div id="layoutSidenav_content">
+            @include('sweetalert::alert')
             @yield('content')
             <footer class="footer mt-auto footer-light">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12 text-center">Copyright &copy; 2021 Bootcamp PT Setia Mandiri Perkasa.</div>
+                        <div class="col-md-12 text-center">Copyright &copy; 2021 Bootcamp PT Setia Mandiri Perkasa.
+                        </div>
                     </div>
                 </div>
             </footer>

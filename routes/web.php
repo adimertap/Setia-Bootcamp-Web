@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\UserDashboardController as UserDashboard;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Mentor\MentorDashboardController as MentorDashboard;
 
 /* 
 |--------------------------------------------------------------------------
@@ -56,6 +57,31 @@ Route::middleware(['auth'])->group(function(){
             Route::get('/', [AdminDashboard::class, 'index'])->name('dashboard');
     });
 
+    // MENTOR DASHBOARD
+    Route::prefix('mentor/dashboard')
+        ->namespace('Mentor')->name('mentor.')
+        ->middleware(['Mentor_Role','verified'])
+        ->group(function(){
+            Route::get('/', [MentorDashboard::class, 'index'])->name('dashboard');
+    });
+
+    // MENTOR LIST KELAS
+    Route::prefix('mentor/kelas')
+        ->namespace('Mentor')
+        ->middleware(['Mentor_Role','verified'])
+        ->group(function () {
+            Route::resource('mentor-kelas', '\App\Http\Controllers\Mentor\MentorKelasController');
+    });
+
+    // MENTOR LIST VIDEO
+    Route::prefix('mentor/video')
+        ->namespace('Mentor')
+        ->middleware(['Mentor_Role','verified'])
+        ->group(function () {
+            Route::resource('mentor-video', '\App\Http\Controllers\Mentor\MentorVideoController');
+    });
+
+
     // ADMIN MASTERDATA
     Route::prefix('admin/masterdata')
         ->namespace('Admin')
@@ -83,8 +109,21 @@ Route::middleware(['auth'])->group(function(){
     ->middleware(['Admin_Role','verified'])
     ->group(function () {
             Route::resource('kelas', '\App\Http\Controllers\Admin\MasterKelasController');
+            Route::post('kelas/{id_kelas}/set-status', '\App\Http\Controllers\Admin\MasterKelasController@launch')
+                ->name('launch-kelas');
+    });
+    
+    // ADMIN MENU MENTOR
+    Route::prefix('admin')
+    ->namespace('Admin')
+    ->middleware(['Admin_Role','verified'])
+    ->group(function () {
+            Route::resource('list-mentor', '\App\Http\Controllers\Admin\ListMentorController');
+            Route::delete('list/{id_kelas}', '\App\Http\Controllers\Admin\ListMentorController@kelasdestroy')
+                ->name('list-mentor-destroy-kelas');
     });
 
+    
 
 });
 

@@ -24,7 +24,10 @@ class Kelas extends Model
         'jumlah_lesson',
         'tentang_kelas',
         'cover_kelas',
-        'status'
+        'status',
+        'status_video',
+        'status_approval_video',
+        'status_keypoint'
     ];
 
     protected $hidden =[ 
@@ -43,6 +46,21 @@ class Kelas extends Model
     public function level()
     {
         return $this->belongsTo(level::class,'id_level','id_level');
+    }
+
+    public function DetailMentor()
+    {
+        return $this->hasMany(DetailMentor::class,'id_kelas','id_kelas');
+    }
+
+    public function Detailkeypoint()
+    {
+        return $this->hasMany(DetailKeypoint::class, 'id_kelas', 'id_kelas');
+    }
+
+    public function Detailvideo()
+    {
+        return $this->hasMany(DetailVideo::class, 'id_kelas', 'id_kelas');
     }
 
     public static function getId(){
