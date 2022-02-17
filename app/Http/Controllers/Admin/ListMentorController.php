@@ -52,7 +52,7 @@ class ListMentorController extends Controller
             $imagePath = $request->file('avatar');
             $avatar = $imagePath->getClientOriginalName();
            
-            $imagePath->move(public_path().'/image/', $avatar); 
+            $imagePath->move(public_path().'/profile/', $avatar); 
             $data[] = $avatar;
           }
 
@@ -82,8 +82,8 @@ class ListMentorController extends Controller
     public function show($id)
     {
         $mentor = User::with('Detailkelas','Detailkelas.Jeniskelas','Detailkelas.level')->find($id);
-        // return $mentor;
         $kelas = Kelas::with('Jeniskelas','Level')->get();
+    
 
         return view('admin.menumentor.listmentor.detail',compact('mentor','kelas'));
     }

@@ -55,10 +55,27 @@
                                 <textarea class="form-control" id="nama_kelas" type="text" name="nama_kelas" value="{{ $kelas->nama_kelas }}"
                                     readonly>{{ $kelas->nama_kelas }}</textarea>
                             </div>
-                            <div class="form-group">
-                                <label class="small mb-1" for="name">Mentor</label>
-                                <input class="form-control" id="name" type="text" name="name" value="{{ $kelas->name }}"readonly />
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="name">Mentor</label>
+                                        <input class="form-control" id="name" type="text" name="name" value="{{ $kelas->name }}"readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @if ($kelas->status_approval_video == 'Disetujui')
+                                            <i class="fas fa-check-square mr-1"></i>
+                                        @else
+                                            <i class="fas fa-times-circle mr-1"></i>
+                                        @endif
+                                        <label class="small mb-1" for="name">Status Approval</label>
+                                        <input class="form-control" id="name" type="text" name="name" value="{{ $kelas->status_approval_video }}"readonly />
+                                    </div>
+                                </div>
+
                             </div>
+                           
                             <div class="form-group text-right">
                                 <hr>
                                 <a href="{{ route('approval-video.index') }}" class="btn btn-sm btn-light">Kembali</a>
@@ -124,7 +141,7 @@
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Start date: activate to sort column ascending"
-                                                    style="width: 150px;">
+                                                    style="width: 70px;">
                                                     Nama Video</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1"
@@ -139,7 +156,7 @@
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Start date: activate to sort column ascending"
-                                                    style="width: 30px;">
+                                                    style="width: 120px;">
                                                     Lihat Video</th>
                                             </tr>
                                         </thead>
@@ -151,10 +168,10 @@
                                                 <td>{{ $item->nama_video }}</td>
                                                 <td>{{ $item->url_video }}</td>
                                                 <td>{{ $item->keterangan_video }}</td>
-                                                <td>
+                                                <td class="text-center">
                                                     <a href="" class="btn-xs btn-secondary" type="button"
                                                         data-toggle="modal"
-                                                        data-target="#Modalvideo-{{ $item->id_detail_video }}">
+                                                        data-target="#Modalvideo-{{ $item->id_video_kelas }}">
                                                         <i class="fab fa-youtube"></i> Lihat Video
                                                     </a>
                                                 </td>
@@ -228,27 +245,40 @@
     </div>
 </div>
 
-@forelse ($kelas->Detailvideo as $video)
-<div class="modal fade" id="Modalvideo-{{ $video->id_detail_video }}" data-backdrop="static" tabindex="-1" role="dialog"
+@forelse ($kelas->Detailvideo as $item)
+<div class="modal fade" id="Modalvideo-{{ $item->id_video_kelas }}" data-backdrop="static" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-light">
-                <h5 class="modal-title" id="staticBackdropLabel">Detail Video</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Nama Video: {{ $item->nama_video }}</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close" id="closetambahpajak"><span
                         aria-hidden="true">×</span></button>
             </div>
-            <form action="" method="POST" id="form2" class="d-inline">
                 <div class="modal-body">
-                    <iframe width="420" height="315" src="{{ $video->url_video }}" frameborder="0" allowfullscreen></iframe>
+                    <x-embed url="{{ $item->url_video }}" />
+                <div class="mt-5">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="small mb-1" for="nama_kelas">Nama Video</label>
+                                <input class="form-control" id="nama_kelas" type="text" name="nama_kelas" value="{{ $item->nama_video }}" readonly />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="small mb-1" for="nama_kelas">Keterangan Video</label>
+                                <textarea class="form-control" id="nama_kelas" type="text" name="nama_kelas"
+                                    readonly>{{ $item->keterangan_video }}</textarea>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Close</button>
-                    <button class="btn btn-success btn-sm" onclick="tambahvideo(event)" type="button">Tambah
-                        Video</button>
+                    <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Kembali</button>
                 </div>
         </div>
-        </form>
     </div>
 </div>
 @empty

@@ -50,6 +50,6 @@ class User extends Authenticatable
 
     public function Detailkelas()
     {
-        return $this->hasMany(Kelas::class,'tb_detail_mentor','id','id_kelas');
+        return $this->belongsTomany(Kelas::class,'tb_detail_mentor','id','id_kelas');
     }
 }

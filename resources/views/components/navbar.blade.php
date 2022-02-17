@@ -14,13 +14,16 @@
                     <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('class') }}">Program Kelas</a>
+                    <a class="nav-link" href="{{ route('program-kelas.index') }}">Program Kelas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Flash Sale</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Portofolio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Perusahaan Kerjasama</a>
                 </li>
             </ul>
             @auth

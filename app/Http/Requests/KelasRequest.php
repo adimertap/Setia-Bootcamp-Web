@@ -26,7 +26,7 @@ class KelasRequest extends FormRequest
         return [
             'id_jenis_kelas' => 'required|exists:tb_master_jenis_kelas,id_jenis_kelas',
             'id_level' => 'required|exists:tb_master_level,id_level',
-            'nama_kelas' => 'required|min:8|max:60',
+            'nama_kelas' => 'required|min:8|max:150',
             'harga_kelas' => 'required|min:1000|numeric',
             'tentang_kelas' => 'required|min:50',
             'cover_kelas' => 'required|image|mimes:jpeg,png,jpg|max:2048',

@@ -1,17 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Mentor;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\DetailKeypoint;
-use App\Models\Admin\DetailMentor;
-use App\Models\Admin\DetailVideo;
-use App\Models\Admin\Kelas;
-use Illuminate\Http\Request;
-use Auth;
+use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
-class MentorVideoController extends Controller
+class ListUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,11 +16,11 @@ class MentorVideoController extends Controller
      */
     public function index()
     {
-        $class = DetailMentor::with('Kelas')->where('id', Auth::user()->id)->get();
+        $user = User::where('role','=','User')->get();
         $today = Carbon::now()->isoFormat('dddd');
         $tanggal = Carbon::now()->format('j F Y');
 
-        return view('mentor.listvideo.index', compact('class','today','tanggal')); 
+        return view('admin.detailkelas.listuser.index', compact('user','today','tanggal'));
     }
 
     /**
@@ -67,10 +63,7 @@ class MentorVideoController extends Controller
      */
     public function edit($id)
     {
-        $kelas = Kelas::with('Jeniskelas','Level')->find($id);
-        $keypoint = DetailKeypoint::where('id_kelas', $id)->get();
-
-        return view('mentor.listvideo.edit', compact('kelas','keypoint'));
+        //
     }
 
     /**
@@ -82,14 +75,7 @@ class MentorVideoController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $video = Kelas::find($id);
-        $video->status_video = 'Telah Dibuat';
-        $video->update();
-        
-        $video->detailvideo()->delete();
-        $video->detailvideo()->insert($request->video);
-        return $request;
+        //
     }
 
     /**

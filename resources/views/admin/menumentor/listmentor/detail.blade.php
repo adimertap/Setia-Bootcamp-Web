@@ -3,7 +3,7 @@
 @section('content')
 {{-- HEADER --}}
 <main>
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
         <!-- Custom page header alternative example-->
         <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
             <div class="mr-4 mb-3 mb-sm-0">
@@ -53,10 +53,10 @@
                 <div class="card mb-4">
                     <div class="card card-header-actions">
                         <div class="card-header">Kelas yang diajarkan
-                            <a href="" class="btn-xs btn-primary" type="button" data-toggle="modal"
+                            {{-- <a href="" class="btn-xs btn-primary" type="button" data-toggle="modal"
                                 data-target="#Modalkelasmentor">
                                 <i class="fas fa-address-card mr-1"></i>Atur Kelas Mentor
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -150,7 +150,7 @@
 @endforelse
 
 
-<div class="modal fade" id="Modalkelasmentor" tabindex="-1" role="dialog" data-backdrop="static"
+{{-- <div class="modal fade" id="Modalkelasmentor" tabindex="-1" role="dialog" data-backdrop="static"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -232,6 +232,9 @@
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Start date: activate to sort column ascending"
                                                 style="width: 40px;">Level</th>
+                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Start date: activate to sort column ascending"
+                                                style="width: 40px;">Mentor</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Actions: activate to sort column ascending"
                                                 style="width: 50px;"> <input onClick="toggle(this)" name="chk[]"
@@ -242,10 +245,16 @@
                                         @forelse ($kelas as $item)
                                         <tr id="item-{{ $item->id_kelas }}" role="row" class="odd">
                                             <th scope="row" class="small" class="sorting_1">{{ $loop->iteration}}</th>
-                                            <td class="nama_kelas"><span
-                                                    id="{{ $item->id_kelas }}">{{ $item->nama_kelas }}</span></td>
+                                            <td class="nama_kelas"><span id="{{ $item->id_kelas }}">{{ $item->nama_kelas }}</span></td>
                                             <td class="jenis_kelas">{{ $item->Jeniskelas->jenis_kelas }}</td>
                                             <td class="level_kelas">{{ $item->level->nama_level }}</td>
+                                            <td>
+                                                @if ($item->name == '')
+                                                    <span class="badge badge-danger ">Belum Terdapat Mentor</span>
+                                                @else
+                                                    <span>{{ $item->name }}</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <div class="">
                                                     <input class="checkpegawai" id="customCheck1-{{ $item->id_kelas }}"
@@ -271,10 +280,10 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 
-<script>
+{{-- <script>
      function tambahkelas(event) {
         var Terpilih = 'Kelas Telah Dipilih'
         var detailkelas = $('#detailkelas').val(Terpilih)
@@ -382,6 +391,6 @@
         $('#dataTableKelas').DataTable()
     });
 
-</script>
+</script> --}}
 
 @endsection

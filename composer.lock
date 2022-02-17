@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "829aa4fd9aae6de65699d50e850104c6",
+    "content-hash": "ef98c3839147e4efcc39bf0b92a60460",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,78 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.0.5"
             },
             "time": "2022-01-03T15:27:13+00:00"
+        },
+        {
+            "name": "bensampo/laravel-embed",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BenSampo/laravel-embed.git",
+                "reference": "d78f7251ea9e8a72cfa46b3aeab4e563817e61cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BenSampo/laravel-embed/zipball/d78f7251ea9e8a72cfa46b3aeab4e563817e61cc",
+                "reference": "d78f7251ea9e8a72cfa46b3aeab4e563817e61cc",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3.1|^7.0",
+                "illuminate/contracts": "^7.25|^8.0",
+                "illuminate/support": "^7.25|^8.0",
+                "php": "^7.4.0|^8.0"
+            },
+            "require-dev": {
+                "laravel/framework": "^7.25|^8.0",
+                "orchestra/testbench": "^5.0|^6.0",
+                "phpunit/phpunit": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "BenSampo\\Embed\\EmbedServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BenSampo\\Embed\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Sampson",
+                    "homepage": "https://sampo.co.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Painless responsive embeds for videos, slideshows and more.",
+            "homepage": "https://github.com/bensampo/laravel-embed",
+            "keywords": [
+                "bensampo",
+                "embed",
+                "laravel",
+                "package"
+            ],
+            "support": {
+                "issues": "https://github.com/BenSampo/laravel-embed/issues",
+                "source": "https://github.com/BenSampo/laravel-embed/tree/v1.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/bensampo",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-03-28T09:04:51+00:00"
         },
         {
             "name": "brick/math",

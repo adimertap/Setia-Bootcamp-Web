@@ -32,11 +32,23 @@
                         <img src="{{ asset('/image/'.$kelas['cover_kelas']) }}" alt="" style="width: 300px" />
                         <img src="{{ url($kelas->cover_kelas) }}" alt="">
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1" for="nama_kelas">Kode Kelas</label>
-                        <input class="form-control form-control-sm" id="nama_kelas" type="text"
-                            name="nama_kelas" value="{{ $kelas->kode_kelas }}" readonly />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" for="nama_kelas">Kode Kelas</label>
+                                <input class="form-control form-control-sm" id="nama_kelas" type="text"
+                                    name="nama_kelas" value="{{ $kelas->kode_kelas }}" readonly />
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="small mb-1" for="nama_kelas">Mentor</label>
+                                <input class="form-control form-control-sm" id="nama_kelas" type="text"
+                                    name="nama_kelas" value="{{ $kelas->name }}" readonly />
+                            </div>
+                        </div>
                     </div>
+                   
                     <div class="form-group">
                         <label class="small mb-1" for="nama_kelas">Nama Kelas</label>
                         <textarea class="form-control form-control-sm" id="nama_kelas" type="text"

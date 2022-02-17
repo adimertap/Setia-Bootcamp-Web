@@ -1,17 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Mentor;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\DetailKeypoint;
-use App\Models\Admin\DetailMentor;
 use App\Models\Admin\DetailVideo;
 use App\Models\Admin\Kelas;
 use Illuminate\Http\Request;
-use Auth;
-use Carbon\Carbon;
 
-class MentorVideoController extends Controller
+class ProgramKelasUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,11 +17,11 @@ class MentorVideoController extends Controller
      */
     public function index()
     {
-        $class = DetailMentor::with('Kelas')->where('id', Auth::user()->id)->get();
-        $today = Carbon::now()->isoFormat('dddd');
-        $tanggal = Carbon::now()->format('j F Y');
+        $kelas = Kelas::with('Jeniskelas','Level')->leftJoin('tb_detail_mentor', 'tb_master_kelas.id_kelas','tb_detail_mentor.id_kelas')
+        ->leftjoin('users','tb_detail_mentor.id','users.id')->where('status','=','Aktif')
+        ->get();
 
-        return view('mentor.listvideo.index', compact('class','today','tanggal')); 
+        return view('user.kelas.list_class',compact('kelas'));
     }
 
     /**
@@ -56,7 +53,15 @@ class MentorVideoController extends Controller
      */
     public function show($id)
     {
-        //
+        $kelas = Kelas::with('Jeniskelas','Level','Detailkeypoint','Detailvideo')->find($id);
+
+        $count_video = DetailVideo::where('id_kelas', '=', $id)->count();
+        $video_sedikit = DetailVideo::where('id_kelas', '=', $id)->take(5)->get();
+        $video_lengkap = DetailVideo::where('id_kelas', '=', $id)->get();
+
+        $modul = DetailKeypoint::where('id_kelas', '=', $id)->get();
+        return view('user.kelas.detail',compact('kelas', 'count_video' ,'video_sedikit','video_lengkap','modul'));
+
     }
 
     /**
@@ -67,10 +72,7 @@ class MentorVideoController extends Controller
      */
     public function edit($id)
     {
-        $kelas = Kelas::with('Jeniskelas','Level')->find($id);
-        $keypoint = DetailKeypoint::where('id_kelas', $id)->get();
-
-        return view('mentor.listvideo.edit', compact('kelas','keypoint'));
+        //
     }
 
     /**
@@ -82,14 +84,7 @@ class MentorVideoController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $video = Kelas::find($id);
-        $video->status_video = 'Telah Dibuat';
-        $video->update();
-        
-        $video->detailvideo()->delete();
-        $video->detailvideo()->insert($request->video);
-        return $request;
+        //
     }
 
     /**

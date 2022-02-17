@@ -20,10 +20,7 @@
             </div>
         </div>
     </header>
-
-
-
-    <div class="container">
+    <div class="container-fluid">
         <div class="card">
             <div class="card-header border-bottom">
                 <div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard" id="cardTab" role="tablist">
@@ -104,7 +101,7 @@
                                     </div>
 
                                     <div class="form-row">
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <div class="row justify-content-between align-items-center">
                                                 <div class="col-12 col-lg-auto mb-5 mb-lg-0 text-center text-lg-left">
                                                     <label class="small mb-1 mr-1" for="harga_kelas">Harga
@@ -123,11 +120,6 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label class="small mb-1 mr-1" for="status_kelas">Status Kelas</label>
-                                            <input class="form-control" name="status_kelas" type="text"
-                                                id="status_kelas" value="Aktif" readonly />
-                                        </div>
-                                        <div class="form-group col-md-4">
                                             <label class="small mb-1" for="cover_kelas">Gambar Cover Kelas</label><span
                                                 class="mr-4 mb-3" style="color: red">*</span>
                                             <input class="form-control" id="cover_kelas" type="file" name="cover_kelas"
@@ -138,6 +130,22 @@
                                             <div class="small">
                                                 <span class="text-muted">Accept Picture in PNG, JPG, JPEG Format </span>
                                             </div>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="small mb-1 mr-1" for="id">Pilih Mentor</label><span
+                                                class="mr-4 mb-3" style="c  olor: red">*</span>
+                                            <select class="form-control" name="id" id="id"
+                                                class="form-control @error('id') is-invalid @enderror">
+                                                <option value="" holder>Pilih Mentor</option>
+                                                @foreach ($mentor as $mentors)
+                                                <option value="{{ $mentors->id }}">
+                                                    {{ $mentors->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            @error('id')<div class="text-danger small mb-1">
+                                                {{ $message }}
+                                            </div> @enderror
                                         </div>
                                     </div>
                                     <div class="form-group">

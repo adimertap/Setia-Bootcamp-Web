@@ -37,8 +37,17 @@ Route::middleware(['auth'])->group(function(){
     })->name('success-checkout');
     
     Route::get('class', function () {
-        return view('kelas.list_class');
+        return view('user.kelas.list_class');
     })->name('class');
+
+    // USER
+    // USER PROGRAM KELAS
+    Route::prefix('user')
+        ->namespace('User')
+        ->middleware(['User_Role','verified'])
+        ->group(function(){
+            Route::resource('program-kelas', '\App\Http\Controllers\User\ProgramKelasUserController');
+    });
 
     // ARAHAN DASHBOARD ADMIN DAN USER
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
@@ -130,6 +139,14 @@ Route::middleware(['auth'])->group(function(){
             Route::resource('approval-video', '\App\Http\Controllers\Admin\ApprovalVideoController');
             Route::post('Video/{id_kelas}/set-status', '\App\Http\Controllers\Admin\ApprovalVideoController@setStatus')
                     ->name('video-status');
+    });
+
+    // MENU DETAIL KELAS
+    Route::prefix('admin')
+    ->namespace('Admin')
+    ->middleware(['Admin_Role','verified'])
+    ->group(function () {
+            Route::resource('list-user', '\App\Http\Controllers\Admin\ListUserController');
     });
 
     

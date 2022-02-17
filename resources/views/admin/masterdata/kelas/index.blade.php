@@ -77,13 +77,16 @@
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 50px;">Harga Kelas</th>
+                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Position: activate to sort column ascending"
+                                                style="width: 20px;">Mentor</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 20px;">Status</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 20px;">Status Video</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 80px;">Launching dan Diskon</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
@@ -98,6 +101,9 @@
                                             <td>{{ $item->nama_kelas }}</td>
                                             <td>{{ $item->Jeniskelas->jenis_kelas }}</td>
                                             <td>Rp. {{ number_format($item->harga_kelas) }}</td>
+                                            <td>
+                                                {{ $item->name }}
+                                            </td>
                                             <td class="text-center">
                                                 @if ($item->status == 'Aktif')
                                                     <span class="badge badge-success ">Aktif</span>
@@ -113,11 +119,11 @@
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                @if ($item->status_video == 'Belum Dibuat' && $item->status_approval_video == 'Pending')
+                                                @if ($item->status_video == 'Belum Dibuat' && $item->status_approval_video == 'Pending' && $item->status == 'Tidak Aktif')
                                                     <span class="badge badge-warning ">Segera Selesaikan Video!</span>
-                                                @elseif ($item->status_video == 'Telah Dibuat' && $item->status_approval_video == 'Pending')
+                                                @elseif ($item->status_video == 'Telah Dibuat' && $item->status_approval_video == 'Pending' && $item->status == 'Tidak Aktif')
                                                     <span class="badge badge-warning ">Cek Menu Approval untuk Approve Video</span>
-                                                @elseif ($item->status_video == 'Telah Dibuat' && $item->status_approval_video == 'Disetujui')
+                                                @elseif ($item->status_video == 'Telah Dibuat' && $item->status_approval_video == 'Disetujui' && $item->status == 'Tidak Aktif')
                                                 <a href="" class="btn-xs btn-primary" type="button"
                                                     data-toggle="modal"
                                                     data-target="#Modallaunching-{{ $item->id_kelas }}">
@@ -128,8 +134,14 @@
                                                     data-target="#Modaldiskon-{{ $item->id_kelas }}">
                                                     Atur Diskon
                                                 </a>
-                                                @elseif ($item->status_video == 'Telah Dibuat' && $item->status_approval_video == 'Ditolak')
+                                                @elseif ($item->status_video == 'Telah Dibuat' && $item->status_approval_video == 'Ditolak' && $item->status == 'Tidak Aktif')
                                                     <span class="badge badge-danger ">Menunggu Pembenaran Video!</span>
+                                                @elseif ($item->status_video == 'Telah Dibuat' && $item->status_approval_video == 'Disetujui' && $item->status == 'Aktif')
+                                                <a href="" class="btn-xs btn-secondary" type="button"
+                                                    data-toggle="modal"
+                                                    data-target="#Modaldiskon-{{ $item->id_kelas }}">
+                                                    Atur Diskon
+                                                </a>
                                                 @endif
                                                
                                             </td>

@@ -7,14 +7,14 @@
         <!-- Custom page header alternative example-->
         <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
             <div class="mr-4 mb-3 mb-sm-0">
-                <h1 class="mb-0">List Mentor</h1>
+                <h1 class="mb-0">List User Terdaftar</h1>
                 <div class="small">
                     <span class="font-weight-500 text-primary">{{ $today }}</span>
                     · Tanggal {{ $tanggal }} · <span id="clock"> 12:16 PM</span>
                 </div>
             </div>
             <div class="small">
-                <span class="font-weight-500 text-primary">Menu Mentor</span>
+                <span class="font-weight-500 text-primary">Menu Detail</span>
                 <hr>
                 </hr>
             </div>
@@ -27,9 +27,7 @@
     <div class="container-fluid">
         <div class="card mb-4">
             <div class="card card-header-actions">
-                <div class="card-header">List Mentor
-                    <a href="{{ route('list-mentor.create') }}" class="btn btn-sm btn-primary" type="button">Tambah
-                        Mentor</a>
+                <div class="card-header">List User
                 </div>
             </div>
             <div class="card-body">
@@ -65,35 +63,34 @@
                                                 style="width: 20px;">No</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 150px;">Nama Mentor</th>
+                                                style="width: 150px;">Nama User</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 50px;">Email Mentor</th>
+                                                style="width: 50px;">Email User</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 50px;">Kelas Mentor</th>
+                                                style="width: 50px;">Tanggal Terdaftar</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Position: activate to sort column ascending"
+                                                style="width: 50px;">Jumlah Kelas</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 80px;">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($mentor as $item)
+                                        @forelse ($user as $item)
                                         <tr role="row" class="odd">
                                             <th scope="row" class="small" class="sorting_1">{{ $loop->iteration}}.</th>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->email }}</td>
+                                            <td>{{ $item->created_at }}</td>
+                                            <td>5</td>
                                             <td class="text-center">
-                                                <a href="{{ route('list-mentor.show', $item->id) }}"
+                                                <a href="{{ route('list-user.show', $item->id) }}"
                                                     class="btn-xs btn-secondary" data-toggle="tooltip"
                                                     data-placement="top" title="" data-original-title="Detail">
-                                                    <i class="fas fa-address-card mr-2"></i>Lihat Kelas Mentor
-                                                </a>
-                                            </td>
-                                            <td class="text-center">
-                                                <a href="" class="btn btn-danger btn-datatable" type="button"
-                                                    data-toggle="modal" data-target="#Modalhapus-{{ $item->id }}">
-                                                    <i class="fas fa-trash"></i>
+                                                    <i class="fas fa-address-card mr-2"></i>Lihat Kelas User
                                                 </a>
                                             </td>
                                         </tr>
@@ -110,32 +107,6 @@
         </div>
     </div>
 </main>
-
-@forelse ($mentor as $item)
-<div class="modal fade" id="Modalhapus-{{ $item->id }}" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-danger-soft">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Konfirmasi Hapus Data</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">×</span></button>
-            </div>
-            <form action="{{ route('list-mentor.destroy', $item->id) }}" method="POST" class="d-inline">
-                @csrf
-                @method('delete')
-                <div class="modal-body">Apakah Anda Yakin Menghapus Mentor {{ $item->name }} ?</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-                    <button class="btn btn-danger" type="submit">Ya! Hapus</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-@empty
-
-@endforelse
 
 
 @endsection

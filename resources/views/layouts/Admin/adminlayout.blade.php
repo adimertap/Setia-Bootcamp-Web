@@ -24,6 +24,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ url('/node_modules/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <x-embed-styles />
 
 </head>
 
@@ -140,7 +141,7 @@
                         </a>
                         <div class="collapse" id="collapseUtilities" data-parent="#accordionSidenav" style="">
                             <nav class="sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ route('list-user.index') }}">
                                     List User
                                 </a>
                                 <a class="nav-link" href="#">
