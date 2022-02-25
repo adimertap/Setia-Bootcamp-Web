@@ -2317,5 +2317,10 @@ button.bg-danger-soft:focus {
     background-color: #00ac69;
 }
 
+.center-item {
+    display: flex;
+    justify-content: center;
+}
+
 
 /*# sourceMappingURL=main.css.map */
