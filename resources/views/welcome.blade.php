@@ -36,7 +36,7 @@
                                 Bootcamp kami membantu Anda untuk <br> mendalami skill yang Anda miliki
                             </p>
                             <p class="cta">
-                                <a href="#" class="btn btn-master btn-primary">
+                                <a href="#" class="btn btn-master btn-secondary">
                                     Mulai Belajar
                                 </a>
                             </p>

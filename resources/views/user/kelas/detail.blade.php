@@ -7,29 +7,29 @@
         <div class="row text-center">
             <div class="col-lg-12 col-12 header-wrap">
                 <h4>
-                    <span  class="badge badge-primary">Premium Edition</span>
+                    <span class="badge badge-primary">Premium Edition</span>
                 </h4>
                 <h1 class="primary-header mt-5">
                     {{ $kelas->nama_kelas }}
                 </h1>
             </div>
+            <div class="row text-center mb-5">
+                <div class="col-lg-12 col-12 header-wrap">
+                    <p class="small">
+                        Learn how to build a real project from scratch
+                    </p>
+                </div>
+            </div>
 
             <section class="benefits">
-                <div class="container">
-                    <div class="row text-center pb-70">
-                        <div class="col-lg-12 col-12 header-wrap">
-                            <p class="small">
-                                Learn how to build a real project from scratch
-                            </p>
-                        </div>
-                    </div>
+                <div class="container col-10">
                     <div class="row">
                         <div class="col-lg-3 col-12">
                             <div class="item-benefit">
                                 <h3 class="title">
-                                    Jenis Kelas
+                                    Jenis
                                 </h3>
-                                <p class="support" style="color: blue">
+                                <p class="support">
                                     {{ $kelas->Jeniskelas->jenis_kelas }}
                                 </p>
                             </div>
@@ -37,9 +37,9 @@
                         <div class="col-lg-3 col-12">
                             <div class="item-benefit">
                                 <h3 class="title">
-                                    Jumlah Member
+                                    Member
                                 </h3>
-                                <p class="support" style="color: blue">
+                                <p class="support">
                                     <b>500</b> enrolled
                                 </p>
                             </div>
@@ -49,7 +49,7 @@
                                 <h3 class="title">
                                     Tingkatan
                                 </h3>
-                                <p class="support" style="color: blue">
+                                <p class="support">
                                     Level {{ $kelas->Level->nama_level }}
                                 </p>
                             </div>
@@ -69,104 +69,212 @@
             </section>
         </div>
     </div>
+
     <div class="container">
         <div class="row">
             <div class="col-xxl-8 col-xl-12 mb-4">
                 <div class="iframe-wrapper text-center">
-                    <iframe src="{{$kelas->Detailvideo[0]->url_video}}" width="560" height="315" allowfullscreen></iframe>
+                    <iframe src="{{$kelas->Detailvideo[0]->url_video}}" width="560" height="315"
+                        allowfullscreen></iframe>
                 </div>
-                    
+
             </div>
             <div class="col-xxl-4 col-xl-6 mb-4">
-                <div class="card card-waves h-100">
-                   
+                <div class="card h-100 border-0">
                     <div class="card-body">
-                            <h5 class="mb-5 mt-2"> <span class="badge badge-primary">{{ $count_video }} Lesson Video</span></h5>
+                        <h5 class="mb-5 mt-2"> <span class="badge badge-dark">{{ $count_video }} Lesson Video</span>
+                        </h5>
                         </h6>
                         @foreach ($video_sedikit as $vids)
                         <div class="timeline timeline-m mt-3">
                             <div class="timeline-item bg-light">
                                 <div class="timeline-item-marker">
-                                    <div class="timeline-item-marker-indicator bg-primary-soft text-primary">Vid</div>
+                                    <div class="timeline-item-marker-indicator"><i
+                                            class="material-icons">play_circle_filled</i></div>
                                 </div>
                                 <div class="timeline-item-content">{{ $vids->nama_video }}</div>
                             </div>
                         </div>
                         @endforeach
+                        <div class="timeline timeline-m mt-3">
+                            <div class="timeline-item bg-light">
+                                <div class="timeline-item-marker">
+                                    <div class="timeline-item-marker-indicator"><i
+                                            class="material-icons">play_circle_filled</i></div>
+                                </div>
+                                <div class="timeline-item-content">{{ $count_video }} Video Lainnya</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-footer bg-primary">
-                        <a type="button" class="bg-primary">Lanjutkan Belajar</a>
-                    </div>
+                    <a type="button" class="btn btn-primary text-white" style="background-color: blue">Gabung Kelas</a>
                 </div>
             </div>
         </div>
     </div>
+    <div class="mt-5">
+        <div class="container mb-4">
+            <div class="mb-5">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item right-3" role="presentation">
+                        <button class="nav-link p-3 active" id="pills-kelas-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-kelas" type="button" role="tab" aria-controls="pills-kelas"
+                            aria-selected="true" style="border-radius: 40px;width:150px;">Tentang Kelas</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link p-3" id="pills-lesson-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-lesson" type="button" role="tab" aria-controls="pills-lesson"
+                            aria-selected="false" style="border-radius: 40px;width:150px">Lesson</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link p-3" id="pills-review-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-review" type="button" role="tab" aria-controls="pills-review"
+                            aria-selected="false" style="border-radius: 40px;width:150px">Review Kelas</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link p-3" id="pills-portofolio-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-portofolio" type="button" role="tab" aria-controls="pills-portofolio"
+                            aria-selected="false" style="border-radius: 40px;width:150px">Portofolio</button>
+                    </li>
+                </ul>
+            </div>
 
-
-    <div class="row justify-content-center">
-        <div class="col-lg-9 col-12">
-            <div class="row">
-                <div class="col-lg-8 col-12">
-                    <div class="item-bootcamp">
-                        <img src="{{ asset('/image/'.$kelas['cover_kelas']) }}" alt="" class="cover">
-                        <h1 class="package">
-                            
-                            Develop Your Skill
-                        </h1>
-                        <p class="description">
-                            {{ $kelas->tentang_kelas }}
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-1 col-12">
-
-                </div>
-                <div class="col-lg-6 col-12">
-                    <form action="{{ route('success-checkout') }}" class="basic-form">
-                        <div class="mb-4">
-                            <label for="exampleInputEmail1" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-4">
-                            <label for="exampleInputEmail1" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-4">
-                            <label for="exampleInputEmail1" class="form-label">Occupation</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-4">
-                            <label for="exampleInputEmail1" class="form-label">Card Number</label>
-                            <input type="number" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-5">
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-kelas" role="tabpanel"
+                    aria-labelledby="pills-kelas-tab">
+                    <div class="container">
+                        <div class="col-lg-12 col-12">
                             <div class="row">
-                                <div class="col-lg-6 col-12">
-                                    <label for="exampleInputEmail1" class="form-label">Expired</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
-                                </div>
-                                <div class="col-lg-6 col-12">
-                                    <label for="exampleInputEmail1" class="form-label">CVC</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                <div class="col-lg-8 col-12">
+                                    <div class="item-bootcamp">
+                                        <h1 class="package text-black">
+                                            Develop Your Skill
+                                        </h1>
+                                        <p class="description" style="text-align: justify">
+                                            {{ $kelas->tentang_kelas }}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="w-100 btn btn-primary">Pay Now</button>
-                        <p class="text-center subheader mt-4">
-                            <img src="{{ asset('images/ic_secure.svg') }}" alt=""> Your payment is secure and encrypted.
-                        </p>
-                    </form>
+                    </div>
+                    <div class="mt-5">
+                        <div class="container">
+                            <div class="col-lg-12 col-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-12">
+                                        <div class="item-bootcamp">
+                                            <h1 class="package text-black">
+                                                Keypoint atau Modul
+                                            </h1>
+                                            <div class="mt-3">
+                                                <div class="row">
+                                                    @forelse ($kelas->Detailkeypoint as $item)
+                                                    <div class="col-6">
+                                                        <p class="mt-2">
+                                                            <img src="https://buildwithangga.com/themes/front/images/ic_check_blue.svg" alt="">
+                                                            {{ $item->nama_keypoint }}
+                                                        </p>
+                                                    </div>
+    
+                                                    @empty
+    
+                                                    @endforelse
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <div class="container">
+                            <div class="col-lg-12 col-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-12">
+                                        <div class="item-bootcamp">
+                                            <h1 class="package text-black">
+                                                Designed For
+                                            </h1>
+                                            <div class="mt-3">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <p class="mt-2">
+                                                            <img src="https://buildwithangga.com/themes/front/images/ic_check_blue.svg" alt="">
+                                                            <span style="line-height: 28px">Bagi yang ingin membangun portfolio</span> 
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p class="mt-2">
+                                                            
+                                                                <img src="https://buildwithangga.com/themes/front/images/ic_check_blue.svg" alt="">
+                                                                
+                                                          
+                                                            <span style="line-height: 28px">Bagi yang ingin belajar melamar pekerjaan</span> 
+                                                        </p>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <div class="container">
+                            <div class="col-lg-12 col-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-12">
+                                        <div class="item-bootcamp">
+                                            <h1 class="package text-black">
+                                                Learn With Expert
+                                            </h1>
+                                            <div class="mt-3">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="card border-0">
+                                                            <div class="card-body text-center">
+                                                                <img src="{{ $kelas->Detailmentor->User->avatar }}" class="user-photo" alt="" style="border-radius: 50%">
+                                                                <h6>{{ $kelas->Detailmentor->User->name }}</h6>
+                                                                <p style="color: grey">{{ $kelas->Jeniskelas->jenis_kelas }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="tab-pane fade" id="pills-lesson" role="tabpanel" aria-labelledby="pills-lesson-tab">2
+                </div>
+                <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">3
+                </div>
+                <div class="tab-pane fade" id="pills-portofolio" role="tabpanel" aria-labelledby="pills-portofolio-tab">
+                    4</div>
             </div>
+
         </div>
     </div>
 
+
+
 </section>
+
+
+
+
+
+
+
 
 @endsection

@@ -53,10 +53,10 @@ class ProgramKelasUserController extends Controller
      */
     public function show($id)
     {
-        $kelas = Kelas::with('Jeniskelas','Level','Detailkeypoint','Detailvideo')->find($id);
-
+        $kelas = Kelas::with('Jeniskelas','Level','Detailkeypoint','Detailvideo','DetailMentor.User')->find($id);
+       
         $count_video = DetailVideo::where('id_kelas', '=', $id)->count();
-        $video_sedikit = DetailVideo::where('id_kelas', '=', $id)->take(5)->get();
+        $video_sedikit = DetailVideo::where('id_kelas', '=', $id)->take(4)->get();
         $video_lengkap = DetailVideo::where('id_kelas', '=', $id)->get();
 
         $modul = DetailKeypoint::where('id_kelas', '=', $id)->get();

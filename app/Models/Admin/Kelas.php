@@ -51,7 +51,7 @@ class Kelas extends Model
 
     public function DetailMentor()
     {
-        return $this->hasMany(DetailMentor::class,'id_kelas','id_kelas');
+        return $this->belongsTo(DetailMentor::class,'id_kelas','id_kelas');
     }
 
     public function Detailkeypoint()

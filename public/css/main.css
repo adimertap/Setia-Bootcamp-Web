@@ -41,6 +41,7 @@ a:not([href]):hover {
 
 body {
     font-family: 'Poppins', sans-serif;
+    background-color: #f6f8fd;
 }
 
 
@@ -124,10 +125,9 @@ body {
     display: block;
     height: 130%;
     width: 120%;
-    border-radius: calc(var(--curve) * .8px);
+    /* border-radius: calc(var(--curve) * .8px); */
     overflow: hidden;
     text-decoration: none;
-    box-shadow: 0 0 5px rgba(75, 75, 75, .07);
     z-index: 1;
 }
 
@@ -151,7 +151,7 @@ body {
     left: 0;
     right: 0;
     z-index: 1;
-    border-radius: calc(var(--curve) * 1px);
+    /* border-radius: calc(var(--curve) * 1px); */
     background-color: var(--surface-color);
     transform: translateY(100%);
     transition: .2s ease-in-out;
@@ -167,7 +167,7 @@ body {
     align-items: center;
     gap: 1em;
     padding: 1em;
-    border-radius: calc(var(--curve) * 1px) 0 0 0;
+    /* border-radius: calc(var(--curve) * 1px) 0 0 0; */
     background-color: var(--surface-color);
     transform: translateY(-100%);
     transition: .2s ease-in-out;
@@ -590,6 +590,7 @@ body {
     -webkit-box-shadow: 1px 8px 61px 0px rgba(22, 28, 51, 0.08);
     -moz-box-shadow: 1px 8px 61px 0px rgba(22, 28, 51, 0.08);
     padding: 24px 0 24px 0;
+    background-color: #f6f8fd;
 }
 
 .navbar .user-logged a {
@@ -1270,7 +1271,6 @@ a.badge-danger-soft.focus {
 }
 
 .card {
-    box-shadow: 0 0.15rem 1.75rem 0 rgba(31, 45, 65, 0.15);
     border-radius: 20px;
 }
 
@@ -1284,7 +1284,7 @@ a.badge-danger-soft.focus {
 
 .card.bg-dark .card-header,
 .card.bg-dark .card-footer {
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: #fff;
 }
 
 .card .card-header .card-header-tabs .nav-link.active {
@@ -1330,7 +1330,7 @@ a.badge-danger-soft.focus {
 }
 
 .card-collapsable .card-header[data-toggle=collapse].collapsed {
-    border-radius: 0.35rem;
+    border-radius: 0.01rem;
 }
 
 .card-collapsable .card-header[data-toggle=collapse].collapsed .card-collapsable-arrow {
@@ -1433,7 +1433,7 @@ a.badge-danger-soft.focus {
 }
 
 .iframe-wrapper {
-    --border-radius: 10px;
+    --border-radius: 30px;
     position: relative;
     aspect-ratio: 16 / 9;
     /* The next three declarations simulate

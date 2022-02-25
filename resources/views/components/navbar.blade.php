@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
+    <div class="container-fluid ml-5">
         <a class="navbar-brand" href="#">
             <img src="{{ asset('images/logo_baru.png') }}" alt=""> 
            
@@ -17,13 +17,13 @@
                     <a class="nav-link" href="{{ route('program-kelas.index') }}">Program Kelas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Flash Sale</a>
+                    <a class="nav-link" href="#">Flash Sale  <span class="badge badge-xs badge-secondary">New</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Portofolio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Perusahaan Kerjasama</a>
+                    <a class="nav-link" href="#">Community</a>
                 </li>
             </ul>
             @auth
