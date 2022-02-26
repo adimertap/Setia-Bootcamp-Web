@@ -7,7 +7,7 @@ use App\Http\Controllers\ClassController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Mentor\MentorDashboardController as MentorDashboard;
 use App\Http\Controllers\UserDashboardController as UserDashboard;
-
+use App\Http\Controllers\User\Checkout\CheckoutKelasController as Checkout;
 /* 
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,19 +52,17 @@ Route::middleware(['auth'])->group(function(){
             Route::get('/', [MentorDashboard::class, 'index'])->name('dashboard');
     });
 
-    // Route::get('checkout', function () {
-    //     return view('checkout');
-    // })->name('checkout');
-    
-    Route::get('success-checkout', function () {
-        return view('success_checkout');
-    })->name('success-checkout');
-    
-    // Route::get('class', function () {
-    //     return view('user.kelas.list_class');
-    // })->name('class');
-
     // USER -----------------------------------------------------------------------------------------------------------------------------------
+    // CHECKOUT KELAS
+    Route::prefix('user')
+    ->namespace('User')
+    ->middleware(['User_Role','verified'])
+        ->group(function(){
+
+            Route::get('checkout-success', [Checkout::class, 'success'])->name('checkout-success');
+           Route::resource('checkout','\App\Http\Controllers\User\Checkout\CheckoutKelasController');
+    });
+
     // USER PROGRAM KELAS
     Route::prefix('user')
         ->namespace('User')
@@ -73,13 +71,7 @@ Route::middleware(['auth'])->group(function(){
             Route::resource('program-kelas', '\App\Http\Controllers\User\ProgramKelasUserController');
     });
 
-    // CHECKOUT KELAS
-    Route::prefix('user')
-    ->namespace('User')
-    ->middleware(['User_Role','verified'])
-        ->group(function(){
-            Route::resource('checkout-kelas', '\App\Http\Controllers\User\CheckoutKelasController');
-    });
+    
 
     // MENTOR ---------------------------------------------------------------------------------------------------------------------------------
     // MENTOR LIST KELAS

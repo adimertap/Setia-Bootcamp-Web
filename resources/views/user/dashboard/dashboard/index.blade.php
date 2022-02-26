@@ -2,7 +2,6 @@
 
 @section('content')
 <main>
-
     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
         <div class="container">
             <div class="page-header-content pt-4">
@@ -25,6 +24,7 @@
                     </div>
                 </div>
             </div>
+            @include('components.alert')
         </div>
     </header>
 </main>

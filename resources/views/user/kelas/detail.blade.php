@@ -415,7 +415,7 @@
                                                 Lowongan pekerjaan
                                             </p>
                                         </div>
-                                        <a href="{{ route() }}" class="btn btn-primary text-white "
+                                        <a href="{{ route('checkout.show', $kelas->id_kelas) }}" class="btn btn-primary text-white "
                                             style="background-color: blue">Beli Kelas</a>
                                         <a href="{{ route('program-kelas.index') }}"
                                             class="btn btn-master btn-secondary mt-3">Lihat Catalog Lain</a>
