@@ -125,7 +125,7 @@ body {
     display: block;
     height: 130%;
     width: 120%;
-    /* border-radius: calc(var(--curve) * .8px); */
+    border-radius: calc(var(--curve) * .8px);
     overflow: hidden;
     text-decoration: none;
     z-index: 1;

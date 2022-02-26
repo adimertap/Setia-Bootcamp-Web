@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User\Checkout;
 
-use Carbon\Carbon;
+use App\Http\Controllers\Controller;
+use App\Models\Admin\Kelas;
 use Illuminate\Http\Request;
 
-class UserDashboardController extends Controller
+class CheckoutKelasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +15,7 @@ class UserDashboardController extends Controller
      */
     public function index()
     {
-        $today = Carbon::now()->isoFormat('dddd');
-        $tanggal_tahun = Carbon::now()->format('j F Y');
-
-        return view('user.dashboard.dashboard.index', compact('today','tanggal_tahun'));
+        return view('user.checkout.checkout');
     }
 
     /**
@@ -49,7 +47,10 @@ class UserDashboardController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $kelas = Kelas::with('Jeniskelas','Level','Detailkeypoint','Detailvideo','DetailMentor.User')->find($id);
+
+        return view('user.checkout.checkout',compact('kelas'));
     }
 
     /**

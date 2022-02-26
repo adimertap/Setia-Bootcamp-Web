@@ -4,9 +4,9 @@ use App\Http\Controllers\Admin\AdminDashboardController as AdminDashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClassController;
-use App\Http\Controllers\UserDashboardController as UserDashboard;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Mentor\MentorDashboardController as MentorDashboard;
+use App\Http\Controllers\UserDashboardController as UserDashboard;
 
 /* 
 |--------------------------------------------------------------------------
@@ -28,28 +28,7 @@ Route::get('sign-in-google', [UserController::class, 'google'])->name('user.logi
 Route::get('auth/google/callback', [UserController::class, 'handleProviderCallback'])->name('user.google.callback');
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('checkout', function () {
-        return view('checkout');
-    })->name('checkout');
-    
-    Route::get('success-checkout', function () {
-        return view('success_checkout');
-    })->name('success-checkout');
-    
-    Route::get('class', function () {
-        return view('user.kelas.list_class');
-    })->name('class');
-
-    // USER
-    // USER PROGRAM KELAS
-    Route::prefix('user')
-        ->namespace('User')
-        ->middleware(['User_Role','verified'])
-        ->group(function(){
-            Route::resource('program-kelas', '\App\Http\Controllers\User\ProgramKelasUserController');
-    });
-
-    // ARAHAN DASHBOARD ADMIN DAN USER
+    // ARAHAN DASHBOARD ADMIN DAN USER -----------------------------------------------------------------------------------------
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     // USER DASHBOARD
     Route::prefix('user/dashboard')
@@ -65,7 +44,6 @@ Route::middleware(['auth'])->group(function(){
         ->group(function(){
             Route::get('/', [AdminDashboard::class, 'index'])->name('dashboard');
     });
-
     // MENTOR DASHBOARD
     Route::prefix('mentor/dashboard')
         ->namespace('Mentor')->name('mentor.')
@@ -74,6 +52,36 @@ Route::middleware(['auth'])->group(function(){
             Route::get('/', [MentorDashboard::class, 'index'])->name('dashboard');
     });
 
+    // Route::get('checkout', function () {
+    //     return view('checkout');
+    // })->name('checkout');
+    
+    Route::get('success-checkout', function () {
+        return view('success_checkout');
+    })->name('success-checkout');
+    
+    // Route::get('class', function () {
+    //     return view('user.kelas.list_class');
+    // })->name('class');
+
+    // USER -----------------------------------------------------------------------------------------------------------------------------------
+    // USER PROGRAM KELAS
+    Route::prefix('user')
+        ->namespace('User')
+        ->middleware(['User_Role','verified'])
+        ->group(function(){
+            Route::resource('program-kelas', '\App\Http\Controllers\User\ProgramKelasUserController');
+    });
+
+    // CHECKOUT KELAS
+    Route::prefix('user')
+    ->namespace('User')
+    ->middleware(['User_Role','verified'])
+        ->group(function(){
+            Route::resource('checkout-kelas', '\App\Http\Controllers\User\CheckoutKelasController');
+    });
+
+    // MENTOR ---------------------------------------------------------------------------------------------------------------------------------
     // MENTOR LIST KELAS
     Route::prefix('mentor/kelas')
         ->namespace('Mentor')
@@ -91,6 +99,7 @@ Route::middleware(['auth'])->group(function(){
     });
 
 
+    // ADMIN -----------------------------------------------------------------------------------------------------------------------------------
     // ADMIN MASTERDATA
     Route::prefix('admin/masterdata')
         ->namespace('Admin')
@@ -132,6 +141,7 @@ Route::middleware(['auth'])->group(function(){
                 ->name('list-mentor-destroy-kelas');
     });
 
+    // ADMIN APPROVAL VIDEO
     Route::prefix('admin')
     ->namespace('Admin')
     ->middleware(['Admin_Role','verified'])
@@ -141,7 +151,7 @@ Route::middleware(['auth'])->group(function(){
                     ->name('video-status');
     });
 
-    // MENU DETAIL KELAS
+    // ADMIN MENU DETAIL KELAS
     Route::prefix('admin')
     ->namespace('Admin')
     ->middleware(['Admin_Role','verified'])

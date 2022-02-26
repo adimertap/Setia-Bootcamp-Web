@@ -23,5 +23,10 @@ class DetailKeypoint extends Model
     {
         return $this->belongsTo(Kelas::class, 'id_kelas','id_kelas');
     }
+
+    public function Video()
+    {
+        return $this->hasMany(DetailVideo::class, 'id_keypoint','id_keypoint');
+    }
     
 }

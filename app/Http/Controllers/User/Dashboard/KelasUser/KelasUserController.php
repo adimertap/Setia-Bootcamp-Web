@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User\Dashboard\KelasUser;
 
-use Carbon\Carbon;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class UserDashboardController extends Controller
+class KelasUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,7 @@ class UserDashboardController extends Controller
      */
     public function index()
     {
-        $today = Carbon::now()->isoFormat('dddd');
-        $tanggal_tahun = Carbon::now()->format('j F Y');
-
-        return view('user.dashboard.dashboard.index', compact('today','tanggal_tahun'));
+        //
     }
 
     /**

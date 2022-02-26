@@ -10,7 +10,7 @@
                     YOUR FUTURE CAREER
                 </p>
                 <h2 class="primary-header">
-                    Start Invest Today
+                    Checkout Kelas
                 </h2>
             </div>
         </div>
@@ -19,10 +19,13 @@
                 <div class="row">
                     <div class="col-lg-5 col-12">
                         <div class="item-bootcamp">
-                            <img src="{{ asset('images/item_bootcamp.png') }}" alt="" class="cover">
+                            <img src="{{ asset('/image/'.$item['cover_kelas']) }}" class="cover" alt="" />
                             <h1 class="package">
-                                GILA BELAJAR
+                                {{ $kelas->nama_kelas }}
                             </h1>
+                            <h5 class="package">
+                                Rp. {{ number_format($kelas->harga_kelas) }}
+                            </h5>
                             <p class="description">
                                 Bootcamp ini akan mengajak Anda untuk belajar penuh mulai dari pengenalan dasar sampai membangun sebuah projek asli
                             </p>
