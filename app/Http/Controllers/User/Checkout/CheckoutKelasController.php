@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User\Checkout;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CheckoutRequest;
 use App\Models\Admin\Kelas;
 use App\Models\Checkout;
 use App\Models\DetailUserKelas;
@@ -52,14 +53,15 @@ class CheckoutKelasController extends Controller
     public function show($id, Request $request)
     {
         
-        $detail = DetailUserKelas::where('id', Auth::user()->id)->where('id_kelas','=',$id)->exists();
+        $detail = DetailUserKelas::with('Kelas')->where('id', Auth::user()->id)->where('id_kelas','=',$id)->exists();
+        $kelas = Kelas::with('Jeniskelas','Level','Detailkeypoint','Detailvideo','DetailMentor.User')->find($id);
 
         if ($detail != null){
-            $request->session()->flash('error', "You already registered on This Class");
+            $request->session()->flash('error', "You already registered on {$kelas->nama_kelas} Class.");
             return redirect()->route('user.dashboard');
         }
 
-        $kelas = Kelas::with('Jeniskelas','Level','Detailkeypoint','Detailvideo','DetailMentor.User')->find($id);
+        
         return view('user.checkout.checkout',compact('kelas'));
     }
 
@@ -81,8 +83,9 @@ class CheckoutKelasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CheckoutRequest $request, $id)
     {
+
        $checkout = new Checkout;
        $checkout->card_number = $request->card_number;
        $checkout->cvc = $request->cvc;
