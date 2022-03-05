@@ -13,18 +13,27 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">Dashboard</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('program-kelas.index') }}">Program Kelas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Flash Sale  <span class="badge badge-xs badge-secondary">New</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Portofolio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Community</a>
-                </li>
+                @if (Auth::user()->role == 'User')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('program-kelas.index') }}">Program Kelas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Flash Sale  <span class="badge badge-xs badge-secondary">New</span></a>
+                    </li>
+                @endif
+             
+                @if (Auth::user()->role == 'Perusahaan' || Auth::user()->role == 'User')
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Portofolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Community</a>
+                    </li>
+                @endif
+               
+               
+               
+               
             </ul>
             @auth
             <div class="d-flex user-logged nav-item dropdown no-arrow">

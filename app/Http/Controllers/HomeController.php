@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Perusahaan\ProfilePerusahaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +23,11 @@ class HomeController extends Controller
         }else if(Auth::user()->role == 'Mentor'){
             return redirect(route('mentor.dashboard'));
         }else if(Auth::user()->role == 'Perusahaan'){
-            return redirect(route('perusahaan.dashboard'));
+            if(ProfilePerusahaan::where('id', Auth::user()->id)->exists()){
+                return redirect(route('perusahaan.dashboard'));
+            }else{
+                return redirect(route('profile-perusahaan.create'));
+            }
         }
 
         // switch(Auth::user()->role == 'User'){

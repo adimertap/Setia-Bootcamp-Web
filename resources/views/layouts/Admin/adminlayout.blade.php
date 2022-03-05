@@ -104,9 +104,13 @@
                     <div class="nav accordion" id="accordionSidenav">
 
                         @if (Auth::user()->role == 'Perusahaan')
-                     
+                        <div class="sidenav-menu-heading">Profile</div>
+                        <a class="nav-link" href="{{ route('perusahaan.dashboard')}}">
+                            <div class="nav-link-icon"><i class="fas fa-building"></i></div>
+                            Profile
+                        </a>
                         <div class="sidenav-menu-heading">Atur Lowongan</div>
-                        <a class="nav-link" href="{{ route('dashboard')}}">
+                        <a class="nav-link" href="{{ route('pengumuman.index')}}">
                             <div class="nav-link-icon"><i class="fas fa-database"></i></div>
                             Pengumuman
                         </a>

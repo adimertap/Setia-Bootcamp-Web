@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Perusahaan;
 
 use App\Http\Controllers\Controller;
 use App\Models\Perusahaan\Pengumuman;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PengumumanController extends Controller
 {
@@ -15,7 +17,11 @@ class PengumumanController extends Controller
      */
     public function index()
     {
-        //
+        $today = Carbon::now()->isoFormat('dddd');
+        $tanggal_tahun = Carbon::now()->format('j F Y');
+        $pengumuman = Pengumuman::where('id', Auth::user()->id)->get();
+
+        return view('perusahaan.pengumuman.index', compact('today','tanggal_tahun','pengumuman'));
     }
 
     /**
@@ -46,6 +52,7 @@ class PengumumanController extends Controller
         $pengumuman->start_date = $request->start_date;
         $pengumuman->end_date = $request->end_date;
         $pengumuman->qualification = $request->qualification;
+        $pengumuman->id = Auth::user()->id;
         $pengumuman->save();
 
         return redirect()->route('perusahaan.dashboard')->with('messageberhasil','Data Pengumuman Berhasil ditambahkan');

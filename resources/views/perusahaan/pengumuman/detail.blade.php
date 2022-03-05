@@ -101,9 +101,9 @@
                                             </div> @enderror
                                         </div>
                                         <div class="form-group col-6">
-                                            <label class="form-label mr-1" for="job_salary">Job Salary</label><span class="mr-4 mb-3" style="color: red">*</span>
-                                            <input type="number" class="form-control" placeholder="Input Kisaran Gaji" id="harga_kelas"
-                                                name="job_salary" value="{{ $item->job_salary }}" readonly>
+                                            <label class="form-label mr-1" for="job_salary">Job Salary (Kisaran)</label><span class="mr-4 mb-3" style="color: red">*</span>
+                                            <input type="text" class="form-control" placeholder="Input Kisaran Gaji" id="harga_kelas"
+                                                name="job_salary" value="Rp. {{ number_format($item->job_salary) }}" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">

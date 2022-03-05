@@ -71,9 +71,17 @@ Route::middleware(['auth'])->group(function(){
            Route::resource('pengumuman','\App\Http\Controllers\Perusahaan\PengumumanController');
     });
 
+    // PROFILE PERUSAHAAN
+    Route::prefix('perusahaan')
+    ->namespace('Perusahaan')
+    ->middleware(['Perusahaan_Role','verified'])
+        ->group(function(){
+           Route::resource('profile-perusahaan','\App\Http\Controllers\Perusahaan\ProfileController');
+    });
+
 
     // USER -----------------------------------------------------------------------------------------------------------------------------------
-    // CHECKOUT KELAS
+    // USER CHECKOUT KELAS
     Route::prefix('user')
     ->namespace('User')
     ->middleware(['User_Role','verified'])
@@ -89,6 +97,14 @@ Route::middleware(['auth'])->group(function(){
         ->middleware(['User_Role','verified'])
         ->group(function(){
             Route::resource('program-kelas', '\App\Http\Controllers\User\ProgramKelasUserController');
+    });
+
+    // USER COMMUNITY
+    Route::prefix('user')
+        ->namespace('User')
+        ->middleware(['User_Role','verified'])
+        ->group(function(){
+            Route::resource('community', '\App\Http\Controllers\User\Community\LowonganController');
     });
 
     // DASHBOARD

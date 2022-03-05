@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Perusahaan;
 
 use App\Http\Controllers\Controller;
 use App\Models\Perusahaan\Pengumuman;
+use App\Models\Perusahaan\ProfilePerusahaan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -18,9 +20,9 @@ class DashboardController extends Controller
     {
         $today = Carbon::now()->isoFormat('dddd');
         $tanggal_tahun = Carbon::now()->format('j F Y');
-        $pengumuman = Pengumuman::get();
+        $profile = ProfilePerusahaan::with('User')->where('id', Auth::user()->id)->first();
 
-        return view('perusahaan.pengumuman.index', compact('today','tanggal_tahun','pengumuman'));
+        return view('perusahaan.profile.index', compact('today','tanggal_tahun','profile'));
     }
 
     /**
