@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DiskonRequest;
 use App\Models\Admin\Diskon;
 use Illuminate\Http\Request;
 
@@ -43,13 +44,14 @@ class MasterDiskonController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DiskonRequest $request)
     {
         $diskon = new Diskon;
         $diskon->kode_diskon = $request->kode_diskon;
         $diskon->nama_diskon = $request->nama_diskon;
         $diskon->jumlah_diskon = $request->jumlah_diskon;
         $diskon->jenis_diskon = $request->jenis_diskon;
+        $diskon->description = $request->description;
 
         $diskon->save();
         return redirect()->back()->with('messageberhasil','Data Master Diskon Berhasil ditambahkan');
@@ -91,6 +93,7 @@ class MasterDiskonController extends Controller
         $diskon->nama_diskon = $request->nama_diskon;
         $diskon->jumlah_diskon = $request->jumlah_diskon;
         $diskon->jenis_diskon = $request->jenis_diskon;
+        $diskon->description = $request->description;
 
         $diskon->update();
         return redirect()->back()->with('messageberhasil','Data Master Diskon Berhasil diubah');

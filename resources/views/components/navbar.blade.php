@@ -37,7 +37,16 @@
                     @endif
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="right: 0; left: auto">
                         <li>
-                            <a href="{{route('user.dashboard')}}" class="dropdown-item">My Dashboard</a>
+                            @if (Auth::user()->role == 'User')
+                                <a href="{{route('user.dashboard')}}" class="dropdown-item">My Dashboard</a>
+                            @elseif (Auth::user()->role == 'Perusahaan')
+                                <a href="{{route('perusahaan.dashboard')}}" class="dropdown-item">My Dashboard</a>
+                            @elseif (Auth::user()->role == 'Admin')
+                                <a href="{{route('perusahaan.dashboard')}}" class="dropdown-item">My Dashboard</a>
+                            @elseif (Auth::user()->role == 'Mentor')
+                                <a href="{{route('mentor.dashboard')}}" class="dropdown-item">My Dashboard</a>
+                            @endif
+                         
                         </li>
                         <li>
                             <a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Sign Out</a>

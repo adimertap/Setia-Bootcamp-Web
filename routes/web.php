@@ -6,8 +6,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Mentor\MentorDashboardController as MentorDashboard;
+use App\Http\Controllers\Perusahaan\DashboardController as PerusahaanDashboard;
 use App\Http\Controllers\UserDashboardController as UserDashboard;
 use App\Http\Controllers\User\Checkout\CheckoutKelasController as Checkout;
+use App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController as KelasUser;
+
 /* 
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,6 +54,23 @@ Route::middleware(['auth'])->group(function(){
         ->group(function(){
             Route::get('/', [MentorDashboard::class, 'index'])->name('dashboard');
     });
+    // PERUSAHAAN DASHBOARD
+    Route::prefix('perusahaan/dashboard')
+    ->namespace('Perusahaan')->name('perusahaan.')
+    ->middleware(['Perusahaan_Role','verified'])
+    ->group(function(){
+        Route::get('/', [PerusahaanDashboard::class, 'index'])->name('dashboard');
+    });
+
+    // PERUSAHAAN ----------------------------------------------------------------------------------------------------------------------------
+    // PENGUMUMAN RECRUIT
+    Route::prefix('perusahaan')
+    ->namespace('Perusahaan')
+    ->middleware(['Perusahaan_Role','verified'])
+        ->group(function(){
+           Route::resource('pengumuman','\App\Http\Controllers\Perusahaan\PengumumanController');
+    });
+
 
     // USER -----------------------------------------------------------------------------------------------------------------------------------
     // CHECKOUT KELAS
@@ -69,6 +89,26 @@ Route::middleware(['auth'])->group(function(){
         ->middleware(['User_Role','verified'])
         ->group(function(){
             Route::resource('program-kelas', '\App\Http\Controllers\User\ProgramKelasUserController');
+    });
+
+    // DASHBOARD
+    // USER KELAS SAYA
+    Route::prefix('user')
+        ->namespace('User')
+        ->middleware(['User_Role','verified'])
+        ->group(function(){
+            Route::resource('kelas-saya', '\App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController');
+            Route::get('kelas/{id_video_kelas}/video', [KelasUser::class, 'video'])->name('kelas-saya-video');
+            Route::post('kelas/{id_kelas}/selesai', '\App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController@selesaikelas')
+            ->name('kelas-saya-selesai');
+    });
+
+    // TRANSACTION
+    Route::prefix('user')
+    ->namespace('User')
+    ->middleware(['User_Role','verified'])
+    ->group(function(){
+        Route::resource('pembelian-saya', '\App\Http\Controllers\User\Dashboard\PembelianSaya\ListPembelianSayaController');
     });
 
     
@@ -149,6 +189,14 @@ Route::middleware(['auth'])->group(function(){
     ->middleware(['Admin_Role','verified'])
     ->group(function () {
             Route::resource('list-user', '\App\Http\Controllers\Admin\ListUserController');
+    });
+
+    // LIST PEMBAYARAN MENU DETAIL KELAS
+    Route::prefix('admin')
+    ->namespace('Admin')
+    ->middleware(['Admin_Role','verified'])
+    ->group(function () {
+            Route::resource('list-checkout', '\App\Http\Controllers\Admin\ListCheckoutController');
     });
 
     

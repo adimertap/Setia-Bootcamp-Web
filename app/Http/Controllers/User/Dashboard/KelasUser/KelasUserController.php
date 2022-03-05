@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\User\Dashboard\KelasUser;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\DetailVideo;
+use App\Models\Admin\Kelas;
+use App\Models\DetailUserKelas;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KelasUserController extends Controller
 {
@@ -14,7 +19,12 @@ class KelasUserController extends Controller
      */
     public function index()
     {
-        //
+        $today = Carbon::now()->isoFormat('dddd');
+        $tanggal_tahun = Carbon::now()->format('j F Y');
+
+        $kelas = DetailUserKelas::with('Kelas','User')->where('status_kelas','!=','Waiting Payment')->where('id','=',Auth::user()->id)->get();
+
+        return view('user.dashboard.userkelas.index',compact('today','tanggal_tahun','kelas'));
     }
 
     /**
@@ -46,7 +56,12 @@ class KelasUserController extends Controller
      */
     public function show($id)
     {
-        //
+        $today = Carbon::now()->isoFormat('dddd');
+        $tanggal_tahun = Carbon::now()->format('j F Y');
+        $kelas = Kelas::with('Detailvideo','Detailkeypoint','DetailMentor','Jeniskelas')->find($id);
+        
+
+        return view('user.dashboard.userkelas.detail', compact('today','tanggal_tahun','kelas'));
     }
 
     /**
@@ -57,8 +72,13 @@ class KelasUserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $today = Carbon::now()->isoFormat('dddd');
+        $tanggal_tahun = Carbon::now()->format('j F Y');
+        $vid = DetailVideo::with('Kelas','Keypoint')->find($id);
+        
+        return view('user.dashboard.userkelas.video', compact('vid','today','tanggal_tahun'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -82,4 +102,25 @@ class KelasUserController extends Controller
     {
         //
     }
+
+    public function video($id_video_kelas)
+    {
+        $today = Carbon::now()->isoFormat('dddd');
+        $tanggal_tahun = Carbon::now()->format('j F Y');
+        $vid = DetailVideo::with('Kelas','Keypoint')->find($id_video_kelas);
+
+        $kelas = Kelas::with('Detailvideo','Detailkeypoint','Detailmentor','Jeniskelas')->where('id_kelas', $vid->Kelas->id_kelas)->first();
+
+        return view('user.dashboard.userkelas.video', compact('today','tanggal_tahun','vid','kelas'));
+    }
+
+    public function selesaikelas($id_kelas)
+    {
+        $detail = DetailUserKelas::with('Kelas','User')->where('id_kelas','=', $id_kelas)->where('id', Auth::user()->id)->first();
+        $detail->status_kelas = 'Sudah Selesai';
+        $detail->update();
+
+        return redirect()->route('kelas-saya.index')->with('messageberhasil','Kelas Berhasil diselesaikan, Lihat Sertif pada menu Ceritificate');
+    }
+
 }

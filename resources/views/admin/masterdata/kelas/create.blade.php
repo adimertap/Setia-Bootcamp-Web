@@ -60,7 +60,7 @@
                                                 class="mr-4 mb-3" style="color: red">*</span>
                                             <input class="form-control" id="nama_kelas" type="text" name="nama_kelas"
                                                 placeholder="Input Nama Kelas" value="{{ old('nama_kelas') }}"
-                                                class="form-control @error('nama_kelas') is-invalid @enderror" />
+                                                class="form-control @error('nama_kelas') is-invalid @enderror" required/>
                                             @error('nama_kelas')<div class="text-danger small mb-1">{{ $message }}
                                             </div> @enderror
                                         </div>
@@ -70,7 +70,7 @@
                                             <label class="small mb-1 mr-1" for="id_jenis_kelas">Pilih Jenis
                                                 Kelas</label><span class="mr-4 mb-3" style="color: red">*</span>
                                             <select class="form-control" name="id_jenis_kelas" id="id_jenis_kelas"
-                                                class="form-control @error('id_jenis_kelas') is-invalid @enderror">
+                                                class="form-control @error('id_jenis_kelas') is-invalid @enderror" required>
                                                 <option value="" holder>Pilih Jenis</option>
                                                 @foreach ($jenis_kelas as $jenis)
                                                 <option value="{{ $jenis->id_jenis_kelas }}">
@@ -86,7 +86,7 @@
                                             <label class="small mb-1 mr-1" for="id_level">Pilih Level</label><span
                                                 class="mr-4 mb-3" style="color: red">*</span>
                                             <select class="form-control" name="id_level" id="id_level"
-                                                class="form-control @error('id_level') is-invalid @enderror">
+                                                class="form-control @error('id_level') is-invalid @enderror" required>
                                                 <option value="" holder>Pilih Level</option>
                                                 @foreach ($level as $levels)
                                                 <option value="{{ $levels->id_level }}">
@@ -111,7 +111,7 @@
                                             <input class="form-control" name="harga_kelas" type="number"
                                                 id="harga_kelas" placeholder="Input Harga Kelas"
                                                 value="{{ old('harga_kelas') }}"
-                                                class="form-control @error('harga_kelas') is-invalid @enderror" />
+                                                class="form-control @error('harga_kelas') is-invalid @enderror" required/>
                                             @error('harga_kelas')<div class="text-danger small mb-1">{{ $message }}
                                             </div> @enderror
                                             <div class="small">
@@ -124,7 +124,7 @@
                                                 class="mr-4 mb-3" style="color: red">*</span>
                                             <input class="form-control" id="cover_kelas" type="file" name="cover_kelas"
                                                 value="{{ old('cover_kelas') }}" accept="image/*" multiple="multiple"
-                                                class="form-control @error('cover_kelas') is-invalid @enderror">
+                                                class="form-control @error('cover_kelas') is-invalid @enderror" required>
                                             @error('cover_kelas')<div class="text-danger small mb-1">{{ $message }}
                                             </div> @enderror
                                             <div class="small">
@@ -135,7 +135,7 @@
                                             <label class="small mb-1 mr-1" for="id">Pilih Mentor</label><span
                                                 class="mr-4 mb-3" style="c  olor: red">*</span>
                                             <select class="form-control" name="id" id="id"
-                                                class="form-control @error('id') is-invalid @enderror">
+                                                class="form-control @error('id') is-invalid @enderror" required>
                                                 <option value="" holder>Pilih Mentor</option>
                                                 @foreach ($mentor as $mentors)
                                                 <option value="{{ $mentors->id }}">
@@ -153,7 +153,7 @@
                                         <textarea class="form-control" name="tentang_kelas" id="tentang_kelas" cols="10"
                                             rows="5" placeholder="Input Deskripsi Mengenai Kelas"
                                             value="{{ old('tentang_kelas') }}"
-                                            class="form-control @error('tentang_kelas') is-invalid @enderror"></textarea>
+                                            class="form-control @error('tentang_kelas') is-invalid @enderror" required></textarea>
                                         @error('tentang_kelas')<div class="text-danger small mb-1">{{ $message }}
                                         </div> @enderror
                                     </div>

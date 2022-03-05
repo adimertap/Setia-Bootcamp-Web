@@ -134,23 +134,40 @@
                     </hr>
                     <div class="form-group">
                         <label class="small mb-1 mr-1" for="kode_diskon">Kode Diskon</label><span class="mr-4 mb-3" style="color: red">*</span>
-                        <input class="form-control" name="kode_diskon" type="text" id="kode_diskon"
-                             value="{{ $kode_diskon }}" readonly/>
+                        <input class="form-control {{ $errors->has('kode_diskon') ? 'Is_invalid' : '' }}" name="kode_diskon" type="text" id="kode_diskon"
+                             value="{{ old('kode_diskon') }}" placeholder="Input Kode Diskon" required/>
+                        @if ($errors->has('kode_diskon'))
+                            <p class="text-danger">{{ $errors->first('kode_diskon') }}</p>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label class="small mb-1 mr-1" for="nama_diskon">Nama Diskon</label><span class="mr-4 mb-3" style="color: red">*</span>
-                        <input class="form-control" name="nama_diskon" type="text" id="nama_diskon"
+                        <input class="form-control {{ $errors->has('nama_diskon') ? 'Is_invalid' : '' }}" name="nama_diskon" type="text" id="nama_diskon"
                             placeholder="Input Nama Diskon" value="{{ old('nama_diskon') }}" required/>
+                        @if ($errors->has('nama_diskon'))
+                            <p class="text-danger">{{ $errors->first('nama_diskon') }}</p>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label class="small mb-1 mr-1" for="jumlah_diskon">Jumlah Diskon (%)</label><span class="mr-4 mb-3" style="color: red">*</span>
-                        <input class="form-control" name="jumlah_diskon" type="number" min="1" max="100" id="jumlah_diskon"
+                        <input class="form-control {{ $errors->has('jumlah_diskon') ? 'Is_invalid' : '' }}" name="jumlah_diskon" type="number" min="1" max="100" id="jumlah_diskon"
                             placeholder="Input Jumlah Persen Diskon" value="{{ old('jumlah_diskon') }}" required/>
+                        @if ($errors->has('jumlah_diskon'))
+                            <p class="text-danger">{{ $errors->first('jumlah_diskon') }}</p>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1 mr-1" for="description">Description</label><span class="mr-4 mb-3" style="color: red">*</span>
+                        <textarea class="form-control {{ $errors->has('description') ? 'Is_invalid' : '' }}" name="description" type="text" id="description" placeholder="Input Description" 
+                            value="{{ old('description') }}"></textarea>
+                        @if ($errors->has('description'))
+                            <p class="text-danger">{{ $errors->first('description') }}</p>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label class="small mb-1 mr-1" for="jenis_diskon">Jenis Diskon</label><span class="mr-4 mb-3" style="color: red">*</span>
                         <select name="jenis_diskon" id="jenis_diskon" class="form-control"
-                            class="form-control @error('jenis_diskon') is-invalid @enderror">
+                            class="form-control @error('jenis_diskon') is-invalid @enderror" required>
                             <option value="{{ old('jenis_diskon')}}"> Pilih Jenis Diskon</option>
                             <option value="Diskon">Diskon Umum</option>
                             <option value="Flash Sale">Flash Sale</option>

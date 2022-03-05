@@ -10,6 +10,8 @@ use App\Models\DetailUserKelas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Checkout\AfterCheckout;
 
 class CheckoutKelasController extends Controller
 {
@@ -58,7 +60,7 @@ class CheckoutKelasController extends Controller
 
         if ($detail != null){
             $request->session()->flash('error', "You already registered on {$kelas->nama_kelas} Class.");
-            return redirect()->route('user.dashboard');
+            return redirect()->route('kelas-saya.index');
         }
 
         
@@ -93,6 +95,7 @@ class CheckoutKelasController extends Controller
        $checkout->tanggal = Carbon::today();
        $checkout->id_kelas = $id;
        $checkout->id = Auth::user()->id;
+       $checkout->is_paid = 'Belum Lunas';
        $checkout->save();
 
        $user = Auth::user();
@@ -106,6 +109,9 @@ class CheckoutKelasController extends Controller
        $detail->id_kelas = $id;
        $detail->status_kelas = 'Waiting Payment';
        $detail->save();
+
+        // Sending Email
+        Mail::to(Auth::user()->email)->send(new AfterCheckout($checkout));    
 
        return redirect()->route('checkout-success')->with('messageberhasil','Selamat Anda Berhasil Melakukan Checkout Kelas');
     }

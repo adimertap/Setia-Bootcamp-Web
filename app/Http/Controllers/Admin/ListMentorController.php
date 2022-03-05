@@ -54,7 +54,7 @@ class ListMentorController extends Controller
            
             $imagePath->move(public_path().'/profile/', $avatar); 
             $data[] = $avatar;
-          }
+        }
 
         $mentor = new User;
         $mentor->name  = $request->name;

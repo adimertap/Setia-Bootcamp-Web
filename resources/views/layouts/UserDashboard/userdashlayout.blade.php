@@ -111,7 +111,7 @@
                         </a>
                         <div class="collapse" id="collapseDashboards" data-parent="#accordionSidenav">
                             <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                <a class="nav-link" href="{{ route('kelas.index') }}">
+                                <a class="nav-link" href="{{ route('kelas-saya.index') }}">
                                     Kelas Saya
                                 </a>
                                 <a class="nav-link" href="{{ route('jenis-kelas.index') }}">
@@ -136,7 +136,7 @@
                         </a>
                         <div class="collapse" id="collapseUtilities" data-parent="#accordionSidenav" style="">
                             <nav class="sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{ route('list-user.index') }}">
+                                <a class="nav-link" href="{{ route('pembelian-saya.index') }}">
                                     Transaction
                                 </a>
                             </nav>

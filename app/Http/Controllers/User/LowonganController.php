@@ -1,39 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class LowonganController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function dashboard()
+    public function index()
     {
-
-        if(Auth::user()->role == 'User'){
-            return redirect(route('user.dashboard'));
-        }else if(Auth::user()->role == 'Admin'){
-            return redirect(route('admin.dashboard'));
-        }else if(Auth::user()->role == 'Mentor'){
-            return redirect(route('mentor.dashboard'));
-        }else if(Auth::user()->role == 'Perusahaan'){
-            return redirect(route('perusahaan.dashboard'));
-        }
-
-        // switch(Auth::user()->role == 'User'){
-        //     case true:
-        //         return redirect(route('admin.dashboard'));
-        //         break;
-            
-        //     default:
-        //     return redirect(route('user.dashboard'));
-        //         break;
-        // }
+        //
     }
 
     /**

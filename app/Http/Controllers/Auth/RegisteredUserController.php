@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,16 +40,21 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+
+        $user = new User;
+        $user->name  = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = 'Perusahaan';
+        $user->occupation = 'Perusahaan Kerjasama';
+        $user->email_verified_at = Carbon::now();
+        $user->save();
 
         event(new Registered($user));
 
-        Auth::login($user);
+        Auth::login($user); 
 
         return redirect(RouteServiceProvider::HOME);
+        
     }
 }

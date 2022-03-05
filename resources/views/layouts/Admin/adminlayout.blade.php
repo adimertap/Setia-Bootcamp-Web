@@ -32,7 +32,14 @@
     <nav class="topnav navbar navbar-expand shadow navbar-light bg-white" id="sidenavAccordion">
         <a class="navbar-brand" href="{{ route('welcome') }}">
             <i class="fas fa-user-cog mr-3"></i>
-            Sistem Admin Bootcamp
+            @if (Auth::user()->role == 'Admin')
+                Sistem Admin Bootcamp
+            @elseif (Auth::user()->role == 'Mentor')
+                Sistem Mentor Bootcamp
+            @elseif (Auth::user()->role == 'Perusahaan')
+                Perusahaan Kerjasama
+            @endif
+           
         </a>
         <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 mr-lg-2 ml-3" id="sidebarToggle" href="#"><i
                 data-feather="menu"></i></button>
@@ -95,85 +102,104 @@
             <nav class="sidenav shadow-right sidenav-light">
                 <div class="sidenav-menu">
                     <div class="nav accordion" id="accordionSidenav">
+
+                        @if (Auth::user()->role == 'Perusahaan')
+                     
+                        <div class="sidenav-menu-heading">Atur Lowongan</div>
+                        <a class="nav-link" href="{{ route('dashboard')}}">
+                            <div class="nav-link-icon"><i class="fas fa-database"></i></div>
+                            Pengumuman
+                        </a>
+                        <a class="nav-link" href="{{ route('dashboard')}}">
+                            <div class="nav-link-icon"><i class="fas fa-address-card"></i></div>
+                            Calon Pelamar
+                        </a>
+                        @endif
+
+
+                        @if (Auth::user()->role == 'Admin' && Auth::user()->role == 'Mentor')
                         <div class="sidenav-menu-heading">Dashboard</div>
                         <a class="nav-link" href="{{ route('dashboard')}}">
                             <div class="nav-link-icon"><i class="fas fa-warehouse"></i></div>
                             Dashboard
                         </a>
+                        @endif
+                       
 
                         @if (Auth::user()->role == 'Admin')
-                        <div class="sidenav-menu-heading">Master Data</div>
-                        <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
-                            data-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
-                            <div class="nav-link-icon"><i class="fas fa-database"></i></div>
-                            Master Data
-                            <div class="sidenav-collapse-arrow">
-                                <i class="fas fa-angle-down"></i>
+                            <div class="sidenav-menu-heading">Master Data</div>
+                            <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+                                data-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
+                                <div class="nav-link-icon"><i class="fas fa-database"></i></div>
+                                Master Data
+                                <div class="sidenav-collapse-arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </div>
+                            </a>
+                            <div class="collapse" id="collapseDashboards" data-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
+                                    <a class="nav-link" href="{{ route('kelas.index') }}">
+                                        Kelas
+                                    </a>
+                                    <a class="nav-link" href="{{ route('jenis-kelas.index') }}">
+                                        Jenis Kelas
+                                    </a>
+                                    <a class="nav-link" href="{{ route('level.index') }}">
+                                        Level
+                                    </a>
+                                    <a class="nav-link" href="{{ route('diskon.index') }}">
+                                        Diskon
+                                    </a>
+                                </nav>
                             </div>
-                        </a>
-                        <div class="collapse" id="collapseDashboards" data-parent="#accordionSidenav">
-                            <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                <a class="nav-link" href="{{ route('kelas.index') }}">
-                                    Kelas
-                                </a>
-                                <a class="nav-link" href="{{ route('jenis-kelas.index') }}">
-                                    Jenis Kelas
-                                </a>
-                                <a class="nav-link" href="{{ route('level.index') }}">
-                                    Level
-                                </a>
-                                <a class="nav-link" href="{{ route('diskon.index') }}">
-                                    Diskon
-                                </a>
-                            </nav>
-                        </div>
 
-                        <div class="sidenav-menu-heading">Detail Kelas</div>
-                        <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
-                            data-target="#collapseUtilities" aria-expanded="false" aria-controls="collapseUtilities">
-                            <div class="nav-link-icon">
-                                <i class="fas fa-cubes"></i>
+                            <div class="sidenav-menu-heading">Detail Kelas</div>
+                            <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+                                data-target="#collapseUtilities" aria-expanded="false" aria-controls="collapseUtilities">
+                                <div class="nav-link-icon">
+                                    <i class="fas fa-cubes"></i>
+                                </div>
+                                User dan Pembayaran
+                                <div class="sidenav-collapse-arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </div>
+                            </a>
+                            <div class="collapse" id="collapseUtilities" data-parent="#accordionSidenav" style="">
+                                <nav class="sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{ route('list-user.index') }}">
+                                        List User
+                                    </a>
+                                    <a class="nav-link" href="{{ route('list-checkout.index') }}">
+                                        List Pembayaran
+                                    </a>
+                                </nav>
                             </div>
-                            User dan Pembayaran
-                            <div class="sidenav-collapse-arrow">
-                                <i class="fas fa-angle-down"></i>
-                            </div>
-                        </a>
-                        <div class="collapse" id="collapseUtilities" data-parent="#accordionSidenav" style="">
-                            <nav class="sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{ route('list-user.index') }}">
-                                    List User
-                                </a>
-                                <a class="nav-link" href="#">
-                                    List Pembayaran
-                                </a>
-                            </nav>
-                        </div>
 
 
-                        <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
-                            data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                            <div class="nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
-                            Capaian User
-                            <div class="sidenav-collapse-arrow">
-                                <i class="fas fa-angle-down"></i>
+                            <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+                                data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+                                Capaian User
+                                <div class="sidenav-collapse-arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </div>
+                            </a>
+                            <div class="collapse" id="collapsePages" data-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
+                                    <a class="nav-link " href="#">
+                                        Sertifikat
+                                    </a>
+                                    <a class="nav-link " href="#">
+                                        Review Kelas
+                                    </a>
+                                    <a class="nav-link " href="#">
+                                        Portofolio
+                                    </a>
+                                </nav>
                             </div>
-                        </a>
-                        <div class="collapse" id="collapsePages" data-parent="#accordionSidenav">
-                            <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
-                                <a class="nav-link " href="#">
-                                    Sertifikat
-                                </a>
-                                <a class="nav-link " href="#">
-                                    Review Kelas
-                                </a>
-                                <a class="nav-link " href="#">
-                                    Portofolio
-                                </a>
-                            </nav>
-                        </div>
                         @endif
 
+                        @if (Auth::user()->role == 'Admin')
                         <div class="sidenav-menu-heading">Mentor</div>
                         <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
                             data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -183,6 +209,8 @@
                                 <i class="fas fa-angle-down">
                                 </i></div>
                         </a>
+                        @endif
+                     
 
                         <div class="collapse" id="collapseLayouts" data-parent="#accordionSidenav">
                             <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
@@ -214,7 +242,7 @@
                 <div class="sidenav-footer">
                     <div class="sidenav-footer-content">
                         <div class="sidenav-footer-subtitle">Jabatan :</div>
-                        <div class="sidenav-footer-title">Admin</div>
+                        <div class="sidenav-footer-title">{{ Auth::user()->role }}</div>
                     </div>
                 </div>
             </nav>
