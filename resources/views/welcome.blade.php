@@ -1,5 +1,8 @@
-
 @extends('layouts.app')
+
+@section('name')
+Welcome Page Bootcamp
+@endsection
 
 @section('content')
     <button id="btn-modal" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="visibility: hidden"></button>
@@ -20,6 +23,7 @@
             </div>
         </div>
     </div>
+
     <section class="banner">
         <div class="container">
             <div class="row justify-content-center">

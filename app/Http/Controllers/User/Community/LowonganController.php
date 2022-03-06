@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User\Community;
 
 use App\Http\Controllers\Controller;
+use App\Models\Perusahaan\Pengumuman;
 use Illuminate\Http\Request;
 
 class LowonganController extends Controller
@@ -14,7 +15,8 @@ class LowonganController extends Controller
      */
     public function index()
     {
-        //
+        $pengumuman = Pengumuman::with('User')->get();
+        return view('user.community.index',compact('pengumuman'));
     }
 
     /**

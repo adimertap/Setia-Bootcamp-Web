@@ -43,40 +43,33 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->file('avatar')) {
-            $imagePath = $request->file('avatar');
-            $avatar = $imagePath->getClientOriginalName();
-           
-            $imagePath->move(public_path().'/image/', $avatar); 
-            $data[] = $avatar;
+        $profile = new ProfilePerusahaan;
+        $profile->id = Auth::user()->id;
+        $profile->nama_legal = $request->nama_legal;
+        $profile->jenis_perusahaan = $request->jenis_perusahaan;
+        $profile->tanggal_berdirinya = $request->tanggal_berdirinya;
+        $profile->alamat_kantor = $request->alamat_kantor;
+        $profile->alamat_website = $request->alamat_website;
+        $profile->no_telp = $request->no_telp;
+        $profile->description = $request->description;
 
-            $profile = new ProfilePerusahaan;
-            $profile->id = Auth::user()->id;
-            $profile->nama_legal = $request->nama_legal;
-            $profile->jenis_perusahaan = $request->jenis_perusahaan;
-            $profile->tanggal_berdirinya = $request->tanggal_berdirinya;
-            $profile->alamat_kantor = $request->alamat_kantor;
-            $profile->alamat_website = $request->alamat_website;
-            $profile->no_telp = $request->no_telp;
-            $profile->description = $request->description;
-            $profile->foto_perusahaan = $avatar;
-            $profile->save();
-    
-            $tes = User::where('id', $profile->id_perusahaan)->first();
-            $tes->avatar = $request->avatar;
-            $tes->update();
-        }else{
-            $profile = new ProfilePerusahaan;
-            $profile->id = Auth::user()->id;
-            $profile->nama_legal = $request->nama_legal;
-            $profile->jenis_perusahaan = $request->jenis_perusahaan;
-            $profile->tanggal_berdirinya = $request->tanggal_berdirinya;
-            $profile->alamat_kantor = $request->alamat_kantor;
-            $profile->alamat_website = $request->alamat_website;
-            $profile->no_telp = $request->no_telp;
-            $profile->description = $request->description;
-            $profile->save();
+        if($request->file('foto_perusahaan')){
+            $file= $request->file('foto_perusahaan');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('perusahaan/profile'), $filename);
+            $profile['foto_perusahaan']= $filename;
         }
+        $profile->save();
+
+        $user = User::where('id', Auth::user()->id)->first(); 
+        if($request->file('avatar')){
+            $tes= $request->file('avatar');
+            $avatar= date('YmdHi').$tes->getClientOriginalName();
+            $tes-> move(public_path('perusahaan/logo'), $avatar);
+            $user['avatar']= $avatar;
+           
+        }
+        $user->save();
 
         return redirect()->route('perusahaan.dashboard')->with('messageberhasil','Data Perusahaan Berhasil ditambahkan');
     }
@@ -121,7 +114,26 @@ class ProfileController extends Controller
         $profile->alamat_website = $request->alamat_website;
         $profile->no_telp = $request->no_telp;
         $profile->description = $request->description;
+     
+        if($request->file('foto_perusahaan')){
+            $file= $request->file('foto_perusahaan');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('perusahaan/profile'), $filename);
+            $profile['foto_perusahaan']= $filename;
+        }
         $profile->update();
+
+        $user = User::where('id', Auth::user()->id)->first(); 
+        if($request->file('avatar')){
+            $tes= $request->file('avatar');
+            $avatar= date('YmdHi').$tes->getClientOriginalName();
+            $tes-> move(public_path('perusahaan/logo'), $avatar);
+            $user['avatar']= $avatar;
+            $user->update();
+        }else{
+            
+        }
+       
 
         return redirect()->route('perusahaan.dashboard')->with('messageberhasil','Data Profile Perusahaan Berhasil diedit');
     }

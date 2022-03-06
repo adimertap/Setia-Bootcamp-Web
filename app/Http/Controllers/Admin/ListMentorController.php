@@ -48,21 +48,19 @@ class ListMentorController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->file('avatar')) {
-            $imagePath = $request->file('avatar');
-            $avatar = $imagePath->getClientOriginalName();
-           
-            $imagePath->move(public_path().'/profile/', $avatar); 
-            $data[] = $avatar;
-        }
-
+       
         $mentor = new User;
         $mentor->name  = $request->name;
         $mentor->email = $request->email;
         $mentor->password = bcrypt($request->password);
-        $mentor->avatar = $avatar;
         $mentor->role = 'Mentor';
         $mentor->email_verified_at = Carbon::now();
+        if($request->file('foto_perusahaan')){
+            $file= $request->file('foto_perusahaan');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('perusahaan/logo'), $filename);
+            $mentor['avatar']= $filename;
+        }
         $mentor->save();
 
         event(new Registered($mentor));

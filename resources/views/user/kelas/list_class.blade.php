@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('name')
+Class Program Bootcamp
+@endsection
+
 @section('content')
 
 
@@ -50,6 +54,7 @@
                 @empty
                     
                 @endforelse
+
         </ul>
 
     </div>

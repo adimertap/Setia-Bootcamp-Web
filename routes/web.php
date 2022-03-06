@@ -86,23 +86,18 @@ Route::middleware(['auth'])->group(function(){
     ->namespace('User')
     ->middleware(['User_Role','verified'])
         ->group(function(){
-
             Route::get('checkout-success', [Checkout::class, 'success'])->name('checkout-success');
            Route::resource('checkout','\App\Http\Controllers\User\Checkout\CheckoutKelasController');
     });
 
     // USER PROGRAM KELAS
     Route::prefix('user')
-        ->namespace('User')
-        ->middleware(['User_Role','verified'])
         ->group(function(){
             Route::resource('program-kelas', '\App\Http\Controllers\User\ProgramKelasUserController');
     });
 
     // USER COMMUNITY
     Route::prefix('user')
-        ->namespace('User')
-        ->middleware(['User_Role','verified'])
         ->group(function(){
             Route::resource('community', '\App\Http\Controllers\User\Community\LowonganController');
     });

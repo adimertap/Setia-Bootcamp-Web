@@ -83,7 +83,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6 form-group">
+                                            <div class="col-4 form-group">
                                                 <label class="small mb-1 mr-1" for="tanggal_berdirinya">Tanggal Berdirinya</label><span class="mr-4 mb-3"
                                                     style="color: red">*</span>
                                                 <input class="form-control form-control-solid" id="tanggal_berdirinya"
@@ -95,7 +95,7 @@
                                                 @error('tanggal_berdirinya')<div class="text-danger small mb-1">{{ $message }}
                                                 </div> @enderror
                                             </div>
-                                            <div class="col-6 form-group">
+                                            <div class="col-4 form-group">
                                                 <label class="small mb-1 mr-1" for="no_telp">Nomor Telephone</label><span class="mr-4 mb-3"
                                                     style="color: red">*</span>
                                                 <input class="form-control form-control-solid" id="no_telp"
@@ -107,18 +107,43 @@
                                                 @error('no_telp')<div class="text-danger small mb-1">{{ $message }}
                                                 </div> @enderror
                                             </div>
+                                            <div class="col-4 form-group">
+                                                <label class="small mb-1 mr-1" for="alamat_website">Alamat Website</label><span class="mr-4 mb-3"
+                                                    style="color: red">*</span>
+                                                <input class="form-control form-control-solid" id="alamat_website"
+                                                    type="text" name="alamat_website"
+                                                    placeholder="Input Tanggal Berdirinya"
+                                                    value="{{ $profile->alamat_website }}"
+                                                    class="form-control @error('alamat_website') is-invalid @enderror"
+                                                    required />
+                                                @error('alamat_website')<div class="text-danger small mb-1">{{ $message }}
+                                                </div> @enderror
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="small mb-1 mr-1" for="alamat_website">Alamat Website</label><span class="mr-4 mb-3"
-                                                style="color: red">*</span>
-                                            <input class="form-control form-control-solid" id="alamat_website"
-                                                type="text" name="alamat_website"
-                                                placeholder="Input Tanggal Berdirinya"
-                                                value="{{ $profile->alamat_website }}"
-                                                class="form-control @error('alamat_website') is-invalid @enderror"
-                                                required />
-                                            @error('alamat_website')<div class="text-danger small mb-1">{{ $message }}
-                                            </div> @enderror
+                                        <div class="row">
+                                            <div class="form-group col-6">
+                                                <label class="small mb-1" for="avatar">Logo Perusahaan</label><span
+                                                    class="mr-4 mb-3" style="color: red">*</span>
+                                                <input class="form-control form-control-solid" id="avatar" type="file" name="avatar"
+                                                    value="{{ $profile->User->avatar }}" accept="image/*" multiple="multiple"
+                                                    class="form-control @error('avatar') is-invalid @enderror" required>
+                                                @error('avatar')<div class="text-danger small mb-1">{{ $message }}
+                                                </div> @enderror
+                                                <div class="small">
+                                                    <span class="text-muted">Accept Picture in PNG, JPG, JPEG Format </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-6">
+                                                <label class="small mb-1" for="foto_perusahaan">Foto Perusahaan</label>
+                                                <input class="form-control form-control-solid" id="foto_perusahaan" type="file" name="foto_perusahaan"
+                                                    value="{{ $profile->foto_perusahaan }}" accept="image/*" multiple="multiple"
+                                                    class="form-control @error('foto_perusahaan') is-invalid @enderror">
+                                                @error('foto_perusahaan')<div class="text-danger small mb-1">{{ $message }}
+                                                </div> @enderror
+                                                <div class="small">
+                                                    <span class="text-muted">Accept Picture in PNG, JPG, JPEG Format </span>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="small mb-1 mr-1" for="alamat_kantor">Alamat Lengkap</label><span class="mr-4 mb-3"

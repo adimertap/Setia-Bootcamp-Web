@@ -13,37 +13,54 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">Dashboard</a>
                 </li>
-                @if (Auth::user()->role == 'User')
+                @auth
+                    @if (Auth::user()->role == 'User')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('program-kelas.index') }}">Program Kelas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Flash Sale  <span class="badge badge-xs badge-secondary">New</span></a>
+                        </li>
+                    @endif
+                    @if (Auth::user()->role == 'Perusahaan' || Auth::user()->role == 'User')
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Portofolio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('community.index') }}">Community</a>
+                        </li>
+                    @endif
+                @else
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('program-kelas.index') }}">Program Kelas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Flash Sale  <span class="badge badge-xs badge-secondary">New</span></a>
                     </li>
-                @endif
-             
-                @if (Auth::user()->role == 'Perusahaan' || Auth::user()->role == 'User')
                     <li class="nav-item">
                         <a class="nav-link" href="#">Portofolio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Community</a>
+                        <a class="nav-link" href="{{ route('community.index') }}">Community</a>
                     </li>
-                @endif
-               
-               
-               
-               
+
+                @endauth
             </ul>
+
             @auth
             <div class="d-flex user-logged nav-item dropdown no-arrow">
                 <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     Halo, {{Auth::user()->name}}!
+                    @if (Auth::user()->role == 'Perusahaan' || Auth::user()->role == 'Mentor')
+                        <img src="{{url('perusahaan/logo/'.Auth::user()->avatar)}}" class="user-photo" alt="" style="border-radius: 50%">
+                    @else
                     @if (Auth::user()->avatar)
                         <img src="{{Auth::user()->avatar}}" class="user-photo" alt="" style="border-radius: 50%">
                     @else
                         <img src="https://ui-avatars.com/api/?name=Admin" class="user-photo" alt="" style="border-radius: 50%">
                     @endif
+                    @endif
+                   
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="right: 0; left: auto">
                         <li>
                             @if (Auth::user()->role == 'User')

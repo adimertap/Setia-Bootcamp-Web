@@ -41,9 +41,8 @@
                 <div class="card">
                     <div class="card-header">Profile Picture</div>
                     <div class="card-body text-center">
-                        <img class="img-account-profile rounded-circle mb-2" src="https://source.unsplash.com/QAB-WJcbgJk/300x300" alt="">
-                        <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div> 
-                            <button class="btn btn-primary" type="button">Upload new image</button>
+                        <img class="img-account-profile rounded-circle mb-2" src="{{ url('perusahaan/logo/'.Auth::user()->avatar) }}" alt="">
+                        <div class="small font-italic text-muted mb-4">Logo will apper in community page</div> 
                             <a class="btn btn-primary" href="{{ route('profile-perusahaan.edit', $profile->id_perusahaan)  }}" >Edit Profile</a>  
                     </div>
                 </div>
@@ -51,7 +50,7 @@
             <div class="col-xl-8">
                 <div class="card mb-4">
                     <div class="card-header">
-                        Account Details
+                        Perusahaan Detail
                     </div>
                     <div class="card-body">
                         <div class="form-group">

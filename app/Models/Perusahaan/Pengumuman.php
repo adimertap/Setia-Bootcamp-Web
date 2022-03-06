@@ -2,6 +2,7 @@
 
 namespace App\Models\Perusahaan;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,7 +21,8 @@ class Pengumuman extends Model
         'job_years_experience',
         'start_date',
         'end_date',
-        'qualification'
+        'qualification',
+        'id'
     ];
 
     protected $hidden =[ 
@@ -31,4 +33,8 @@ class Pengumuman extends Model
 
     public $timestamps = true;
 
+    public function User()
+    {
+        return $this->belongsTo(User::class,'id','id');
+    }
 }
