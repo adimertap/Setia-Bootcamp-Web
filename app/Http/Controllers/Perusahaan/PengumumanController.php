@@ -19,7 +19,7 @@ class PengumumanController extends Controller
     {
         $today = Carbon::now()->isoFormat('dddd');
         $tanggal_tahun = Carbon::now()->format('j F Y');
-        $pengumuman = Pengumuman::where('id', Auth::user()->id)->get();
+        $pengumuman = Pengumuman::where('id_perusahaan', Auth::user()->id)->get();
 
         return view('perusahaan.pengumuman.index', compact('today','tanggal_tahun','pengumuman'));
     }
@@ -52,7 +52,7 @@ class PengumumanController extends Controller
         $pengumuman->start_date = $request->start_date;
         $pengumuman->end_date = $request->end_date;
         $pengumuman->qualification = $request->qualification;
-        $pengumuman->id = Auth::user()->id;
+        $pengumuman->id_perusahaan = Auth::user()->id;
         $pengumuman->save();
 
         return redirect()->route('perusahaan.dashboard')->with('messageberhasil','Data Pengumuman Berhasil ditambahkan');

@@ -39,6 +39,12 @@
                 </a>
             </p>
             <img src="{{ asset('images/people.png') }}" class="people" alt="">
+            <div class="mt-5">
+                <a  href="{{ route('register') }}">
+                    Become Partner, Click Here to Register
+                </a>
+            </div>
+         
         </div>
     </section>
 

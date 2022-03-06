@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController as AdminDashboard;
+use App\Http\Controllers\Admin\DaftarPerusahaanController as DaftarPerusahaan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClassController;
@@ -10,7 +11,8 @@ use App\Http\Controllers\Perusahaan\DashboardController as PerusahaanDashboard;
 use App\Http\Controllers\UserDashboardController as UserDashboard;
 use App\Http\Controllers\User\Checkout\CheckoutKelasController as Checkout;
 use App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController as KelasUser;
-
+use App\Http\Controllers\User\Community\LowonganController as Lowongan;
+use \App\Http\Controllers\Perusahaan\PelamarController as Pelamar;
 /* 
 |--------------------------------------------------------------------------
 | Web Routes
@@ -79,6 +81,15 @@ Route::middleware(['auth'])->group(function(){
            Route::resource('profile-perusahaan','\App\Http\Controllers\Perusahaan\ProfileController');
     });
 
+    // PELAMAR PERUSAHAAN
+    Route::prefix('perusahaan')
+    ->namespace('Perusahaan')
+    ->middleware(['Perusahaan_Role','verified'])
+        ->group(function(){
+            Route::get('/download_cv/{file_cv}', [Pelamar::class, 'getFile'])->name('pelamar-perusahaan-cv');
+            Route::get('/download_pendukung/{file_dukungan}', [Pelamar::class, 'getFilePendukung'])->name('pelamar-perusahaan-pendukung');
+           Route::resource('pelamar-perusahaan','\App\Http\Controllers\Perusahaan\PelamarController');
+    });
 
     // USER -----------------------------------------------------------------------------------------------------------------------------------
     // USER CHECKOUT KELAS
@@ -99,6 +110,7 @@ Route::middleware(['auth'])->group(function(){
     // USER COMMUNITY
     Route::prefix('user')
         ->group(function(){
+            Route::get('communityprofile/{id}/perusahaan', [Lowongan::class, 'profile'])->name('community-profile');
             Route::resource('community', '\App\Http\Controllers\User\Community\LowonganController');
     });
 
@@ -123,7 +135,6 @@ Route::middleware(['auth'])->group(function(){
     });
 
     
-
     // MENTOR ---------------------------------------------------------------------------------------------------------------------------------
     // MENTOR LIST KELAS
     Route::prefix('mentor/kelas')
@@ -210,7 +221,15 @@ Route::middleware(['auth'])->group(function(){
             Route::resource('list-checkout', '\App\Http\Controllers\Admin\ListCheckoutController');
     });
 
-    
+    // DAFTAR PERUSAHAAN DAN LOWONGAN
+    Route::prefix('admin')
+    ->namespace('Admin')
+    ->middleware(['Admin_Role','verified'])
+    ->group(function () {
+        Route::get('daftar-perusahaan', [DaftarPerusahaan::class, 'getPerusahaan'])->name('daftar-perusahaan');
+        Route::get('daftar-lowongan', [DaftarPerusahaan::class, 'getLowongan'])->name('daftar-lowongan');
+    });
+
 
 });
 

@@ -2322,5 +2322,10 @@ button.bg-danger-soft:focus {
     justify-content: center;
 }
 
+p.form_text1>span {
+    display: inline-block;
+    min-width: 120px;
+}
+
 
 /*# sourceMappingURL=main.css.map */

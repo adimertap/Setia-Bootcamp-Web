@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Admin\Kelas;
+use App\Models\Perusahaan\Pelamar;
+use App\Models\Perusahaan\ProfilePerusahaan;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -52,4 +54,15 @@ class User extends Authenticatable
     {
         return $this->belongsTomany(Kelas::class,'tb_detail_mentor','id','id_kelas');
     }
+
+    public function Perusahaan()
+    {
+        return $this->belongsTo(ProfilePerusahaan::class,'id','id');
+    }
+
+    public function Pelamar()
+    {
+        return $this->belongsTo(Pelamar::class,'id','id');
+    }
+
 }

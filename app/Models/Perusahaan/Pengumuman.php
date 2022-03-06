@@ -22,7 +22,7 @@ class Pengumuman extends Model
         'start_date',
         'end_date',
         'qualification',
-        'id'
+        'id_perusahaan'
     ];
 
     protected $hidden =[ 
@@ -35,6 +35,6 @@ class Pengumuman extends Model
 
     public function User()
     {
-        return $this->belongsTo(User::class,'id','id');
+        return $this->belongsTo(User::class,'id_perusahaan','id');
     }
 }

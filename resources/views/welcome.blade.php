@@ -421,13 +421,6 @@ Welcome Page Bootcamp
                             </div>
                         </div>
                     </div>
-                    <div class="row copyright">
-                        <div class="col-lg-12 col-12">
-                            <p>
-                                All Rights Reserved. Copyright PT Setia Mandiri Perkasa.
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

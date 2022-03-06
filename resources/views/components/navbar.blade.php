@@ -14,7 +14,7 @@
                     <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">Dashboard</a>
                 </li>
                 @auth
-                    @if (Auth::user()->role == 'User')
+                    @if (Auth::user()->role == 'User' || Auth::user()->role == 'Admin')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('program-kelas.index') }}">Program Kelas</a>
                         </li>
@@ -22,7 +22,7 @@
                             <a class="nav-link" href="#">Flash Sale  <span class="badge badge-xs badge-secondary">New</span></a>
                         </li>
                     @endif
-                    @if (Auth::user()->role == 'Perusahaan' || Auth::user()->role == 'User')
+                    @if (Auth::user()->role == 'Perusahaan' || Auth::user()->role == 'User' || Auth::user()->role == 'Admin')
                         <li class="nav-item">
                             <a class="nav-link" href="#">Portofolio</a>
                         </li>

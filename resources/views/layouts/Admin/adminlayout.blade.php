@@ -147,7 +147,7 @@
                             <div class="nav-link-icon"><i class="fas fa-database"></i></div>
                             Pengumuman
                         </a>
-                        <a class="nav-link" href="{{ route('dashboard')}}">
+                        <a class="nav-link" href="{{ route('pelamar-perusahaan.index')}}">
                             <div class="nav-link-icon"><i class="fas fa-address-card"></i></div>
                             Calon Pelamar
                         </a>
@@ -273,6 +273,30 @@
                                 @endif
                             </nav>
                         </div>
+
+                        @if (Auth::user()->role == 'Admin')
+                        <div class="sidenav-menu-heading">Perusahaan Kerjasama</div>
+                        <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+                            data-target="#collapseComponents" aria-expanded="false" aria-controls="collapseComponents">
+                            <div class="nav-link-icon"><i class="fas fa-building"></i></div>
+                            Perusahaan
+                            <div class="sidenav-collapse-arrow">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
+                        </a>
+                        <div class="collapse" id="collapseComponents" data-parent="#accordionSidenav">
+                            <nav class="sidenav-menu-nested nav">
+                                <a class="nav-link " href="#">
+                                    Daftar Perusahaan
+                                </a>
+                                <a class="nav-link" href="#">
+                                    Daftar Lowongan
+                                </a>
+                            </nav>
+                        </div>
+                        @endif
+
+
                     </div>
                 </div>
 

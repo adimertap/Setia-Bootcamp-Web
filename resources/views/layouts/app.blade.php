@@ -16,16 +16,28 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ url('/node_modules/sweetalert2/dist/sweetalert2.min.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @include('sweetalert::alert')
 </head>
 
 <body>
 
     @include('components.navbar')
-  
+    @include('sweetalert::alert')
     
     @yield('content')
+
+    <div class="row copyright">
+        <div class="col-lg-12 col-12">
+            <p>
+                All Rights Reserved. Copyright PT Setia Mandiri Perkasa.
+            </p>
+        </div>
+    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
