@@ -68,7 +68,7 @@
                             @elseif (Auth::user()->role == 'Perusahaan')
                                 <a href="{{route('perusahaan.dashboard')}}" class="dropdown-item">My Dashboard</a>
                             @elseif (Auth::user()->role == 'Admin')
-                                <a href="{{route('perusahaan.dashboard')}}" class="dropdown-item">My Dashboard</a>
+                                <a href="{{route('admin.dashboard')}}" class="dropdown-item">My Dashboard</a>
                             @elseif (Auth::user()->role == 'Mentor')
                                 <a href="{{route('mentor.dashboard')}}" class="dropdown-item">My Dashboard</a>
                             @endif

@@ -227,7 +227,9 @@ Route::middleware(['auth'])->group(function(){
     ->middleware(['Admin_Role','verified'])
     ->group(function () {
         Route::get('daftar-perusahaan', [DaftarPerusahaan::class, 'getPerusahaan'])->name('daftar-perusahaan');
+        Route::get('daftar-perusahaan/{id}', [DaftarPerusahaan::class, 'showPerusahaan'])->name('daftar-perusahaan-show');
         Route::get('daftar-lowongan', [DaftarPerusahaan::class, 'getLowongan'])->name('daftar-lowongan');
+        Route::get('daftar-lowongan/{id}', [DaftarPerusahaan::class, 'showLowongan'])->name('daftar-lowongan-show');
     });
 
 

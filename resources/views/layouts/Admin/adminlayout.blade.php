@@ -286,10 +286,10 @@
                         </a>
                         <div class="collapse" id="collapseComponents" data-parent="#accordionSidenav">
                             <nav class="sidenav-menu-nested nav">
-                                <a class="nav-link " href="#">
+                                <a class="nav-link " href="{{ route('daftar-perusahaan') }}">
                                     Daftar Perusahaan
                                 </a>
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ route('daftar-lowongan') }}">
                                     Daftar Lowongan
                                 </a>
                             </nav>
