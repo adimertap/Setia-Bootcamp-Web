@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DiskonRequest;
 use App\Models\Admin\Diskon;
+use App\Models\Admin\Kelas;
 use Illuminate\Http\Request;
 
 class MasterDiskonController extends Controller
@@ -16,16 +17,10 @@ class MasterDiskonController extends Controller
      */
     public function index()
     {
-        $id = Diskon::getId();
-        foreach($id as $value);
-        $idlama = $value->id_diskon;
-        $idbaru = $idlama + 1;
-        $blt = date('m');
-
-        $kode_diskon = 'Diskon-'.$blt.'/'.$idbaru;
         $diskon = Diskon::get();
+        $kelas = Kelas::with('Jeniskelas')->get();
 
-        return view('admin.masterdata.diskon',compact('diskon','kode_diskon'));
+        return view('admin.masterdata.diskon',compact('diskon','kelas'));
     }
 
     /**
@@ -44,17 +39,36 @@ class MasterDiskonController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DiskonRequest $request)
+    public function store(Request $request)
     {
-        $diskon = new Diskon;
-        $diskon->kode_diskon = $request->kode_diskon;
-        $diskon->nama_diskon = $request->nama_diskon;
-        $diskon->jumlah_diskon = $request->jumlah_diskon;
-        $diskon->jenis_diskon = $request->jenis_diskon;
-        $diskon->description = $request->description;
+        $data = Diskon::where('nama_diskon', $request->nama_diskon)->first();
 
-        $diskon->save();
-        return redirect()->back()->with('messageberhasil','Data Master Diskon Berhasil ditambahkan');
+        if(empty($data)){
+            if($request->jenis_diskon == 'Voucher'){
+                $diskon = new Diskon;
+                $diskon->kode_diskon = $request->kode_diskon;
+                $diskon->nama_diskon = $request->nama_diskon;
+                $diskon->jumlah_diskon = $request->jumlah_diskon;
+                $diskon->jenis_diskon = 'Voucher';
+                $diskon->description = $request->description;
+                $diskon->save();
+    
+            }else if($request->jenis_diskon == 'FlashSale'){
+                
+                $diskon = new Diskon;
+                $diskon->nama_diskon = $request->nama_diskon;
+                $diskon->kode_diskon = 'Flash Sale';
+                $diskon->jumlah_diskon = $request->jumlah_diskon;
+                $diskon->description = $request->description;
+                $diskon->jenis_diskon = 'FlashSale';
+                $diskon->save();
+                $diskon->Detailkelas()->sync($request->detailkelas);
+            }
+        }else{
+            throw new \Exception('Nama Diskon Sudah Ada');
+        }
+
+        
     }
 
     /**

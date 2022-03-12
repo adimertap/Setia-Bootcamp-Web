@@ -27,15 +27,9 @@ class Diskon extends Model
 
     public $timestamps = true;
 
-    public static function getId(){
-        // return $this->orderBy('id_sparepart')->take(1)->get();
-        $getId = DB::table('tb_master_diskon')->orderBy('id_diskon','DESC')->take(1)->get();
-        if(count($getId) > 0) return $getId;
-        return (object)[
-            (object)[
-                'id_diskon'=> 0
-            ]
-            ];
-
+    public function Detailkelas()
+    {
+        return $this->belongsToMany(Kelas::class,'tb_detail_diskon','id_diskon','id_kelas');
     }
+
 }
