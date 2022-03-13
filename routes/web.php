@@ -32,6 +32,10 @@ Route::get('/', function () {
 Route::get('sign-in-google', [UserController::class, 'google'])->name('user.login.google');
 Route::get('auth/google/callback', [UserController::class, 'handleProviderCallback'])->name('user.google.callback');
 
+// midtrans route
+Route::get('payment/success' , [UserController::class, 'midtranscallback']);
+Route::post('payment/success' , [UserController::class, 'midtranscallback']);
+
 Route::middleware(['auth'])->group(function(){
     // ARAHAN DASHBOARD ADMIN DAN USER -----------------------------------------------------------------------------------------
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
