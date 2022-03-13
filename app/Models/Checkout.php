@@ -15,11 +15,9 @@ class Checkout extends Model
     protected $fillable = [
         'id',
         'id_kelas',
-        'card_number',
-        'expired',
-        'cvc',
-        'is_paid',
-        'tanggal'
+        'midtrans_url',
+        'midtrans_booking_code',
+        'payment_status'
     ];
 
     protected $hidden =[ 
