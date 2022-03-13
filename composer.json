@@ -13,6 +13,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/socialite": "^5.4",
         "laravel/tinker": "^2.5",
+        "midtrans/midtrans-php": "^2.5",
         "realrashid/sweet-alert": "^5.0"
     },
     "require-dev": {
