@@ -69,9 +69,10 @@ class CheckoutKelasController extends Controller
     {
         
         $detail = DetailUserKelas::with('Kelas')->where('id', Auth::user()->id)->where('id_kelas','=',$id)->exists();
+        $transaction = Checkout::with('Kelas')->where('id', Auth::user()->id)->where('id_kelas','=',$id)->where('payment_status','=','Paid')->exists();
         $kelas = Kelas::with('Jeniskelas','Level','Detailkeypoint','Detailvideo','DetailMentor.User')->find($id);
 
-        if ($detail != null){
+        if ($detail != null || $transaction != null){
             $request->session()->flash('error', "You already registered on {$kelas->nama_kelas} Class.");
             return redirect()->route('kelas-saya.index');
         }
@@ -116,7 +117,6 @@ class CheckoutKelasController extends Controller
 
        $this->getSnapRedirect($checkout);
    
-
         // Sending Email
         Mail::to(Auth::user()->email)->send(new AfterCheckout($checkout));    
     //    return redirect()->route('checkout-success');
@@ -133,9 +133,24 @@ class CheckoutKelasController extends Controller
         //
     }
 
+    public function midtransUnfinished()
+    {
+        return view('user.checkout.status.error_checkout');
+    }
+
+    public function midtransError()
+    {
+        return view('user.checkout.status.error_checkout');
+    }
+
     public function success()
     {
         return view('user.checkout.status.success_checkout');
+    }
+    
+    public function midtransPending()
+    {
+        return view('user.checkout.status.pending_checkout');
     }
 
     /**
@@ -214,17 +229,19 @@ class CheckoutKelasController extends Controller
             if ($fraud == 'challenge') {
             // TODO Set payment status in merchant's database to 'challenge'
             $checkout->payment_status = 'Pending';
+            return view('user.checkout.status.pending_checkout');
+
             }
             else if ($fraud == 'accept') {
             // TODO Set payment status in merchant's database to 'success'
             $checkout->payment_status = 'Paid';
+            $checkout->save();
 
             $detail = new DetailUserKelas;
             $detail->id = $checkout->id;
             $detail->id_kelas = $checkout->id_kelas;
             $detail->status_kelas = 'Progress';
             $detail->save();
-            $checkout->save();
 
             return view('user.checkout.status.success_checkout');
         }
@@ -246,25 +263,27 @@ class CheckoutKelasController extends Controller
         else if ($transaction_status == 'settlement') {
             // TODO set payment status in merchant's database to 'Settlement'
             $checkout->payment_status = 'Paid';
+            $checkout->save();
 
             $detail = new DetailUserKelas;
             $detail->id = $checkout->id;
             $detail->id_kelas = $checkout->id_kelas;
             $detail->status_kelas = 'Progress';
             $detail->save();
-            $checkout->save();
-
+            
             return view('user.checkout.status.success_checkout');
         }
         else if ($transaction_status == 'pending') {
             // TODO set payment status in merchant's database to 'Pending'
             $checkout->payment_status = 'Pending';
+            return view('user.checkout.status.pending_checkout');
         }
         else if ($transaction_status == 'expire') {
             // TODO set payment status in merchant's database to 'expire'
             $checkout->payment_status = 'Failed';
         }
 
+        $checkout->save();
       
        
     }
