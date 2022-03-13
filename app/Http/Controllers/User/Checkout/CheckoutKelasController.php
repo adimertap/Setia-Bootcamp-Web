@@ -9,21 +9,23 @@ use App\Models\Checkout;
 use App\Models\DetailUserKelas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\Checkout\AfterCheckout;
-use Exception;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Mail;
+use Str;
 use Midtrans;
+use Exception;
+
 class CheckoutKelasController extends Controller
 {
 
     public function __construct()
     {
-      Midtrans\Config::$serverKey = env('MIDTRANS_SERVERKEY');
-      Midtrans\Config::$isProduction = env('MIDTRANS_IS_PRODUCTION');
-      Midtrans\Config::$isSanitized = env('MIDTRANS_IS_SANITIZED');
-      Midtrans\Config::$is3ds = env('MIDTRANS_IS_3DS');
+        // Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        Midtrans\Config::$serverKey = "SB-Mid-server-ThmSXotcqD9A6m7KSd-SIaEG";
+        Midtrans\Config::$isProduction = false;
+        Midtrans\Config::$isSanitized = false;
+        Midtrans\Config::$is3ds = false;
     }
 
     /**
@@ -96,36 +98,28 @@ class CheckoutKelasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CheckoutRequest $request, $id)
+    public function update(Request $request, $id)
     {
-
-       $checkout = new Checkout;
-       $checkout->card_number = $request->card_number;
-       $checkout->cvc = $request->cvc;
-       $checkout->expired = $request->expired;
-       $checkout->tanggal = Carbon::today();
-       $checkout->id_kelas = $id;
-       $checkout->id = Auth::user()->id;
-       $checkout->is_paid = 'Belum Lunas';
-       $checkout->save();
-       $this->getSnapRedirect($checkout);
 
        $user = Auth::user();
        $user->email = $request->email;
        $user->name = $request->name;
        $user->occupation = $request->occupation;
+       $user->phone = $request->phone;
+       $user->address = $request->address;
        $user->save();
 
-       $detail = new DetailUserKelas;
-       $detail->id = $checkout->id;
-       $detail->id_kelas = $id;
-       $detail->status_kelas = 'Waiting Payment';
-       $detail->save();
+       $checkout = Checkout::create([
+            'id_kelas' => $id,
+            'id' => Auth::user()->id
+        ]);
+
+       $this->getSnapRedirect($checkout);
+   
 
         // Sending Email
         Mail::to(Auth::user()->email)->send(new AfterCheckout($checkout));    
-
-       return redirect()->route('checkout-success')->with('messageberhasil','Selamat Anda Berhasil Melakukan Checkout Kelas');
+    //    return redirect()->route('checkout-success');
     }
 
     /**
@@ -139,8 +133,9 @@ class CheckoutKelasController extends Controller
         //
     }
 
-    public function success(){
-        return view('success_checkout');
+    public function success()
+    {
+        return view('user.checkout.status.success_checkout');
     }
 
     /**
@@ -148,7 +143,7 @@ class CheckoutKelasController extends Controller
      */
     public function getSnapRedirect(Checkout $checkout)
     {
-        $orderId = $checkout->id. '-' .Str::random(5);
+        $orderId = $checkout->id_checkouts. '-' .Str::random(5);
         $checkout->midtrans_booking_code = $orderId;
         $price = $checkout->Kelas->harga_kelas;
 
@@ -161,52 +156,53 @@ class CheckoutKelasController extends Controller
             'id' => $orderId,
             'price' => $price,
             'quantity' => 1,
-            'name' => "Payment for {$checkout->Kelas->nama_kelas} Kelas",
-            "category" => $checkout->Kelas->Jeniskelas->jenis_kelas,
+            'name' => "Payment for Class",
+            'category' => $checkout->Kelas->Jeniskelas->jenis_kelas,
         ];
 
         $userData = [
-            'first_name' => $checkout->User->name,
-            'last_name' => "",
-            'address' => $checkout->User->address,
-            'city' => "",
-            'postal_code' => "",
-            'phone' => $checkout->User->phone,
-            'country_code' => "IDN"
+            "first_name" => $checkout->User->name,
+            "last_name" => "",
+            "address" => $checkout->User->address,
+            "city" => "",
+            "postal_code" => "",
+            "phone" => $checkout->User->phone,
+            "country_code" => "IDN"
         ];
 
         $customer_details = [
-            'first_name' => $checkout->User->name,
-            'last_name' => "",
-            'email' => $checkout->User->email,
-            'phone' => $checkout->User->phone,
-            'billing_address' => $userData,
-            'shipping_address' => $userData
+            "first_name" => $checkout->User->name,
+            "last_name" => "",
+            "email" => $checkout->User->email,
+            "phone" => $checkout->User->phone,
+            "billing_address" => $userData,
+            "shipping_address" => $userData
         ];
 
         $midtrans_params = [
             'transaction_details' => $transaction_details,
             'customer_details' => $customer_details,
-            'item_details' => $item_details
+            'item_details' => $item_details,
         ];
 
         try{
             // Get Snap Payment Page URL
             $paymentUrl = \Midtrans\Snap::createTransaction($midtrans_params)->redirect_url;
             $checkout->midtrans_url = $paymentUrl;
+            $checkout->total_price = $price;
             $checkout->save();
+            return redirect()->to($paymentUrl)->send();
+            // header('Location: '.$paymentUrl);
+            // return $paymentUrl;
 
-            return $paymentUrl;
         }catch (Exception $e){
-            return false;
+            dd($e);
         }
-
-
     }
 
     public function midtransCallback (Request $request)
     {
-        $notif = new Midtrans\Notification();
+        $notif = $request->method() == 'POST' ? new Midtrans\Notification() : Midtrans\Transaction::status($request->order_id);
 
         $transaction_status = $notif->transaction_status;
         $fraud = $notif->fraud_status;
@@ -222,6 +218,15 @@ class CheckoutKelasController extends Controller
             else if ($fraud == 'accept') {
             // TODO Set payment status in merchant's database to 'success'
             $checkout->payment_status = 'Paid';
+
+            $detail = new DetailUserKelas;
+            $detail->id = $checkout->id;
+            $detail->id_kelas = $checkout->id_kelas;
+            $detail->status_kelas = 'Progress';
+            $detail->save();
+            $checkout->save();
+
+            return view('user.checkout.status.success_checkout');
         }
         }
         else if ($transaction_status == 'cancel') {
@@ -241,6 +246,15 @@ class CheckoutKelasController extends Controller
         else if ($transaction_status == 'settlement') {
             // TODO set payment status in merchant's database to 'Settlement'
             $checkout->payment_status = 'Paid';
+
+            $detail = new DetailUserKelas;
+            $detail->id = $checkout->id;
+            $detail->id_kelas = $checkout->id_kelas;
+            $detail->status_kelas = 'Progress';
+            $detail->save();
+            $checkout->save();
+
+            return view('user.checkout.status.success_checkout');
         }
         else if ($transaction_status == 'pending') {
             // TODO set payment status in merchant's database to 'Pending'
@@ -251,7 +265,7 @@ class CheckoutKelasController extends Controller
             $checkout->payment_status = 'Failed';
         }
 
-        $checkout->save();
-        return view('success_checkout');
+      
+       
     }
 }

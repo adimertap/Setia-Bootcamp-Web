@@ -33,8 +33,8 @@ Route::get('sign-in-google', [UserController::class, 'google'])->name('user.logi
 Route::get('auth/google/callback', [UserController::class, 'handleProviderCallback'])->name('user.google.callback');
 
 // midtrans route
-Route::get('payment/success' , [UserController::class, 'midtranscallback']);
-Route::post('payment/success' , [UserController::class, 'midtranscallback']);
+Route::get('payment/success' , [Checkout::class, 'midtransCallback']);
+Route::post('payment/success' , [Checkout::class, 'midtransCallback']);
 
 Route::middleware(['auth'])->group(function(){
     // ARAHAN DASHBOARD ADMIN DAN USER -----------------------------------------------------------------------------------------
