@@ -22,8 +22,7 @@ class KelasUserController extends Controller
         $today = Carbon::now()->isoFormat('dddd');
         $tanggal_tahun = Carbon::now()->format('j F Y');
 
-        $kelas = DetailUserKelas::with('Kelas','User')->where('status_kelas','!=','Waiting Payment')->where('id','=',Auth::user()->id)->get();
-
+        $kelas = DetailUserKelas::with('Kelas','User')->where('status_kelas','!=','Waiting Payment')->where('id','=',Auth::user()->id)->groupBy('id_kelas')->get();
         return view('user.dashboard.userkelas.index',compact('today','tanggal_tahun','kelas'));
     }
 
