@@ -19,7 +19,7 @@
                             <a class="nav-link" href="{{ route('program-kelas.index') }}">Program Kelas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Flash Sale  <span class="badge badge-xs badge-secondary">New</span></a>
+                            <a class="nav-link" href="{{ route('flash-sale.index') }}">Flash Sale  <span class="badge badge-xs badge-secondary">New</span></a>
                         </li>
                     @endif
                     @if (Auth::user()->role == 'Perusahaan' || Auth::user()->role == 'User' || Auth::user()->role == 'Admin')
@@ -35,7 +35,7 @@
                         <a class="nav-link" href="{{ route('program-kelas.index') }}">Program Kelas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Flash Sale  <span class="badge badge-xs badge-secondary">New</span></a>
+                        <a class="nav-link" href="{{ route('flash-sale.index') }}">Flash Sale  <span class="badge badge-xs badge-secondary">New</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Portofolio</a>

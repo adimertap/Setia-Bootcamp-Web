@@ -18,8 +18,8 @@
                 <p>
                     Refresh Page jika sudah melakukan pembayaran!
                 </p>
-                <a href="{{ route('user.dashboard') }}" class="btn btn-primary mt-3">
-                    My Dashboard
+                <a href="{{ route('pembelian-saya.index') }}" class="btn btn-primary mt-3">
+                    Lanjutkan Pembayaran
                 </a>
             </div>
         </div>

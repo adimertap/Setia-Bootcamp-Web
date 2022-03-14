@@ -56,6 +56,12 @@
                                                 style="width: 30px;">Tanggal</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
+                                                style="width: 30px;">Diskon</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Position: activate to sort column ascending"
+                                                style="width: 70px;">Total</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 30px;">Status</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
@@ -68,23 +74,33 @@
                                             <th scope="row" class="small" class="sorting_1">{{ $loop->iteration}}.</th>
                                             <td>{{ $item->Kelas->nama_kelas }}</td>
                                             <td>{{ $item->Kelas->Jeniskelas->jenis_kelas }}</td>
-                                            <td>{{ $item->tanggal }}</td>
+                                            <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
+                                            <td class="text-center">{{ $item->percentage_diskon }}%</td>
+                                            <td class="text-center">Rp. {{ number_format($item->total_price) }}</td>
                                             <td class="text-center">
-                                                @if ($item->is_paid == 'Belum Lunas')
-                                                    <span class="badge badge-danger ml-auto">{{ $item->is_paid }}</span>
+                                                @if ($item->payment_status == 'Pending')
+                                                <a href="{{ $item->midtrans_url }}"
+                                                    class="btn-xs btn-secondary" data-toggle="tooltip"
+                                                    data-placement="top" title="" data-original-title="Bayar Sekarang">
+                                                    <i class="fas fa-money-check-alt mr-2"></i>Pay Now
+                                                </a>
+                                                @elseif ($item->payment_status == 'Paid')
+                                                    <span class="badge badge-success ml-auto">{{ $item->payment_status }}</span>
                                                 @else
-                                                    <span class="badge badge-success ml-auto">{{ $item->is_paid }}</span>
+                                                    <span class="badge badge-danger ml-auto">{{ $item->payment_status }}</span>
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                @if ($item->is_paid == 'Lunas')
-                                                <a href="{{ route('list-checkout.show', $item->id) }}"
+                                                @if ($item->payment_status == 'Paid')
+                                                <a href="{{ route('pembelian-saya.show', $item->id_checkouts) }}"
                                                     class="btn-xs btn-secondary" data-toggle="tooltip"
                                                     data-placement="top" title="" data-original-title="Detail">
                                                     <i class="fas fa-address-card mr-2"></i>Invoice
                                                 </a>
+                                                @elseif ($item->payment_status == 'Pending')
+                                                    <span class="badge badge-danger ml-auto">Selesaikan Pembayaran</span>
                                                 @else
-                                                <span class="badge badge-danger ml-auto">Selesaikan Pembayaran</span>
+                                                    <span class="badge badge-danger ml-auto">Pembayaran Gagal</span>
                                                 @endif
                                                
                                             </td>

@@ -10,6 +10,7 @@ use App\Models\DetailUserKelas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Mail\Checkout\AfterCheckout;
+use App\Models\Admin\Diskon;
 use Illuminate\Support\Facades\Auth;
 use Mail;
 use Str;
@@ -99,9 +100,13 @@ class CheckoutKelasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CheckoutRequest $request, $id)
     {
+        $data = $request->all;
+        $data['id_kelas'] = $id;
+        $data['id'] = Auth::user()->id;
 
+        
        $user = Auth::user();
        $user->email = $request->email;
        $user->name = $request->name;
@@ -110,11 +115,14 @@ class CheckoutKelasController extends Controller
        $user->address = $request->address;
        $user->save();
 
-       $checkout = Checkout::create([
-            'id_kelas' => $id,
-            'id' => Auth::user()->id
-        ]);
-
+        
+       if($request->discount){
+            $discount = Diskon::where('kode_diskon', '=', $request->discount)->first();
+            $data['id_diskon'] = $discount->id_diskon;
+            $data['percentage_diskon']= $discount->jumlah_diskon;
+       }
+       
+       $checkout = Checkout::create($data);
        $this->getSnapRedirect($checkout);
    
         // Sending Email
@@ -158,14 +166,10 @@ class CheckoutKelasController extends Controller
      */
     public function getSnapRedirect(Checkout $checkout)
     {
+       
         $orderId = $checkout->id_checkouts. '-' .Str::random(5);
         $checkout->midtrans_booking_code = $orderId;
         $price = $checkout->Kelas->harga_kelas;
-
-        $transaction_details = [
-            'order_id' => $orderId,
-            'gross_amount' => $price
-        ];
 
         $item_details[] = [
             'id' => $orderId,
@@ -173,6 +177,23 @@ class CheckoutKelasController extends Controller
             'quantity' => 1,
             'name' => "Payment for Class",
             'category' => $checkout->Kelas->Jeniskelas->jenis_kelas,
+        ];
+
+        $discountPrice = 0;
+        if($checkout->Discount){
+            $discountPrice = $price * $checkout->percentage_diskon / 100;
+            $item_details[] = [
+                'id' => $checkout->Discount->kode_diskon,
+                'price' => -$discountPrice,
+                'quantity' => 1,
+                'name' => "Discount {$checkout->Discount->nama_diskon} ({$checkout->percentage_diskon}%)",
+            ];
+        }
+
+        $total = $price - $discountPrice;
+        $transaction_details = [
+            'order_id' => $orderId,
+            'gross_amount' => $total
         ];
 
         $userData = [
@@ -204,7 +225,7 @@ class CheckoutKelasController extends Controller
             // Get Snap Payment Page URL
             $paymentUrl = \Midtrans\Snap::createTransaction($midtrans_params)->redirect_url;
             $checkout->midtrans_url = $paymentUrl;
-            $checkout->total_price = $price;
+            $checkout->total_price = $total;
             $checkout->save();
             return redirect()->to($paymentUrl)->send();
             // header('Location: '.$paymentUrl);

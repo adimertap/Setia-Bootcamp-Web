@@ -40,14 +40,13 @@ Class Program Bootcamp
                                     <path /></svg>
                                 <img class="card__thumb" src="{{ asset('/image/'.$item['avatar']) }}" alt="" />
                                 <div class="card__header-text">
-                                    <span class="card__status">{{ $item->Jeniskelas->jenis_kelas }}, Rp. {{ number_format($item->harga_kelas) }}</span>
+                                    <span class="card__status">{{ $item->Jeniskelas->jenis_kelas }}, {{ $item->Level->nama_level }}</span>
                                     <h3 class="card__title">{{ $item->nama_kelas }}</h3>
                                     <span class="card__status"> </span>
                                 </div>
+                                <h6 style="color: grey">Cuma {{ number_format($item->harga_kelas) }} </h6>
                             </div>
-                            <p class="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Asperiores,
-                                blanditiis?</p>
+                            <p class="card__description">Kelas ini ditunjukan untuk kamu yang ingin menambah portofolio dan mempelajari mengenai {{ $item->nama_kelas }}</p>
                         </div>
                     </a>
                 </li>

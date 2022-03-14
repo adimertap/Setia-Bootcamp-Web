@@ -120,6 +120,11 @@ Route::middleware(['auth'])->group(function(){
             Route::resource('community', '\App\Http\Controllers\User\Community\LowonganController');
     });
 
+    Route::prefix('user')
+        ->group(function(){
+            Route::resource('flash-sale', '\App\Http\Controllers\User\FlashSaleController');
+    });
+
     // DASHBOARD
     // USER KELAS SAYA
     Route::prefix('user')

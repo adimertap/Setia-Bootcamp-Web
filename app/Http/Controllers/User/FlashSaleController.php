@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\User\Dashboard\PembelianSaya;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Checkout;
-use Carbon\Carbon;
+use App\Models\Admin\DetailDiskon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ListPembelianSayaController extends Controller
+class FlashSaleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +15,14 @@ class ListPembelianSayaController extends Controller
      */
     public function index()
     {
-        $checkout = Checkout::with('Kelas','User')->where('id', Auth::user()->id)->get();
-        $today = Carbon::now()->isoFormat('dddd');
-        $tanggal_tahun = Carbon::now()->format('j F Y');
+        $kelas = DetailDiskon::leftjoin('tb_master_kelas', 'tb_detail_diskon.id_kelas','tb_master_kelas.id_kelas')
+        ->leftjoin('tb_master_diskon','tb_detail_diskon.id_diskon','tb_master_diskon.id_diskon')->where('jenis_diskon','=','FlashSale')
+        ->groupBy('tb_master_kelas.id_kelas')->get();
         
-        return view('user.dashboard.checkoutsaya.index', compact('today','tanggal_tahun','checkout'));
-
+        
+        // $kelas = DetailDiskon::with('Kelas.Jeniskelas','Diskon')->groupBy('id_kelas')->get();
+        
+        return view('user.flashsale.index',compact('kelas'));
     }
 
     /**
@@ -52,10 +52,9 @@ class ListPembelianSayaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id_checkouts)
+    public function show($id)
     {
-        $checkout = Checkout::with('Kelas','Discount','User')->find($id_checkouts);
-        return view('user.dashboard.checkoutsaya.invoice', compact('checkout'));
+        //
     }
 
     /**

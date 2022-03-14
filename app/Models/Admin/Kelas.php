@@ -64,6 +64,12 @@ class Kelas extends Model
         return $this->hasMany(DetailVideo::class, 'id_kelas', 'id_kelas');
     }
 
+    public function Detaildiskon()
+    {
+        return $this->hasMany(Detaildiskon::class, 'id_kelas', 'id_kelas');
+    }
+
+
     public static function getId(){
         // return $this->orderBy('id_sparepart')->take(1)->get();
         $getId = DB::table('tb_master_kelas')->orderBy('id_kelas','DESC')->take(1)->get();

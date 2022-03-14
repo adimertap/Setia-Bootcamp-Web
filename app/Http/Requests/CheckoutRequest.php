@@ -35,7 +35,8 @@ class CheckoutRequest extends FormRequest
             // 'cvc' => 'required|numeric|digits:3'
 
             'phone' => 'required',
-            'address' => 'required|string'
+            'address' => 'required|string',
+            'discount' => 'nullable|string|exists:tb_master_diskon,kode_diskon'
         ];
     }
 }

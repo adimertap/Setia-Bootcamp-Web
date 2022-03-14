@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Admin\Diskon;
 use App\Models\Admin\Kelas;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,9 +16,12 @@ class Checkout extends Model
     protected $fillable = [
         'id',
         'id_kelas',
+        'id_diskon',
         'midtrans_url',
         'midtrans_booking_code',
-        'payment_status'
+        'payment_status',
+        'percentage_diskon'
+
     ];
 
     protected $hidden =[ 
@@ -36,6 +40,11 @@ class Checkout extends Model
     public function User()
     {
         return $this->belongsTo(User::class,'id','id');
+    }
+
+    public function Discount()
+    {
+        return $this->belongsTo(Diskon::class,'id_diskon','id_diskon');
     }
 
     public function setExpiredAttribute($value){

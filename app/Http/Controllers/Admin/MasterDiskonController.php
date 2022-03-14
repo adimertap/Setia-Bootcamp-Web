@@ -18,7 +18,7 @@ class MasterDiskonController extends Controller
     public function index()
     {
         $diskon = Diskon::get();
-        $kelas = Kelas::with('Jeniskelas')->get();
+        $kelas = Kelas::with('Jeniskelas')->where('status', '=', 'Aktif')->get();
 
         return view('admin.masterdata.diskon',compact('diskon','kelas'));
     }
