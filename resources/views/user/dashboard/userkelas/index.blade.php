@@ -27,6 +27,11 @@
                     <li class="breadcrumb-item"><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Kelas Saya</li>
                 </ol>
+                <nav class="nav nav-borders mt-4 ml-4" id="myDIV">
+                    <a class="nav-link ml-0 text-white active" href="{{ route('kelas-saya.index') }}">All Class</a>
+                    <a class="nav-link text-white" href="{{ route('kelas-saya-unfinished') }}">Unfinished</a>
+                    <a class="nav-link text-white" href="{{ route('kelas-saya-filter') }}">Finished</a>
+                </nav>
                 <div>
                     @include('components.alert')
                     @if(session('messageberhasil'))
@@ -63,8 +68,11 @@
                         @elseif ($item->status_kelas == 'Sudah Selesai')
                             <a class="btn btn-sm btn-primary p-2 line-height-normal" href="{{ route('kelas-saya.show', $item->id_kelas) }}" style="border-radius: 40px">Belajar Lagi</a>
                             <a class="btn btn-sm btn-secondary p-2 line-height-normal" href="{{ route('kelas-saya.show', $item->id_kelas) }}" style="border-radius: 30px">Lihat Sertifikat</a>
-                            <a class="btn btn-sm btn-warning p-2 line-height-normal" href="{{ route('kelas-saya.show', $item->id_kelas) }}" style="border-radius: 30px">Beri Review</a>
-                        @endif
+                            {{-- <a href="" class="btn btn-sm btn-warning p-2 line-height-normal" type="button" data-toggle="modal" style="border-radius: 30px"
+                                data-target="#Modalreview-{{ $item->id_kelas }}">
+                                <i class="fas fa-address-card mr-1"></i>Beri Review
+                            </a> --}}
+                            @endif
                         
                     </div>
                 </div>
@@ -89,9 +97,10 @@
 
         </div>
     </div>
-
-
 </main>
+
+
+
 
 <script>
     setInterval(displayclock, 500);
@@ -129,6 +138,8 @@
 
         document.getElementById('clock').innerHTML = hrs + ':' + min + ':' + sec + ' ' + en;
     }
+
+   
 
 </script>
 

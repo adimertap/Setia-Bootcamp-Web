@@ -24,11 +24,15 @@
                                 Harga Kelas
                             </p>
                             <p class="mt-2">
-                                <h5 style="color: black">
-                                    Rp. {{ number_format($kelas->harga_kelas) }}
-                                </h5>
+                                @if (count($kelas->Detaildiskon) == '0')
+                                    <h4><b>Rp. {{ number_format($kelas->harga_kelas) }}</b></h4>
+                                @else
+                                    <s style="color: red">Rp. {{ number_format($kelas->harga_kelas) }}</s>
+                                    <h4><b>Rp. {{ number_format($kelas->harga_kelas - $kelas->harga_kelas * $kelas->Detaildiskon[0]->Diskon->jumlah_diskon / 100) }}</b></h4>
+                                @endif
+
                                 <p style="color: grey;line-height:28px">Akses Selamanya</p> 
-                            </p>
+                            </p?>
                          
                             <p class="description">
                                 Bootcamp ini akan mengajak Anda untuk belajar penuh mulai dari pengenalan dasar sampai membangun sebuah projek asli
@@ -80,6 +84,7 @@
                                     <p class="text-danger">{{ $errors->first('address') }}</p>
                                 @endif
                             </div>
+                            @if (count($kelas->Detaildiskon) == '0')
                             <div class="mb-4">
                                 <label for="discount" class="form-label">Discount Code / Voucher</label>
                                 <input name="discount" type="text" class="form-control {{ $errors->has('discount') ? 'is-invalid': '' }}" placeholder="Input Voucher Diskon" value="{{ old('discount') }}"></input>
@@ -87,6 +92,16 @@
                                     <p class="text-danger">{{ $errors->first('discount') }}</p>
                                 @endif
                             </div>
+                            @else
+                            <div class="mb-4">
+                                <label for="discount" class="form-label">Discount Code / Voucher</label>
+                                <input name="discount" type="text" class="form-control {{ $errors->has('discount') ? 'is-invalid': '' }}" placeholder="Input Voucher Diskon" value="{{ $kelas->Detaildiskon[0]->Diskon->kode_diskon }}" readonly></input>
+                                @if ($errors->has('discount'))
+                                    <p class="text-danger">{{ $errors->first('discount') }}</p>
+                                @endif
+                            </div>
+                            @endif
+                          
                             <button type="submit" class="w-100 btn btn-primary">Pay Now</button>
                             <p class="text-center subheader mt-4">
                                 <img src="{{ asset('images/ic_secure.svg') }}" alt=""> Your payment is secure and encrypted.

@@ -226,7 +226,7 @@
                                 <a class="nav-link " href="#">
                                     Sertifikat
                                 </a>
-                                <a class="nav-link " href="#">
+                                <a class="nav-link " href="{{ route('admin-review.index') }}">
                                     Review Kelas
                                 </a>
                                 <a class="nav-link " href="#">

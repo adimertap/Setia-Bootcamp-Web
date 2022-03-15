@@ -42,9 +42,19 @@ Class Program Bootcamp
                                 <div class="card__header-text">
                                     <span class="card__status">{{ $item->Jeniskelas->jenis_kelas }}, {{ $item->Level->nama_level }}</span>
                                     <h3 class="card__title">{{ $item->nama_kelas }}</h3>
-                                    <span class="card__status"> </span>
+                                    @if (count($item->Detaildiskon) != '0')
+                                        <span class="card__status">Flash Sale Class <span style="color: red">{{ $item->Detaildiskon[0]->Diskon->jumlah_diskon }}% Off</span> </span>
+                                    @else
+                                       
+                                    @endif
+                                    
                                 </div>
-                                <h6 style="color: grey">Cuma {{ number_format($item->harga_kelas) }} </h6>
+                                @if (count($item->Detaildiskon) == '0')
+                                    <h6 style="color: grey">{{ number_format($item->harga_kelas) }}</h6>
+                                @else
+                                    <h6 style="color: red"><u>{{ number_format($item->harga_kelas - $item->harga_kelas * $item->Detaildiskon[0]->Diskon->jumlah_diskon / 100) }}</u></h6>
+                                @endif
+                                {{-- <h6 style="color: grey">Cuma {{ number_format($item->harga_kelas) }} </h6> --}}
                             </div>
                             <p class="card__description">Kelas ini ditunjukan untuk kamu yang ingin menambah portofolio dan mempelajari mengenai {{ $item->nama_kelas }}</p>
                         </div>

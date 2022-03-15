@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\DetailKeypoint;
 use App\Models\Admin\DetailVideo;
 use App\Models\Admin\Kelas;
+use App\Models\User\Review;
 use Illuminate\Http\Request;
 
 class ProgramKelasUserController extends Controller
@@ -17,7 +18,7 @@ class ProgramKelasUserController extends Controller
      */
     public function index()
     {
-        $kelas = Kelas::with('Jeniskelas','Level')->leftJoin('tb_detail_mentor', 'tb_master_kelas.id_kelas','tb_detail_mentor.id_kelas')
+        $kelas = Kelas::with('Jeniskelas','Level','Detaildiskon.Diskon')->leftJoin('tb_detail_mentor', 'tb_master_kelas.id_kelas','tb_detail_mentor.id_kelas')
         ->leftjoin('users','tb_detail_mentor.id','users.id')->where('status','=','Aktif')
         ->get();
 
@@ -53,14 +54,16 @@ class ProgramKelasUserController extends Controller
      */
     public function show($id)
     {
-        $kelas = Kelas::with('Jeniskelas','Level','Detailkeypoint','Detailvideo','DetailMentor.User')->find($id);
+        $kelas = Kelas::with('Jeniskelas','Level','Detailkeypoint','Detailvideo','DetailMentor.User','Detaildiskon.Diskon')->find($id);
+        // return $kelas;
        
         $count_video = DetailVideo::where('id_kelas', '=', $id)->count();
         $video_sedikit = DetailVideo::where('id_kelas', '=', $id)->take(4)->get();
         $video_lengkap = DetailVideo::where('id_kelas', '=', $id)->get();
+        $review = Review::with('Kelas','User')->where('id_kelas', $id)->get();
 
         $modul = DetailKeypoint::where('id_kelas', '=', $id)->get();
-        return view('user.kelas.detail',compact('kelas', 'count_video' ,'video_sedikit','video_lengkap','modul'));
+        return view('user.kelas.detail',compact('kelas', 'count_video' ,'video_sedikit','video_lengkap','modul','review'));
 
     }
 

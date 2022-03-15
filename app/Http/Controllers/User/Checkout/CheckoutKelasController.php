@@ -23,6 +23,11 @@ class CheckoutKelasController extends Controller
     public function __construct()
     {
         // Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        // Midtrans\Config::$isProduction = env('MIDTRANS_IS_PRODUCTION');
+        // Midtrans\Config::$isSanitized = env('MIDTRANS_IS_SANITIZED');
+        // Midtrans\Config::$is3ds = env('MIDTRANS_IS_3DS');
+
+        // Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
         Midtrans\Config::$serverKey = "SB-Mid-server-ThmSXotcqD9A6m7KSd-SIaEG";
         Midtrans\Config::$isProduction = false;
         Midtrans\Config::$isSanitized = false;
@@ -71,7 +76,7 @@ class CheckoutKelasController extends Controller
         
         $detail = DetailUserKelas::with('Kelas')->where('id', Auth::user()->id)->where('id_kelas','=',$id)->exists();
         $transaction = Checkout::with('Kelas')->where('id', Auth::user()->id)->where('id_kelas','=',$id)->where('payment_status','=','Paid')->exists();
-        $kelas = Kelas::with('Jeniskelas','Level','Detailkeypoint','Detailvideo','DetailMentor.User')->find($id);
+        $kelas = Kelas::with('Jeniskelas','Level','Detailkeypoint','Detailvideo','DetailMentor.User','Detaildiskon.Diskon')->find($id);
 
         if ($detail != null || $transaction != null){
             $request->session()->flash('error', "You already registered on {$kelas->nama_kelas} Class.");

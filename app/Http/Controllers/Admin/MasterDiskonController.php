@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DiskonRequest;
+use App\Models\Admin\DetailDiskon;
 use App\Models\Admin\Diskon;
 use App\Models\Admin\Kelas;
 use Illuminate\Http\Request;
@@ -43,6 +44,13 @@ class MasterDiskonController extends Controller
     {
         $data = Diskon::where('nama_diskon', $request->nama_diskon)->first();
 
+        $id = Diskon::getId();
+        foreach($id as $value);
+        $idlama = $value->id_diskon;
+        $idbaru = $idlama + 1;
+        $blt = date('y-m');
+        $kode_flashsale = 'FlashSale-'.$blt.'/'.$idbaru;
+
         if(empty($data)){
             if($request->jenis_diskon == 'Voucher'){
                 $diskon = new Diskon;
@@ -56,8 +64,8 @@ class MasterDiskonController extends Controller
             }else if($request->jenis_diskon == 'FlashSale'){
                 
                 $diskon = new Diskon;
+                $diskon->kode_diskon = $kode_flashsale;
                 $diskon->nama_diskon = $request->nama_diskon;
-                $diskon->kode_diskon = 'Flash Sale';
                 $diskon->jumlah_diskon = $request->jumlah_diskon;
                 $diskon->description = $request->description;
                 $diskon->jenis_diskon = 'FlashSale';
@@ -122,7 +130,12 @@ class MasterDiskonController extends Controller
     public function destroy($id)
     {
         $diskon = Diskon::find($id);
-        $diskon->delete();
+        if($diskon->jenis_diskon == 'FlashSale'){
+            DetailDiskon::where('id_diskon', $id)->delete();
+            $diskon->delete();
+        }else{
+            $diskon->delete();
+        }
 
         return redirect()->back()->with('messagehapus','Data Master Diskon Berhasil dihapus');
     }

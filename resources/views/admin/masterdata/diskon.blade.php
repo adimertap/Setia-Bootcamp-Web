@@ -80,12 +80,7 @@
                                         <tr role="row" class="odd">
                                             <th scope="row" class="small" class="sorting_1">{{ $loop->iteration}}.</th>
                                             <td>
-                                                @if ($item->jenis_diskon == 'Voucher')
                                                 {{ $item->kode_diskon }}
-                                                @else
-                                                Diskon Flash Sale
-
-                                                @endif
                                             </td>
 
                                             <td>{{ $item->nama_diskon }}</td>

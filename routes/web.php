@@ -12,6 +12,7 @@ use App\Http\Controllers\UserDashboardController as UserDashboard;
 use App\Http\Controllers\User\Checkout\CheckoutKelasController as Checkout;
 use App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController as KelasUser;
 use App\Http\Controllers\User\Community\LowonganController as Lowongan;
+use App\Http\Controllers\User\AllPortofolioController as Portofolio;
 use \App\Http\Controllers\Perusahaan\PelamarController as Pelamar;
 /* 
 |--------------------------------------------------------------------------
@@ -108,22 +109,31 @@ Route::middleware(['auth'])->group(function(){
     });
 
     // USER PROGRAM KELAS
-    Route::prefix('user')
+    Route::prefix('bootcamp')
         ->group(function(){
             Route::resource('program-kelas', '\App\Http\Controllers\User\ProgramKelasUserController');
     });
 
+    // FLASH SALE
+    Route::prefix('bootcamp')
+        ->group(function(){
+            Route::resource('flash-sale', '\App\Http\Controllers\User\FlashSaleController');
+    });
+
+    // PORTOFOLIO
+    Route::prefix('bootcamp')
+        ->group(function(){
+            Route::resource('portofolio', '\App\Http\Controllers\User\AllPortofolioController');
+    });
+
     // USER COMMUNITY
-    Route::prefix('user')
+    Route::prefix('bootcamp')
         ->group(function(){
             Route::get('communityprofile/{id}/perusahaan', [Lowongan::class, 'profile'])->name('community-profile');
             Route::resource('community', '\App\Http\Controllers\User\Community\LowonganController');
     });
 
-    Route::prefix('user')
-        ->group(function(){
-            Route::resource('flash-sale', '\App\Http\Controllers\User\FlashSaleController');
-    });
+    
 
     // DASHBOARD
     // USER KELAS SAYA
@@ -132,17 +142,29 @@ Route::middleware(['auth'])->group(function(){
         ->middleware(['User_Role','verified'])
         ->group(function(){
             Route::resource('kelas-saya', '\App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController');
+            Route::get('kelas/finished', [KelasUser::class, 'FilterFinished'])->name('kelas-saya-filter');
+            Route::get('kelas/unfinished', [KelasUser::class, 'FilterUnFinished'])->name('kelas-saya-unfinished');
+
             Route::get('kelas/{id_video_kelas}/video', [KelasUser::class, 'video'])->name('kelas-saya-video');
+            Route::get('kelas/{id_kelas}/finishclass', [KelasUser::class, 'FinishClass'])->name('kelas-saya-finish');
             Route::post('kelas/{id_kelas}/selesai', '\App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController@selesaikelas')
             ->name('kelas-saya-selesai');
     });
 
-    // TRANSACTION
+    // TRANSACTION USER
     Route::prefix('user')
     ->namespace('User')
     ->middleware(['User_Role','verified'])
     ->group(function(){
         Route::resource('pembelian-saya', '\App\Http\Controllers\User\Dashboard\PembelianSaya\ListPembelianSayaController');
+    });
+
+    // PORTOFOLIO USER
+    Route::prefix('user')
+    ->namespace('User')
+    ->middleware(['User_Role','verified'])
+    ->group(function(){
+        Route::resource('portofolio-saya', '\App\Http\Controllers\User\Dashboard\Portofolio\PortofolioSayaController');
     });
 
     
@@ -230,6 +252,15 @@ Route::middleware(['auth'])->group(function(){
     ->middleware(['Admin_Role','verified'])
     ->group(function () {
             Route::resource('list-checkout', '\App\Http\Controllers\Admin\ListCheckoutController');
+    });
+
+    // CAPAIN KELAS
+    // REVIEW KELAS
+    Route::prefix('admin')
+    ->namespace('Admin')
+    ->middleware(['Admin_Role','verified'])
+    ->group(function () {
+            Route::resource('admin-review', '\App\Http\Controllers\Admin\ReviewKelasController');
     });
 
     // DAFTAR PERUSAHAAN DAN LOWONGAN

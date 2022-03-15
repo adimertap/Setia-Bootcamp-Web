@@ -117,7 +117,7 @@
                                 <a class="nav-link" href="{{ route('jenis-kelas.index') }}">
                                     Certificate
                                 </a>
-                                <a class="nav-link" href="{{ route('level.index') }}">
+                                <a class="nav-link" href="{{ route('portofolio-saya.index') }}">
                                     Portofolio
                                 </a>
                             </nav>

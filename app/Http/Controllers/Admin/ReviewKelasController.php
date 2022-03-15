@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\DetailDiskon;
+use App\Models\User\Review;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class FlashSaleController extends Controller
+class ReviewKelasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +16,10 @@ class FlashSaleController extends Controller
      */
     public function index()
     {
-        $kelas = DetailDiskon::leftjoin('tb_master_kelas', 'tb_detail_diskon.id_kelas','tb_master_kelas.id_kelas')
-        ->leftjoin('tb_master_diskon','tb_detail_diskon.id_diskon','tb_master_diskon.id_diskon')->where('jenis_diskon','=','FlashSale')
-        ->groupBy('tb_master_kelas.id_kelas')->get();
-        
-        return view('user.flashsale.index',compact('kelas'));
+        $review = Review::with('Kelas.Jeniskelas','User')->get();
+        $today = Carbon::now()->isoFormat('dddd');
+        $tanggal = Carbon::now()->format('j F Y');
+        return view('admin.capaian.review.index', compact('review','today','tanggal'));
     }
 
     /**

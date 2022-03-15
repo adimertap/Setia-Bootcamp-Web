@@ -338,7 +338,67 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">Review Kelas On Progress
+                <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+                    <section class="testimonials" style="margin-top: 0px">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12 col-12">
+                                <div class="row">
+                                    @forelse ($review as $item)
+                                    <div class="col-lg-4 col-12">
+                                        <div class="item-review">
+                                            @if ($item->bintang == '1')
+                                            <i class="material-icons">star</i>
+                                            @elseif ($item->bintang == '2')
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            @elseif ($item->bintang == '3')
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            @elseif ($item->bintang == '4')
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            @elseif ($item->bintang == '5')
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            @endif
+                                            
+                                           
+                                            <p class="message">
+                                                {{ $item->review }}
+                                            </p>
+                                            <div class="user">
+                                                <img src="{{$item->User->avatar}}" class="photo" alt="" style="border-radius: 50px">
+                                                <div class="info">
+                                                    <h4 class="name">
+                                                        {{ $item->User->name }}
+                                                    </h4>
+                                                    <p class="role">
+                                                        {{ $item->User->email }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @empty
+                                    <h2 class="primary-header">
+                                        Belum Terdapat Review Kelas
+                                    </h2>
+            
+                                    @endforelse
+            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </section>
+
                 </div>
                 <div class="tab-pane fade" id="pills-portofolio" role="tabpanel" aria-labelledby="pills-portofolio-tab">Portofolio On Progress</div>
 
@@ -370,12 +430,16 @@
                                                         class="icon" width="70" height="70">
                                                 </p>
                                                 <p style="margin: 1px">
-                                                    Selamanya
+                                                    Selamanya 
                                                 </p>
-                                                <h4>
-                                                    <b>Rp. {{ number_format($kelas->harga_kelas) }}</b>
-    
-                                                </h4>
+                                                
+                                                    @if (count($kelas->Detaildiskon) == '0')
+                                                        <h4><b>Rp. {{ number_format($kelas->harga_kelas) }}</b></h4>
+                                                    @else
+                                                        <s style="color: red">Rp. {{ number_format($kelas->harga_kelas) }}</s>
+                                                        <h4><b>Rp. {{ number_format($kelas->harga_kelas - $kelas->harga_kelas * $kelas->Detaildiskon[0]->Diskon->jumlah_diskon / 100) }}</b></h4>
+                                                    @endif
+                                                  
                                                 <div class="col-10">
                                                     <p class="mt-1" class="small" style="color: gray">
                                                         Miliki kelas Premium secara permanen dan bangun sebuah projek

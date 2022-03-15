@@ -44,7 +44,7 @@ class Checkout extends Model
 
     public function Discount()
     {
-        return $this->belongsTo(Diskon::class,'id_diskon','id_diskon');
+        return $this->belongsTo(Diskon::class,'id_diskon','id_diskon')->onDelete('cascade');
     }
 
     public function setExpiredAttribute($value){

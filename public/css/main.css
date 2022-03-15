@@ -2337,5 +2337,9 @@ p.form_text1>span {
     min-width: 120px;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 
 /*# sourceMappingURL=main.css.map */

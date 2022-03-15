@@ -24,7 +24,7 @@
                     @endif
                     @if (Auth::user()->role == 'Perusahaan' || Auth::user()->role == 'User' || Auth::user()->role == 'Admin')
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Portofolio</a>
+                            <a class="nav-link" href="{{ route('portofolio.index') }}">Portofolio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('community.index') }}">Community</a>
@@ -38,7 +38,7 @@
                         <a class="nav-link" href="{{ route('flash-sale.index') }}">Flash Sale  <span class="badge badge-xs badge-secondary">New</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Portofolio</a>
+                        <a class="nav-link" href="{{ route('portofolio.index') }}">Portofolio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('community.index') }}">Community</a>
