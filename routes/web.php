@@ -12,6 +12,7 @@ use App\Http\Controllers\UserDashboardController as UserDashboard;
 use App\Http\Controllers\User\Checkout\CheckoutKelasController as Checkout;
 use App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController as KelasUser;
 use App\Http\Controllers\User\Community\LowonganController as Lowongan;
+use App\Http\Controllers\Admin\MasterDiskonController as Diskon;
 use App\Http\Controllers\User\AllPortofolioController as Portofolio;
 use \App\Http\Controllers\Perusahaan\PelamarController as Pelamar;
 /* 
@@ -134,7 +135,6 @@ Route::middleware(['auth'])->group(function(){
     });
 
     
-
     // DASHBOARD
     // USER KELAS SAYA
     Route::prefix('user')
@@ -207,6 +207,7 @@ Route::middleware(['auth'])->group(function(){
         ->middleware(['Admin_Role','verified'])
         ->group(function () {
                 Route::resource('diskon', '\App\Http\Controllers\Admin\MasterDiskonController');
+                Route::post ('diskonaktif',  [Diskon::class, 'UpdateStatus'])->name('diskon-status');
         });
 
     Route::prefix('admin/masterdata')
@@ -261,6 +262,13 @@ Route::middleware(['auth'])->group(function(){
     ->middleware(['Admin_Role','verified'])
     ->group(function () {
             Route::resource('admin-review', '\App\Http\Controllers\Admin\ReviewKelasController');
+    });
+
+    Route::prefix('admin')
+    ->namespace('Admin')
+    ->middleware(['Admin_Role','verified'])
+    ->group(function () {
+            Route::resource('admin-portofolio', '\App\Http\Controllers\Admin\AllPortofolioAdminController');
     });
 
     // DAFTAR PERUSAHAAN DAN LOWONGAN

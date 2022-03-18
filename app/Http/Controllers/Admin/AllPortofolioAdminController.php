@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\DetailUserKelas;
-use App\Models\User;
+use App\Models\User\Portofolio;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class ListUserController extends Controller
+class AllPortofolioAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,16 +16,11 @@ class ListUserController extends Controller
      */
     public function index()
     {
-    
+        $portofolio = Portofolio::with('User','Kelas')->get();
         $today = Carbon::now()->isoFormat('dddd');
         $tanggal = Carbon::now()->format('j F Y');
 
-        $user = DetailUserKelas::join('users', 'tb_detail_user_kelas.id','users.id')
-        ->selectRaw('name, email, COUNT(id_kelas) as jumlah_kelas')->groupBy('name')
-        ->get();
-       
-
-        return view('admin.detailkelas.listuser.index', compact('user','today','tanggal'));
+        return view('admin.capaian.portofolio.index', compact('portofolio','today','tanggal'));
     }
 
     /**
@@ -56,16 +50,11 @@ class ListUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($name)
+    public function show($id)
     {
-        // $item = DetailUserKelas::with('Kelas','User')->find($id_detail_kelas);
+        $item = Portofolio::with('User','Kelas')->find($id);
 
-        $item = DetailUserKelas::with('Kelas','User')->join('users','tb_detail_user_kelas.id','users.id')->where('name', $name)->get();
-
-        // return $item;
-     
-        
-        return view('admin.detailkelas.listuser.detail', compact('item'));
+        return view('admin.capaian.portofolio.detail', compact('item'));
     }
 
     /**

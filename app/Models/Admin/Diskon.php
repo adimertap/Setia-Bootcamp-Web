@@ -16,7 +16,8 @@ class Diskon extends Model
         'kode_diskon',
         'nama_diskon',
         'jumlah_diskon',
-        'jenis_diskon'
+        'jenis_diskon',
+        'status_diskon'
     ];
 
     protected $hidden =[ 
@@ -31,6 +32,11 @@ class Diskon extends Model
     {
         return $this->belongsToMany(Kelas::class,'tb_detail_diskon','id_diskon','id_kelas');
     }
+
+    // public function Detaildiskon()
+    // {
+    //     return $this->belongsToMany(Kelas::class,'tb_detail_diskon','id_diskon','id_kelas');
+    // }
 
     public static function getId()
     {

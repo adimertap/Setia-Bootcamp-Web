@@ -72,6 +72,9 @@
                                                 style="width: 70px;">Jenis Diskon</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
+                                                style="width: 10px;">Status</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 50px;">Action</th>
                                         </tr>
                                     </thead>
@@ -92,6 +95,20 @@
                                                 <span class="badge badge-warning">{{ $item->jenis_diskon }}</span>
                                                 @endif
 
+                                            </td>
+
+                                            <td class="text-center">
+                                                <div class="custom-control custom-switch mt-n2">
+                                                    <div>
+                                                        <input id="switch-primary-{{$item->id_diskon}}"
+                                                            value="{{$item->id_diskon}}" class="custom-control-input"
+                                                            name="toggle" type="checkbox"
+                                                            {{ $item->status_diskon === 'Aktif' ? 'checked' : '' }}>
+
+                                                        <label class="custom-control-label"
+                                                            for="switch-primary-{{$item->id_diskon}}"></label>
+                                                    </div>
+                                                </div>
                                             </td>
                                             <td class="text-center">
                                                 @if ($item->jenis_diskon == 'FlashSale')
@@ -151,6 +168,7 @@
                     <label class="small mb-1">Isikan Form Dibawah Ini</label>
                     <hr>
                     </hr>
+                    @if (count($detail) == '0')
                     <div class="row mb-1" id="radio1">
                         <div class="col-md-6">
                             <input class="mr-1" value="Voucher" type="radio" name="radio2" checked>Diskon Voucher
@@ -159,6 +177,14 @@
                             <input class="mr-1" value="FlashSale" type="radio" name="radio2">Flash Sale
                         </div>
                     </div>
+                    @else
+                    <div class="row mb-1" id="radio1">
+                        <div class="col-md-6">
+                            <input class="mr-1" value="Voucher" type="radio" name="radio2" checked>Diskon Voucher
+                        </div>
+                    </div>
+                    @endif
+
                     <p></p>
                     <div id="FlashSale" style="display:none">
                         <div class="form-group">
@@ -225,6 +251,8 @@
                         <p class="text-danger">{{ $errors->first('description') }}</p>
                         @endif
                     </div>
+                    <p class="small text-muted">Note: Jika ingin menambahkan Flash Sale NonAktifkan Flash Sale
+                        Sebelumnya</p>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
@@ -341,33 +369,33 @@
                         <label class="small mb-1 mr-1" for="kode_diskon">Kode Diskon</label><span class="mr-4 mb-3"
                             style="color: red">*</span>
                         <input class="form-control" name="kode_diskon" type="text" id="kode_diskon"
-                            value="{{ $item->kode_diskon }}"/>
+                            value="{{ $item->kode_diskon }}" />
                     </div>
                     @else
                     <h5>Flash Sale</h5>
                     @endif
-                  
+
                     <div class="form-group">
                         <label class="small mb-1 mr-1" for="nama_diskon">Nama Diskon</label><span class="mr-4 mb-3"
                             style="color: red">*</span>
                         <input class="form-control" name="nama_diskon" type="text" id="nama_diskon"
-                            placeholder="Input Nama Diskon" value="{{ $item->nama_diskon }}"/>
+                            placeholder="Input Nama Diskon" value="{{ $item->nama_diskon }}" />
                     </div>
                     <div class="form-group">
                         <label class="small mb-1 mr-1" for="jumlah_diskon">Jumlah Diskon (%)</label><span
                             class="mr-4 mb-3" style="color: red">*</span>
                         <input class="form-control" name="jumlah_diskon" type="number" min="1" max="100"
                             id="jumlah_diskon" placeholder="Input Jumlah Persen Diskon"
-                            value="{{ $item->jumlah_diskon  }}"/>
+                            value="{{ $item->jumlah_diskon  }}" />
                     </div>
                     <div class="form-group">
-                        <label class="small mb-1 mr-1" for="description">Description</label><span
-                            class="mr-4 mb-3" style="color: red">*</span>
-                        <textarea class="form-control" name="description" type="text"
-                            id="description" placeholder="Input Description"
+                        <label class="small mb-1 mr-1" for="description">Description</label><span class="mr-4 mb-3"
+                            style="color: red">*</span>
+                        <textarea class="form-control" name="description" type="text" id="description"
+                            placeholder="Input Description"
                             value="{{ $item->description  }}">{{ $item->description }}</textarea>
                     </div>
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
@@ -454,7 +482,9 @@
                                             <th scope="row" class="small" class="sorting_1">{{ $loop->iteration}}</th>
                                             <td>{{ $item->nama_kelas }}</td>
                                             <td>{{ $item->Jeniskelas->jenis_kelas }}</td>
-                                            <td class="text-center">Rp. {{ number_format($item->harga_kelas-$item->harga_kelas*$diskon/100) }}</td>
+                                            <td class="text-center">Rp.
+                                                {{ number_format($item->harga_kelas-$item->harga_kelas*$diskon/100) }}
+                                            </td>
                                         </tr>
                                         @empty
 
@@ -495,6 +525,40 @@
             title: 'Berhasil Menambahkan Data Pegawai'
         })
     }
+
+    $('input[name=toggle]').change(function () {
+        var mode = $(this).prop('checked');
+        var id = $(this).val();
+
+        console.log(mode, id)
+
+        var diskonobj = {};
+        diskonobj.mode = $(this).prop('checked');
+        diskonobj.id_diskon = $(this).val();
+        diskonobj._token = '{{csrf_token()}}';
+        
+        Swal.fire(
+            'Success!',
+            'Berhasil Merubah Status Diskon!',
+            'success'
+        )
+       
+       
+
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: "{{ url('/admin/masterdata/diskonaktif') }}",
+            data: diskonobj,
+            success: function (data, response) {
+                swal.fire({
+                    icon: 'success',
+                    showConfirmButton: false,
+                    html: '<h5>Success!</h5>'
+                });
+            }
+        });
+    });
 
     function simpandata() {
         var _token = $('#form1').find('input[name="_token"]').val()

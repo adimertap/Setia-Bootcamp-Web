@@ -1,38 +1,33 @@
 @extends('layouts.Admin.adminlayout')
 
 @section('content')
-
 <main>
     <div class="container-fluid mt-5">
         <!-- Custom page header alternative example-->
         <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
             <div class="mr-4 mb-3 mb-sm-0">
-                <h1 class="mb-0">List Pembayaran User</h1>
+                <h1 class="mb-0">List Review Kelas</h1>
                 <div class="small">
                     <span class="font-weight-500 text-primary">{{ $today }}</span>
                     · Tanggal {{ $tanggal }} · <span id="clock"> 12:16 PM</span>
                 </div>
             </div>
             <div class="small">
-                <span class="font-weight-500 text-primary">Menu Detail</span>
+                <span class="font-weight-500 text-primary">Master Data</span>
                 <hr>
                 </hr>
             </div>
         </div>
     </div>
 
-
-    {{-- MAIN PAGE CONTENT --}}
-
     <div class="container-fluid">
         <div class="card mb-4">
             <div class="card card-header-actions">
-                <div class="card-header">List Pembayaran
+                <div class="card-header">List Review Kelas dari User
                 </div>
             </div>
             <div class="card-body">
                 <div class="datatable">
-
                     @if(session('messageberhasil'))
                     <div class="alert alert-success" role="alert"> <i class="fas fa-check"></i>
                         {{ session('messageberhasil') }}
@@ -49,7 +44,6 @@
                         </button>
                     </div>
                     @endif
-
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12">
@@ -63,56 +57,42 @@
                                                 style="width: 20px;">No</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 70px;">Nama User</th>
+                                                style="width: 150px;">Nama User</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 20px;">Email User</th>
+                                                style="width: 40px;">Email</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 100px;">Kelas</th>
+                                                style="width: 160px;">Kelas</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 50px;">Jenis Kelas</th>
+                                                style="width: 40px;">Jenis Project</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 30px;">Tanggal</th>
+                                                style="width: 100px;">Nama Project</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 30px;">Diskon</th>
+                                                style="width: 30px;">Url project</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 30px;">Total Price</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 30px;">Status</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 50px;">Action</th>
+                                                style="width: 50px;">Detail</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($checkout as $item)
+                                        @forelse ($portofolio as $item)
                                         <tr role="row" class="odd">
                                             <th scope="row" class="small" class="sorting_1">{{ $loop->iteration}}.</th>
                                             <td>{{ $item->User->name }}</td>
                                             <td>{{ $item->User->email }}</td>
                                             <td>{{ $item->Kelas->nama_kelas }}</td>
                                             <td>{{ $item->Kelas->Jeniskelas->jenis_kelas }}</td>
-                                            <td>{{ date('d M Y', strtotime($item->created_at)) }}</td>
-                                            <td>{{ $item->percentage_diskon }}%</td>
-                                            <td>Rp. {{ number_format($item->total_price) }}</td>
+                                            <td>{{ $item->nama_project }}</td>
+                                            <td>{{ $item->url_project }}</td>
                                             <td class="text-center">
-                                                @if ($item->payment_status == 'Pending')
-                                                    <span class="badge badge-danger ml-auto">{{ $item->payment_status }}</span>
-                                                @else
-                                                    <span class="badge badge-success ml-auto">{{ $item->payment_status }}</span>
-                                                @endif
-                                            </td>
-                                            <td class="text-center">
-                                                <a href="{{ route('list-checkout.show', $item->id_checkouts) }}"
-                                                    class="btn-xs btn-secondary" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Detail">
-                                                    <i class="fas fa-address-card mr-2"></i>Invoice
+                                                <a href="{{ route('admin-portofolio.show', $item->id_portofolio) }}"
+                                                    class="btn btn-secondary btn-datatable" data-toggle="tooltip"
+                                                    data-placement="top" title="" data-original-title="Detail Porto">
+                                                    <i class="fa fa-eye"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -130,5 +110,43 @@
     </div>
 </main>
 
+<script>
+    setInterval(displayclock, 500);
+
+    function displayclock() {
+        var time = new Date()
+        var hrs = time.getHours()
+        var min = time.getMinutes()
+        var sec = time.getSeconds()
+        var en = 'AM';
+
+        if (hrs > 12) {
+            en = 'PM'
+        }
+
+        if (hrs > 12) {
+            hrs = hrs - 12;
+        }
+
+        if (hrs == 0) {
+            hrs = 12;
+        }
+
+        if (hrs < 10) {
+            hrs = '0' + hrs;
+        }
+
+        if (min < 10) {
+            min = '0' + min;
+        }
+
+        if (sec < 10) {
+            sec = '0' + sec;
+        }
+
+        document.getElementById('clock').innerHTML = hrs + ':' + min + ':' + sec + ' ' + en;
+    }
+
+</script>
 
 @endsection

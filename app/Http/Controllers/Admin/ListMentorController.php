@@ -80,8 +80,11 @@ class ListMentorController extends Controller
     public function show($id)
     {
         $mentor = User::with('Detailkelas','Detailkelas.Jeniskelas','Detailkelas.level')->find($id);
-        $kelas = Kelas::with('Jeniskelas','Level')->get();
-    
+        $kelas = Kelas::with('Jeniskelas','Level')->leftjoin('tb_detail_mentor','tb_master_kelas.id_kelas','tb_detail_mentor.id_kelas')
+        ->join('users','tb_detail_mentor.id','users.id')
+        ->get();
+
+        // return $kelas;
 
         return view('admin.menumentor.listmentor.detail',compact('mentor','kelas'));
     }

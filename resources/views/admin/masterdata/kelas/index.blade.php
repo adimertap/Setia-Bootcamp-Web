@@ -88,7 +88,7 @@
                                                 style="width: 20px;">Status Video</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 80px;">Launching dan Diskon</th>
+                                                style="width: 80px;">Launching Kelas</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 80px;">Action</th>
@@ -129,19 +129,10 @@
                                                     data-target="#Modallaunching-{{ $item->id_kelas }}">
                                                     <i class="fas fa-rocket mr-1"></i>Launch
                                                 </a>
-                                                <a href="" class="btn-xs btn-secondary" type="button"
-                                                    data-toggle="modal"
-                                                    data-target="#Modaldiskon-{{ $item->id_kelas }}">
-                                                    Atur Diskon
-                                                </a>
                                                 @elseif ($item->status_video == 'Telah Dibuat' && $item->status_approval_video == 'Ditolak' && $item->status == 'Tidak Aktif')
                                                     <span class="badge badge-danger ">Menunggu Pembenaran Video!</span>
                                                 @elseif ($item->status_video == 'Telah Dibuat' && $item->status_approval_video == 'Disetujui' && $item->status == 'Aktif')
-                                                <a href="" class="btn-xs btn-secondary" type="button"
-                                                    data-toggle="modal"
-                                                    data-target="#Modaldiskon-{{ $item->id_kelas }}">
-                                                    Atur Diskon
-                                                </a>
+                                                    <span class="badge badge-success ">Kelas Telah Launching!</span>
                                                 @endif
                                                
                                             </td>

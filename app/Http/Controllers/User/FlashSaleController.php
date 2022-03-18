@@ -16,7 +16,8 @@ class FlashSaleController extends Controller
     public function index()
     {
         $kelas = DetailDiskon::leftjoin('tb_master_kelas', 'tb_detail_diskon.id_kelas','tb_master_kelas.id_kelas')
-        ->leftjoin('tb_master_diskon','tb_detail_diskon.id_diskon','tb_master_diskon.id_diskon')->where('jenis_diskon','=','FlashSale')
+        ->leftjoin('tb_master_diskon','tb_detail_diskon.id_diskon','tb_master_diskon.id_diskon')
+        ->where('jenis_diskon','=','FlashSale')->where('status_diskon','=','Aktif')
         ->groupBy('tb_master_kelas.id_kelas')->get();
         
         return view('user.flashsale.index',compact('kelas'));

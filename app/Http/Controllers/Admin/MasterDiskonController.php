@@ -20,8 +20,22 @@ class MasterDiskonController extends Controller
     {
         $diskon = Diskon::get();
         $kelas = Kelas::with('Jeniskelas')->where('status', '=', 'Aktif')->get();
+        $detail = DetailDiskon::join('tb_master_diskon', 'tb_detail_diskon.id_diskon','tb_master_diskon.id_diskon')
+        ->where('status_diskon','=','Aktif')->get();
 
-        return view('admin.masterdata.diskon',compact('diskon','kelas'));
+        return view('admin.masterdata.diskon',compact('diskon','kelas','detail'));
+    }
+
+    public function UpdateStatus(Request $request)
+    {
+        if($request->mode == "true")
+            {
+                $tes = Diskon::where('id_diskon', '=', $request->id_diskon)->update(array('status_diskon' => 'Aktif'));
+            }
+            else
+            {
+                $tes = Diskon::where('id_diskon', '=', $request->id_diskon)->update(array('status_diskon' => 'Tidak Aktif'));
+            }
     }
 
     /**
@@ -59,6 +73,7 @@ class MasterDiskonController extends Controller
                 $diskon->jumlah_diskon = $request->jumlah_diskon;
                 $diskon->jenis_diskon = 'Voucher';
                 $diskon->description = $request->description;
+                $diskon->status_diskon = 'Aktif';
                 $diskon->save();
     
             }else if($request->jenis_diskon == 'FlashSale'){
@@ -69,13 +84,13 @@ class MasterDiskonController extends Controller
                 $diskon->jumlah_diskon = $request->jumlah_diskon;
                 $diskon->description = $request->description;
                 $diskon->jenis_diskon = 'FlashSale';
+                $diskon->status_diskon = 'Aktif';
                 $diskon->save();
                 $diskon->Detailkelas()->sync($request->detailkelas);
             }
         }else{
             throw new \Exception('Nama Diskon Sudah Ada');
         }
-
         
     }
 
@@ -116,8 +131,8 @@ class MasterDiskonController extends Controller
         $diskon->jumlah_diskon = $request->jumlah_diskon;
         $diskon->jenis_diskon = $request->jenis_diskon;
         $diskon->description = $request->description;
-
         $diskon->update();
+
         return redirect()->back()->with('messageberhasil','Data Master Diskon Berhasil diubah');
     }
 

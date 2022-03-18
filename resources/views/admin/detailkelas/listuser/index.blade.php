@@ -69,9 +69,6 @@
                                                 style="width: 50px;">Email User</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 50px;">Tanggal Terdaftar</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 50px;">Jumlah Kelas</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
@@ -84,10 +81,9 @@
                                             <th scope="row" class="small" class="sorting_1">{{ $loop->iteration}}.</th>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->email }}</td>
-                                            <td>{{ $item->created_at }}</td>
-                                            <td>5</td>
+                                            <td class="text-center">{{ $item->jumlah_kelas }} Kelas</td>
                                             <td class="text-center">
-                                                <a href="{{ route('list-user.show', $item->id) }}"
+                                                <a href="{{ route('list-user.show', $item->name) }}"
                                                     class="btn-xs btn-secondary" data-toggle="tooltip"
                                                     data-placement="top" title="" data-original-title="Detail">
                                                     <i class="fas fa-address-card mr-2"></i>Lihat Kelas User
