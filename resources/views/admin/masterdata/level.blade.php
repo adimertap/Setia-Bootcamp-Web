@@ -116,7 +116,10 @@
                     <div class="form-group">
                         <label class="small mb-1 mr-1" for="nama_level">Nama Level</label><span class="mr-4 mb-3" style="color: red">*</span>
                         <input class="form-control" name="nama_level" type="text" id="nama_level"
-                            placeholder="Input Nama Jenis Kelas" value="{{ old('nama_level') }}" required/>
+                            placeholder="Input Nama Jenis Kelas" value="{{ old('nama_level') }}"
+                            class="form-control @error('jenis_kelas') is-invalid @enderror" required/>
+                            @error('nama_level')<div class="text-danger small mb-1">{{ $message }}
+                            </div> @enderror
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -148,7 +151,7 @@
                     <div class="form-group">
                         <label class="small mb-1 mr-1" for="nama_level">Nama Level</label><span class="mr-4 mb-3" style="color: red">*</span>
                         <input class="form-control" name="nama_level" type="text" id="nama_level"
-                            value="{{ $item->nama_level }}"></input>
+                            value="{{ $item->nama_level }}" required></input>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -189,6 +192,18 @@
 
 @endforelse
 
+@if (count($errors) > 0)
+<button id="validasierror" style="display: none" type="button" data-toggle="modal" data-target="#Modaltambah">
+    Open Modal</button>
+@endif
 
+{{-- Script Open Modal Callback --}}
+<script>
+    $(document).ready(function () {
+        $('#validasierror').click();
+        // $('#dataTable').DataTable();
+    });
+
+</script>
 
 @endsection

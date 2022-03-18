@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Perusahaan;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PengumumanLowonganRequest;
 use App\Models\Perusahaan\Pengumuman;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -40,8 +41,9 @@ class PengumumanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PengumumanLowonganRequest $request)
     {
+    
         $pengumuman = new Pengumuman;
         $pengumuman->nama_pengumuman = $request->nama_pengumuman;
         $pengumuman->job_description = $request->job_description;
@@ -55,7 +57,7 @@ class PengumumanController extends Controller
         $pengumuman->id_perusahaan = Auth::user()->id;
         $pengumuman->save();
 
-        return redirect()->route('perusahaan.dashboard')->with('messageberhasil','Data Pengumuman Berhasil ditambahkan');
+        return redirect()->route('pengumuman.index')->with('messageberhasil','Data Pengumuman Berhasil ditambahkan');
     }
 
     /**

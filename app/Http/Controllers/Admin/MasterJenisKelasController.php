@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\JenisKelasRequest;
 use App\Models\Admin\JenisKelas;
 use Illuminate\Http\Request;
 
@@ -36,15 +37,12 @@ class MasterJenisKelasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(JenisKelasRequest $request)
     {
-
         $jenis_kelas = new JenisKelas;
         $jenis_kelas->jenis_kelas = $request->jenis_kelas;
         $jenis_kelas->keterangan = $request->keterangan;
         
-        
-
         $jenis_kelas->save();
         return redirect()->back()->with('messageberhasil','Data Master Jenis Kelas Berhasil ditambahkan');
     }

@@ -37,11 +37,11 @@
                                                 <button class="close" data-dismiss="alert">
                                                     <span>×</span>
                                                 </button>
-                                                <h10><i class="icon fas fa-ban"></i><b> LOGIN ERROR!</b></h10>
+                                                <h10><i class="icon fas fa-ban"></i><b> REGISTER ERROR!</b></h10>
                                                 <br>
-                                                @foreach ($errors->all() as $e)
+                                                {{-- @foreach ($errors->all() as $e)
                                                 {{$e}}
-                                                @endforeach
+                                                @endforeach --}}
                                             </div>
                                         </div>
                                         @endif
@@ -49,33 +49,35 @@
                                             <label for="name" :value="__('name')">Name</label><span class="mr-4 mb-3"
                                                 style="color: red">*</span>
                                             <input id="name" class="form-control" type="name" name="name"
-                                                placeholder="Enter Your Name" :value="old('name')" tabindex="1" required
-                                                autofocus>
-                                            <div class="invalid-feedback">
-                                                Please fill in your username
-                                            </div>
+                                            class="form-control @error('name') is-invalid @enderror" 
+                                                placeholder="Enter Your Name" value="{{ old('name') }}" tabindex="1"
+                                                required autofocus>
+                                            @error('name')<div class="text-danger small mb-1">{{ $message }}
+                                            </div> @enderror
                                         </div>
-                                        <!-- Form Group (email address)-->
                                         <div class="form-group">
                                             <label for="email" :value="__('Email')">Email</label><span class="mr-4 mb-3"
                                                 style="color: red">*</span>
                                             <input id="email" class="form-control" type="email" name="email"
-                                                placeholder="Enter Your Email" :value="old('email')" tabindex="1"
+                                            class="form-control @error('email') is-invalid @enderror" 
+                                                placeholder="Enter Your Email" value="{{ old('email') }}" tabindex="1"
                                                 required autofocus>
-                                            <div class="invalid-feedback">
-                                                Please fill in your username
-                                            </div>
+                                            @error('name')<div class="text-danger small mb-1">{{ $message }}
+                                            </div> @enderror
                                         </div>
-
                                         <div class="form-group">
                                             <label class="small mb-1" for="password">Password</label><span
                                                 class="mr-4 mb-3" style="color: red">*</span>
                                             <input id="password" class="form-control" type="password" name="password"
+                                            class="form-control @error('password') is-invalid @enderror"
                                                 placeholder="Enter Your Password" required
                                                 autocomplete="current-password" required>
-                                            <div class="invalid-feedback">
-                                                please fill in your password
-                                            </div>
+                                                @error('password')<div class="text-danger small mb-1">
+                                                    - Must be at least 10 characters in length 
+                                                    <br> - Must contain at least one uppercase letter
+                                                    <br> - Must contain at least one uppercase letter
+                                                    <br> - Must contain at least one digit
+                                                </div> @enderror
                                         </div>
 
                                         <div class="form-group">
@@ -85,9 +87,8 @@
                                             <input id="password_confirmation" class="form-control" type="password"
                                                 name="password_confirmation" placeholder="Password Confirmation"
                                                 required autocomplete="current-password" required>
-                                            <div class="invalid-feedback">
-                                                please fill in your password
-                                            </div>
+                                                @error('password_confirmation')<div class="text-danger small mb-1">{{ $message }}
+                                                </div> @enderror
                                         </div>
 
                                         <div

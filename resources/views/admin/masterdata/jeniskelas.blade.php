@@ -122,11 +122,15 @@
                         <input class="form-control" name="jenis_kelas" type="text" id="jenis_kelas"
                             placeholder="Input Nama Jenis Kelas" value="{{ old('jenis_kelas') }}"
                             class="form-control @error('jenis_kelas') is-invalid @enderror" required/>
+                            @error('jenis_kelas')<div class="text-danger small mb-1">{{ $message }}
+                            </div> @enderror
                     </div>
                     <div class="form-group">
                         <label class="small mb-1 mr-1" for="keterangan">Keterangan</label><span class="mr-4 mb-3" style="color: red">*</span>
                         <textarea class="form-control" name="keterangan" type="text" id="keterangan"
                             placeholder="Input Keterangan" value="{{ old('keterangan') }}" required></textarea>
+                            @error('keterangan')<div class="text-danger small mb-1">{{ $message }}
+                            </div> @enderror
                     </div>
                 </div>
 
@@ -205,6 +209,18 @@
 
 @endforelse
 
+@if (count($errors) > 0)
+<button id="validasierror" style="display: none" type="button" data-toggle="modal" data-target="#Modaltambah">
+    Open Modal</button>
+@endif
 
+{{-- Script Open Modal Callback --}}
+<script>
+    $(document).ready(function () {
+        $('#validasierror').click();
+        // $('#dataTable').DataTable();
+    });
+
+</script>
 
 @endsection

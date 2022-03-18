@@ -93,18 +93,20 @@
                                                 class="form-control @error('password') is-invalid @enderror"
                                                 placeholder="Input Password" name="password" required
                                                 autocomplete="new-password">
-
-                                            @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
+                                                @error('password')<div class="text-danger small mb-1">
+                                                    - Must be at least 10 characters in length 
+                                                    <br> - Must contain at least one uppercase letter
+                                                    <br> - Must contain at least one uppercase letter
+                                                    <br> - Must contain at least one digit
+                                                </div> @enderror
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="password-confirm" class="d-block">Password Confirmation</label>
                                             <input id="password-confirm" type="password" class="form-control"
                                                 placeholder="Konfirmasi Password" name="password_confirmation" required
                                                 autocomplete="new-password">
+                                                @error('password_confirmation')<div class="text-danger small mb-1">{{ $message }}
+                                                </div> @enderror
                                         </div>
                                     </div>
 

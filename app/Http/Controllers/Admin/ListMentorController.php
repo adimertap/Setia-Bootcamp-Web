@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MentorRequest;
 use App\Models\Admin\DetailMentor;
 use App\Models\Admin\Kelas;
 use App\Models\User;
@@ -46,7 +47,7 @@ class ListMentorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MentorRequest $request)
     {
        
         $mentor = new User;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LevelRequest;
 use Illuminate\Http\Request;
 use App\Models\Admin\Level;
 
@@ -36,7 +37,7 @@ class MasterLevelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LevelRequest $request)
     {
         $level = new Level;
         $level->nama_level = $request->nama_level;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Perusahaan;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfilePerusahaanRequest;
 use App\Models\Perusahaan\ProfilePerusahaan;
 use App\Models\User;
 use Carbon\Carbon;
@@ -41,7 +42,7 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProfilePerusahaanRequest $request)
     {
         $profile = new ProfilePerusahaan;
         $profile->id = Auth::user()->id;

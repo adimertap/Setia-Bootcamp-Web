@@ -95,7 +95,7 @@
                                             <input type="date" class="form-control" placeholder="Input Tanggal Mulai Pengumuman"
                                                 name="start_date" value="{{ old('start_date') }}"
                                                 class="form-control @error('start_date') is-invalid @enderror" required>
-                                            @error('start_date')<div class="invalid-feedback">{{ $message }}
+                                            @error('start_date')<div class="text-danger small mb-1">{{ $message }}
                                             </div> @enderror
                                         </div>
                                         <div class="form-group col-6">
@@ -103,7 +103,7 @@
                                             <input type="date" class="form-control" placeholder="Input Tanggal Selesai Pengumuman"
                                                 name="end_date" value="{{ old('end_date') }}"
                                                 class="form-control @error('end_date') is-invalid @enderror" required>
-                                            @error('end_date')<div class="invalid-feedback">{{ $message }}
+                                            @error('end_date')<div class="text-danger small mb-1">{{ $message }}
                                             </div> @enderror
                                         </div>
                                     </div>
@@ -113,7 +113,7 @@
                                             <input type="text" class="form-control" placeholder="Input Years of Experience"
                                                 name="job_years_experience" value="{{ old('job_years_experience') }}"
                                                 class="form-control @error('job_years_experience') is-invalid @enderror" required>
-                                            @error('job_years_experience')<div class="invalid-feedback">{{ $message }}
+                                            @error('job_years_experience')<div class="text-danger small mb-1">{{ $message }}
                                             </div> @enderror
                                         </div>
                                         <div class="form-group col-6">
@@ -121,7 +121,7 @@
                                             <input type="number" class="form-control" placeholder="Input Kisaran Gaji" id="harga_kelas"
                                                 name="job_salary" value="{{ old('job_salary') }}"
                                                 class="form-control @error('job_salary') is-invalid @enderror" required>
-                                            @error('job_salary')<div class="invalid-feedback">{{ $message }}
+                                            @error('job_salary')<div class="text-danger small mb-1"> Nominal Between Rp. 1.000.000 - Rp. 100.000.000
                                             </div> @enderror
                                             <div class="small">
                                                 <span class="font-weight-500 text-primary">Nominal (IDR) : </span>
