@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\User\Community;
 
 use App\Http\Controllers\Controller;
+use App\Models\DetailUserKelas;
 use App\Models\Perusahaan\Pelamar;
 use App\Models\Perusahaan\Pengumuman;
 use App\Models\Perusahaan\ProfilePerusahaan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -20,6 +22,7 @@ class LowonganController extends Controller
     public function index()
     {
         $pengumuman = Pengumuman::with('User.Perusahaan')->get();
+
         return view('user.community.index',compact('pengumuman'));
     }
 
@@ -62,6 +65,9 @@ class LowonganController extends Controller
     {
         $item = Pengumuman::with('User.Perusahaan')->find($id);
         return view('user.community.detail', compact('item'));
+       
+        
+        
     }
 
     /**
@@ -72,16 +78,20 @@ class LowonganController extends Controller
      */
     public function edit($id)
     {
-       if(Pelamar::where('id', Auth::user()->id)->exists()){
-           
-            return redirect()->route('community.show', $id)->with('messagewarning', 'Anda Telah Apply Lamaran pada Lowongan ini');
-       }else{
-        $item = Pengumuman::with('User.Perusahaan')->find($id);
-        $user = Pelamar::with('User','Pengumuman')->where('id', Auth::user()->id)->get();
-         
- 
-         return view('user.community.apply',compact('item','user'));
-       }
+        $user = DetailUserKelas::where('id', Auth::user()->id)->count();
+        if($user < 2){
+            return view('user.community.buyclass');
+        }else{
+            if(Pelamar::where('id', Auth::user()->id)->exists()){
+                return redirect()->route('community.show', $id)->with('messagewarning', 'Anda Telah Apply Lamaran pada Lowongan ini');
+           }else{
+            $item = Pengumuman::with('User.Perusahaan')->find($id);
+            $user = Pelamar::with('User','Pengumuman')->where('id', Auth::user()->id)->get();
+             
+     
+             return view('user.community.apply',compact('item','user'));
+           }
+        }
       
     }
 

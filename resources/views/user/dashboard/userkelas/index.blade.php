@@ -79,17 +79,25 @@
             </div>
             @empty
             <div class="container-fluid">
-                <div class="card card-icon">
-                    <div class="row no-gutters">
-                        <div class="card-icon-aside bg-primary"><i class="mr-1 text-white-50" data-feather="layers"></i></div>
-                        <div class="col">
-                            <div class="card-body py-5">
-                                <h5 class="card-title">Warning!</h5>
-                                <p class="card-text">Anda Belum Memiliki Kelas, Yuk Mulai Beli dan dapatkan Akses ke Banyak Video Pembalajaran!, <a class="font-weight-bold text-dark" href="{{ route('program-kelas.index') }}">Beli disini</a></p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-icon">
+                            <div class="row no-gutters">
+                                <div class="card-icon-aside bg-primary"><i class="mr-1 text-white-50" data-feather="layers"></i></div>
+                                <div class="col">
+                                    <div class="card-body py-5">
+                                        <h5 class="card-title">Warning!</h5>
+                                        <p class="card-text">Anda Belum Memiliki Kelas, Yuk Mulai Beli dan dapatkan Akses ke Banyak Video Pembalajaran!, <a class="font-weight-bold text-dark" href="{{ route('program-kelas.index') }}">Beli disini</a></p>
+                                    </div>
+                                </div>
                             </div>
+                            
                         </div>
                     </div>
+                   
                 </div>
+                
+              
                     
             </div>
           
