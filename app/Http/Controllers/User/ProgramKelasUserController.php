@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\DetailDiskon;
 use App\Models\Admin\DetailKeypoint;
 use App\Models\Admin\DetailVideo;
+use App\Models\Admin\Diskon;
 use App\Models\Admin\Kelas;
+use App\Models\DetailUserKelas;
 use App\Models\User\Review;
 use Illuminate\Http\Request;
 
@@ -18,9 +21,16 @@ class ProgramKelasUserController extends Controller
      */
     public function index()
     {
+        $diskon = Diskon::with('Detaildiskon')->where('status_diskon','Aktif')->get();
+        
         $kelas = Kelas::with('Jeniskelas','Level','Detaildiskon.Diskon')->leftJoin('tb_detail_mentor', 'tb_master_kelas.id_kelas','tb_detail_mentor.id_kelas')
-        ->leftjoin('users','tb_detail_mentor.id','users.id')->where('status','=','Aktif')
+        ->leftjoin('users','tb_detail_mentor.id','users.id')
+        // ->leftjoin('tb_detail_diskon', 'tb_master_kelas.id_kelas', 'tb_detail_diskon.id_kelas')
+        // ->leftjoin('tb_master_diskon', 'tb_detail_diskon.id_diskon', 'tb_master_diskon.id_diskon')
+        ->where('status','=','Aktif')
         ->get();
+
+      
 
         return view('user.kelas.list_class',compact('kelas'));
     }
@@ -54,16 +64,17 @@ class ProgramKelasUserController extends Controller
      */
     public function show($id)
     {
-        $kelas = Kelas::with('Jeniskelas','Level','Detailkeypoint','Detailvideo','DetailMentor.User','Detaildiskon.Diskon')->find($id);
-        // return $kelas;
-       
+        $kelas = Kelas::with('Jeniskelas','Level','Detailkeypoint','Detailvideo','DetailMentor.User','Detaildiskon.Diskon')
+        ->find($id);
+        
+        $count_user = DetailUserKelas::where('id_kelas', '=', $id)->count();
         $count_video = DetailVideo::where('id_kelas', '=', $id)->count();
         $video_sedikit = DetailVideo::where('id_kelas', '=', $id)->take(4)->get();
         $video_lengkap = DetailVideo::where('id_kelas', '=', $id)->get();
         $review = Review::with('Kelas','User')->where('id_kelas', $id)->get();
 
         $modul = DetailKeypoint::where('id_kelas', '=', $id)->get();
-        return view('user.kelas.detail',compact('kelas', 'count_video' ,'video_sedikit','video_lengkap','modul','review'));
+        return view('user.kelas.detail',compact('kelas', 'count_video','count_user' ,'video_sedikit','video_lengkap','modul','review'));
 
     }
 

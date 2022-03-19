@@ -4,10 +4,12 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DetailDiskon extends Model
 {
+    use SoftDeletes;
+
     protected $table = "tb_detail_diskon";
 
     protected $primaryKey = 'id_detail_diskon';

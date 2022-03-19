@@ -30,11 +30,18 @@ class MasterDiskonController extends Controller
     {
         if($request->mode == "true")
             {
+                $detail = DetailDiskon::where('id_diskon','=', $request->id_diskon)->restore();
                 $tes = Diskon::where('id_diskon', '=', $request->id_diskon)->update(array('status_diskon' => 'Aktif'));
+                
+
+                // $detail->restore();
             }
             else
             {
+                $detail = DetailDiskon::where('id_diskon','=', $request->id_diskon)->delete();
                 $tes = Diskon::where('id_diskon', '=', $request->id_diskon)->update(array('status_diskon' => 'Tidak Aktif'));
+              
+                // $detail->delete();
             }
     }
 

@@ -40,7 +40,7 @@
                                     Member
                                 </h3>
                                 <p class="support">
-                                    <b>500</b> enrolled
+                                    <b>{{ $count_user }}</b> enrolled
                                 </p>
                             </div>
                         </div>

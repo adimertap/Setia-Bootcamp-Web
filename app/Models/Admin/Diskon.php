@@ -4,10 +4,13 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Diskon extends Model
 {
+   
+
     protected $table = "tb_master_diskon";
 
     protected $primaryKey = 'id_diskon';
@@ -23,6 +26,7 @@ class Diskon extends Model
     protected $hidden =[ 
         'created_at',
         'updated_at',
+     
         
     ];
 
@@ -33,10 +37,10 @@ class Diskon extends Model
         return $this->belongsToMany(Kelas::class,'tb_detail_diskon','id_diskon','id_kelas');
     }
 
-    // public function Detaildiskon()
-    // {
-    //     return $this->belongsToMany(Kelas::class,'tb_detail_diskon','id_diskon','id_kelas');
-    // }
+    public function Detaildiskon()
+    {
+        return $this->belongsToMany(Kelas::class,'tb_detail_diskon','id_diskon','id_kelas');
+    }
 
     public static function getId()
     {
