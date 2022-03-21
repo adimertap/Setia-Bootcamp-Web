@@ -40,10 +40,10 @@
                 <div class="card card-scrollable mt-2">
                     <div class="card-header">Modul {{ $loop->iteration}}. {{ $item->nama_keypoint }}</div>
                     <div class="card-body">
-                        @forelse ($item->Video as $vid)
+                        @forelse ($item->Video as $vids)
                         <div class="text-center">
-                            <a class="btn btn-primary btn-xs btn-icon mr-2 my-1 lift" href="{{ route('kelas-saya-video', $vid->id_video_kelas) }}"><i class="fas fa-video"></i></a>
-                            <a class="btn btn-sm btn-light mr-2 my-1" href="{{ route('kelas-saya-video', $vid->id_video_kelas) }}" style="width: 300px">{{ $loop->iteration}}. {{ $vid->nama_video }}</a>
+                            <a class="btn btn-primary btn-xs btn-icon mr-2 my-1 lift" href="{{ route('kelas-saya-video', $vids->id_video_kelas) }}"><i class="fas fa-video"></i></a>
+                            <a class="btn btn-sm btn-light mr-2 my-1" href="{{ route('kelas-saya-video', $vids->id_video_kelas) }}" style="width: 300px">{{ $loop->iteration}}. {{ $vids->nama_video }}</a>
                         </div>
                          
                         @empty
@@ -64,10 +64,13 @@
             </div>
             <div class="col-8">
                 <div class="card mt-2" style="border-radius: 30px">
-                    <div class="iframe-wrapper text-center">
+                    <div class="card-body">
+                        <x-embed url="{{ $vid->url_video }}" width="560" height="315" />
+                    </div>
+                    {{-- <div class="iframe-wrapper text-center">
                         <iframe src="{{$vid->url_video}}" width="560" height="315"
                             allowfullscreen></iframe>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

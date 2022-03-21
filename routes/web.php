@@ -144,6 +144,7 @@ Route::middleware(['auth'])->group(function(){
             Route::resource('kelas-saya', '\App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController');
             Route::get('kelas/finished', [KelasUser::class, 'FilterFinished'])->name('kelas-saya-filter');
             Route::get('kelas/unfinished', [KelasUser::class, 'FilterUnFinished'])->name('kelas-saya-unfinished');
+            Route::get('kelas/{id}/sertifikat', [KelasUser::class, 'Sertifikat'])->name('kelas-saya-sertifikat');
 
             Route::get('kelas/{id_video_kelas}/video', [KelasUser::class, 'video'])->name('kelas-saya-video');
             Route::get('kelas/{id_kelas}/finishclass', [KelasUser::class, 'FinishClass'])->name('kelas-saya-finish');

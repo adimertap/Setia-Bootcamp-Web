@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Checkout;
+use App\Models\DetailUserKelas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserDashboardController extends Controller
 {
@@ -17,7 +20,12 @@ class UserDashboardController extends Controller
         $today = Carbon::now()->isoFormat('dddd');
         $tanggal_tahun = Carbon::now()->format('j F Y');
 
-        return view('user.dashboard.dashboard.index', compact('today','tanggal_tahun'));
+        $semua = DetailUserKelas::with('Kelas','User')->where('id', Auth::user()->id)->count();
+        $unfinish = DetailUserKelas::with('Kelas','User')->where('id', Auth::user()->id)->where('status_kelas','=','Progress')->count();
+        $finish = DetailUserKelas::with('Kelas','User')->where('id', Auth::user()->id)->where('status_kelas','=','Sudah Selesai')->count();
+        $checkout = Checkout::with('Kelas','User')->where('id', Auth::user()->id)->where('payment_status','=','Paid')->count();
+
+        return view('user.dashboard.dashboard.index', compact('today','tanggal_tahun','semua','unfinish','finish','checkout'));
     }
 
     /**

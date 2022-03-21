@@ -216,15 +216,15 @@ Welcome Page Bootcamp
                         <div class="col-lg-6 col-12">
                             <div class="table-pricing paket-gila">
                                 <p class="story text-center">
-                                    GILA BELAJAR
+                                    Mulai Dari
                                 </p>
                                 <h1 class="price text-center">
-                                    $280K
+                                    Rp. 99.000
                                 </h1>
                                 <div class="item-benefit-pricing mb-4">
                                     <img src="{{asset('images/ic_check.svg')}}" alt="">
                                     <p>
-                                        Pro Techstack Kit
+                                        Akses kelas selamanya
                                     </p>
                                     <div class="clear"></div>
                                     <div class="divider"></div>
@@ -232,7 +232,7 @@ Welcome Page Bootcamp
                                 <div class="item-benefit-pricing mb-4">
                                     <img src="{{asset('images/ic_check.svg')}}" alt="">
                                     <p>
-                                        iMac Pro 2021 & Display
+                                        Assets & group konsultasi
                                     </p>
                                     <div class="clear"></div>
                                     <div class="divider"></div>
@@ -240,7 +240,7 @@ Welcome Page Bootcamp
                                 <div class="item-benefit-pricing mb-4">
                                     <img src="{{asset('images/ic_check.svg')}}" alt="">
                                     <p>
-                                        1-1 Mentoring Program
+                                        Tools pendukung belajar
                                     </p>
                                     <div class="clear"></div>
                                     <div class="divider"></div>
@@ -248,7 +248,7 @@ Welcome Page Bootcamp
                                 <div class="item-benefit-pricing mb-4">
                                     <img src="{{asset('images/ic_check.svg')}}" alt="">
                                     <p>
-                                        Final Project Certificate
+                                        Sertifikat kelulusan
                                     </p>
                                     <div class="clear"></div>
                                     <div class="divider"></div>
@@ -256,7 +256,7 @@ Welcome Page Bootcamp
                                 <div class="item-benefit-pricing mb-4">
                                     <img src="{{asset('images/ic_check.svg')}}" alt="">
                                     <p>
-                                        Offline Course Videos
+                                        Free update materi
                                     </p>
                                     <div class="clear"></div>
                                     <div class="divider"></div>
@@ -264,7 +264,7 @@ Welcome Page Bootcamp
                                 <div class="item-benefit-pricing mb-4">
                                     <img src="{{asset('images/ic_check.svg')}}" alt="">
                                     <p>
-                                        Future Job Opportinity
+                                        Lowongan pekerjaan
                                     </p>
                                     <div class="clear"></div>
                                     <div class="divider"></div>
@@ -272,21 +272,14 @@ Welcome Page Bootcamp
                                 <div class="item-benefit-pricing mb-4">
                                     <img src="{{asset('images/ic_check.svg')}}" alt="">
                                     <p>
-                                        Premium Design Kit
+                                        Community Sharing
                                     </p>
                                     <div class="clear"></div>
                                     <div class="divider"></div>
-                                </div>
-                                <div class="item-benefit-pricing">
-                                    <img src="{{asset('images/ic_check.svg')}}" alt="">
-                                    <p>
-                                        Website Builder
-                                    </p>
-                                    <div class="clear"></div>
                                 </div>
                                 <p>
-                                    <a href="" class="btn btn-master btn-primary w-100 mt-3">
-                                        Take This Plan
+                                    <a href="{{ route('program-kelas.index') }}" class="btn btn-master btn-primary w-100 mt-3">
+                                        Lihat Catalog
                                     </a>
                                 </p>
                             </div>
@@ -294,47 +287,54 @@ Welcome Page Bootcamp
                         <div class="col-lg-6 col-12">
                             <div class="table-pricing paket-biasa">
                                 <p class="story text-center">
-                                    BARU MULAI
+                                    Bootcamp Lain
                                 </p>
                                 <h1 class="price text-center">
-                                    $140K
+                                    Rp. 4-5 Jt
                                 </h1>
                                 <div class="item-benefit-pricing mb-4">
-                                    <img src="{{asset('images/ic_check.svg')}}" alt="">
                                     <p>
-                                        1-1 Mentoring Program
+                                    <span class="material-icons">
+                                        close
+                                    </span>
+                                  
+                                        Akses kelas Bulanan
                                     </p>
                                     <div class="clear"></div>
                                     <div class="divider"></div>
                                 </div>
                                 <div class="item-benefit-pricing mb-4">
-                                    <img src="{{asset('images/ic_check.svg')}}" alt="">
                                     <p>
-                                        Final Project Certificate
+                                    <span class="material-icons">
+                                        close
+                                    </span>
+                                   
+                                        Harga Relative Mahal
                                     </p>
                                     <div class="clear"></div>
                                     <div class="divider"></div>
                                 </div>
                                 <div class="item-benefit-pricing mb-4">
-                                    <img src="{{asset('images/ic_check.svg')}}" alt="">
                                     <p>
-                                        Offline Course Videos
+                                    <span class="material-icons">
+                                                        close
+                                                    </span>
+                                    
+                                        Tidak ada update materi
                                     </p>
                                     <div class="clear"></div>
                                     <div class="divider"></div>
                                 </div>
                                 <div class="item-benefit-pricing">
-                                    <img src="{{asset('images/ic_check.svg')}}" alt="">
                                     <p>
-                                        Future Job Opportinity
+                                    <span class="material-icons">
+                                                        close
+                                                    </span>
+                                  
+                                        Kelas tidak terstuktur
                                     </p>
                                     <div class="clear"></div>
                                 </div>
-                                <p>
-                                    <a href="" class="btn btn-master btn-secondary w-100 mt-3">
-                                        Start With This Plan
-                                    </a>
-                                </p>
                             </div>
                         </div>
                     </div>

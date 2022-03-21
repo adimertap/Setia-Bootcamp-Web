@@ -42,6 +42,12 @@ class KelasUserController extends Controller
         return view('user.dashboard.userkelas.index',compact('today','tanggal_tahun','kelas'));
     }
 
+    public function Sertifikat($id)
+    {
+        $kelas = DetailUserKelas::where('id_kelas', '=', $id)->where('id', Auth::user()->id)->first();
+        return view('user.dashboard.sertifikat.sertifikat', compact('kelas'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

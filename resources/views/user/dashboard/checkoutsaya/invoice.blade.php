@@ -41,7 +41,7 @@
                                     <div class="small text-muted d-none d-md-block">Jenis Kelas yang dibeli {{ $checkout->Kelas->Jeniskelas->jenis_kelas }}</div>
                                 </td>
                                 <td class="text-right font-weight-bold">Rp. {{ number_format($checkout->Kelas->harga_kelas) }}</td>
-                                <td class="text-right font-weight-bold">{{ $checkout->percentage_diskon }}</td>
+                                <td class="text-right font-weight-bold">{{ $checkout->percentage_diskon }}%</td>
                                 <td class="text-right font-weight-bold">Rp.{{ number_format($checkout->total_price) }}</td>
                             </tr>
                             <!-- Invoice total-->

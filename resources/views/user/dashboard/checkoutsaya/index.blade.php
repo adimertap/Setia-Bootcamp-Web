@@ -75,7 +75,7 @@
                                             <td>{{ $item->Kelas->nama_kelas }}</td>
                                             <td>{{ $item->Kelas->Jeniskelas->jenis_kelas }}</td>
                                             <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
-                                            <td class="text-center">{{ $item->percentage_diskon }}%</td>
+                                            <td class="text-center" style="color: red">{{ $item->percentage_diskon }}% Off</td>
                                             <td class="text-center">Rp. {{ number_format($item->total_price) }}</td>
                                             <td class="text-center">
                                                 @if ($item->payment_status == 'Pending')

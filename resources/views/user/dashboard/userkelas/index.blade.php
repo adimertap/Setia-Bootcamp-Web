@@ -67,7 +67,7 @@
                             <a class="btn btn-sm btn-primary p-2 line-height-normal" href="{{ route('kelas-saya.show', $item->id_kelas) }}" style="border-radius: 40px">Lanjutkan Belajar</a>
                         @elseif ($item->status_kelas == 'Sudah Selesai')
                             <a class="btn btn-sm btn-primary p-2 line-height-normal" href="{{ route('kelas-saya.show', $item->id_kelas) }}" style="border-radius: 40px">Belajar Lagi</a>
-                            <a class="btn btn-sm btn-secondary p-2 line-height-normal" href="{{ route('kelas-saya.show', $item->id_kelas) }}" style="border-radius: 30px">Lihat Sertifikat</a>
+                            <a class="btn btn-sm btn-secondary p-2 line-height-normal" href="{{ route('kelas-saya-sertifikat', $item->id_kelas) }}" style="border-radius: 30px">Lihat Sertifikat</a>
                             {{-- <a href="" class="btn btn-sm btn-warning p-2 line-height-normal" type="button" data-toggle="modal" style="border-radius: 30px"
                                 data-target="#Modalreview-{{ $item->id_kelas }}">
                                 <i class="fas fa-address-card mr-1"></i>Beri Review
