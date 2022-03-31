@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Admin\Level;
 use App\Models\Admin\JenisKelas;
+use App\Models\Admin\DetailDiskon;
+use App\Models\Admin\DetailMentor;
+use App\Models\Admin\DetailKeypoint;
+use App\Models\Admin\DetailVideo;
 use Illuminate\Support\Facades\DB;
 
 class Kelas extends Model
@@ -66,7 +70,7 @@ class Kelas extends Model
 
     public function Detaildiskon()
     {
-        return $this->hasMany(Detaildiskon::class, 'id_kelas', 'id_kelas');
+        return $this->hasMany(DetailDiskon::class, 'id_kelas', 'id_kelas');
     }
 
 
