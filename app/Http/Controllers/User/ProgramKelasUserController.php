@@ -22,15 +22,12 @@ class ProgramKelasUserController extends Controller
     public function index()
     {
         $diskon = Diskon::with('Detaildiskon')->where('status_diskon','Aktif')->get();
+        $detail = DetailDiskon::get();
         
         $kelas = Kelas::with('Jeniskelas','Level','Detaildiskon.Diskon')->leftJoin('tb_detail_mentor', 'tb_master_kelas.id_kelas','tb_detail_mentor.id_kelas')
         ->leftjoin('users','tb_detail_mentor.id','users.id')
-        // ->leftjoin('tb_detail_diskon', 'tb_master_kelas.id_kelas', 'tb_detail_diskon.id_kelas')
-        // ->leftjoin('tb_master_diskon', 'tb_detail_diskon.id_diskon', 'tb_master_diskon.id_diskon')
         ->where('status','=','Aktif')
         ->get();
-
-      
 
         return view('user.kelas.list_class',compact('kelas'));
     }
