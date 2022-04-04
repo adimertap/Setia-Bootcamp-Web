@@ -133,10 +133,8 @@ class MasterDiskonController extends Controller
     public function update(Request $request, $id)
     {
         $diskon = Diskon::find($id);
-        $diskon->kode_diskon = $request->kode_diskon;
         $diskon->nama_diskon = $request->nama_diskon;
         $diskon->jumlah_diskon = $request->jumlah_diskon;
-        $diskon->jenis_diskon = $request->jenis_diskon;
         $diskon->description = $request->description;
         $diskon->update();
 
