@@ -7,7 +7,7 @@
         <!-- Custom page header alternative example-->
         <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
             <div class="mr-4 mb-3 mb-sm-0">
-                <h1 class="mb-0">Pembuatan Video Kelas</h1>
+                <h1 class="mb-0">Pembuatan Kuis Kelas</h1>
                 <div class="small">
                     <span class="font-weight-500 text-primary">{{ $today }}</span>
                     · Tanggal {{ $tanggal }} · <span id="clock"> 12:16 PM</span>
@@ -26,7 +26,7 @@
     <div class="container-fluid">
         <div class="card mb-4">
             <div class="card card-header-actions">
-                <div class="card-header">List Kelas dan Video</div>
+                <div class="card-header">List Kelas dan Kuis</div>
             </div>
             <div class="card-body">
                 <div class="datatable">
@@ -72,21 +72,15 @@
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 50px;">Jenis Kelas</th>
-                                            {{-- <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 20px;">Jumlah Video</th> --}}
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 20px;">Status Keypoint</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 20px;">Status Kuis</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 20px;">Status Video</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 70px;">Status Approval Video</th>
+                                                style="width: 20px;">Status Kuis</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 40px;">Action</th>
@@ -101,15 +95,16 @@
                                                 <th scope="row" class="small" class="sorting_1">{{ $loop->iteration}}.</th>
                                                 <td>{{ $item->Kelas[0]->nama_kelas }}</td>
                                                 <td>{{ $item->Kelas[0]->Jeniskelas->jenis_kelas }}</td>
-                                                {{-- <td>
-                                                    @if ($item->Kelas[0]->status_video == 'Belum Dibuat')
-                                                        <span class="small"> 0 </span>
-                                                    @else
-                                                        <span class="small"> {{ $jumlah_video }} </span>
-                                                    @endif
-                                                </td> --}}
                                                 <td class="text-center">
                                                     @if ($item->Kelas[0]->status_keypoint == 'Telah Dibuat')
+                                                        <span class="badge badge-success ">Telah Dibuat</span>
+                                                    @else
+                                                        <span class="badge badge-danger">Belum Dibuat</span>
+                                                    @endif
+                                                </td>
+                                                
+                                                <td class="text-center">
+                                                    @if ($item->Kelas[0]->status_video == 'Telah Dibuat')
                                                         <span class="badge badge-success ">Telah Dibuat</span>
                                                     @else
                                                         <span class="badge badge-danger">Belum Dibuat</span>
@@ -123,29 +118,15 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
-                                                    @if ($item->Kelas[0]->status_video == 'Telah Dibuat')
-                                                        <span class="badge badge-success ">Telah Dibuat</span>
-                                                    @else
-                                                        <span class="badge badge-danger">Belum Dibuat</span>
-                                                    @endif
-                                                </td>
-                                            <td class="text-center">
-                                                @if ($item->Kelas[0]->status_approval_video == 'Pending')
-                                                    <span class="badge badge-secondary">Pending</span>
-                                                @elseif ($item->status_approval_video == 'Ditolak')
-                                                    <span class="badge badge-danger">Ditolak</span>
-                                                @else
-                                                    <span class="badge badge-success">Disetujui</span>
-                                                @endif
-                                            </td>
-                                                <td class="text-center">
                                                     @if ($item->Kelas[0]->status_keypoint == 'Belum Dibuat')
                                                         <span class="badge badge-warning">Atur Modul Terlebih Dahulu</span>
+                                                    @elseif ($item->Kelas[0]->status_video == 'Belum Dibuat')
+                                                        <span class="badge badge-warning">Atur Video Terlebih Dahulu</span>
                                                     @else
-                                                        <a href="{{ route('mentor-video.edit', $item->Kelas[0]->id_kelas) }}"
+                                                        <a href="{{ route('mentor-kuis.edit', $item->Kelas[0]->id_kelas) }}"
                                                             class="btn-xs btn-secondary" data-toggle="tooltip"
-                                                            data-placement="top" title="" data-original-title="Video Pembelajaran">
-                                                            <i class="fab fa-youtube"></i> Buat Video
+                                                            data-placement="top" title="" data-original-title="Kuis Pembelajaran">
+                                                            <i class="fa fa-tasks"></i> Buat Kuis
                                                         </a>
                                                     @endif
                                                     

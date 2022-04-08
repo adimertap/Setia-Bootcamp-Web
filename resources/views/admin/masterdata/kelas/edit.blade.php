@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label class="small mb-1 mr-1" for="id_jenis_kelas">Pilih Jenis
                                                 Kelas</label><span class="mr-4 mb-3" style="color: red">*</span>
                                             <select class="form-control" name="id_jenis_kelas" id="id_jenis_kelas"
@@ -86,7 +86,7 @@
                                                 {{ $message }}
                                             </div> @enderror
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label class="small mb-1 mr-1" for="id_level">Pilih Level</label><span
                                                 class="mr-4 mb-3" style="color: red">*</span>
                                             <select class="form-control" name="id_level" id="id_level"
@@ -101,6 +101,18 @@
                                             @error('id_level')<div class="text-danger small mb-1">
                                                 {{ $message }}
                                             </div> @enderror
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="small mb-1 mr-1" for="url_telegram">URL Group Telegram</label><span
+                                                class="mr-4 mb-3" style="color: red">*</span>
+                                            <input class="form-control" id="url_telegram" type="text" name="url_telegram"
+                                                placeholder="Input Url Grup Telegram" value="{{ $kelas->url_telegram }}"
+                                                class="form-control @error('url_telegram') is-invalid @enderror" required/>
+                                            @error('url_telegram')<div class="text-danger small mb-1">{{ $message }}
+                                            </div> @enderror
+                                            <div class="small">
+                                                <span class="text-muted">Pastikan Anda telah Membuat Grup Telegram </span>
+                                            </div>
                                         </div>
                                     </div>
 

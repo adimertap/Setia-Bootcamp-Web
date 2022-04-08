@@ -32,7 +32,9 @@ class Kelas extends Model
         'status_video',
         'status_approval_video',
         'status_keypoint',
-        'keterangan_approval'
+        'keterangan_approval',
+        'status_kuis',
+        'url_telegram'
     ];
 
     protected $hidden =[ 
@@ -66,6 +68,11 @@ class Kelas extends Model
     public function Detailvideo()
     {
         return $this->hasMany(DetailVideo::class, 'id_kelas', 'id_kelas');
+    }
+
+    public function Detailkuis()
+    {
+        return $this->hasMany(Detailkuis::class, 'id_kelas', 'id_kelas');
     }
 
     public function Detaildiskon()

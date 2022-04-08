@@ -81,6 +81,7 @@ class MasterKelasController extends Controller
         $kelas->id_level = $request->id_level;
         $kelas->harga_kelas = $request->harga_kelas;
         $kelas->tentang_kelas = $request->tentang_kelas;
+        $kelas->url_telegram = $request->url_telegram;
         $kelas->status = 'Tidak Aktif';
         $kelas->slug = Str::slug($request->nama_kelas);
         $kelas->cover_kelas = $imageName;
@@ -153,6 +154,7 @@ class MasterKelasController extends Controller
             $kelas->kode_kelas = $request->kode_kelas;
             $kelas->nama_kelas = $request->nama_kelas;
             $kelas->id_jenis_kelas = $request->id_jenis_kelas;
+            $kelas->url_telegram = $request->url_telegram;
             $kelas->id_level = $request->id_level;
             $kelas->harga_kelas = $request->harga_kelas;
             $kelas->tentang_kelas = $request->tentang_kelas;
@@ -164,6 +166,7 @@ class MasterKelasController extends Controller
             $kelas->kode_kelas = $request->kode_kelas;
             $kelas->nama_kelas = $request->nama_kelas;
             $kelas->id_jenis_kelas = $request->id_jenis_kelas;
+            $kelas->url_telegram = $request->url_telegram;
             $kelas->id_level = $request->id_level;
             $kelas->harga_kelas = $request->harga_kelas;
             $kelas->tentang_kelas = $request->tentang_kelas;

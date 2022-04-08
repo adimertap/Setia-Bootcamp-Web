@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="small">
-                <span class="font-weight-500 text-primary">List</span>
+                <span class="font-weight-500 text-primary">Menu Mentor</span>
                 <hr></hr>
             </div>
         </div>
@@ -47,6 +47,12 @@
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 20px;">Status Video</th>
+                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Position: activate to sort column ascending"
+                                                style="width: 20px;">Status Kuis</th>
+                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Position: activate to sort column ascending"
+                                                style="width: 20px;">Status Approval</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 20px;">Status Keypoint</th>
@@ -70,6 +76,22 @@
                                                     <span class="badge badge-success ">Telah Dibuat</span>
                                                 @else
                                                     <span class="badge badge-danger">Belum Dibuat</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($item->Kelas[0]->status_kuis == 'Telah Dibuat')
+                                                    <span class="badge badge-success ">Telah Dibuat</span>
+                                                @else
+                                                    <span class="badge badge-danger">Belum Dibuat</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($item->Kelas[0]->status_approval_video == 'Pending')
+                                                    <span class="badge badge-secondary">Pending</span>
+                                                @elseif ($item->status_approval_video == 'Ditolak')
+                                                    <span class="badge badge-danger">Ditolak</span>
+                                                @else
+                                                    <span class="badge badge-success">Disetujui</span>
                                                 @endif
                                             </td>
                                             <td class="text-center">

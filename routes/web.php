@@ -150,6 +150,8 @@ Route::middleware(['auth'])->group(function(){
             Route::get('kelas/{id_kelas}/finishclass', [KelasUser::class, 'FinishClass'])->name('kelas-saya-finish');
             Route::post('kelas/{id_kelas}/selesai', '\App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController@selesaikelas')
             ->name('kelas-saya-selesai');
+            Route::post('kelas/{id_video_kelas}/pertanyaan', '\App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController@Pertanyaan')
+            ->name('kelas-saya-pertanyaan');
     });
 
     // TRANSACTION USER
@@ -184,6 +186,23 @@ Route::middleware(['auth'])->group(function(){
         ->middleware(['Mentor_Role','verified'])
         ->group(function () {
             Route::resource('mentor-video', '\App\Http\Controllers\Mentor\MentorVideoController');
+    });
+
+     // MENTOR LIST KUIS
+     Route::prefix('mentor/kuis')
+     ->namespace('Mentor')
+     ->middleware(['Mentor_Role','verified'])
+     ->group(function () {
+         Route::resource('mentor-kuis', '\App\Http\Controllers\Mentor\MentorKuisController');
+    });
+
+    // MENTOR LIST FAQ
+    Route::prefix('mentor/faq')
+    ->namespace('Mentor')
+    ->middleware(['Mentor_Role','verified'])
+    ->group(function () {
+        Route::resource('mentor-faq', '\App\Http\Controllers\Mentor\MentorFaqController');
+        Route::post('/email/{id_faq}',  [App\Http\Controllers\Mentor\MentorFaqController::class, 'sendEmail'])->name('send.email.faq');
     });
 
 

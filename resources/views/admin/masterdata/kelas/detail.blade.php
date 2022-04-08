@@ -48,49 +48,57 @@
                             </div>
                         </div>
                     </div>
-                   
+
                     <div class="form-group">
                         <label class="small mb-1" for="nama_kelas">Nama Kelas</label>
-                        <textarea class="form-control form-control-sm" id="nama_kelas" type="text"
-                            name="nama_kelas" value="" readonly>{{ $kelas->nama_kelas }}</textarea>
+                        <textarea class="form-control form-control-sm" id="nama_kelas" type="text" name="nama_kelas"
+                            value="" readonly>{{ $kelas->nama_kelas }}</textarea>
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1" for="id_jenis_kelas">Jenis Kelas</label>
-                        <input class="form-control form-control-sm" id="id_jenis_kelas" type="text"
-                            name="id_jenis_kelas" value="{{ $kelas->Jeniskelas->jenis_kelas }}" readonly />
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label class="small mb-1" for="id_jenis_kelas">Jenis Kelas</label>
+                            <input class="form-control form-control-sm" id="id_jenis_kelas" type="text"
+                                name="id_jenis_kelas" value="{{ $kelas->Jeniskelas->jenis_kelas }}" readonly />
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="small mb-1" for="id_jenis_kelas">URL Telegram</label>
+                            <input class="form-control form-control-sm" id="id_jenis_kelas" type="text"
+                                name="id_jenis_kelas" value="{{ $kelas->url_telegram }}" readonly />
+                        </div>
                     </div>
+
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label class="small mb-1" for="id_level">Level Kelas</label>
-                            <input class="form-control form-control-sm" id="id_level" type="text"
-                                name="id_level" value="{{ $kelas->level->nama_level }}" readonly />
+                            <input class="form-control form-control-sm" id="id_level" type="text" name="id_level"
+                                value="{{ $kelas->level->nama_level }}" readonly />
                         </div>
                         <div class="form-group col-md-6">
                             <i class="fas fa-tags mr-1"></i>
                             <label class="small mb-1" for="harga_kelas">Harga Kelas</label>
-                            <input class="form-control form-control-sm" id="harga_kelas" type="text"
-                                name="harga_kelas" value="Rp. {{ number_format($kelas->harga_kelas) }}" readonly />
+                            <input class="form-control form-control-sm" id="harga_kelas" type="text" name="harga_kelas"
+                                value="Rp. {{ number_format($kelas->harga_kelas) }}" readonly />
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             @if ($kelas->status == 'Aktif')
-                                <i class="fas fa-check-square mr-1"></i>
+                            <i class="fas fa-check-square mr-1"></i>
                             @else
-                                <i class="fas fa-times-circle mr-1"></i>
+                            <i class="fas fa-times-circle mr-1"></i>
                             @endif
-                           
+
                             <label class="small mb-1" for="status kelas">Status Kelas</label>
                             <input class="form-control form-control-sm" id="status kelas" type="text"
                                 name="status kelas" value="{{ $kelas->status }}" readonly />
                         </div>
                         <div class="form-group col-md-6">
                             @if ($kelas->status_video == 'Telah Dibuat')
-                                <i class="fas fa-check-square mr-1"></i>
+                            <i class="fas fa-check-square mr-1"></i>
                             @else
-                                <i class="fas fa-times-circle mr-1"></i>
+                            <i class="fas fa-times-circle mr-1"></i>
                             @endif
-                           
+
                             <label class="small mb-1" for="status kelas">Status Video</label>
                             <input class="form-control form-control-sm" id="status kelas" type="text"
                                 name="status kelas" value="{{ $kelas->status_video }}" readonly />
@@ -116,11 +124,16 @@
                             <a class="nav-link" id="example-tab" href="#example" data-toggle="tab" role="tab"
                                 aria-controls="example" aria-selected="false">Modul Kelas</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="example3-tab" href="#example3" data-toggle="tab" role="tab"
+                                aria-controls="example" aria-selected="false">Kuis Kelas</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <div class="tab-content" id="cardTabContent">
-                        <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                        <div class="tab-pane fade show active" id="overview" role="tabpanel"
+                            aria-labelledby="overview-tab">
                             <div class="alert alert-info alert-icon" role="alert">
                                 <button class="close" type="button" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true"></span>
@@ -133,10 +146,10 @@
                                     Cover Kelas, Tentang Kelas, Video Kelas
                                 </div>
                             </div>
-                          
+
                             <div class="form-group">
-                            <textarea class="form-control" name="tentang_kelas" id="tentang_kelas" cols="20"
-                                rows="20" readonly>{{ $kelas->tentang_kelas }}</textarea>
+                                <textarea class="form-control" name="tentang_kelas" id="tentang_kelas" cols="20"
+                                    rows="20" readonly>{{ $kelas->tentang_kelas }}</textarea>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="example" role="tabpanel" aria-labelledby="example-tab">
@@ -144,31 +157,35 @@
                                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <table class="table table-bordered table-hover dataTable" id="dataTable" width="100%"
-                                                cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                            <table class="table table-bordered table-hover dataTable" id="dataTable"
+                                                width="100%" cellspacing="0" role="grid"
+                                                aria-describedby="dataTable_info" style="width: 100%;">
                                                 <thead>
                                                     <tr role="row">
-                                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                            colspan="1" aria-sort="ascending"
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1" aria-sort="ascending"
                                                             aria-label="Name: activate to sort column descending"
                                                             style="width: 20px;">No</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                            colspan="1" aria-label="Position: activate to sort column ascending"
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Position: activate to sort column ascending"
                                                             style="width: 60px;">Urutan</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                            colspan="1" aria-label="Position: activate to sort column ascending"
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Position: activate to sort column ascending"
                                                             style="width: 120px;">Modul/Keypoint</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @forelse ($kelas->Detailkeypoint as $item)
                                                     <tr role="row" class="odd">
-                                                        <th scope="row" class="small" class="sorting_1">{{ $loop->iteration}}.</th>
+                                                        <th scope="row" class="small" class="sorting_1">
+                                                            {{ $loop->iteration}}.</th>
                                                         <td>{{ $item->number }}</td>
                                                         <td>{{ $item->nama_keypoint }}</td>
                                                     </tr>
                                                     @empty
-                                                    
+
                                                     @endforelse
                                                 </tbody>
                                             </table>
@@ -182,39 +199,107 @@
                                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <table class="table table-bordered table-hover dataTable" id="dataTableVideo" width="100%"
-                                                cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                            <table class="table table-bordered table-hover dataTable"
+                                                id="dataTableVideo" width="100%" cellspacing="0" role="grid"
+                                                aria-describedby="dataTable_info" style="width: 100%;">
                                                 <thead>
                                                     <tr role="row">
-                                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                            colspan="1" aria-sort="ascending"
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1" aria-sort="ascending"
                                                             aria-label="Name: activate to sort column descending"
                                                             style="width: 20px;">No</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                            colspan="1" aria-label="Position: activate to sort column ascending"
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Position: activate to sort column ascending"
                                                             style="width: 60px;">Modul</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                            colspan="1" aria-label="Position: activate to sort column ascending"
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Position: activate to sort column ascending"
                                                             style="width: 60px;">Nama Video</th>
-                                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                            colspan="1" aria-label="Position: activate to sort column ascending"
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Position: activate to sort column ascending"
                                                             style="width: 60px;">Url Video</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                            colspan="1" aria-label="Position: activate to sort column ascending"
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Position: activate to sort column ascending"
                                                             style="width: 80px;">Keterangan</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @forelse ($kelas->Detailvideo as $item)
                                                     <tr role="row" class="odd">
-                                                        <th scope="row" class="small" class="sorting_1">{{ $loop->iteration}}.</th>
+                                                        <th scope="row" class="small" class="sorting_1">
+                                                            {{ $loop->iteration}}.</th>
                                                         <td>{{ $item->Keypoint->nama_keypoint }}</td>
                                                         <td>{{ $item->nama_video }}</td>
                                                         <td>{{ $item->url_video }}</td>
                                                         <td>{{ $item->keterangan_video }}</td>
                                                     </tr>
                                                     @empty
-                                                    
+
+                                                    @endforelse
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="example3" role="tabpanel" aria-labelledby="example3-tab">
+                            <div class="datatable">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered table-hover dataTable"
+                                                id="dataTableKuis" width="100%" cellspacing="0" role="grid"
+                                                aria-describedby="dataTable_info" style="width: 100%;">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1" aria-sort="ascending"
+                                                            aria-label="Name: activate to sort column descending"
+                                                            style="width: 20px;">No</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Position: activate to sort column ascending"
+                                                            style="width: 150px;">Pertanyaan</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Position: activate to sort column ascending"
+                                                            style="width: 30px;">Option A</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Position: activate to sort column ascending"
+                                                            style="width: 30px;">Option B</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Position: activate to sort column ascending"
+                                                            style="width: 30px;">Option C</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Position: activate to sort column ascending"
+                                                            style="width: 30px;">Option D</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Position: activate to sort column ascending"
+                                                            style="width: 60px;">Jawaban</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @forelse ($kelas->Detailkuis as $item)
+                                                    <tr role="row" class="odd">
+                                                        <th scope="row" class="small" class="sorting_1">
+                                                            {{ $loop->iteration}}.</th>
+                                                        <td>{{ $item->soal_kuis }}</td>
+                                                        <td>{{ $item->option_a }}</td>
+                                                        <td>{{ $item->option_b }}</td>
+                                                        <td>{{ $item->option_c }}</td>
+                                                        <td>{{ $item->option_d }}</td>
+                                                        <td>{{ $item->jawaban }}</td>
+                                                    </tr>
+                                                    @empty
+
                                                     @endforelse
                                                 </tbody>
                                             </table>
@@ -224,7 +309,7 @@
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
@@ -233,9 +318,11 @@
 </main>
 
 <script>
-     $(document).ready(function () {
+    $(document).ready(function () {
         $('#dataTableVideo').dataTable();
-     });
+        $('#dataTableKuis').dataTable();
+    });
+
 </script>
 
 @endsection

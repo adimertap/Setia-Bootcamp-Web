@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User\Dashboard\KelasUser;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\DetailFaq;
 use App\Models\Admin\DetailVideo;
 use App\Models\Admin\Kelas;
 use App\Models\DetailUserKelas;
@@ -165,6 +166,21 @@ class KelasUserController extends Controller
         $detail->update();
 
         return redirect()->route('kelas-saya-finish', $id_kelas);
+    }
+
+    public function Pertanyaan(Request $request, $id_video_kelas)
+    {
+        $faq = new DetailFaq;
+        $faq->id = Auth::user()->id;
+        $faq->id_video_kelas = $id_video_kelas;
+        $faq->pertanyaan = $request->pertanyaan;
+        $faq->status_faq = 'Belum Terjawab';
+        $faq->id_mentor = $request->id_mentor;
+        $faq->id_kelas = $request->id_kelas;
+        $faq->save();
+
+        return redirect()->route('kelas-saya-video', $id_video_kelas)->with('messagefaq','Pertanyaan Berhasil dikirim');
+        
     }
 
 }

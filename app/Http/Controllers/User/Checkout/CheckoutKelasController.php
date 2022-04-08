@@ -131,7 +131,7 @@ class CheckoutKelasController extends Controller
        $this->getSnapRedirect($checkout);
    
         // Sending Email
-        Mail::to(Auth::user()->email)->send(new AfterCheckout($checkout));    
+        Mail::to($request->email)->send(new AfterCheckout($checkout));    
     //    return redirect()->route('checkout-success');
     }
 
