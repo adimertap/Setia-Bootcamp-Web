@@ -12,10 +12,10 @@ use Illuminate\Http\Request;
 use App\Mail\Checkout\AfterCheckout;
 use App\Models\Admin\Diskon;
 use Illuminate\Support\Facades\Auth;
-use Mail;
 use Str;
 use Midtrans;
 use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutKelasController extends Controller
 {
