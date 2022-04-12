@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User\Dashboard\KelasUser;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\DetailFaq;
+use App\Models\Admin\DetailKuis;
 use App\Models\Admin\DetailVideo;
 use App\Models\Admin\Kelas;
 use App\Models\DetailUserKelas;
@@ -47,6 +48,20 @@ class KelasUserController extends Controller
     {
         $kelas = DetailUserKelas::where('id_kelas', '=', $id)->where('id', Auth::user()->id)->first();
         return view('user.dashboard.sertifikat.sertifikat', compact('kelas'));
+    }
+
+    public function Kuis($id_kelas)
+    {
+        $kuis = DetailKuis::with('Kelas')->where('id_kelas', $id_kelas)->get();
+        $kelas = Kelas::where('id_kelas', $id_kelas)->first();
+        $today = Carbon::now()->isoFormat('dddd');
+        $tanggal_tahun = Carbon::now()->format('j F Y');
+        return view('user.dashboard.userkelas.kuis', compact('kuis','today','tanggal_tahun','kelas'));
+    }
+
+    public function KirimJawaban($id_kelas)
+    {
+        # code...
     }
 
     /**
@@ -165,7 +180,7 @@ class KelasUserController extends Controller
         $detail->status_kelas = 'Sudah Selesai';
         $detail->update();
 
-        return redirect()->route('kelas-saya-finish', $id_kelas);
+        return redirect()->route('kelas-saya-kuis', $id_kelas);
     }
 
     public function Pertanyaan(Request $request, $id_video_kelas)

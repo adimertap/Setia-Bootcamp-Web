@@ -152,6 +152,9 @@ Route::middleware(['auth'])->group(function(){
             ->name('kelas-saya-selesai');
             Route::post('kelas/{id_video_kelas}/pertanyaan', '\App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController@Pertanyaan')
             ->name('kelas-saya-pertanyaan');
+            Route::get('kelas/{id_kelas}/kuis', [KelasUser::class, 'Kuis'])->name('kelas-saya-kuis');
+            Route::post('kelas/{id_kelas}/kuis', '\App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController@KirimJawaban')
+            ->name('kelas-saya-kirim-jawaban');
     });
 
     // TRANSACTION USER

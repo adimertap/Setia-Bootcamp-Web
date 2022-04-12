@@ -16,7 +16,8 @@ class DetailUserKelas extends Model
     protected $fillable = [
         'id_kelas',
         'id',
-        'status_kelas'
+        'status_kelas',
+        'nilai_kuis'
     ];
 
     protected $hidden =[ 

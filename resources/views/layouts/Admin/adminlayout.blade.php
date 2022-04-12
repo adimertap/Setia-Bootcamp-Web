@@ -238,10 +238,14 @@
 
                         @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Mentor')
                         <div class="sidenav-menu-heading">Mentor</div>
+                        @endif
+                        @if (Auth::user()->role == 'Mentor')
                         <a class="nav-link" href="{{ route('mentor-faq.index')}}">
                             <div class="nav-link-icon"><i class="fas fa-question"></i></div>
                             Pertanyaan Member
                         </a>
+                        @endif
+                        @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Mentor')
                         <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
                             data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="nav-link-icon"><i class="fas fa-address-card"></i></div>
@@ -250,8 +254,9 @@
                                 <i class="fas fa-angle-down">
                                 </i></div>
                         </a>
-                       
                         @endif
+                       
+                      
 
 
                         <div class="collapse" id="collapseLayouts" data-parent="#accordionSidenav">
