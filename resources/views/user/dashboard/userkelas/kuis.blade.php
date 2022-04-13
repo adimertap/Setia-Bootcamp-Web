@@ -57,8 +57,7 @@
                     <div class="card mt-2">
                         {{-- <div class="card-header  bg-primary-soft">Selesai Belajar</div> --}}
                         <div class="card-body text-center">
-                            <button class="btn btn-primary" onclick="kirimjawaban(event, {{ $kelas->id_kelas }})"
-                                type="button">Kirim Jawaban!</button>
+                            <a href="{{ route('kelas-saya.index') }}" class="btn btn-primary" type="button">Kirim Jawaban</a>
                         </div>
                     </div>
                 </div>

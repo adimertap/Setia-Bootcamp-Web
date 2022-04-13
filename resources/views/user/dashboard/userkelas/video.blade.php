@@ -37,6 +37,15 @@
     <div class="container-fluid mt-n10">
         <div class="row">
             <div class="col-4">
+                <div class="card card-scrollable mt-2">
+                    <div class="card-header">Join Grup Telegram</div>
+                    <div class="card-body">
+                        <div class="text-center">
+                            <a class="btn btn-secondary btn-xs btn-icon mr-2 my-1" href="{{ url($kelas->url_telegram) }}"><i class="fa fa-users"></i></a>
+                            <a class="btn btn-sm btn-light mr-2 my-1" href="{{ url($kelas->url_telegram) }}" style="width: 300px">Join Grup Telegram</a>
+                        </div>
+                    </div>
+                </div>
                 @forelse ($kelas->Detailkeypoint as $item)
                 <div class="card card-scrollable mt-2">
                     <div class="card-header">Modul {{ $loop->iteration}}. {{ $item->nama_keypoint }}</div>
