@@ -10,6 +10,7 @@ use App\Models\Admin\DetailDiskon;
 use App\Models\Admin\DetailMentor;
 use App\Models\Admin\DetailKeypoint;
 use App\Models\Admin\DetailVideo;
+use App\Models\Admin\Detailkuis;
 use Illuminate\Support\Facades\DB;
 
 class Kelas extends Model
@@ -72,7 +73,7 @@ class Kelas extends Model
 
     public function Detailkuis()
     {
-        return $this->hasMany(Detailkuis::class, 'id_kelas', 'id_kelas');
+        return $this->hasMany(DetailKuis::class, 'id_kelas', 'id_kelas');
     }
 
     public function Detaildiskon()
