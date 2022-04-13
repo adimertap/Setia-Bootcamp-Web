@@ -73,7 +73,7 @@ class Kelas extends Model
 
     public function Detailkuis()
     {
-        return $this->hasMany(DetailKuis::class, 'id_kelas', 'id_kelas');
+        return $this->hasMany(Detailkuis::class, 'id_kelas', 'id_kelas');
     }
 
     public function Detaildiskon()
