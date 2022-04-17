@@ -17,7 +17,8 @@ class DetailUserKelas extends Model
         'id_kelas',
         'id',
         'status_kelas',
-        'nilai_kuis'
+        'nilai_kuis',
+        'nilai_max'
     ];
 
     protected $hidden =[ 

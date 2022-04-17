@@ -144,10 +144,12 @@ Route::middleware(['auth'])->group(function(){
             Route::resource('kelas-saya', '\App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController');
             Route::get('kelas/finished', [KelasUser::class, 'FilterFinished'])->name('kelas-saya-filter');
             Route::get('kelas/unfinished', [KelasUser::class, 'FilterUnFinished'])->name('kelas-saya-unfinished');
+            Route::get('kelas/gagalkuis', [KelasUser::class, 'FilterGagalKuis'])->name('kelas-saya-filter-gagal');
             Route::get('kelas/{id}/sertifikat', [KelasUser::class, 'Sertifikat'])->name('kelas-saya-sertifikat');
 
             Route::get('kelas/{id_video_kelas}/video', [KelasUser::class, 'video'])->name('kelas-saya-video');
             Route::get('kelas/{id_kelas}/finishclass', [KelasUser::class, 'FinishClass'])->name('kelas-saya-finish');
+            Route::get('kelas/{id_kelas}/gagalkuis', [KelasUser::class, 'Gagal'])->name('kelas-saya-gagal');
             Route::post('kelas/{id_kelas}/selesai', '\App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController@selesaikelas')
             ->name('kelas-saya-selesai');
             Route::post('kelas/{id_video_kelas}/pertanyaan', '\App\Http\Controllers\User\Dashboard\KelasUser\KelasUserController@Pertanyaan')

@@ -63,6 +63,11 @@
                                     placeholder="Input Kode Receiving" value="{{ $kelas->nama_kelas }}"
                                     readonly>{{ $kelas->nama_kelas }}</textarea>
                             </div>
+                            {{-- <div class="form-group">
+                                <label class="small mb-1" for="poin_kelas">Poin Kelas</label>
+                                <input class="form-control" id="poin_kelas" type="text" name="poin_kelas"
+                                    placeholder="Input Poin Kelas" value="{{ $kelas->poin_kelas ?? '' }}"></input>
+                            </div> --}}
                             <div class="form-group text-right">
                                 <hr>
                                 <a href="{{ route('mentor-kuis.index') }}" class="btn btn-sm btn-light">Kembali</a>

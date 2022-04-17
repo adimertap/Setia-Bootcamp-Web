@@ -40,7 +40,15 @@ class KelasUserController extends Controller
     {
         $today = Carbon::now()->isoFormat('dddd');
         $tanggal_tahun = Carbon::now()->format('j F Y');
-        $kelas = DetailUserKelas::with('Kelas','User')->where('status_kelas','=','Progress')->where('id','=',Auth::user()->id)->groupBy('id_kelas')->get();
+        $kelas = DetailUserKelas::with('Kelas','User')->where('status_kelas','=','Progress')->where('id','=',Auth::user()->id)->orWhere('status_kelas','=','Gagal Kuis')->groupBy('id_kelas')->get();
+        return view('user.dashboard.userkelas.index',compact('today','tanggal_tahun','kelas'));
+    }
+
+    public function FilterGagalKuis()
+    {
+        $today = Carbon::now()->isoFormat('dddd');
+        $tanggal_tahun = Carbon::now()->format('j F Y');
+        $kelas = DetailUserKelas::with('Kelas','User')->where('status_kelas','=','Gagal Kuis')->where('id','=',Auth::user()->id)->groupBy('id_kelas')->get();
         return view('user.dashboard.userkelas.index',compact('today','tanggal_tahun','kelas'));
     }
 
@@ -53,15 +61,28 @@ class KelasUserController extends Controller
     public function Kuis($id_kelas)
     {
         $kuis = DetailKuis::with('Kelas')->where('id_kelas', $id_kelas)->get();
+        $count_kuis =DetailKuis::with('Kelas')->where('id_kelas', $id_kelas)->count();
+
         $kelas = Kelas::where('id_kelas', $id_kelas)->first();
         $today = Carbon::now()->isoFormat('dddd');
         $tanggal_tahun = Carbon::now()->format('j F Y');
-        return view('user.dashboard.userkelas.kuis', compact('kuis','today','tanggal_tahun','kelas'));
+        return view('user.dashboard.userkelas.kuis', compact('kuis','today','tanggal_tahun','kelas','count_kuis'));
     }
 
-    public function KirimJawaban($id_kelas)
+    public function KirimJawaban(Request $request, $id_kelas)
     {
-        # code...
+       $detail = DetailUserKelas::where('id', Auth::user()->id)->where('id_kelas','=', $id_kelas)->first();
+       $detail->nilai_kuis = $request->nilai;
+       $detail->nilai_max = $request->poin_soal;
+
+       if($request->nilai >= $request->nilai_min){
+            $detail->status_kelas = 'Sudah Selesai';
+       }else{
+            $detail->status_kelas = 'Gagal Kuis';
+        }
+       $detail->save();
+
+       return $request;
     }
 
     /**
@@ -117,12 +138,17 @@ class KelasUserController extends Controller
 
     public function FinishClass($id_kelas)
     {
-        $kelas = Kelas::with('Jeniskelas')->find($id_kelas);
-
+        $detail = DetailUserKelas::with('Kelas')->where('id', Auth::user()->id)->where('id_kelas', $id_kelas)->first();
         $review = Review::where('id_kelas', $id_kelas)->where('id', Auth::user()->id)->first();
-        
 
-        return view('user.dashboard.userkelas.finish_class',compact('kelas','review'));
+        return view('user.dashboard.userkelas.finish_class',compact('detail','review'));
+    }
+
+    public function Gagal($id_kelas)
+    {
+        $detail = DetailUserKelas::with('Kelas')->where('id', Auth::user()->id)->where('id_kelas', $id_kelas)->first();
+
+        return view('user.dashboard.userkelas.gagal_kuis',compact('detail'));
     }
 
 
@@ -176,10 +202,6 @@ class KelasUserController extends Controller
 
     public function selesaikelas($id_kelas)
     {
-        $detail = DetailUserKelas::with('Kelas','User')->where('id_kelas','=', $id_kelas)->where('id', Auth::user()->id)->first();
-        $detail->status_kelas = 'Sudah Selesai';
-        $detail->update();
-
         return redirect()->route('kelas-saya-kuis', $id_kelas);
     }
 

@@ -28,9 +28,10 @@
                     <li class="breadcrumb-item active">Kelas Saya</li>
                 </ol>
                 <nav class="nav nav-borders mt-4 ml-4" id="myDIV">
-                    <a class="nav-link ml-0 text-white active" href="{{ route('kelas-saya.index') }}">All Class</a>
+                    <a class="nav-link ml-0 text-white active" href="{{ route('kelas-saya.index') }}">My Class</a>
                     <a class="nav-link text-white" href="{{ route('kelas-saya-unfinished') }}">Unfinished</a>
                     <a class="nav-link text-white" href="{{ route('kelas-saya-filter') }}">Finished</a>
+                    <a class="nav-link text-white" href="{{ route('kelas-saya-filter-gagal') }}">Gagal Kuis</a>
                 </nav>
                 <div>
                     @include('components.alert')
@@ -60,6 +61,8 @@
                                 <span class="badge badge-primary mr-2">{{ $item->status_kelas }}</span>
                             @elseif ($item->status_kelas == 'Sudah Selesai')
                                 <span class="badge badge-success mr-2">{{ $item->status_kelas }}</span>
+                            @elseif ($item->status_kelas == 'Gagal Kuis')
+                                <span class="badge badge-danger mr-2">{{ $item->status_kelas }}</span>
                             @endif
                         </h5>
                         <p class="mb-4">{{ $item->Kelas->nama_kelas }}</p>
@@ -72,9 +75,18 @@
                                 data-target="#Modalreview-{{ $item->id_kelas }}">
                                 <i class="fas fa-address-card mr-1"></i>Beri Review
                             </a> --}}
-                            @endif
+                        @elseif ($item->status_kelas == 'Gagal Kuis')
+                            <a class="btn btn-sm btn-danger p-2 line-height-normal" href="{{ route('kelas-saya-kuis', $item->id_kelas) }}" style="border-radius: 40px">Ulangi Kuis</a>
+                        @endif
+
                         
+                        @if ($item->nilai_kuis == null)
+                        
+                        @else
+                            <p class="mt-2 small">Nilai Kuis Anda {{ $item->nilai_kuis }}/{{ $item->nilai_max }}.</p>
+                        @endif
                     </div>
+                   
                 </div>
             </div>
             @empty

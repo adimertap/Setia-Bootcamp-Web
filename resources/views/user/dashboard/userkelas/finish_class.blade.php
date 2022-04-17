@@ -25,17 +25,17 @@
                     <img src="{{asset('images/done_class.png')}}" width="500" height="500" alt=""
                         class="mb-5 img-fluid">
                     <h1 class="mb-3">
-                        What a Day!
+                        What a Day! Score Kuis Anda {{ $detail->nilai_kuis }}/{{ $detail->nilai_max }}
                     </h1>
                     <p class="subtitle-primary mb-5"
                         style="width: 600px; max-width: 100%; margin-left: auto; margin-right: auto">
-                        Akhirnya kamu telah menyelesaikan kelas <strong>{{ $kelas->nama_kelas }}</strong> dengan sangat
-                        baik.
+                        Akhirnya anda telah menyelesaikan kelas <strong>{{ $detail->Kelas->nama_kelas }}</strong> dengan sangat
+                        baik dan lulus kuis kelas.
                     </p>
                     <div class="d-grid flex-column justify-content-center gap-4">
                         <a class="btn btn-secondary" href="{{ route('user.dashboard') }}"
                             style="border-radius: 40px">Download Sertifikat</a>
-                        <a class="btn btn-primary" href="{{ route('user.dashboard') }}" style="border-radius: 40px">My
+                        <a class="btn btn-primary" href="{{ route('kelas-saya.index') }}" style="border-radius: 40px">My
                             Dashboard</a>
                         @if (empty($review))
                         <a href="" class="btn btn-sm btn-warning p-2 line-height-normal" type="button"
@@ -63,7 +63,7 @@
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">×</span></button>
             </div>
-            <form action="{{ route('kelas-saya.update', $kelas->id_kelas) }}" method="POST" id="form1" class="d-inline">
+            <form action="{{ route('kelas-saya.update', $detail->Kelas->id_kelas) }}" method="POST" id="form1" class="d-inline">
                 @method('PUT')
                 @csrf
                 <div class="modal-body">
@@ -269,6 +269,11 @@
 
 <script>
     window.onload = function () {
+        document.getElementById("sidenavAccordion").style.display = "none";
+        
+        var button2 = document.getElementById('sidebarToggle');
+        button2.click();
+
         var button = document.getElementById('buttonmodal');
         button.click();
     }
