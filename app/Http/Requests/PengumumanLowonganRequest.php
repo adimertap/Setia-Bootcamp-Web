@@ -25,9 +25,9 @@ class PengumumanLowonganRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama_pengumuman' => 'required|min:8',
-            'job_description' => 'required|min:20',
-            'job_requirement' => 'required|min:20',
+            'nama_pengumuman' => 'required|min:4',
+            'job_description' => 'required',
+            'job_requirement' => 'required',
             'job_type' => 'required',
             'job_salary' => 'required|numeric|digits_between:1000000,100000000',
             'job_years_experience' => 'required|min:1|max:2',

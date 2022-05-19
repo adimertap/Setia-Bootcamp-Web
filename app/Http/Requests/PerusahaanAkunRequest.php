@@ -25,7 +25,7 @@ class PerusahaanAkunRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:8|unique:users',
+            'name' => 'required|min:4|unique:users',
             'email' => 'required|email|unique:users',
             'password' => [
                 'required',

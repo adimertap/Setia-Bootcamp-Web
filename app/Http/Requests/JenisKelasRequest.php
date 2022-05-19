@@ -25,8 +25,8 @@ class JenisKelasRequest extends FormRequest
     public function rules()
     {
         return [
-            'jenis_kelas' => 'required|min:8|unique:tb_master_jenis_kelas',
-            'keterangan' => 'required|min:10',
+            'jenis_kelas' => 'required|min:4|unique:tb_master_jenis_kelas',
+            'keterangan' => 'required|min:5',
         ];
     }
 }

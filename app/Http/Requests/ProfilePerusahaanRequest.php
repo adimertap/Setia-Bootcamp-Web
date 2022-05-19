@@ -25,10 +25,10 @@ class ProfilePerusahaanRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama_legal' => 'required|min:8|unique:tb_detail_perusahaan',
+            'nama_legal' => 'required|min:4|unique:tb_detail_perusahaan',
             'jenis_perusahaan' => 'required',
             'tanggal_berdirinya' => 'required',
-            'alamat_kantor' => 'required|min:10',
+            'alamat_kantor' => 'required|min:5',
             'alamat_website' => 'required|url',
             'no_telp' => 'required|numeric|min:11|max:15',
             'avatar' => 'required|image|mimes:jpeg,png,jpg|max:6144',
