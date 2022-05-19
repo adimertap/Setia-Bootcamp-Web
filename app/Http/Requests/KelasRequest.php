@@ -29,8 +29,8 @@ class KelasRequest extends FormRequest
             'id_level' => 'required|exists:tb_master_level,id_level',
             'nama_kelas' => 'required|min:8|max:150',
             'harga_kelas' => 'required|min:1000|numeric',
-            'tentang_kelas' => 'required|min:50',
-            'cover_kelas' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'tentang_kelas' => 'required',
+            'cover_kelas' => 'required|image|mimes:jpeg,png,jpg|max:8048',
         ];
     }
 }
