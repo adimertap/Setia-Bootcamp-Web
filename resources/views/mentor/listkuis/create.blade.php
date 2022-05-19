@@ -462,7 +462,7 @@
 
             $.ajax({
                 method: 'put',
-                url: '/mentor/video/mentor-kuis/' + id_kelas,
+                url: '/mentor/kuis/mentor-kuis/' + id_kelas,
                 data: data,
                 beforeSend: function () {
                     swal.fire({
@@ -480,7 +480,7 @@
                         showConfirmButton: false,
                         html: '<h5>Success!</h5>'
                     });
-                    window.location.href = '/mentor/video/mentor-kuis/'
+                    window.location.href = '/mentor/kuis/mentor-kuis/'
                     console.log(response)
                 },
                 error: function (response) {
